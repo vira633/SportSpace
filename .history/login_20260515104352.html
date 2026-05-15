@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk / Daftar — SportSpace</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <style>
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+    .auth-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px 16px; background: linear-gradient(135deg, #f0faf6 0%, #e8f5f0 100%); }
+    .auth-card { width: 100%; max-width: 420px; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); overflow: hidden; }
+    .auth-top { padding: 28px 28px 0; text-align: center; }
+    .auth-logo { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 6px; font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--gray-900); }
+    .auth-logo i { color: var(--green); font-size: 22px; }
+    .auth-desc { font-size: 13px; color: var(--gray-400); margin-bottom: 20px; }
+    .tab-row { display: flex; border-bottom: 1px solid var(--gray-200); }
+    .tab-btn { flex: 1; padding: 12px; font-size: 14px; font-weight: 600; border: none; background: transparent; color: var(--gray-400); cursor: pointer; border-bottom: 2.5px solid transparent; margin-bottom: -1px; transition: all .15s; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .tab-btn.active { color: var(--green); border-bottom-color: var(--green); }
+    .tab-panel { display: none; padding: 24px 28px 28px; }
+    .tab-panel.active { display: block; }
+    .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .role-card { border: 1.5px solid var(--gray-200); border-radius: var(--radius-md); padding: 12px; cursor: pointer; transition: all .15s; text-align: center; }
+    .role-card:hover { border-color: var(--green); }
+    .role-card.selected { border-color: var(--green); background: var(--green-light); }
+    .role-card i { font-size: 22px; color: var(--gray-400); margin-bottom: 6px; display: block; }
+    .role-card.selected i { color: var(--green); }
+    .role-card p { font-size: 13px; font-weight: 600; margin: 0; color: var(--gray-700); }
+    .role-card span { font-size: 11px; color: var(--gray-400); }
+    .forgot-link { font-size: 12px; color: var(--green); font-weight: 600; text-align: right; display: block; margin-top: -8px; margin-bottom: 16px; cursor: pointer; }
+    .auth-switch { text-align: center; font-size: 13px; color: var(--gray-400); margin-top: 16px; }
+    .auth-switch a { color: var(--green); font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <i class="ti ti-tournament"></i>
+    <span>SportSpace</span>
+    <div class="dot"></div>
+  </a>
+</nav>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-top">
+      <div class="auth-logo"><i class="ti ti-tournament"></i> SportSpace</div>
+      <p class="auth-desc">Platform booking lapangan olahraga #1 di Yogyakarta</p>
+    </div>
+
+    <div class="tab-row">
+      <button class="tab-btn active" data-tab="login" onclick="switchTab('login')">Masuk</button>
+      <button class="tab-btn" data-tab="register" onclick="switchTab('register')">Daftar</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="tab-panel active" id="panel-login">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <div class="input-icon">
+          <i class="ti ti-mail"></i>
+          <input type="email" class="form-input" placeholder="email@kamu.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <div class="input-icon">
+          <i class="ti ti-lock"></i>
+          <input type="password" class="form-input" placeholder="••••••••">
+        </div>
+      </div>
+      <a class="forgot-link">Lupa password?</a>
+      <a href="riwayat.html"><button class="btn btn-primary btn-lg btn-full">Masuk <i class="ti ti-arrow-right"></i></button></a>
+      <div class="divider"><span>atau masuk sebagai</span></div>
+      <div style="display:flex;gap:8px;">
+        <a href="dashboard-admin.html" style="flex:1;"><button class="btn btn-outline btn-full" style="font-size:13px;"><i class="ti ti-shield"></i> Admin</button></a>
+        <a href="dashboard-owner.html" style="flex:1;"><button class="btn btn-outline btn-full" style="font-size:13px;"><i class="ti ti-building"></i> Pemilik GOR</button></a>
+      </div>
+      <p class="auth-switch">Belum punya akun? <a onclick="switchTab('register')">Daftar sekarang</a></p>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="tab-panel" id="panel-register">
+      <div style="margin-bottom:16px;">
+        <label class="form-label">Daftar sebagai</label>
+        <div class="role-grid">
+          <div class="role-card selected" id="role-user" onclick="selectRole('user')">
+            <i class="ti ti-user"></i>
+            <p>User</p>
+            <span>Mau booking lapangan</span>
+          </div>
+          <div class="role-card" id="role-owner" onclick="selectRole('owner')">
+            <i class="ti ti-building"></i>
+            <p>Pemilik GOR</p>
+            <span>Punya lapangan/GOR</span>
+          </div>
+        </div>
+      </div>
+      <div id="owner-note" class="alert alert-warning" style="display:none;margin-bottom:16px;">
+        <i class="ti ti-info-circle"></i>
+        <span>Akun pemilik GOR perlu diverifikasi admin sebelum bisa menambahkan lapangan.</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nama lengkap</label>
+        <div class="input-icon">
+          <i class="ti ti-user"></i>
+          <input type="text" class="form-input" placeholder="Nama kamu">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <div class="input-icon">
+          <i class="ti ti-mail"></i>
+          <input type="email" class="form-input" placeholder="email@kamu.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nomor HP</label>
+        <div class="input-icon">
+          <i class="ti ti-phone"></i>
+          <input type="tel" class="form-input" placeholder="08xxxxxxxxxx">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <div class="input-icon">
+          <i class="ti ti-lock"></i>
+          <input type="password" class="form-input" placeholder="Min. 8 karakter">
+        </div>
+      </div>
+      <a href="riwayat.html"><button class="btn btn-primary btn-lg btn-full">Buat akun <i class="ti ti-arrow-right"></i></button></a>
+      <p class="auth-switch">Sudah punya akun? <a onclick="switchTab('login')">Masuk di sini</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
