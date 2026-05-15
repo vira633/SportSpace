@@ -4,125 +4,200 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Admin — SportSpace</title>
+
   <link rel="stylesheet" href="admin.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
 </head>
 
 <body>
 
-  <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="toast">
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+
     <i class="ti ti-circle-check"></i>
-    <span id="toastText">Berhasil!</span>
+
+    <div>
+
+      <div class="toast-title" id="toastTitle">
+        Berhasil
+      </div>
+
+      <div class="toast-text" id="toastText">
+        Aksi berhasil dilakukan
+      </div>
+
+    </div>
+
   </div>
 
   <!-- MODAL DETAIL USER -->
-  <div class="modal-overlay" id="detailModal">
-    <div class="detail-modal">
+  <div class="modal" id="detailModal">
+
+    <div class="modal-box">
+
       <div class="modal-header">
-        <h2>Detail User</h2>
-        <button class="close-btn"
-        onclick="closeDetailModal()">
+
+        <div class="modal-title">
+          Detail User
+        </div>
+
+        <button class="close-modal"
+        onclick="closeModal()">
+
           <i class="ti ti-x"></i>
+
         </button>
 
       </div>
-      <div class="detail-content">
-        <div class="detail-avatar">
-          A
+
+      <div class="detail-list">
+
+        <div class="detail-item">
+
+          <div class="detail-label">
+            Nama Lengkap
+          </div>
+
+          <div class="detail-value">
+            Andi Rahmawan
+          </div>
+
         </div>
-        <h3>Riska Aprilia</h3>
 
-        <p class="detail-role">
-          User SportSpace
-        </p>
+        <div class="detail-item">
 
-        <div class="detail-list">
-          <div class="detail-item">
-            <span>Email</span>
-            <strong>riska@gmail.com</strong>
+          <div class="detail-label">
+            Email
           </div>
 
-          <div class="detail-item">
-            <span>No HP</span>
-            <strong>0812-3456-7890</strong>
+          <div class="detail-value">
+            andi@email.com
           </div>
 
-          <div class="detail-item">
-            <span>Status</span>
-            <strong>Aktif</strong>
-          </div>
-
-          <div class="detail-item">
-            <span>Bergabung</span>
-            <strong>Januari 2026</strong>
-          </div>
         </div>
+
+        <div class="detail-item">
+
+          <div class="detail-label">
+            Role
+          </div>
+
+          <div class="detail-value">
+            User
+          </div>
+
+        </div>
+
+        <div class="detail-item">
+
+          <div class="detail-label">
+            Bergabung
+          </div>
+
+          <div class="detail-value">
+            Januari 2026
+          </div>
+
+        </div>
+
       </div>
+
     </div>
+
   </div>
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <a href="index.html"class="navbar-brand">
-      <i class="ti ti-bowling"></i>
+
+    <a href="index.html" class="navbar-brand">
+
+      <i class="ti ti-tournament"></i>
+
       <span>SportSpace</span>
+
       <div class="dot"></div>
+
     </a>
 
     <div class="navbar-actions">
+
       <span class="admin-text">
         Admin Panel
       </span>
-      <div class="notif-container">
 
-  <div class="notif" onclick="toggleNotif()">
-    <i class="ti ti-bell"></i>
-    <div class="notif-badge" id="notifBadge">
-      3
+      <!-- NOTIF -->
+      <div class="notif"
+      onclick="toggleNotifPopup()">
+
+        <i class="ti ti-bell"></i>
+
+        <div class="notif-badge">
+          4
+        </div>
+
+      </div>
+
+      <!-- POPUP NOTIF -->
+      <div class="notif-popup"
+      id="notifPopup">
+
+        <div class="notif-popup-header">
+          Notifikasi
+        </div>
+
+        <div class="notif-item">
+          <i class="ti ti-circle-check"></i>
+          <div>
+            GOR Sejahtera berhasil diverifikasi
+          </div>
+        </div>
+
+        <div class="notif-item">
+          <i class="ti ti-user"></i>
+          <div>
+            User baru telah mendaftar
+          </div>
+        </div>
+
+        <div class="notif-item">
+          <i class="ti ti-calendar-event"></i>
+          <div>
+            Booking baru berhasil dibuat
+          </div>
+        </div>
+
+        <div class="notif-item">
+          <i class="ti ti-settings"></i>
+          <div>
+            Pengaturan platform diperbarui
+          </div>
+        </div>
+
+      </div>
+
+      <a href="login.html">
+
+        <button class="btn btn-outline btn-sm">
+
+          <i class="ti ti-logout"></i>
+          Keluar
+
+        </button>
+
+      </a>
+
     </div>
-  </div>
 
-  <div class="notif-dropdown"
-  id="notifDropdown">
-
-    <div class="notif-item">
-      <i class="ti ti-building"></i>
-      <span>
-        GOR baru menunggu verifikasi
-      </span>
-    </div>
-
-    <div class="notif-item">
-      <i class="ti ti-calendar-event"></i>
-      <span>
-        Booking baru berhasil masuk
-      </span>
-    </div>
-
-    <div class="notif-item">
-      <i class="ti ti-users"></i>
-      <span>
-        Ada user baru terdaftar
-      </span>
-    </div>
-  </div>
-</div>
-
-<a href="login.html">
-  <button class="btn btn-outline btn-sm">
-     <i class="ti ti-logout"></i>
-     Keluar
-    </button>
-  </a>
- </div>
-</nav>
+  </nav>
 
   <!-- LAYOUT -->
-   <div class="dashboard-layout">
+  <div class="dashboard-layout">
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
+
       <div>
 
         <div class="sidebar-section">
@@ -131,7 +206,8 @@
 
         <div class="sidebar-menu">
 
-          <div class="sidebar-item active" onclick="showSection('dashboard', this)">
+          <div class="sidebar-item active"
+          onclick="showSection('dashboard', this)">
             <i class="ti ti-home"></i>
             <span>Dashboard</span>
           </div>
@@ -153,6 +229,7 @@
             <i class="ti ti-users"></i>
             <span>Kelola User</span>
           </div>
+
         </div>
 
         <div class="sidebar-section extra">
@@ -168,13 +245,21 @@
           </div>
 
           <a href="login.html" class="logout-link">
+
             <div class="sidebar-item logout">
+
               <i class="ti ti-logout"></i>
+
               <span>Keluar</span>
+
             </div>
+
           </a>
+
         </div>
+
       </div>
+
     </aside>
 
     <!-- CONTENT -->
@@ -182,8 +267,11 @@
 
       <!-- DASHBOARD -->
       <section id="section-dashboard">
+
         <div class="top-header">
+
           <div>
+
             <h1 class="page-title">
               Dashboard Admin
             </h1>
@@ -191,19 +279,28 @@
             <p class="page-sub">
               Selamat datang! Pantau semua aktivitas platform di sini.
             </p>
+
           </div>
 
           <div class="date-card">
+
             <i class="ti ti-calendar"></i>
+
             Rabu, 14 Mei 2026
+
           </div>
+
         </div>
 
         <!-- STATS -->
         <div class="stats-grid">
+
           <div class="stat-card">
+
             <div class="stat-top">
+
               <div>
+
                 <div class="stat-value">
                   1.247
                 </div>
@@ -211,22 +308,28 @@
                 <div class="stat-label">
                   Total Pengguna
                 </div>
+
               </div>
 
               <div class="stat-icon blue-bg">
                 <i class="ti ti-users"></i>
               </div>
+
             </div>
 
             <div class="stat-change stat-up">
               <i class="ti ti-trending-up"></i>
               +12% bulan ini
             </div>
+
           </div>
 
           <div class="stat-card">
+
             <div class="stat-top">
+
               <div>
+
                 <div class="stat-value">
                   87
                 </div>
@@ -234,21 +337,26 @@
                 <div class="stat-label">
                   GOR Terdaftar
                 </div>
+
               </div>
 
               <div class="stat-icon green-bg">
                 <i class="ti ti-building"></i>
               </div>
+
             </div>
 
             <div class="stat-change stat-up">
               <i class="ti ti-trending-up"></i>
               +5 GOR baru
             </div>
+
           </div>
 
           <div class="stat-card">
+
             <div class="stat-top">
+
               <div>
 
                 <div class="stat-value">
@@ -258,21 +366,26 @@
                 <div class="stat-label">
                   Booking Bulan Ini
                 </div>
+
               </div>
 
               <div class="stat-icon amber-bg">
                 <i class="ti ti-calendar-check"></i>
               </div>
+
             </div>
 
             <div class="stat-change stat-up">
               <i class="ti ti-trending-up"></i>
               +18% vs bulan lalu
             </div>
+
           </div>
 
           <div class="stat-card">
+
             <div class="stat-top">
+
               <div>
 
                 <div class="stat-value">
@@ -282,101 +395,59 @@
                 <div class="stat-label">
                   Pending Verifikasi
                 </div>
+
               </div>
 
               <div class="stat-icon red-bg">
                 <i class="ti ti-clock"></i>
               </div>
+
             </div>
 
             <div class="stat-change danger">
               <i class="ti ti-alert-circle"></i>
               Perlu tindakan
             </div>
+
           </div>
+
         </div>
 
-        <!-- BOOKING TERBARU -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">
-              <i class="ti ti-file-invoice"></i>
-              Booking Terbaru
-            </div>
-
-            <button class="btn btn-outline btn-sm"
-            onclick="openBookingSection()">
-              Lihat Semua
-            </button>
-          </div>
-
-          <div class="table-wrapper">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Kode</th>
-                  <th>User</th>
-                  <th>Lapangan</th>
-                  <th>Tanggal</th>
-                  <th>Total</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <tr>
-                  <td><strong>SS-00142</strong></td>
-                  <td>Andi R.</td>
-                  <td>GOR Maju Jaya</td>
-                  <td>12 Mei 2026</td>
-                  <td>Rp160.000</td>
-                  <td><span class="badge badge-amber">Pending</span></td>
-                </tr>
-
-                <tr>
-                  <td><strong>SS-00141</strong></td>
-                  <td>Budi S.</td>
-                  <td>Arena Badminton88</td>
-                  <td>11 Mei 2026</td>
-                  <td>Rp90.000</td>
-                  <td><span class="badge badge-blue">Dikonfirmasi</span></td>
-                </tr>
-
-                <tr>
-                  <td><strong>SS-00140</strong></td>
-                  <td>Citra M.</td>
-                  <td>Basket Court Pro</td>
-                  <td>10 Mei 2026</td>
-                  <td>Rp240.000</td>
-                  <td><span class="badge badge-green">Selesai</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </section>
 
       <!-- VERIFIKASI -->
       <section id="section-venue" class="hidden">
+
         <div class="top-header">
+
           <div>
+
             <h1 class="page-title">
               Verifikasi GOR
             </h1>
+
             <p class="page-sub">
               Kelola dan verifikasi GOR baru sebelum tampil di platform.
             </p>
+
           </div>
+
         </div>
+
         <div class="venue-grid">
+
           <div class="venue-card">
+
             <div class="venue-top">
+
               <div class="venue-icon">
                 <i class="ti ti-building-stadium"></i>
               </div>
+
               <span class="badge badge-amber">
                 Pending
               </span>
+
             </div>
 
             <h3 class="venue-title">
@@ -389,6 +460,7 @@
             </div>
 
             <div class="venue-info-list">
+
               <div>
                 <i class="ti ti-user"></i>
                 Pemilik: Bapak Hendra
@@ -403,88 +475,36 @@
                 <i class="ti ti-ball-football"></i>
                 Futsal & Badminton
               </div>
+
             </div>
 
             <div class="venue-actions">
 
-              <button class="btn btn-primary btn-sm" onclick="showToast('GOR berhasil diterima!')">
+              <button class="btn btn-primary btn-sm"
+              onclick="showToast('Berhasil','GOR berhasil diterima')">
                 Terima
               </button>
 
-              <button class="btn btn-outline btn-sm reject-btn" onclick="showToast('GOR berhasil ditolak!')">
+              <button class="btn btn-outline btn-sm reject-btn"
+              onclick="showToast('Ditolak','GOR berhasil ditolak')">
                 Tolak
               </button>
+
             </div>
+
           </div>
-        </div>
-      </section>
 
-      <!-- BOOKING -->
-      <section id="section-booking" class="hidden">
-        <div class="top-header">
-          <div>
-
-            <h1 class="page-title">
-              Semua Booking
-            </h1>
-
-            <p class="page-sub">
-              Pantau seluruh transaksi booking pengguna SportSpace.
-            </p>
-          </div>
         </div>
 
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">
-              <i class="ti ti-receipt"></i>
-              Data Booking
-            </div>
-          </div>
-          <div class="table-wrapper">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Kode</th>
-                  <th>User</th>
-                  <th>Lapangan</th>
-                  <th>Tanggal</th>
-                  <th>Jam</th>
-                  <th>Total</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <tr>
-                  <td><strong>SS-00142</strong></td>
-                  <td>Andi R.</td>
-                  <td>Futsal A</td>
-                  <td>12 Mei 2026</td>
-                  <td>13.00 - 15.00</td>
-                  <td>Rp160.000</td>
-                  <td><span class="badge badge-amber">Pending</span></td>
-                </tr>
-
-                <tr>
-                  <td><strong>SS-00141</strong></td>
-                  <td>Budi S.</td>
-                  <td>Badminton A</td>
-                  <td>11 Mei 2026</td>
-                  <td>09.00 - 11.00</td>
-                  <td>Rp90.000</td>
-                  <td><span class="badge badge-blue">Dikonfirmasi</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </section>
 
       <!-- USER -->
       <section id="section-user" class="hidden">
+
         <div class="top-header">
+
           <div>
+
             <h1 class="page-title">
               Kelola User
             </h1>
@@ -492,12 +512,17 @@
             <p class="page-sub">
               Pantau akun pengguna dan owner yang terdaftar.
             </p>
+
           </div>
+
         </div>
 
         <div class="user-grid">
+
           <div class="user-card">
+
             <div class="user-top">
+
               <div class="user-avatar">
                 A
               </div>
@@ -505,14 +530,15 @@
               <span class="badge badge-blue">
                 User
               </span>
+
             </div>
 
             <h3 class="user-name">
-              Riska Aprilia
+              Andi Rahmawan
             </h3>
 
             <div class="user-email">
-              riska@gmail.com
+              andi@email.com
             </div>
 
             <div class="user-role">
@@ -522,22 +548,28 @@
             <div class="user-actions">
 
               <button class="btn btn-outline btn-sm"
-              onclick="openDetailModal()">
+              onclick="openModal()">
                 Detail
               </button>
 
               <button class="btn btn-outline btn-sm reject-btn"
-              onclick="showToast('User berhasil diblokir!')">
+              onclick="showToast('User Dibanned','Akun berhasil dibanned')">
                 Ban
               </button>
+
             </div>
+
           </div>
+
         </div>
+
       </section>
 
       <!-- SETTING -->
       <section id="section-setting" class="hidden">
+
         <div class="top-header">
+
           <div>
 
             <h1 class="page-title">
@@ -547,44 +579,60 @@
             <p class="page-sub">
               Atur konfigurasi utama platform SportSpace.
             </p>
+
           </div>
+
         </div>
 
         <div class="setting-grid">
+
           <div class="setting-card">
+
             <h3>
               Pengaturan Platform
             </h3>
 
             <div class="form-group">
+
               <label>
                 Nama Platform
               </label>
 
               <input type="text"
               value="SportSpace">
+
             </div>
 
             <div class="form-group">
+
               <label>
                 Email Admin
               </label>
+
               <input type="email"
               value="admin@sportspace.com">
+
             </div>
 
             <button class="btn btn-primary btn-sm"
-            onclick="showToast('Perubahan berhasil disimpan!')">
+            onclick="showToast('Berhasil','Pengaturan berhasil disimpan')">
               Simpan Perubahan
             </button>
+
           </div>
+
         </div>
+
       </section>
+
     </main>
+
   </div>
 
   <script>
+
     function showSection(name, item){
+
       document
       .querySelectorAll('[id^="section-"]')
       .forEach(section => {
@@ -604,43 +652,16 @@
       item.classList.add('active');
     }
 
-    function openBookingSection(){
-      document
-      .querySelectorAll('[id^="section-"]')
-      .forEach(section => {
-        section.classList.add('hidden');
-      });
+    function showToast(title, text){
 
-      document
-      .getElementById('section-booking')
-      .classList.remove('hidden');
-
-      document
-      .querySelectorAll('.sidebar-item')
-      .forEach(menu => {
-        menu.classList.remove('active');
-      });
-
-      document
-      .querySelectorAll('.sidebar-item')[2]
-      .classList.add('active');
-    }
-
-    function toggleProfileMenu(){
-      const dropdown =
-      document.getElementById('profileDropdown');
-
-      dropdown.classList.toggle('active');
-    }
-
-    function showToast(message){
       const toast =
       document.getElementById('toast');
 
-      const toastText =
-      document.getElementById('toastText');
+      document.getElementById('toastTitle')
+      .innerText = title;
 
-      toastText.innerText = message;
+      document.getElementById('toastText')
+      .innerText = text;
 
       toast.classList.add('show');
 
@@ -649,45 +670,43 @@
       }, 3000);
     }
 
-    function openDetailModal(){
+    function openModal(){
       document
       .getElementById('detailModal')
-      .classList.add('active');
+      .classList.add('show');
     }
 
-    function closeDetailModal(){
+    function closeModal(){
       document
       .getElementById('detailModal')
-      .classList.remove('active');
+      .classList.remove('show');
     }
-    
-    function toggleNotif(){
-      const dropdown =
-      document.getElementById('notifDropdown');
-      
-      const badge =
-      document.getElementById('notifBadge');
-      
-      dropdown.classList.toggle('active');
-      
-      if(dropdown.classList.contains('active')){
-         badge.style.display = 'none';
-  }
-}
 
-window.addEventListener('click', function(e){
-  if(
-    !e.target.closest('.notif-container')
-  ){
-    const notif =
-    document.getElementById('notifDropdown');
+    function toggleNotifPopup(){
 
-    if(notif){
-      notif.classList.remove('active');
+      const popup =
+      document.getElementById('notifPopup');
+
+      popup.classList.toggle('active');
     }
-  }
-}
-);
+
+    window.addEventListener('click', function(e){
+
+      const notif =
+      document.querySelector('.notif');
+
+      const popup =
+      document.getElementById('notifPopup');
+
+      if(
+        !notif.contains(e.target) &&
+        !popup.contains(e.target)
+      ){
+        popup.classList.remove('active');
+      }
+    });
+
   </script>
+
 </body>
 </html>

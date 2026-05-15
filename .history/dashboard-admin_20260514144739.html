@@ -1,0 +1,603 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard Admin - SportSpace</title>
+
+  <link rel="stylesheet" href="admin.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <a href="#" class="navbar-brand">
+
+      <i class="ti ti-tournament"></i>
+
+      <span>SportSpace</span>
+
+      <div class="dot"></div>
+
+    </a>
+
+    <div class="navbar-actions">
+
+      <span class="admin-text">
+        Admin Panel
+      </span>
+
+      <div class="notif">
+
+        <i class="ti ti-bell"></i>
+
+        <div class="notif-badge">
+          4
+        </div>
+
+      </div>
+
+      <a href="login.html">
+
+        <button class="btn btn-outline btn-sm">
+
+          <i class="ti ti-logout"></i>
+          Keluar
+
+        </button>
+
+      </a>
+
+    </div>
+
+  </nav>
+
+  <!-- LAYOUT -->
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div>
+
+        <div class="sidebar-section">
+          MENU
+        </div>
+
+        <div class="sidebar-menu">
+
+          <div class="sidebar-item active"
+          onclick="showSection('dashboard', this)">
+            <i class="ti ti-home"></i>
+            <span>Dashboard</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('venue', this)">
+            <i class="ti ti-building"></i>
+            <span>Verifikasi GOR</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('booking', this)">
+            <i class="ti ti-calendar-event"></i>
+            <span>Semua Booking</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('user', this)">
+            <i class="ti ti-users"></i>
+            <span>Kelola User</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('setting', this)">
+            <i class="ti ti-settings"></i>
+            <span>Pengaturan</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- PROFILE -->
+      <div class="sidebar-profile-container">
+
+        <div class="sidebar-profile"
+        onclick="toggleProfileMenu()">
+
+          <div class="profile-left">
+
+            <div class="avatar">
+              A
+            </div>
+
+            <div class="profile-info">
+
+              <div class="profile-name">
+                Admin
+              </div>
+
+              <div class="profile-role">
+                Administrator
+              </div>
+
+            </div>
+
+          </div>
+
+          <i class="ti ti-chevron-up"></i>
+
+        </div>
+
+        <!-- DROPDOWN -->
+        <div class="profile-dropdown"
+        id="profileDropdown">
+
+          <div class="dropdown-item">
+            <i class="ti ti-user"></i>
+            Profil Saya
+          </div>
+
+          <div class="dropdown-item">
+            <i class="ti ti-settings"></i>
+            Pengaturan Akun
+          </div>
+
+          <div class="dropdown-item">
+            <i class="ti ti-bell"></i>
+            Notifikasi
+          </div>
+
+          <a href="login.html"
+          class="dropdown-link">
+
+            <div class="dropdown-item logout-item">
+              <i class="ti ti-logout"></i>
+              Keluar
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="dashboard-content">
+
+      <!-- DASHBOARD -->
+      <section id="section-dashboard">
+
+        <div class="top-header">
+
+          <div>
+
+            <h1 class="page-title">
+              Dashboard Admin
+            </h1>
+
+            <p class="page-sub">
+              Pantau seluruh aktivitas platform SportSpace
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-grid">
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div>
+
+                <div class="stat-value">
+                  1.247
+                </div>
+
+                <div class="stat-label">
+                  Total Pengguna
+                </div>
+
+              </div>
+
+              <div class="stat-icon blue-bg">
+                <i class="ti ti-users"></i>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div>
+
+                <div class="stat-value">
+                  87
+                </div>
+
+                <div class="stat-label">
+                  GOR Terdaftar
+                </div>
+
+              </div>
+
+              <div class="stat-icon green-bg">
+                <i class="ti ti-building"></i>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div>
+
+                <div class="stat-value">
+                  432
+                </div>
+
+                <div class="stat-label">
+                  Booking Bulan Ini
+                </div>
+
+              </div>
+
+              <div class="stat-icon amber-bg">
+                <i class="ti ti-calendar-check"></i>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- BOOKING -->
+        <div class="card">
+
+          <div class="card-header">
+
+            <div class="card-title">
+
+              <i class="ti ti-file-invoice"></i>
+
+              Booking Terbaru
+
+            </div>
+
+            <button class="btn btn-outline btn-sm"
+            onclick="openBookingSection()">
+
+              Lihat Semua
+
+            </button>
+
+          </div>
+
+          <div class="table-wrapper">
+
+            <table class="table">
+
+              <thead>
+
+                <tr>
+
+                  <th>Kode</th>
+                  <th>User</th>
+                  <th>Lapangan</th>
+                  <th>Total</th>
+                  <th>Status</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>SS-00142</td>
+                  <td>Andi</td>
+                  <td>Futsal A</td>
+                  <td>Rp160.000</td>
+                  <td><span class="badge badge-amber">Pending</span></td>
+                </tr>
+
+                <tr>
+                  <td>SS-00141</td>
+                  <td>Budi</td>
+                  <td>Badminton A</td>
+                  <td>Rp90.000</td>
+                  <td><span class="badge badge-green">Selesai</span></td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- VERIFIKASI GOR -->
+      <section id="section-venue" class="hidden">
+
+        <h1 class="page-title">
+          Verifikasi GOR
+        </h1>
+
+        <p class="page-sub">
+          Verifikasi tempat olahraga sebelum tampil di platform
+        </p>
+
+        <div class="venue-grid">
+
+          <div class="venue-card">
+
+            <div class="venue-top">
+
+              <div class="venue-icon">
+                <i class="ti ti-building-stadium"></i>
+              </div>
+
+              <span class="badge badge-amber">
+                Pending
+              </span>
+
+            </div>
+
+            <h3 class="venue-title">
+              GOR Sejahtera
+            </h3>
+
+            <p class="venue-location">
+              Sleman, Yogyakarta
+            </p>
+
+            <div class="venue-info-list">
+
+              <div>
+                <i class="ti ti-user"></i>
+                Hendra Saputra
+              </div>
+
+              <div>
+                <i class="ti ti-ball-football"></i>
+                Futsal & Badminton
+              </div>
+
+            </div>
+
+            <div class="venue-actions">
+
+              <button class="btn btn-primary btn-sm">
+                Terima
+              </button>
+
+              <button class="btn btn-outline btn-sm reject-btn">
+                Tolak
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- BOOKING -->
+      <section id="section-booking" class="hidden">
+
+        <h1 class="page-title">
+          Semua Booking
+        </h1>
+
+        <div class="card">
+
+          <div class="table-wrapper">
+
+            <table class="table">
+
+              <thead>
+
+                <tr>
+
+                  <th>Kode</th>
+                  <th>User</th>
+                  <th>Lapangan</th>
+                  <th>Status</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>SS-00142</td>
+                  <td>Andi</td>
+                  <td>Futsal A</td>
+                  <td><span class="badge badge-amber">Pending</span></td>
+                </tr>
+
+                <tr>
+                  <td>SS-00141</td>
+                  <td>Budi</td>
+                  <td>Badminton A</td>
+                  <td><span class="badge badge-green">Selesai</span></td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- USER -->
+      <section id="section-user" class="hidden">
+
+        <h1 class="page-title">
+          Kelola User
+        </h1>
+
+        <div class="user-grid">
+
+          <div class="user-card">
+
+            <div class="user-top">
+
+              <div class="user-avatar">
+                A
+              </div>
+
+              <span class="badge badge-green">
+                Aktif
+              </span>
+
+            </div>
+
+            <h3 class="user-name">
+              Andi Rahmawan
+            </h3>
+
+            <p class="user-email">
+              andi@email.com
+            </p>
+
+            <div class="user-actions">
+
+              <button class="btn btn-outline btn-sm">
+                Detail
+              </button>
+
+              <button class="btn btn-primary btn-sm">
+                Kelola
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- SETTING -->
+      <section id="section-setting" class="hidden">
+
+        <h1 class="page-title">
+          Pengaturan
+        </h1>
+
+        <div class="setting-grid">
+
+          <div class="setting-card">
+
+            <h3>
+              Informasi Platform
+            </h3>
+
+            <div class="form-group">
+
+              <label>Nama Platform</label>
+
+              <input type="text"
+              value="SportSpace">
+
+            </div>
+
+            <div class="form-group">
+
+              <label>Email Admin</label>
+
+              <input type="email"
+              value="admin@sportspace.com">
+
+            </div>
+
+            <button class="btn btn-primary btn-sm">
+              Simpan
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+
+    function showSection(name, item){
+
+      document
+      .querySelectorAll('[id^="section-"]')
+      .forEach(section => {
+        section.classList.add('hidden');
+      });
+
+      document
+      .getElementById('section-' + name)
+      .classList.remove('hidden');
+
+      document
+      .querySelectorAll('.sidebar-item')
+      .forEach(menu => {
+        menu.classList.remove('active');
+      });
+
+      item.classList.add('active');
+    }
+
+    function openBookingSection(){
+
+      document
+      .querySelectorAll('[id^="section-"]')
+      .forEach(section => {
+        section.classList.add('hidden');
+      });
+
+      document
+      .getElementById('section-booking')
+      .classList.remove('hidden');
+    }
+
+    function toggleProfileMenu(){
+
+      const dropdown =
+      document.getElementById('profileDropdown');
+
+      dropdown.classList.toggle('active');
+    }
+
+  </script>
+
+</body>
+</html>
