@@ -42,7 +42,8 @@
   </div>
 
   <h1 style="font-size:20px; margin-bottom:4px; text-align: left;">Riwayat Booking</h1>
-  
+  <p style="font-size:13px; color:var(--gray-400); text-align: left; margin-bottom:24px;">Urutan otomatis: Tanggal hari ini di posisi paling atas</p>
+
   <div id="booking-list"></div>
 
   <a href="index.html" class="btn-back"><i class="ti ti-arrow-left"></i> Kembali</a>
@@ -53,9 +54,12 @@
     const list = document.getElementById('booking-list');
     const dataUser = JSON.parse(localStorage.getItem('riwayatSport')) || [];
     
+    // Mendapatkan tanggal hari ini (format YYYY-MM-DD)
     const today = new Date().toISOString().split('T')[0];
     const yesterday = new Date(Date.now() - 864e5).toISOString().split('T')[0];
     const twoDaysAgo = new Date(Date.now() - 1728e5).toISOString().split('T')[0];
+
+    // DATA SIMULASI SESUAI REQUEST
     const dataSimulasi = [
       { 
         tgl: today, 
@@ -99,6 +103,7 @@
       }
     ];
 
+    // Mapping Data User Baru
     const formattedUser = dataUser.map(item => ({
       tgl: item.tgl,
       tempat: "Booking Baru",
@@ -109,7 +114,8 @@
       iconSport: item.sport.includes("Badminton") ? "ti-feather" : "ti-ball-football",
       iconStatus: "ti-clock-hour-4"
     }));
-   
+
+    // Gabung dan Sort Tanggal (Descending: Terbaru -> Terlama)
     const totalData = [...formattedUser, ...dataSimulasi].sort((a, b) => new Date(b.tgl) - new Date(a.tgl));
 
     list.innerHTML = totalData.map((item, index) => `
@@ -130,6 +136,7 @@
           </div>
           <div style="text-align:right;">
             <div style="font-size:16px; font-weight:700; color:var(--gray-900);">${item.harga}</div>
+            <div style="font-size:10px; color:var(--green); font-weight:800; margin-top:4px;">SUCCESS</div>
           </div>
         </div>
       </div>

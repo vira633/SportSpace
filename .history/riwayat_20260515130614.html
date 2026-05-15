@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riwayat Booking — SportSpace</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <style>
+    :root {
+      --green: #10b981; --green-light: #f0faf6; --white: #ffffff;
+      --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-400: #9ca3af;
+      --gray-900: #111827; --amber: #f59e0b; --amber-light: #fffbeb;
+    }
+    body { background: linear-gradient(135deg, #f0faf6 0%, #ffffff 100%); min-height: 100vh; margin: 0; }
+    .page-wrap { max-width: 800px; margin: 0 auto; padding: 32px 16px; font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    .profile-box { background: var(--white); border: 1px solid var(--gray-200); border-radius: 16px; padding: 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .avatar-lg { width: 52px; height: 52px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: var(--green); }
+    
+    .booking-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; margin-bottom: 14px; overflow: hidden; transition: 0.2s; }
+    .booking-card:hover { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+    .booking-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--gray-100); }
+    .booking-body { padding: 14px 18px; display: flex; gap: 16px; align-items: center; }
+    
+    .booking-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+    .booking-info { flex: 1; text-align: left; }
+    .booking-name { font-size: 15px; font-weight: 700; color: var(--gray-900); }
+    .booking-meta { font-size: 12px; color: var(--gray-400); display: flex; gap: 12px; margin-top: 4px; }
+    
+    /* BADGE STATUS */
+    .badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+    .badge-amber { background: var(--amber-light); color: var(--amber); }
+    .badge-green { background: #dcfce7; color: #15803d; }
+    
+    .btn-back { display: inline-flex; align-items: center; gap: 8px; background: #1b4332; color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; margin-top: 20px; transition: 0.3s; }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+  <div class="profile-box">
+    <div class="avatar-lg">AR</div>
+    <div style="text-align: left;">
+      <p style="font-size:16px; font-weight:700; margin:0;">Andi Rahmawan</p>
+      <p style="font-size:13px; color:var(--gray-400); margin:0;">andi.rahmawan@email.com</p>
+    </div>
+    <div style="margin-left:auto;">
+      <a href="index.html" style="text-decoration:none;">
+        <button style="background:var(--green); color:white; border:none; padding:8px 16px; border-radius:8px; font-weight:600; cursor:pointer;">
+          <i class="ti ti-plus"></i> Booking Baru
+        </button>
+      </a>
+    </div>
+  </div>
+
+  <h1 style="font-size:20px; text-align:left; margin-bottom:4px;">Riwayat Booking</h1>
+  <p style="font-size:13px; color:var(--gray-400); text-align:left; margin-bottom:24px;">Data pesanan kamu (Bervariasi: Menunggu & Selesai)</p>
+
+  <div id="booking-list">
+    </div>
+
+  <a href="index.html" class="btn-back">
+    <i class="ti ti-arrow-left"></i> Kembali ke Dashboard
+  </a>
+</div>
+
+<script>
+  function muatRiwayat() {
+    const list = document.getElementById('booking-list');
+    const dataUser = JSON.parse(localStorage.getItem('riwayatSport')) || [];
+    const dataSimulasi = [
+      { tgl: "15 Mei 2026", sport: "Futsal", jam: "20.00 - 22.00", icon: "ti-ball-football", badge: "badge-amber", label: "Menunggu Konfirmasi", iconStatus: "ti-clock-hour-4" },
+      { tgl: "12 Mei 2026", sport: "Badminton", jam: "08.00 - 10.00", icon: "ti-feather", badge: "badge-green", label: "Selesai", iconStatus: "ti-circle-check" },
+      { tgl: "10 Mei 2026", sport: "Basket", jam: "15.00 - 17.00", icon: "ti-ball-basketball", badge: "badge-amber", label: "Menunggu Konfirmasi", iconStatus: "ti-clock-hour-4" },
+      { tgl: "05 Mei 2026", sport: "Voli", jam: "19.00 - 21.00", icon: "ti-ball-volleyball", badge: "badge-green", label: "Selesai", iconStatus: "ti-circle-check" }
+    ];
+    const totalData = [
+      ...dataUser.reverse().map(item => ({
+        ...item,
+        badge: "badge-amber",
+        label: "Menunggu Konfirmasi",
+        iconStatus: "ti-clock-hour-4"
+      })),
+      ...dataSimulasi
+    ];
+
+    list.innerHTML = totalData.map((item, index) => {
+      let iconSport = item.icon || "ti-ball-football";
+      if(item.sport === "Badminton") iconSport = "ti-feather";
+      if(item.sport === "Basket") iconSport = "ti-ball-basketball";
+
+      return `
+        <div class="booking-card">
+          <div class="booking-header">
+            <span style="font-size:11px; color:var(--gray-400); font-weight:600;">SS-2026-0${180 - index}</span>
+            <span class="badge ${item.badge}"><i class="${item.iconStatus}"></i> ${item.label}</span>
+          </div>
+          <div class="booking-body">
+            <div class="booking-icon" style="background:var(--green-light); color:var(--green);">
+              <i class="ti ${iconSport}"></i>
+            </div>
+            <div class="booking-info">
+              <div class="booking-name">SportSpace — ${item.sport}</div>
+              <div class="booking-meta">
+                <span><i class="ti ti-calendar"></i> ${item.tgl}</span>
+                <span><i class="ti ti-clock"></i> ${item.jam}</span>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:16px; font-weight:700; color:var(--gray-900);">Rp150.000</div>
+              <div style="font-size:10px; color:var(--green); font-weight:800; margin-top:4px;">PAID</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.onload = muatRiwayat;
+</script>
+
+</body>
+</html>

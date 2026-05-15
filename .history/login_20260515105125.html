@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
   <style>
+    /* Tambahan Style untuk integrasi */
     body { min-height: 100vh; display: flex; flex-direction: column; font-family: 'Plus Jakarta Sans', sans-serif; }
     .auth-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px 16px; background: linear-gradient(135deg, #f0faf6 0%, #e8f5f0 100%); }
     .auth-card { width: 100%; max-width: 420px; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); overflow: hidden; }
@@ -112,6 +113,7 @@
 </div>
 
 <script>
+  // Fungsi Pindah Tab
   function switchTab(type) {
     const pLogin = document.getElementById('panel-login');
     const pRegister = document.getElementById('panel-register');
@@ -130,21 +132,25 @@
       bRegister.classList.add('active');
     }
   }
-  
+
+  // Navigasi ke file lain
   function goTo(url) {
     window.location.href = url;
   }
-  
+
+  // Simulasi Login
   function handleLogin() {
     const email = document.getElementById('loginEmail').value;
     if(!email) {
       alert("Masukkan email dulu!");
       return;
     }
+    // Jika email terisi, anggap login berhasil dan simpan nama di session (opsional)
     localStorage.setItem('userLoggedIn', email);
-    window.location.href = "index.html"; 
+    window.location.href = "index.html"; // Ke dashboard utama olahraga
   }
-  
+
+  // Simulasi Register
   function handleRegister() {
     const nama = document.getElementById('regNama').value;
     if(!nama) {

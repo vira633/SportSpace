@@ -1,9 +1,11 @@
 // SportSpace — shared JS utilities
 
+// Active nav link
 document.querySelectorAll('.navbar-links a').forEach(link => {
   if (link.href === window.location.href) link.classList.add('active');
 });
 
+// Slot picker (used on detail.html)
 function toggleSlot(btn) {
   if (btn.classList.contains('penuh')) return;
   btn.classList.toggle('selected');
@@ -33,11 +35,13 @@ function updateBookingSummary() {
   if (elBtn) elBtn.disabled = count === 0;
 }
 
+// Day picker
 function selectDay(btn) {
   document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
 
+// Role picker (register)
 function selectRole(role) {
   document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
   const el = document.getElementById('role-' + role);
@@ -46,11 +50,13 @@ function selectRole(role) {
   if (note) note.style.display = role === 'owner' ? 'flex' : 'none';
 }
 
+// Tab switcher (login/register)
 function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
 }
 
+// Filter buttons
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -58,6 +64,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
+// Sidebar active state (dashboard)
 document.querySelectorAll('.sidebar-item').forEach(item => {
   item.addEventListener('click', () => {
     document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
@@ -65,6 +72,7 @@ document.querySelectorAll('.sidebar-item').forEach(item => {
   });
 });
 
+// --- Fungsi Pencarian Lapangan ---
 function jalankanCari() {
     console.log("Fungsi jalankanCari berhasil dipicu!"); // Tes di console
 
@@ -78,6 +86,7 @@ function jalankanCari() {
     const cards = document.querySelectorAll('.field-card');
     const filterBtns = document.querySelectorAll('.filter-btn');
 
+    // 1. Filter Kartu
     cards.forEach(card => {
         const text = card.innerText.toLowerCase();
         if (text.includes(keyword)) {
@@ -86,15 +95,18 @@ function jalankanCari() {
             card.style.display = "none";
         }
     });
- 
+
+    // 2. Update Tombol Hijau (Filter)
     filterBtns.forEach(btn => {
         const btnText = btn.innerText.toLowerCase();
+        // Kalau ngetik nama kategori, pindahkan warna hijaunya
         if (keyword.includes(btnText) || (keyword === "" && btnText === "semua")) {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
     });
 
+    // 3. Gerakan Scroll
     const target = document.getElementById('lapangan');
     if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
@@ -102,6 +114,7 @@ function jalankanCari() {
         console.warn("Target id='lapangan' tidak ditemukan!");
     }
 }
+// Tambahan: Biar bisa tekan "Enter" pas ngetik langsung nyari
 document.getElementById('searchInput')?.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         jalankanCari();
