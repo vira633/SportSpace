@@ -12,12 +12,11 @@
 <!--NAVBAR-->
 <nav class="navbar">
   <a href="index.html" class="navbar-brand">
-      <i class="ti ti-bowling"></i>
+    <i class="ti ti-tournament"></i>
     <span>SportSpace</span>
     <div class="dot"></div>
   </a>
   <div class="navbar-actions">
-    <span style="font-size:13px;color:var(--gray-400);">GOR Maju Jaya</span>
     <a href="login.html">
       <button class="btn btn-outline btn-sm"><i class="ti ti-logout"></i> Keluar</button>
     </a>
@@ -28,44 +27,27 @@
 
   <!--SIDEBAR-->
   <aside class="sidebar">
-    <div class="sidebar-section">
-      Menu
-    </div>
-    
+    <div class="sidebar-section">Menu</div>
     <div class="sidebar-item active" onclick="showSection('dashboard',this)">
-      <i class="ti ti-home"></i>
-      Dashboard
+      <i class="ti ti-dashboard"></i> Dashboard
     </div>
-
     <div class="sidebar-item" onclick="showSection('lapangan',this)">
-      <i class="ti ti-layout-grid"></i> 
-      Lapangan Saya
+      <i class="ti ti-layout-grid"></i> Lapangan Saya
     </div>
-
     <div class="sidebar-item" onclick="showSection('booking',this)" style="position:relative;">
-      <i class="ti ti-calendar"></i> 
-      Booking Masuk
+      <i class="ti ti-calendar"></i> Booking Masuk
       <span style="margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;">3</span>
     </div>
-
     <div class="sidebar-item" onclick="showSection('jadwal',this)">
-      <i class="ti ti-clock"></i> 
-      Kelola Jadwal
+      <i class="ti ti-clock"></i> Kelola Jadwal
     </div>
-
-    <div class="sidebar-section">
-      Lainnya
-    </div>
-
+    <div class="sidebar-section">Lainnya</div>
     <div class="sidebar-item" onclick="showSection('profil',this)">
-      <i class="ti ti-building"> </i> 
-      Profil GOR
+      <i class="ti ti-building"></i> Profil GOR
     </div>
-
     <a href="login.html" style="color:inherit;">
       <div class="sidebar-item" style="color:var(--red);">
-        <i class="ti ti-logout"> </i>
-         Keluar
+        <i class="ti ti-logout"></i> Keluar
       </div>
     </a>
   </aside>
@@ -76,21 +58,16 @@
     <!--SECTION: DASHBOARD-->
     <div id="section-dashboard">
 
-      <h1 class="page-title">
-        Dashboard Owner
-      </h1>
-
+      <h1 class="page-title">Dashboard Owner</h1>
+    
       <!-- STAT CARDS -->
       <div class="stats-grid">
         <div class="stat-card">
           <div style="display:flex;justify-content:space-between;align-items:start;">
             <div>
               <div class="stat-value">8</div>
-              <div class="stat-label">
-                Booking Hari Ini
-              </div>
+              <div class="stat-label">Booking Hari Ini</div>
             </div>
-
             <div style="width:38px;height:38px;background:var(--green-light);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;">
               <i class="ti ti-calendar-check" style="color:var(--green);font-size:18px;"></i>
             </div>
@@ -101,38 +78,22 @@
         <div class="stat-card">
           <div style="display:flex;justify-content:space-between;align-items:start;">
             <div>
-              <div class="stat-value">
-                3
-              </div>
-
-              <div class="stat-label">
-                Menunggu Konfirmasi
-              </div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">Menunggu Konfirmasi</div>
             </div>
-
             <div style="width:38px;height:38px;background:var(--amber-light);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;">
               <i class="ti ti-clock" style="color:var(--amber);font-size:18px;"></i>
             </div>
           </div>
-
-          <div class="stat-change" style="color:var(--amber);"> 
-            <i class="ti ti-alert-circle"> </i> 
-            Perlu konfirmasi segera
-          </div>
+          <div class="stat-change" style="color:var(--amber);"><i class="ti ti-alert-circle"></i> Perlu konfirmasi segera</div>
         </div>
 
         <div class="stat-card">
           <div style="display:flex;justify-content:space-between;align-items:start;">
             <div>
-              <div class="stat-value">
-                Rp1,2jt
-              </div>
-
-              <div class="stat-label">
-                Pendapatan Bulan Ini
-              </div>
+              <div class="stat-value">Rp1,2jt</div>
+              <div class="stat-label">Pendapatan Bulan Ini</div>
             </div>
-
             <div style="width:38px;height:38px;background:var(--blue-light);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;">
               <i class="ti ti-cash" style="color:var(--blue);font-size:18px;"></i>
             </div>
@@ -143,23 +104,14 @@
         <div class="stat-card">
           <div style="display:flex;justify-content:space-between;align-items:start;">
             <div>
-              <div class="stat-value">
-                4
-              </div>
-
-              <div class="stat-label">
-                Lapangan Aktif
-              </div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">Lapangan Aktif</div>
             </div>
-
             <div style="width:38px;height:38px;background:var(--green-light);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;">
               <i class="ti ti-layout-grid" style="color:var(--green);font-size:18px;"></i>
             </div>
           </div>
-
-          <div class="stat-change" style="color:var(--gray-400);">
-            dari 4 total lapangan
-          </div>
+          <div class="stat-change" style="color:var(--gray-400);">dari 3 total lapangan</div>
         </div>
       </div>
 
@@ -305,17 +257,13 @@
       </div>
     </div>
 
-    <!--SECTION: LAPANGAN SAYA -->
+    <!--SECTION: LAPANGAN SAYA-->
     <div id="section-lapangan" style="display:none;">
 
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
         <div>
-          <h1 class="page-title" style="margin-bottom:2px;">
-            Lapangan Saya
-          </h1>
-          <p class="page-sub" style="margin:0;"></p>
+          <h1 class="page-title" style="margin-bottom:2px;">Lapangan Saya</h1>
         </div>
-
         <button class="btn btn-primary" onclick="document.getElementById('add-modal').classList.add('show')">
           <i class="ti ti-plus"></i> Tambah Lapangan
         </button>
@@ -323,35 +271,48 @@
 
       <!-- Filter Tabs -->
       <div class="tab-row">
-        <div class="tab-btn active" onclick="filterLapangan('semua',this)">
-          Semua (4)
-        </div>
-        <div class="tab-btn" onclick="filterLapangan('futsal',this)">
-          Futsal (2)
-        </div>
-        <div class="tab-btn" onclick="filterLapangan('badminton',this)">
-          Badminton (1)</div>
-          <div class="tab-btn" onclick="filterLapangan('basket',this)">
-          Basket (1)</div>
+        <div class="tab-btn active" onclick="filterLapangan('semua',this)">Semua (4)</div>
+        <div class="tab-btn" onclick="filterLapangan('futsal',this)">Futsal (2)</div>
+        <div class="tab-btn" onclick="filterLapangan('badminton',this)">Badminton (1)</div>
+        <div class="tab-btn" onclick="filterLapangan('basket',this)">Basket (1)</div>
       </div>
 
       <!-- Lapangan List -->
-
-       <!--Futsal 1-->
       <div class="fields-list">
+        <div class="field-row" data-type="futsal">
+          <div class="field-row-icon" style="background:var(--green-light);color:var(--green);">
+            <i class="ti ti-ball-football"></i>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:14px;font-weight:700;">Lapangan Futsal A</div>
+            <div style="font-size:12px;color:var(--gray-400);margin-top:2px;">Futsal &nbsp;·&nbsp; Vinyl &nbsp;·&nbsp; Rp80.000/jam</div>
+            <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="badge badge-green"><i class="ti ti-sun"></i> Indoor</span>
+              <span class="badge badge-blue"><i class="ti ti-ruler"></i> 20×40m</span>
+            </div>
+          </div>
+          <div class="toggle">
+            <input type="checkbox" checked>
+            <span style="color:var(--green);">Aktif</span>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-outline btn-sm" onclick="openEditModal('Lapangan Futsal A','Futsal','80000','Vinyl')">
+              <i class="ti ti-edit"></i> Edit
+            </button>
+            <button class="btn btn-outline btn-sm" style="color:var(--red);border-color:var(--red);">
+              <i class="ti ti-trash"></i>
+            </button>
+          </div>
+        </div>
+
         <div class="field-row" data-type="futsal">
           <div class="field-row-icon" style="background:var(--green-light);color:var(--green);">
             <i class="ti ti-ball-football"></i>
           </div>
 
           <div style="flex:1;">
-            <div style="font-size:14px;font-weight:700;">
-              GOR Maju Jaya
-            </div>
-
-            <div style="font-size:12px;color:var(--gray-400);margin-top:2px;">
-              Futsal &nbsp;·&nbsp; Vinyl &nbsp;·&nbsp; Rp80.000/jam
-            </div>
+            <div style="font-size:14px;font-weight:700;">Lapangan Futsal B</div>
+            <div style="font-size:12px;color:var(--gray-400);margin-top:2px;">Futsal &nbsp;·&nbsp; Parquet &nbsp;·&nbsp; Rp75.000/jam</div>
             <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
               <span class="badge badge-green"><i class="ti ti-sun"></i> Indoor</span>
               <span class="badge badge-blue"><i class="ti ti-ruler"></i> 20×40m</span>
@@ -360,15 +321,12 @@
 
           <div class="toggle">
             <input type="checkbox" checked>
-            <span style="color:var(--green);">
-              Aktif
-            </span>
+            <span style="color:var(--green);">Aktif</span>
           </div>
 
           <div style="display:flex;gap:6px;">
-            <button class="btn btn-outline btn-sm" onclick="openEditModal('GOR Maju Jaya','Futsal','80000','Vinyl')">
-              <i class="ti ti-edit"></i> 
-              Edit
+            <button class="btn btn-outline btn-sm" onclick="openEditModal('Lapangan Futsal B','Futsal','75000','Parquet')">
+              <i class="ti ti-edit"></i> Edit
             </button>
 
             <button class="btn btn-outline btn-sm" style="color:var(--red);border-color:var(--red);">
@@ -377,132 +335,29 @@
           </div>
         </div>
 
-        <!--Futsal 2-->
-        <div class="field-row" data-type="futsal">
-          <div class="field-row-icon" style="background:var(--green-light);color:var(--green);">
-            <i class="ti ti-ball-football"></i>
+        <div class="field-row" data-type="badminton">
+          <div class="field-row-icon" style="background:#EEF1FA;color:#4a6fa5;">
+            <i class="ti ti-feather"></i>
           </div>
 
           <div style="flex:1;">
-            <div style="font-size:14px;font-weight:700;">
-              GOR Sport Center
-            </div>
-
-            <div style="font-size:12px;color:var(--gray-400);margin-top:2px;">
-              Futsal &nbsp;·&nbsp; Parquet &nbsp;·&nbsp; Rp70.000/jam
-            </div>
-
+            <div style="font-size:14px;font-weight:700;">Lapangan Badminton A</div>
+            <div style="font-size:12px;color:var(--gray-400);margin-top:2px;">Badminton &nbsp;·&nbsp; Kayu &nbsp;·&nbsp; Rp45.000/jam</div>
             <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
-              <span class="badge badge-green"><i class="ti ti-sun"></i>
-                Indoor
-              </span>
-              <span class="badge badge-blue"><i class="ti ti-ruler"></i>
-                20×40m
-              </span>
-            </div>
-          </div>
-
-          <div class="toggle">
-            <input type="checkbox" checked>
-            <span style="color:var(--green);">
-              Aktif
-            </span>
-          </div>
-
-          <div style="display:flex;gap:6px;">
-            <button class="btn btn-outline btn-sm" onclick="openEditModal('GOR Sport Center','Futsal','70000','Parquet')">
-              <i class="ti ti-edit"></i> 
-              Edit
-            </button>
-
-            <button class="btn btn-outline btn-sm" style="color:var(--red);border-color:var(--red);">
-              <i class="ti ti-trash"></i>
-            </button>
-          </div>
-        </div>
-
-        <!--Badminton-->
-          <div class="field-row" data-type="badminton">
-          <div class="field-row-icon" style="background:var(--green-light);color:var(--green);">
-            <i class="ti ti-ball-volleyball"></i>
-          </div>
-
-          <div style="flex:1;">
-            <div style="font-size:14px;font-weight:700;">
-              Arena Badminton 88
-            </div>
-
-            <div style="font-size:12px;color:var(--gray-400);margin-top:2px;">
-              Badminton &nbsp;·&nbsp; Parquet &nbsp;·&nbsp; Rp45.000/jam
-            </div>
-
-            <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
-              <span class="badge badge-green"><i class="ti ti-sun"></i>
-                Indoor
-              </span>
-              <span class="badge badge-blue"><i class="ti ti-ruler"></i>
-                20×40m
-              </span>
-            </div>
-          </div>
-
-          <div class="toggle">
-            <input type="checkbox" checked>
-            <span style="color:var(--green);">
-              Aktif
-            </span>
-          </div>
-
-          <div style="display:flex;gap:6px;">
-            <button class="btn btn-outline btn-sm" onclick="openEditModal('GOR Sport Center','Futsal','70000','Parquet')">
-              <i class="ti ti-edit"></i> 
-              Edit
-            </button>
-
-            <button class="btn btn-outline btn-sm" style="color:var(--red);border-color:var(--red);">
-              <i class="ti ti-trash"></i>
-            </button>
-          </div>
-        </div>
-          
-        <!--Basket-->
-          <div class="field-row" data-type="badminton">
-            <div class="field-row-icon" style="background:#EEF1FA;color:#4a6fa5;">
-              <i class="ti ti-ball-basketball"></i>
-          </div>
-          
-          <div style="flex:1;">
-            <div style="font-size:14px;font-weight:700;">
-              Basket Court Pro
-            </div>
-            
-            <div style="font-size:12px;color:var(--gray-400);margin-top:2px;">
-              Basket &nbsp;·&nbsp; Kayu &nbsp;·&nbsp; Rp120.000/jam
-            </div>
-            
-            <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
-              <span class="badge badge-amber"><i class="ti ti-sun"></i>
-                Indoor
-              </span>
-              <span class="badge badge-blue"><i class="ti ti-ruler"></i>
-                6×13m
-              </span>
+              <span class="badge badge-amber"><i class="ti ti-sun"></i> Indoor</span>
+              <span class="badge badge-blue"><i class="ti ti-ruler"></i> 6×13m</span>
             </div>
           </div>
 
           <div class="toggle">
             <input type="checkbox">
-            <span style="color:var(--gray-400);">
-              Nonaktif
-            </span>
+            <span style="color:var(--gray-400);">Nonaktif</span>
           </div>
 
           <div style="display:flex;gap:6px;">
             <button class="btn btn-outline btn-sm" onclick="openEditModal('Lapangan Badminton A','Badminton','45000','Kayu')">
-              <i class="ti ti-edit"></i>
-              Edit
+              <i class="ti ti-edit"></i> Edit
             </button>
-
             <button class="btn btn-outline btn-sm" style="color:var(--red);border-color:var(--red);">
               <i class="ti ti-trash"></i>
             </button>
@@ -516,14 +371,17 @@
           <div style="font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Total Lapangan</div>
           <div style="font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--gray-900);margin-top:4px;">3</div>
         </div>
+
         <div class="stat-card" style="padding:14px;">
           <div style="font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Aktif</div>
           <div style="font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--green);margin-top:4px;">2</div>
         </div>
+
         <div class="stat-card" style="padding:14px;">
           <div style="font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Nonaktif</div>
           <div style="font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--amber);margin-top:4px;">1</div>
         </div>
+
         <div class="stat-card" style="padding:14px;">
           <div style="font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Tarif Rata-rata</div>
           <div style="font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--gray-900);margin-top:4px;">Rp68k</div>
@@ -531,13 +389,10 @@
       </div>
     </div>
 
-    <!-- ─────────────────────────────────────────
-         SECTION: BOOKING MASUK
-    ───────────────────────────────────────── -->
+    <!--SECTION: BOOKING MASUK-->
     <div id="section-booking" style="display:none;">
 
       <h1 class="page-title">Booking Masuk</h1>
-      <p class="page-sub">Semua booking yang masuk ke GOR kamu</p>
 
       <!-- Filter Bar -->
       <div class="filter-bar">
@@ -567,10 +422,12 @@
           <i class="ti ti-clock" style="color:var(--amber);font-size:17px;"></i>
           <span style="font-size:13px;font-weight:700;color:#7a5000;">3 Pending</span>
         </div>
+
         <div style="background:var(--blue-light);border:1px solid #c0d0f0;border-radius:var(--radius-md);padding:10px 16px;display:flex;align-items:center;gap:8px;">
           <i class="ti ti-calendar-check" style="color:var(--blue);font-size:17px;"></i>
           <span style="font-size:13px;font-weight:700;color:var(--blue);">4 Dikonfirmasi</span>
         </div>
+
         <div style="background:var(--green-light);border:1px solid #b3dfc4;border-radius:var(--radius-md);padding:10px 16px;display:flex;align-items:center;gap:8px;">
           <i class="ti ti-circle-check" style="color:var(--green);font-size:17px;"></i>
           <span style="font-size:13px;font-weight:700;color:var(--green-dark);">12 Selesai</span>
@@ -706,13 +563,10 @@
       </div>
     </div>
 
-    <!-- ─────────────────────────────────────────
-         SECTION: KELOLA JADWAL
-    ───────────────────────────────────────── -->
+    <!--SECTION: KELOLA JADWAL-->
     <div id="section-jadwal" style="display:none;">
 
       <h1 class="page-title">Kelola Jadwal</h1>
-      <p class="page-sub">Atur slot waktu operasional setiap lapangan</p>
 
       <!-- Pilih Lapangan -->
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
@@ -733,7 +587,6 @@
         <div style="display:flex;align-items:center;gap:5px;"><div style="width:14px;height:14px;border-radius:3px;background:#dcf5e8;border:1px solid #b3dfc4;"></div> Terpesan</div>
         <div style="display:flex;align-items:center;gap:5px;"><div style="width:14px;height:14px;border-radius:3px;background:var(--green-50);border:1px solid #b3dfc4;"></div> Tersedia</div>
         <div style="display:flex;align-items:center;gap:5px;"><div style="width:14px;height:14px;border-radius:3px;background:#fef2f2;border:1px solid #fec6c6;"></div> Diblokir</div>
-        <div style="font-size:11.5px;color:var(--gray-400);margin-left:auto;">Klik slot tersedia untuk blokir/buka</div>
       </div>
 
       <!-- Schedule Grid -->
@@ -943,13 +796,10 @@
       </div>
     </div>
 
-    <!-- ─────────────────────────────────────────
-         SECTION: PROFIL GOR
-    ───────────────────────────────────────── -->
+    <!--SECTION: PROFIL GOR-->
     <div id="section-profil" style="display:none;">
 
       <h1 class="page-title">Profil GOR</h1>
-      <p class="page-sub">Informasi GOR yang tampil di halaman publik</p>
 
       <div style="display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;flex-wrap:wrap;">
 
@@ -1065,9 +915,7 @@
   </main>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     MODAL: TAMBAH LAPANGAN
-════════════════════════════════════════════════ -->
+<!--MODAL: TAMBAH LAPANGAN-->
 <div class="modal-overlay" id="add-modal">
   <div class="modal-box">
     <div class="modal-header">
@@ -1130,9 +978,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     MODAL: EDIT LAPANGAN
-════════════════════════════════════════════════ -->
+<!--MODAL: EDIT LAPANGAN-->
 <div class="modal-overlay" id="edit-modal">
   <div class="modal-box">
     <div class="modal-header">

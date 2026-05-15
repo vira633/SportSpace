@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard Admin — SportSpace</title>
+
+  <link rel="stylesheet" href="admin.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <a href="index.html" class="navbar-brand">
+      <i class="ti ti-tournament"></i>
+
+      <span>SportSpace</span>
+
+      <div class="dot"></div>
+    </a>
+
+    <div class="navbar-actions">
+
+      <span class="admin-text">
+        Admin Panel
+      </span>
+
+      <div class="notif">
+        <i class="ti ti-bell"></i>
+
+        <div class="notif-badge">
+          4
+        </div>
+      </div>
+
+      <a href="login.html">
+        <button class="btn btn-outline btn-sm">
+          <i class="ti ti-logout"></i>
+          Keluar
+        </button>
+      </a>
+
+    </div>
+
+  </nav>
+
+  <!-- LAYOUT -->
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div>
+
+        <div class="sidebar-section">
+          MENU
+        </div>
+
+        <div class="sidebar-menu">
+
+          <div class="sidebar-item active"
+          onclick="showSection('dashboard', this)">
+            <i class="ti ti-home"></i>
+            <span>Dashboard</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('venue', this)">
+            <i class="ti ti-building"></i>
+            <span>Verifikasi GOR</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('booking', this)">
+            <i class="ti ti-calendar-event"></i>
+            <span>Semua Booking</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('user', this)">
+            <i class="ti ti-users"></i>
+            <span>Kelola User</span>
+          </div>
+
+        </div>
+
+        <div class="sidebar-section extra">
+          LAINNYA
+        </div>
+
+        <div class="sidebar-menu">
+
+          <div class="sidebar-item"
+          onclick="showSection('setting', this)">
+            <i class="ti ti-settings"></i>
+            <span>Pengaturan</span>
+          </div>
+
+          <a href="login.html" class="logout-link">
+
+            <div class="sidebar-item logout">
+
+              <i class="ti ti-logout"></i>
+
+              <span>Keluar</span>
+
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- PROFILE -->
+      <div class="sidebar-profile">
+
+        <div class="profile-left">
+
+          <div class="avatar">
+            A
+          </div>
+
+          <div class="profile-info">
+
+            <div class="profile-name">
+              Admin
+            </div>
+
+            <div class="profile-role">
+              Administrator
+            </div>
+
+          </div>
+
+        </div>
+
+        <i class="ti ti-chevron-down"></i>
+
+      </div>
+
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="dashboard-content">
+
+      <!-- DASHBOARD -->
+      <section id="section-dashboard">
+
+        <div class="top-header">
+
+          <div>
+
+            <h1 class="page-title">
+              Dashboard Admin
+            </h1>
+
+            <p class="page-sub">
+              Selamat datang! Pantau semua aktivitas platform di sini.
+            </p>
+
+          </div>
+
+          <div class="date-card">
+
+            <i class="ti ti-calendar"></i>
+
+            Rabu, 14 Mei 2026
+
+          </div>
+
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-grid">
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div>
+
+                <div class="stat-value">
+                  1.247
+                </div>
+
+                <div class="stat-label">
+                  Total Pengguna
+                </div>
+
+              </div>
+
+              <div class="stat-icon blue-bg">
+                <i class="ti ti-users"></i>
+              </div>
+
+            </div>
+
+            <div class="stat-change stat-up">
+              <i class="ti ti-trending-up"></i>
+              +12% bulan ini
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div>
+
+                <div class="stat-value">
+                  87
+                </div>
+
+                <div class="stat-label">
+                  GOR Terdaftar
+                </div>
+
+              </div>
+
+              <div class="stat-icon green-bg">
+                <i class="ti ti-building"></i>
+              </div>
+
+            </div>
+
+            <div class="stat-change stat-up">
+              <i class="ti ti-trending-up"></i>
+              +5 GOR baru
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div>
+
+                <div class="stat-value">
+                  432
+                </div>
+
+                <div class="stat-label">
+                  Booking Bulan Ini
+                </div>
+
+              </div>
+
+              <div class="stat-icon amber-bg">
+                <i class="ti ti-calendar-check"></i>
+              </div>
+
+            </div>
+
+            <div class="stat-change stat-up">
+              <i class="ti ti-trending-up"></i>
+              +18% vs bulan lalu
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div>
+
+                <div class="stat-value">
+                  4
+                </div>
+
+                <div class="stat-label">
+                  Pending Verifikasi
+                </div>
+
+              </div>
+
+              <div class="stat-icon red-bg">
+                <i class="ti ti-clock"></i>
+              </div>
+
+            </div>
+
+            <div class="stat-change danger">
+              <i class="ti ti-alert-circle"></i>
+              Perlu tindakan
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- TABLE -->
+        <div class="card">
+
+          <div class="card-header">
+
+            <div class="card-title">
+              <i class="ti ti-file-invoice"></i>
+              Booking Terbaru
+            </div>
+
+            <button class="btn btn-outline btn-sm">
+              Lihat Semua
+            </button>
+
+          </div>
+
+          <div class="table-wrapper">
+
+            <table class="table">
+
+              <thead>
+
+                <tr>
+
+                  <th>Kode</th>
+                  <th>User</th>
+                  <th>Lapangan</th>
+                  <th>Tanggal</th>
+                  <th>Total</th>
+                  <th>Status</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td><strong>SS-00142</strong></td>
+                  <td>Andi R.</td>
+                  <td>Futsal A — GOR Maju</td>
+                  <td>12 Mei 2026</td>
+                  <td>Rp160.000</td>
+                  <td><span class="badge badge-amber">Pending</span></td>
+                </tr>
+
+                <tr>
+                  <td><strong>SS-00141</strong></td>
+                  <td>Budi S.</td>
+                  <td>Badminton A — Arena 88</td>
+                  <td>11 Mei 2026</td>
+                  <td>Rp90.000</td>
+                  <td><span class="badge badge-blue">Dikonfirmasi</span></td>
+                </tr>
+
+                <tr>
+                  <td><strong>SS-00140</strong></td>
+                  <td>Citra M.</td>
+                  <td>Basket — Court Pro</td>
+                  <td>10 Mei 2026</td>
+                  <td>Rp240.000</td>
+                  <td><span class="badge badge-green">Selesai</span></td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- VERIFIKASI -->
+      <section id="section-venue" class="hidden">
+
+        <h1 class="page-title">
+          Verifikasi GOR
+        </h1>
+
+      </section>
+
+      <!-- BOOKING -->
+      <section id="section-booking" class="hidden">
+
+        <h1 class="page-title">
+          Semua Booking
+        </h1>
+
+      </section>
+
+      <!-- USER -->
+      <section id="section-user" class="hidden">
+
+        <h1 class="page-title">
+          Kelola User
+        </h1>
+
+      </section>
+
+      <!-- SETTING -->
+      <section id="section-setting" class="hidden">
+
+        <h1 class="page-title">
+          Pengaturan
+        </h1>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+
+    function showSection(name, item){
+
+      document
+      .querySelectorAll('[id^="section-"]')
+      .forEach(section => {
+        section.classList.add('hidden');
+      });
+
+      document
+      .getElementById('section-' + name)
+      .classList.remove('hidden');
+
+      document
+      .querySelectorAll('.sidebar-item')
+      .forEach(menu => {
+        menu.classList.remove('active');
+      });
+
+      item.classList.add('active');
+    }
+
+  </script>
+
+</body>
+</html>

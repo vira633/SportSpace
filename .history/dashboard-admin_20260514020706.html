@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SportSpace — Booking Lapangan</title>
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- ICON -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+
+  <style>
+
+    :root{
+      --green:#164f21;
+      --green-mid:#1f9b32;
+      --green-light:#dff6dc;
+
+      --gray-50:#f7f8f7;
+      --gray-100:#f1f2f1;
+      --gray-200:#e5e7e5;
+      --gray-400:#8f948f;
+      --gray-600:#5b615b;
+      --gray-800:#232623;
+      --gray-900:#111411;
+
+      --white:#ffffff;
+
+      --radius-md:14px;
+      --radius-lg:24px;
+      --radius-xl:34px;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Plus Jakarta Sans',sans-serif;
+      background:var(--gray-50);
+      color:var(--gray-800);
+    }
+
+    h1,h2,h3{
+      font-family:'Syne',sans-serif;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .navbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      padding:18px 44px;
+
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(14px);
+
+      border-bottom:1px solid var(--gray-200);
+    }
+
+    .navbar-brand{
+      display:flex;
+      align-items:center;
+      gap:8px;
+
+      font-family:'Syne',sans-serif;
+      font-size:22px;
+      font-weight:800;
+    }
+
+    .navbar-brand i{
+      color:var(--green);
+      font-size:28px;
+    }
+
+    .navbar-brand .dot{
+      width:5px;
+      height:5px;
+      border-radius:100%;
+      background:var(--green);
+      margin-top:14px;
+    }
+
+    .navbar-links{
+      display:flex;
+      gap:38px;
+    }
+
+    .navbar-links a{
+      font-size:15px;
+      font-weight:600;
+      color:var(--gray-600);
+      transition:.2s ease;
+    }
+
+    .navbar-links a:hover,
+    .navbar-links a.active{
+      color:var(--green);
+    }
+
+    .navbar-actions{
+      display:flex;
+      gap:10px;
+    }
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .btn{
+      border:none;
+      cursor:pointer;
+
+      padding:11px 22px;
+
+      border-radius:14px;
+
+      font-size:14px;
+      font-weight:700;
+
+      transition:.2s ease;
+
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+
+    .btn-primary{
+      background:var(--green);
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:var(--green-mid);
+      transform:translateY(-2px);
+    }
+
+    .btn-outline{
+      background:#fff;
+      border:1.5px solid var(--gray-200);
+      color:var(--gray-800);
+    }
+
+    .btn-outline:hover{
+      border-color:var(--green);
+      color:var(--green);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero{
+      background:
+      linear-gradient(
+        135deg,
+        var(--green) 0%,
+        var(--green-mid) 65%,
+        #7bd37c 100%
+      );
+
+      padding:90px 24px 110px;
+
+      text-align:center;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+
+      padding:10px 18px;
+
+      border-radius:999px;
+
+      background:rgba(255,255,255,.14);
+
+      color:#fff;
+
+      border:1px solid rgba(255,255,255,.18);
+
+      font-size:14px;
+      font-weight:600;
+
+      backdrop-filter:blur(10px);
+
+      margin-bottom:28px;
+    }
+
+    .hero h1{
+      font-size:72px;
+      line-height:1.1;
+      color:#fff;
+
+      max-width:920px;
+      margin:0 auto 24px;
+    }
+
+    .hero p{
+      font-size:20px;
+      color:rgba(255,255,255,.82);
+
+      max-width:700px;
+      margin:0 auto 42px;
+
+      line-height:1.8;
+    }
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search-box{
+      max-width:720px;
+
+      margin:0 auto;
+
+      background:#fff;
+
+      border-radius:22px;
+
+      padding:10px;
+
+      display:flex;
+      align-items:center;
+      gap:12px;
+
+      box-shadow:
+      0 20px 40px rgba(0,0,0,.14);
+    }
+
+    .search-box i{
+      color:var(--gray-400);
+      font-size:20px;
+      margin-left:10px;
+    }
+
+    .search-box input{
+      flex:1;
+
+      border:none;
+      outline:none;
+
+      font-size:15px;
+      font-family:'Plus Jakarta Sans',sans-serif;
+    }
+
+    .search-box input::placeholder{
+      color:var(--gray-400);
+    }
+
+    /* =========================
+       HERO STATS
+    ========================= */
+
+    .hero-stats{
+      display:flex;
+      justify-content:center;
+      gap:60px;
+
+      flex-wrap:wrap;
+
+      margin-top:54px;
+    }
+
+    .hero-stat .num{
+      color:#fff;
+      font-size:46px;
+      font-weight:800;
+    }
+
+    .hero-stat .lbl{
+      color:rgba(255,255,255,.74);
+      font-size:15px;
+      margin-top:4px;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .section{
+      max-width:1320px;
+      margin:auto;
+      padding:70px 34px;
+    }
+
+    .field-section{
+      margin-top:-50px;
+
+      position:relative;
+      z-index:10;
+
+      background:
+      linear-gradient(
+        180deg,
+        #eff8ee 0%,
+        #ffffff 100%
+      );
+
+      border-radius:34px;
+
+      border:1px solid var(--gray-200);
+
+      box-shadow:
+      0 30px 50px rgba(0,0,0,.06);
+    }
+
+    .section-title{
+      font-size:42px;
+      margin-bottom:10px;
+      color:var(--gray-900);
+    }
+
+    .section-subtitle{
+      font-size:16px;
+      color:var(--gray-600);
+      margin-bottom:34px;
+    }
+
+    /* =========================
+       SPORT CHIP
+    ========================= */
+
+    .sport-chips{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+
+      margin-bottom:34px;
+    }
+
+    .sport-chip{
+      padding:12px 22px;
+
+      border-radius:999px;
+
+      background:#fff;
+
+      border:1.5px solid var(--gray-200);
+
+      display:flex;
+      align-items:center;
+      gap:8px;
+
+      font-size:14px;
+      font-weight:700;
+
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .sport-chip:hover,
+    .sport-chip.active{
+      background:var(--green);
+      color:#fff;
+      border-color:var(--green);
+
+      transform:translateY(-2px);
+    }
+
+    /* =========================
+       GRID
+    ========================= */
+
+    .fields-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+      gap:30px;
+    }
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .field-card{
+      background:#fff;
+
+      border-radius:28px;
+
+      overflow:hidden;
+
+      border:1px solid #ebeeeb;
+
+      transition:.25s ease;
+
+      box-shadow:
+      0 12px 28px rgba(0,0,0,.05);
+    }
+
+    .field-card:hover{
+      transform:translateY(-8px);
+
+      box-shadow:
+      0 22px 40px rgba(22,79,33,.14);
+    }
+
+    .field-img{
+      height:240px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .field-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+
+      transition:.3s ease;
+    }
+
+    .field-card:hover img{
+      transform:scale(1.05);
+    }
+
+    .badge{
+      position:absolute;
+      top:18px;
+      right:18px;
+
+      padding:9px 16px;
+
+      border-radius:999px;
+
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .badge-green{
+      background:var(--green-light);
+      color:var(--green);
+    }
+
+    .badge-amber{
+      background:#fff0d6;
+      color:#c17800;
+    }
+
+    .field-body{
+      padding:26px;
+    }
+
+    .field-name{
+      font-size:28px;
+      font-family:'Syne',sans-serif;
+      margin-bottom:10px;
+    }
+
+    .field-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+
+      color:var(--gray-600);
+
+      font-size:14px;
+
+      margin-bottom:14px;
+    }
+
+    .field-rating{
+      margin-bottom:24px;
+      font-size:14px;
+      color:var(--gray-600);
+    }
+
+    .stars{
+      color:#ffca2c;
+      letter-spacing:2px;
+      margin-right:6px;
+    }
+
+    .field-footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .field-price{
+      font-size:34px;
+      font-weight:800;
+      color:var(--green);
+    }
+
+    .field-price span{
+      font-size:15px;
+      color:var(--gray-400);
+      font-weight:500;
+    }
+
+    /* =========================
+       HOW SECTION
+    ========================= */
+
+    .how-section{
+      text-align:center;
+    }
+
+    .how-title h2{
+      font-size:44px;
+      margin-bottom:12px;
+    }
+
+    .how-title p{
+      color:var(--gray-400);
+      margin-bottom:48px;
+      font-size:16px;
+    }
+
+    .how-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:26px;
+    }
+
+    .how-card{
+      background:#fff;
+
+      border-radius:28px;
+
+      padding:34px;
+
+      border:1px solid var(--gray-200);
+
+      box-shadow:
+      0 10px 26px rgba(0,0,0,.04);
+
+      transition:.2s ease;
+    }
+
+    .how-card:hover{
+      transform:translateY(-6px);
+    }
+
+    .how-num{
+      width:58px;
+      height:58px;
+
+      border-radius:100%;
+
+      background:var(--green);
+
+      color:#fff;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      font-size:20px;
+      font-weight:800;
+
+      margin:auto auto 20px;
+    }
+
+    .how-card h3{
+      font-size:24px;
+      margin-bottom:12px;
+    }
+
+    .how-card p{
+      color:var(--gray-600);
+      line-height:1.8;
+      font-size:15px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media(max-width:900px){
+
+      .hero h1{
+        font-size:48px;
+      }
+
+      .hero p{
+        font-size:16px;
+      }
+
+      .navbar{
+        padding:16px 20px;
+      }
+
+      .navbar-links{
+        display:none;
+      }
+
+      .hero-stat .num{
+        font-size:34px;
+      }
+
+      .section-title{
+        font-size:34px;
+      }
+
+      .field-name{
+        font-size:24px;
+      }
+
+      .field-price{
+        font-size:28px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <a href="#" class="navbar-brand">
+      <i class="ti ti-tournament"></i>
+      <span>SportSpace</span>
+      <div class="dot"></div>
+    </a>
+
+    <div class="navbar-links">
+      <a href="#" class="active">Beranda</a>
+      <a href="#">Lapangan</a>
+      <a href="#">Tentang</a>
+    </div>
+
+    <div class="navbar-actions">
+      <button class="btn btn-outline">Masuk</button>
+      <button class="btn btn-primary">Daftar</button>
+    </div>
+
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="hero-badge">
+      <i class="ti ti-bolt"></i>
+      Booking lapangan jadi lebih mudah
+    </div>
+
+    <h1>
+      Cari & Booking Lapangan
+      Olahraga Favoritmu
+    </h1>
+
+    <p>
+      Futsal, badminton, basket, dan lainnya tersedia di kotamu.
+      Booking cepat dalam hitungan menit.
+    </p>
+
+    <div class="search-box">
+
+      <i class="ti ti-map-pin"></i>
+
+      <input type="text" placeholder="Cari cabang olahraga atau lapangan...">
+
+      <button class="btn btn-primary">
+        Cari Lapangan
+      </button>
+
+    </div>
+
+    <div class="hero-stats">
+
+      <div class="hero-stat">
+        <div class="num">1.2rb+</div>
+        <div class="lbl">Pengguna aktif</div>
+      </div>
+
+      <div class="hero-stat">
+        <div class="num">85+</div>
+        <div class="lbl">GOR terdaftar</div>
+      </div>
+
+      <div class="hero-stat">
+        <div class="num">400+</div>
+        <div class="lbl">Booking bulan ini</div>
+      </div>
+
+      <div class="hero-stat">
+        <div class="num">4.8★</div>
+        <div class="lbl">Rating rata-rata</div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- LAPANGAN -->
+  <section class="section field-section">
+
+    <div class="sport-chips">
+
+      <div class="sport-chip active">
+        <i class="ti ti-layout-grid"></i>
+        Semua
+      </div>
+
+      <div class="sport-chip">
+        <i class="ti ti-ball-football"></i>
+        Futsal
+      </div>
+
+      <div class="sport-chip">
+        <i class="ti ti-feather"></i>
+        Badminton
+      </div>
+
+      <div class="sport-chip">
+        <i class="ti ti-ball-basketball"></i>
+        Basket
+      </div>
+
+    </div>
+
+    <h2 class="section-title">
+      Lapangan Favorit
+    </h2>
+
+    <p class="section-subtitle">
+      Pilih lapangan olahraga terbaik dengan fasilitas lengkap.
+    </p>
+
+    <div class="fields-grid">
+
+      <!-- CARD -->
+      <div class="field-card">
+
+        <div class="field-img">
+          <img src="lapangan-futsal.jpg">
+          <div class="badge badge-green">Tersedia</div>
+        </div>
+
+        <div class="field-body">
+
+          <div class="field-name">
+            GOR Maju Jaya
+          </div>
+
+          <div class="field-meta">
+            <span><i class="ti ti-map-pin"></i> Sleman</span>
+            <span><i class="ti ti-ball-football"></i> Futsal</span>
+          </div>
+
+          <div class="field-rating">
+            <span class="stars">★★★★★</span>
+            4.8 (24 ulasan)
+          </div>
+
+          <div class="field-footer">
+
+            <div class="field-price">
+              Rp80rb <span>/jam</span>
+            </div>
+
+            <button class="btn btn-primary">
+              Booking
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+      <div class="field-card">
+
+        <div class="field-img">
+          <img src="badminton.jpg">
+          <div class="badge badge-green">Tersedia</div>
+        </div>
+
+        <div class="field-body">
+
+          <div class="field-name">
+            Arena Badminton 88
+          </div>
+
+          <div class="field-meta">
+            <span><i class="ti ti-map-pin"></i> Bantul</span>
+            <span><i class="ti ti-feather"></i> Badminton</span>
+          </div>
+
+          <div class="field-rating">
+            <span class="stars">★★★★★</span>
+            4.7 (18 ulasan)
+          </div>
+
+          <div class="field-footer">
+
+            <div class="field-price">
+              Rp45rb <span>/jam</span>
+            </div>
+
+            <button class="btn btn-primary">
+              Booking
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+      <div class="field-card">
+
+        <div class="field-img">
+          <img src="lapangan-basket.jpg">
+          <div class="badge badge-amber">Penuh hari ini</div>
+        </div>
+
+        <div class="field-body">
+
+          <div class="field-name">
+            Basket Court Pro
+          </div>
+
+          <div class="field-meta">
+            <span><i class="ti ti-map-pin"></i> Kota Jogja</span>
+            <span><i class="ti ti-ball-basketball"></i> Basket</span>
+          </div>
+
+          <div class="field-rating">
+            <span class="stars">★★★★★</span>
+            4.9 (41 ulasan)
+          </div>
+
+          <div class="field-footer">
+
+            <div class="field-price">
+              Rp120rb <span>/jam</span>
+            </div>
+
+            <button class="btn btn-outline">
+              Lihat
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- HOW -->
+  <section class="section how-section">
+
+    <div class="how-title">
+
+      <h2>
+        Cara Pakai SportSpace
+      </h2>
+
+      <p>
+        Booking lapangan jadi lebih cepat dan praktis
+      </p>
+
+    </div>
+
+    <div class="how-grid">
+
+      <div class="how-card">
+
+        <div class="how-num">1</div>
+
+        <h3>Daftar akun</h3>
+
+        <p>
+          Buat akun gratis hanya dalam beberapa detik.
+        </p>
+
+      </div>
+
+      <div class="how-card">
+
+        <div class="how-num">2</div>
+
+        <h3>Cari lapangan</h3>
+
+        <p>
+          Pilih olahraga, lokasi, dan jadwal terbaik.
+        </p>
+
+      </div>
+
+      <div class="how-card">
+
+        <div class="how-num">3</div>
+
+        <h3>Pilih jadwal</h3>
+
+        <p>
+          Tentukan waktu booking sesuai kebutuhanmu.
+        </p>
+
+      </div>
+
+      <div class="how-card">
+
+        <div class="how-num">4</div>
+
+        <h3>Bayar & Bermain</h3>
+
+        <p>
+          Lakukan pembayaran dan langsung bermain.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</body>
+</html>
