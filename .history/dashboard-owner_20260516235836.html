@@ -17,8 +17,10 @@
     <div class="dot">
     </div>
   </a>
-  
   <div class="navbar-actions">
+    <span style="font-size:13px;color:var(--gray-400);">
+      GOR Maju Jaya
+    </span>
     <a href="login.html">
       <button class="btn btn-outline btn-sm">
         <i class="ti ti-logout"></i> 
@@ -45,13 +47,11 @@
       <i class="ti ti-layout-grid"></i> 
       Lapangan Saya
     </div>
-    
-    <div class="sidebar-item menu-booking" onclick="showSection('booking',this)">
-      <i class="ti ti-calendar"></i>
+
+    <div class="sidebar-item" onclick="showSection('booking',this)" style="position:relative;">
+      <i class="ti ti-calendar"></i> 
       Booking Masuk
-      <span class="notif-badge">
-        3
-      </span>
+      <span style="margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;">3</span>
     </div>
 
     <div class="sidebar-item" onclick="showSection('jadwal',this)">
@@ -81,6 +81,7 @@
 
     <!--SECTION: DASHBOARD-->
     <div id="section-dashboard">
+
       <h1 class="page-title">
         Dashboard Owner
       </h1>
@@ -700,7 +701,7 @@
           <option>GOR Maju Jaya</option>
           <option>GOR Sport Center</option>
           <option>Area Badminton 88</option>
-          <option>Basket Court Pro</option>
+          <option>Basker Court Pro</option>
         </select>
         <input type="date" class="form-input" style="width:auto;">
       </div>
@@ -973,12 +974,6 @@
             <i class="ti ti-feather"></i>
             Arena Badminton 88
           </div>
-
-          
-          <div class="lapangan-pill" onclick="selectJadwalLapangan(this, 'badminton-a')">
-            <i class="ti ti-feather"></i>
-            Basket Court Pro
-          </div>
         </div>
 
         <div style="display:flex;gap:8px;align-items:center;">
@@ -1009,11 +1004,11 @@
 
         <div style="display:flex;align-items:center;gap:5px;">
           <div style="width:14px;height:14px;border-radius:3px;background:#fef2f2;border:1px solid #fec6c6;"></div>
-          Libur
+          Diblokir
         </div>
 
         <div style="font-size:11.5px;color:var(--gray-400);margin-left:auto;">
-          Klik slot tersedia untuk libur/buka
+          Klik slot tersedia untuk blokir/buka
         </div>
       </div>
 
@@ -1217,7 +1212,7 @@
               <label class="form-label">
                 Jam Buka
               </label>
-              <input type="time" class="form-input">
+              <input type="time" class="form-input" value="07:00">
             </div>
 
             <div class="form-group" style="margin-bottom:10px;">
@@ -1225,7 +1220,7 @@
                 Jam Tutup
               </label>
 
-              <input type="time" class="form-input" value=>
+              <input type="time" class="form-input" value="21:00">
             </div>
             <div class="form-group" style="margin-bottom:0;">
               <label class="form-label">
@@ -1234,6 +1229,7 @@
 
               <select class="form-input">
                 <option>1</option>
+                <option selected>1</option>
                 <option>2</option>
               </select>
             </div>
@@ -1243,7 +1239,7 @@
         <div class="card" style="margin-bottom:0;">
           <div class="card-header">
             <i class="ti ti-calendar-off" style="color:var(--red);"></i>
-            Hari Libur
+            Hari Libur / Blokir
           </div>
 
           <div class="card-body">
@@ -1263,7 +1259,7 @@
 
             <button class="btn btn-danger btn-sm" style="width:100%;justify-content:center;">
               <i class="ti ti-lock"></i>
-              Konfirmasi
+              Blokir Tanggal
             </button>
           </div>
         </div>
@@ -1272,8 +1268,59 @@
 
     <!--SECTION: PROFIL GOR-->
     <div id="section-profil" style="display:none;">
+
       <h1 class="page-title">Profil GOR</h1>
-      <div style="display:grid;grid-template-columns:1fr;gap:20px;">
+      <p class="page-sub">Informasi GOR yang tampil di halaman publik</p>
+
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;flex-wrap:wrap;">
+
+        <!-- Left: Photo + quick info -->
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="photo-upload" onclick="alert('Upload foto GOR')">
+            <i class="ti ti-building"></i>
+            <span>
+              Foto GOR
+            </span>
+
+            <span style="font-size:10px;color:var(--gray-400);">
+              Klik untuk upload
+            </span>
+          </div>
+
+          <div class="card" style="padding:14px;min-width:160px;margin-bottom:0;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:8px;">
+              Status
+            </div>
+
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--green);">
+              </div>
+
+              <span style="font-size:13px;font-weight:700;color:var(--green);">
+                Terverifikasi
+              </span>
+            </div>
+
+            <div style="margin-top:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:6px;">
+              Rating
+            </div>
+
+            <div style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--amber);">
+              <i class="ti ti-star-filled"></i> 4.8
+              <span style="color:var(--gray-400);font-weight:400;">
+                (24)
+              </span>
+            </div>
+
+            <div style="margin-top:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-400);margin-bottom:6px;">
+              Bergabung
+            </div>
+
+            <div style="font-size:13px;font-weight:600;color:var(--gray-700);">
+              Jan 2025
+            </div>
+          </div>
+        </div>
 
         <!-- Right: Form -->
         <div class="card" style="margin-bottom:0;">
@@ -1287,52 +1334,55 @@
                 <label class="form-label">
                   Nama GOR
                 </label>
-                <input type="text" class="form-input">
+                <input type="text" class="form-input" value="GOR Maju Jaya">
               </div>
 
               <div class="form-group" style="grid-column:1/-1;">
                 <label class="form-label">
                   Alamat Lengkap
                 </label>
-                <input type="text" class="form-input">
+                <input type="text" class="form-input" value="Jl. Kaliurang Km 7, Sleman, Yogyakarta">
               </div>
 
               <div class="form-group">
                 <label class="form-label">
                   Nomor HP / WA
                 </label>
-                <input type="tel" class="form-input">
+                <input type="tel" class="form-input" value="0812-3456-7890">
               </div>
 
               <div class="form-group">
                 <label class="form-label">
                   Email
                 </label>
-                <input type="email" class="form-input">
+                <input type="email" class="form-input" value="gor.majujaya@email.com">
               </div>
 
               <div class="form-group">
                 <label class="form-label">
-                  Jam Buka
+                  am Buka
                 </label>
-                <input type="time" class="form-input">
+                <input type="time" class="form-input" value="07:00">
               </div>
 
               <div class="form-group">
                 <label class="form-label">Jam Tutup</label>
-                <input type="time" class="form-input">
+                <input type="time" class="form-input" value="21:00">
               </div>
 
               <div class="form-group" style="grid-column:1/-1;">
                 <label class="form-label">
                   Deskripsi GOR
                 </label>
-                <textarea class="form-input" rows="3"></textarea>
+
+                <textarea class="form-input" rows="3">
+                  Lapangan olahraga berstandar nasional dengan fasilitas lengkap. Parkir luas, kantin, dan musala tersedia untuk kenyamanan pengunjung.
+                </textarea>
               </div>
 
               <div class="form-group" style="grid-column:1/-1;">
                 <label class="form-label">
-                  Fasilitas Tersedia
+                  asilitas Tersedia
                 </label>
 
                 <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">
@@ -1380,6 +1430,31 @@
               </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Danger Zone -->
+      <div class="card" style="border-color:var(--red-light);margin-top:20px;">
+        <div class="card-header" style="color:var(--red);border-bottom-color:var(--red-light);">
+          <i class="ti ti-alert-triangle"></i>
+          Zona Berbahaya
+        </div>
+
+        <div class="card-body" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+          <div>
+            <div style="font-size:13.5px;font-weight:600;color:var(--gray-700);">
+              Nonaktifkan GOR
+            </div>
+
+            <div style="font-size:12.5px;color:var(--gray-400);">
+              GOR tidak akan muncul di pencarian dan tidak dapat menerima booking baru.
+            </div>
+          </div>
+
+          <button class="btn btn-outline btn-sm" style="color:var(--red);border-color:var(--red);" onclick="if(confirm('Yakin nonaktifkan GOR?')) alert('GOR dinonaktifkan.')">
+            <i class="ti ti-power"></i>
+            Nonaktifkan GOR
+          </button>
         </div>
       </div>
     </div>
@@ -1665,12 +1740,6 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
     if (e.target === overlay) overlay.classList.remove('show');
   });
 });
-
-const bookingMenu = document.querySelector(".menu-booking");
-const notifBadge = document.querySelector(".notif-badge");
-bookingMenu.addEventListener("click", () => {
-  notifBadge.style.display = "none";
-  });
 </script>
 </body>
 </html>

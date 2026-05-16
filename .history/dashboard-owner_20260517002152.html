@@ -17,8 +17,8 @@
     <div class="dot">
     </div>
   </a>
-  
   <div class="navbar-actions">
+    <span style="font-size:13px;color:var(--gray-400);"></span>
     <a href="login.html">
       <button class="btn btn-outline btn-sm">
         <i class="ti ti-logout"></i> 
@@ -45,13 +45,11 @@
       <i class="ti ti-layout-grid"></i> 
       Lapangan Saya
     </div>
-    
-    <div class="sidebar-item menu-booking" onclick="showSection('booking',this)">
-      <i class="ti ti-calendar"></i>
+
+    <div class="sidebar-item" onclick="showSection('booking',this)" style="position:relative;">
+      <i class="ti ti-calendar"></i> 
       Booking Masuk
-      <span class="notif-badge">
-        3
-      </span>
+      <span style="margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;">3</span>
     </div>
 
     <div class="sidebar-item" onclick="showSection('jadwal',this)">
@@ -81,6 +79,7 @@
 
     <!--SECTION: DASHBOARD-->
     <div id="section-dashboard">
+
       <h1 class="page-title">
         Dashboard Owner
       </h1>
@@ -1272,8 +1271,12 @@
 
     <!--SECTION: PROFIL GOR-->
     <div id="section-profil" style="display:none;">
+
       <h1 class="page-title">Profil GOR</h1>
-      <div style="display:grid;grid-template-columns:1fr;gap:20px;">
+
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:100px;align-items:start;flex-wrap:wrap;">
+
+       
 
         <!-- Right: Form -->
         <div class="card" style="margin-bottom:0;">
@@ -1665,12 +1668,6 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
     if (e.target === overlay) overlay.classList.remove('show');
   });
 });
-
-const bookingMenu = document.querySelector(".menu-booking");
-const notifBadge = document.querySelector(".notif-badge");
-bookingMenu.addEventListener("click", () => {
-  notifBadge.style.display = "none";
-  });
 </script>
 </body>
 </html>

@@ -29,6 +29,7 @@ body {
   background: #f5faf6;
   color: var(--dark);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 a { text-decoration: none; color: inherit; }
