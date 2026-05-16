@@ -4,6 +4,7 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
+  font-family:'Syne', sans-serif;
 }
 
 :root{
@@ -205,7 +206,6 @@ body{
 }
 
 .sidebar-item i{
-  font-family:'Plus Jakarta Sans', sans-serif;
   font-size:20px;
 }
 
@@ -333,7 +333,7 @@ body{
 
 .page-title{
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size:35px;
+  font-size:30px;
   font-weight:800;
   letter-spacing:-1px;
   margin-bottom:6px;
