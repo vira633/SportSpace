@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin — SportSpace</title>
+
+  <link rel="stylesheet" href="admin.css">
+
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+</head>
+
+<body>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">
+
+    <i id="toastIcon"
+    class="ti ti-check"></i>
+
+    <span id="toastText">
+      Berhasil
+    </span>
+
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal hidden"
+  id="userModal">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h3>Detail User</h3>
+
+        <button class="close-btn"
+        onclick="closeModal()">
+
+          <i class="ti ti-x"></i>
+
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="detail-item">
+
+          <span>Nama</span>
+
+          <strong id="detailName">-</strong>
+
+        </div>
+
+        <div class="detail-item">
+
+          <span>Email</span>
+
+          <strong id="detailEmail">-</strong>
+
+        </div>
+
+        <div class="detail-item">
+
+          <span>Role</span>
+
+          <strong id="detailRole">-</strong>
+
+        </div>
+
+        <div class="detail-item">
+
+          <span>Status</span>
+
+          <strong id="detailStatus">-</strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <a href="#" class="navbar-brand">
+
+      <i class="ti ti-tournament"></i>
+
+      <span>SportSpace</span>
+
+      <div class="dot"></div>
+
+    </a>
+
+    <div class="navbar-actions">
+
+      <span class="admin-text">
+        Admin Panel
+      </span>
+
+      <div class="notif">
+
+        <i class="ti ti-bell"></i>
+
+        <div class="notif-badge">
+          4
+        </div>
+
+      </div>
+
+      <button class="btn btn-outline btn-sm">
+
+        <i class="ti ti-logout"></i>
+        Keluar
+
+      </button>
+
+    </div>
+
+  </nav>
+
+  <!-- LAYOUT -->
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div>
+
+        <div class="sidebar-section">
+          MENU
+        </div>
+
+        <div class="sidebar-menu">
+
+          <div class="sidebar-item active"
+          onclick="showSection('dashboard', this)">
+            <i class="ti ti-home"></i>
+            <span>Dashboard</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('venue', this)">
+            <i class="ti ti-building"></i>
+            <span>Verifikasi GOR</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('booking', this)">
+            <i class="ti ti-calendar-event"></i>
+            <span>Semua Booking</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('user', this)">
+            <i class="ti ti-users"></i>
+            <span>Kelola User</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('setting', this)">
+            <i class="ti ti-settings"></i>
+            <span>Pengaturan</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="dashboard-content">
+
+      <!-- DASHBOARD -->
+      <section id="section-dashboard">
+
+        <div class="top-header">
+
+          <div>
+
+            <h1 class="page-title">
+              Dashboard Admin
+            </h1>
+
+            <p class="page-sub">
+              Selamat datang! Pantau semua aktivitas platform di sini.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+
+            <div class="stat-value">
+              1.247
+            </div>
+
+            <div class="stat-label">
+              Total Pengguna
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-value">
+              87
+            </div>
+
+            <div class="stat-label">
+              GOR Terdaftar
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-value">
+              432
+            </div>
+
+            <div class="stat-label">
+              Booking Bulan Ini
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-value">
+              4
+            </div>
+
+            <div class="stat-label">
+              Pending Verifikasi
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- VERIFIKASI -->
+      <section id="section-venue" class="hidden">
+
+        <h1 class="page-title">
+          Verifikasi GOR
+        </h1>
+
+        <div class="venue-grid">
+
+          <div class="venue-card">
+
+            <h3 class="venue-title">
+              GOR Sejahtera
+            </h3>
+
+            <div class="venue-location">
+              Sleman, Yogyakarta
+            </div>
+
+            <div class="venue-actions">
+
+              <button class="btn btn-primary btn-sm"
+              onclick="verifyVenue('GOR Sejahtera')">
+
+                Terima
+
+              </button>
+
+              <button class="btn btn-outline btn-sm reject-btn"
+              onclick="rejectVenue('GOR Sejahtera')">
+
+                Tolak
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- BOOKING -->
+      <section id="section-booking" class="hidden">
+
+        <h1 class="page-title">
+          Semua Booking
+        </h1>
+
+        <div class="card">
+
+          <table class="table">
+
+            <thead>
+
+              <tr>
+
+                <th>Kode</th>
+                <th>User</th>
+                <th>Lapangan</th>
+                <th>Status</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+
+                <td>SS-00142</td>
+                <td>Andi</td>
+                <td>Futsal A</td>
+                <td>
+                  <span class="badge badge-amber">
+                    Pending
+                  </span>
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+      <!-- USER -->
+      <section id="section-user" class="hidden">
+
+        <h1 class="page-title">
+          Kelola User
+        </h1>
+
+        <div class="user-grid">
+
+          <div class="user-card">
+
+            <div class="user-avatar">
+              A
+            </div>
+
+            <h3 class="user-name">
+              Andi Rahmawan
+            </h3>
+
+            <div class="user-email">
+              andi@email.com
+            </div>
+
+            <div class="user-actions">
+
+              <button class="btn btn-outline btn-sm"
+              onclick="showUserDetail(
+              'Andi Rahmawan',
+              'andi@email.com',
+              'User',
+              'Aktif'
+              )">
+
+                Detail
+
+              </button>
+
+              <button class="btn btn-outline btn-sm reject-btn"
+              onclick="banUser('Andi Rahmawan')">
+
+                Ban
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- SETTING -->
+      <section id="section-setting" class="hidden">
+
+        <h1 class="page-title">
+          Pengaturan
+        </h1>
+
+        <div class="setting-card">
+
+          <div class="form-group">
+
+            <label>Nama Platform</label>
+
+            <input type="text"
+            value="SportSpace">
+
+          </div>
+
+          <button class="btn btn-primary btn-sm"
+          onclick="saveSettings()">
+
+            Simpan Perubahan
+
+          </button>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+<script>
+
+function showSection(name, item){
+
+  document
+  .querySelectorAll('section')
+  .forEach(section => {
+    section.classList.add('hidden');
+  });
+
+  document
+  .getElementById('section-' + name)
+  .classList.remove('hidden');
+
+  document
+  .querySelectorAll('.sidebar-item')
+  .forEach(menu => {
+    menu.classList.remove('active');
+  });
+
+  item.classList.add('active');
+}
+
+function showToast(message, type="success"){
+
+  const toast =
+  document.getElementById("toast");
+
+  const text =
+  document.getElementById("toastText");
+
+  text.innerText = message;
+
+  toast.className = "toast show";
+
+  if(type === "error"){
+    toast.classList.add("error");
+  }
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2500);
+}
+
+function verifyVenue(name){
+
+  showToast(
+    "GOR " + name + " berhasil diverifikasi!"
+  );
+}
+
+function rejectVenue(name){
+
+  showToast(
+    "GOR " + name + " ditolak!",
+    "error"
+  );
+}
+
+function saveSettings(){
+
+  showToast(
+    "Pengaturan berhasil disimpan!"
+  );
+}
+
+function banUser(name){
+
+  showToast(
+    name + " berhasil dibanned!",
+    "error"
+  );
+}
+
+function showUserDetail(
+name,
+email,
+role,
+status
+){
+
+  document.getElementById("detailName").innerText = name;
+
+  document.getElementById("detailEmail").innerText = email;
+
+  document.getElementById("detailRole").innerText = role;
+
+  document.getElementById("detailStatus").innerText = status;
+
+  document.getElementById("userModal")
+  .classList.remove("hidden");
+}
+
+function closeModal(){
+
+  document.getElementById("userModal")
+  .classList.add("hidden");
+}
+
+</script>
+
+</body>
+</html>

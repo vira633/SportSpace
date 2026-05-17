@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin — SportSpace</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+</head>
+<body>
+
+<!-- ========================
+     NAVBAR
+     ======================== -->
+<nav class="navbar">
+  <a href="#" class="navbar-brand" onclick="showSection('dashboard', document.querySelector('.sidebar-item'))">
+    <i class="ti ti-tournament"></i>
+    <span>SportSpace</span>
+    <div class="dot"></div>
+  </a>
+  <div class="navbar-actions">
+    <span style="font-size:13px;color:var(--gray-400);font-weight:500;">Admin Panel</span>
+    <div style="width:34px;height:34px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--green-text);">A</div>
+    <a href="login.html">
+      <button class="btn btn-outline btn-sm"><i class="ti ti-logout"></i> Keluar</button>
+    </a>
+  </div>
+</nav>
+
+<!-- ========================
+     LAYOUT
+     ======================== -->
+<div class="dashboard-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">Menu Utama</div>
+    <div class="sidebar-item active" onclick="showSection('dashboard', this)">
+      <i class="ti ti-layout-dashboard"></i> Dashboard
+    </div>
+    <div class="sidebar-item" onclick="showSection('venue', this)">
+      <i class="ti ti-building"></i> Verifikasi GOR
+      <span class="sidebar-badge">4</span>
+    </div>
+    <div class="sidebar-item" onclick="showSection('booking', this)">
+      <i class="ti ti-calendar-check"></i> Semua Booking
+    </div>
+    <div class="sidebar-item" onclick="showSection('user', this)">
+      <i class="ti ti-users"></i> Kelola User
+    </div>
+    <div class="sidebar-section">Lainnya</div>
+    <div class="sidebar-item" onclick="showSection('setting', this)">
+      <i class="ti ti-settings"></i> Pengaturan
+    </div>
+    <div class="sidebar-footer">
+      <a href="login.html">
+        <div class="sidebar-item" style="color:var(--red);">
+          <i class="ti ti-logout"></i> Keluar
+        </div>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="dashboard-content">
+
+    <!-- ========================
+         SECTION: DASHBOARD
+         ======================== -->
+    <div id="section-dashboard">
+      <div class="page-header">
+        <h1 class="page-title">Dashboard Admin</h1>
+        <p class="page-sub">Selamat datang kembali! Pantau semua aktivitas platform SportSpace di sini.</p>
+      </div>
+
+      <!-- STAT CARDS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-inner">
+            <div>
+              <div class="stat-value">1.247</div>
+              <div class="stat-label">Total Pengguna</div>
+            </div>
+            <div class="stat-icon blue"><i class="ti ti-users"></i></div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-change stat-up"><i class="ti ti-trending-up"></i> +12% bulan ini</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-inner">
+            <div>
+              <div class="stat-value">87</div>
+              <div class="stat-label">GOR Terdaftar</div>
+            </div>
+            <div class="stat-icon green"><i class="ti ti-building"></i></div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-change stat-up"><i class="ti ti-trending-up"></i> +5 GOR baru</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-inner">
+            <div>
+              <div class="stat-value">432</div>
+              <div class="stat-label">Booking Bulan Ini</div>
+            </div>
+            <div class="stat-icon amber"><i class="ti ti-calendar-check"></i></div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-change stat-up"><i class="ti ti-trending-up"></i> +18% vs bulan lalu</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-inner">
+            <div>
+              <div class="stat-value">4</div>
+              <div class="stat-label">Pending Verifikasi</div>
+            </div>
+            <div class="stat-icon red"><i class="ti ti-clock"></i></div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-change stat-warn"><i class="ti ti-alert-circle"></i> Perlu tindakan segera</div>
+        </div>
+      </div>
+
+      <!-- ROW: CHART + QUICK STATS -->
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:20px;">
+
+        <!-- BOOKING CHART -->
+        <div class="card card-accent-top">
+          <div class="card-header">
+            <span class="card-title"><i class="ti ti-chart-bar" style="color:var(--green);vertical-align:-2px;margin-right:5px;"></i> Tren Booking (7 Hari)</span>
+            <span class="badge badge-green"><i class="ti ti-trending-up"></i> Naik</span>
+          </div>
+          <div class="card-body" style="padding-bottom:16px;">
+            <div style="display:flex;gap:8px;align-items:flex-end;height:90px;">
+              <!-- Bar chart mini -->
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="flex:1;width:100%;background:var(--green-light);border-radius:5px 5px 0 0;position:relative;min-height:20px;" data-val="55"></div>
+                <span style="font-size:11px;color:var(--gray-400);">Sen</span>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="flex:1;width:100%;background:var(--green-light);border-radius:5px 5px 0 0;" data-val="70"></div>
+                <span style="font-size:11px;color:var(--gray-400);">Sel</span>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="flex:1;width:100%;background:var(--green);border-radius:5px 5px 0 0;" data-val="90"></div>
+                <span style="font-size:11px;color:var(--gray-400);">Rab</span>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="flex:1;width:100%;background:var(--green-light);border-radius:5px 5px 0 0;" data-val="65"></div>
+                <span style="font-size:11px;color:var(--gray-400);">Kam</span>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="flex:1;width:100%;background:var(--green);border-radius:5px 5px 0 0;" data-val="88"></div>
+                <span style="font-size:11px;color:var(--gray-400);">Jum</span>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="flex:1;width:100%;background:var(--green);border-radius:5px 5px 0 0;" data-val="100"></div>
+                <span style="font-size:11px;color:var(--gray-400);">Sab</span>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="flex:1;width:100%;background:var(--green);border-radius:5px 5px 0 0;" data-val="95"></div>
+                <span style="font-size:11px;color:var(--gray-400);">Min</span>
+              </div>
+            </div>
+            <div style="margin-top:14px;display:flex;gap:24px;">
+              <div>
+                <div style="font-size:11px;color:var(--gray-400);margin-bottom:2px;">Total minggu ini</div>
+                <div style="font-size:20px;font-weight:700;">563</div>
+              </div>
+              <div>
+                <div style="font-size:11px;color:var(--gray-400);margin-bottom:2px;">Pendapatan estimasi</div>
+                <div style="font-size:20px;font-weight:700;">Rp 84,5 jt</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK SPORT STATS -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title"><i class="ti ti-chart-pie" style="color:var(--green);vertical-align:-2px;margin-right:5px;"></i> Olahraga Populer</span>
+          </div>
+          <div class="card-body" style="padding-top:14px;">
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;">
+                <span style="font-weight:600;">⚽ Futsal</span><span style="color:var(--gray-400);">47%</span>
+              </div>
+              <div class="progress"><div class="progress-fill" style="width:47%"></div></div>
+            </div>
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;">
+                <span style="font-weight:600;">🏸 Badminton</span><span style="color:var(--gray-400);">29%</span>
+              </div>
+              <div class="progress"><div class="progress-fill blue" style="width:29%"></div></div>
+            </div>
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;">
+                <span style="font-weight:600;">🏀 Basket</span><span style="color:var(--gray-400);">15%</span>
+              </div>
+              <div class="progress"><div class="progress-fill amber" style="width:15%"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;">
+                <span style="font-weight:600;">🎾 Tenis</span><span style="color:var(--gray-400);">9%</span>
+              </div>
+              <div class="progress"><div class="progress-fill red" style="width:9%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOKING TERBARU -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title"><i class="ti ti-list-check" style="color:var(--green);vertical-align:-2px;margin-right:5px;"></i> Booking Terbaru</span>
+          <button class="btn btn-outline btn-sm" onclick="showSection('booking', document.querySelectorAll('.sidebar-item')[2])">Lihat Semua <i class="ti ti-arrow-right"></i></button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Kode</th>
+                <th>User</th>
+                <th>Lapangan</th>
+                <th>Tanggal</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code class="inline-code">SS-00142</code></td>
+                <td><div class="avatar-row"><div class="avatar">AR</div><div><div class="avatar-name">Andi R.</div></div></div></td>
+                <td>Futsal A — GOR Maju</td>
+                <td>12 Mei 2025</td>
+                <td style="font-weight:600;">Rp 160.000</td>
+                <td><span class="badge badge-amber"><i class="ti ti-clock"></i> Pending</span></td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">SS-00141</code></td>
+                <td><div class="avatar-row"><div class="avatar" style="background:var(--blue-light);color:#0f4c8c;">BS</div><div><div class="avatar-name">Budi S.</div></div></div></td>
+                <td>Badminton A — Arena 88</td>
+                <td>11 Mei 2025</td>
+                <td style="font-weight:600;">Rp 90.000</td>
+                <td><span class="badge badge-blue"><i class="ti ti-circle-check"></i> Dikonfirmasi</span></td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">SS-00140</code></td>
+                <td><div class="avatar-row"><div class="avatar" style="background:#f3f0ff;color:#4b3aad;">CM</div><div><div class="avatar-name">Citra M.</div></div></div></td>
+                <td>Basket — Court Pro</td>
+                <td>10 Mei 2025</td>
+                <td style="font-weight:600;">Rp 240.000</td>
+                <td><span class="badge badge-green"><i class="ti ti-check"></i> Selesai</span></td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">SS-00139</code></td>
+                <td><div class="avatar-row"><div class="avatar" style="background:var(--red-light);color:#8b2323;">DF</div><div><div class="avatar-name">Dani F.</div></div></div></td>
+                <td>Futsal B — GOR Maju</td>
+                <td>10 Mei 2025</td>
+                <td style="font-weight:600;">Rp 160.000</td>
+                <td><span class="badge badge-red"><i class="ti ti-x"></i> Dibatalkan</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div><!-- end section-dashboard -->
+
+
+    <!-- ========================
+         SECTION: VERIFIKASI GOR
+         ======================== -->
+    <div id="section-venue" style="display:none;">
+      <div class="page-header">
+        <h1 class="page-title">Verifikasi GOR</h1>
+        <p class="page-sub">GOR yang mendaftar perlu diverifikasi sebelum bisa listing lapangan</p>
+      </div>
+
+      <div class="alert alert-warning" style="margin-bottom:20px;">
+        <i class="ti ti-clock"></i>
+        <div><strong>4 GOR</strong> sedang menunggu verifikasi kamu. Tinjau sebelum 3 hari.</div>
+      </div>
+
+      <!-- GOR 1 -->
+      <div class="venue-card">
+        <div class="venue-icon"><i class="ti ti-building-stadium"></i></div>
+        <div class="venue-info">
+          <div class="venue-name">GOR Sejahtera Mandiri</div>
+          <div class="venue-meta">
+            <i class="ti ti-map-pin"></i> Sleman
+            <span style="color:var(--gray-200);">|</span>
+            <i class="ti ti-user"></i> Bapak Hendra
+            <span style="color:var(--gray-200);">|</span>
+            <i class="ti ti-calendar"></i> Daftar: 09 Mei 2025
+          </div>
+          <div class="venue-tags">
+            <span class="badge badge-gray"><i class="ti ti-ball-football"></i> Futsal</span>
+            <span class="badge badge-gray"><i class="ti ti-feather"></i> Badminton</span>
+          </div>
+        </div>
+        <div class="venue-actions">
+          <button class="btn btn-primary btn-sm" onclick="verifyVenue(this)"><i class="ti ti-check"></i> Terima</button>
+          <button class="btn btn-danger btn-sm" onclick="rejectVenue(this)"><i class="ti ti-x"></i> Tolak</button>
+        </div>
+      </div>
+
+      <!-- GOR 2 -->
+      <div class="venue-card">
+        <div class="venue-icon"><i class="ti ti-building-stadium"></i></div>
+        <div class="venue-info">
+          <div class="venue-name">Sport Center Jogja</div>
+          <div class="venue-meta">
+            <i class="ti ti-map-pin"></i> Bantul
+            <span style="color:var(--gray-200);">|</span>
+            <i class="ti ti-user"></i> Ibu Ratna
+            <span style="color:var(--gray-200);">|</span>
+            <i class="ti ti-calendar"></i> Daftar: 08 Mei 2025
+          </div>
+          <div class="venue-tags">
+            <span class="badge badge-gray"><i class="ti ti-ball-basketball"></i> Basket</span>
+            <span class="badge badge-gray"><i class="ti ti-ball-tennis"></i> Tenis</span>
+          </div>
+        </div>
+        <div class="venue-actions">
+          <button class="btn btn-primary btn-sm" onclick="verifyVenue(this)"><i class="ti ti-check"></i> Terima</button>
+          <button class="btn btn-danger btn-sm" onclick="rejectVenue(this)"><i class="ti ti-x"></i> Tolak</button>
+        </div>
+      </div>
+
+      <!-- GOR 3 -->
+      <div class="venue-card">
+        <div class="venue-icon"><i class="ti ti-building-stadium"></i></div>
+        <div class="venue-info">
+          <div class="venue-name">Arena Prima Futsal</div>
+          <div class="venue-meta">
+            <i class="ti ti-map-pin"></i> Kota Yogyakarta
+            <span style="color:var(--gray-200);">|</span>
+            <i class="ti ti-user"></i> Mas Rian
+            <span style="color:var(--gray-200);">|</span>
+            <i class="ti ti-calendar"></i> Daftar: 07 Mei 2025
+          </div>
+          <div class="venue-tags">
+            <span class="badge badge-gray"><i class="ti ti-ball-football"></i> Futsal</span>
+          </div>
+        </div>
+        <div class="venue-actions">
+          <button class="btn btn-primary btn-sm" onclick="verifyVenue(this)"><i class="ti ti-check"></i> Terima</button>
+          <button class="btn btn-danger btn-sm" onclick="rejectVenue(this)"><i class="ti ti-x"></i> Tolak</button>
+        </div>
+      </div>
+
+      <!-- GOR 4 -->
+      <div class="venue-card">
+        <div class="venue-icon"><i class="ti ti-building-stadium"></i></div>
+        <div class="venue-info">
+          <div class="venue-name">Lapangan Bersama Kulon Progo</div>
+          <div class="venue-meta">
+            <i class="ti ti-map-pin"></i> Kulon Progo
+            <span style="color:var(--gray-200);">|</span>
+            <i class="ti ti-user"></i> Pak Wahyu
+            <span style="color:var(--gray-200);">|</span>
+            <i class="ti ti-calendar"></i> Daftar: 06 Mei 2025
+          </div>
+          <div class="venue-tags">
+            <span class="badge badge-gray"><i class="ti ti-ball-volleyball"></i> Voli</span>
+            <span class="badge badge-gray"><i class="ti ti-feather"></i> Badminton</span>
+          </div>
+        </div>
+        <div class="venue-actions">
+          <button class="btn btn-primary btn-sm" onclick="verifyVenue(this)"><i class="ti ti-check"></i> Terima</button>
+          <button class="btn btn-danger btn-sm" onclick="rejectVenue(this)"><i class="ti ti-x"></i> Tolak</button>
+        </div>
+      </div>
+
+      <!-- SUDAH TERVERIFIKASI -->
+      <h2 style="font-size:15px;font-weight:700;margin:28px 0 14px;">GOR Sudah Terverifikasi</h2>
+      <div class="card">
+        <div style="overflow-x:auto;">
+          <table class="table">
+            <thead>
+              <tr><th>Nama GOR</th><th>Lokasi</th><th>Pemilik</th><th>Olahraga</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>GOR Maju Jaya</strong></td>
+                <td>Sleman</td>
+                <td>Pak Budi</td>
+                <td><span class="badge badge-gray">Futsal</span></td>
+                <td><span class="badge badge-green"><i class="ti ti-circle-check"></i> Aktif</span></td>
+              </tr>
+              <tr>
+                <td><strong>Arena 88</strong></td>
+                <td>Bantul</td>
+                <td>Bu Sari</td>
+                <td><span class="badge badge-gray">Badminton</span></td>
+                <td><span class="badge badge-green"><i class="ti ti-circle-check"></i> Aktif</span></td>
+              </tr>
+              <tr>
+                <td><strong>Court Pro</strong></td>
+                <td>Kota Yogyakarta</td>
+                <td>Mas Diko</td>
+                <td><span class="badge badge-gray">Basket</span></td>
+                <td><span class="badge badge-green"><i class="ti ti-circle-check"></i> Aktif</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div><!-- end section-venue -->
+
+
+    <!-- ========================
+         SECTION: SEMUA BOOKING
+         ======================== -->
+    <div id="section-booking" style="display:none;">
+      <div class="page-header">
+        <h1 class="page-title">Semua Booking</h1>
+        <p class="page-sub">Pantau dan kelola semua transaksi booking di platform</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <i class="ti ti-search"></i>
+          <input type="text" placeholder="Cari kode booking / user...">
+        </div>
+        <select class="filter-select">
+          <option value="">Semua Status</option>
+          <option>Pending</option>
+          <option>Dikonfirmasi</option>
+          <option>Selesai</option>
+          <option>Dibatalkan</option>
+        </select>
+        <select class="filter-select">
+          <option value="">Semua Olahraga</option>
+          <option>Futsal</option>
+          <option>Badminton</option>
+          <option>Basket</option>
+        </select>
+        <button class="btn btn-outline btn-sm" style="margin-left:auto;"><i class="ti ti-download"></i> Export CSV</button>
+      </div>
+
+      <div class="card">
+        <div style="overflow-x:auto;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Kode</th>
+                <th>User</th>
+                <th>Lapangan</th>
+                <th>Tanggal</th>
+                <th>Waktu</th>
+                <th>Total</th>
+                <th>Bayar</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code class="inline-code">SS-00142</code></td>
+                <td><div class="avatar-row"><div class="avatar">AR</div><span>Andi R.</span></div></td>
+                <td>Futsal A</td>
+                <td>12 Mei</td>
+                <td>13.00–15.00</td>
+                <td style="font-weight:600;">Rp 160.000</td>
+                <td><span class="badge badge-gray"><i class="ti ti-building-bank"></i> Transfer</span></td>
+                <td><span class="badge badge-amber"><i class="ti ti-clock"></i> Pending</span></td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">SS-00141</code></td>
+                <td><div class="avatar-row"><div class="avatar" style="background:var(--blue-light);color:#0f4c8c;">BS</div><span>Budi S.</span></div></td>
+                <td>Badminton A</td>
+                <td>11 Mei</td>
+                <td>09.00–11.00</td>
+                <td style="font-weight:600;">Rp 90.000</td>
+                <td><span class="badge badge-gray"><i class="ti ti-building-bank"></i> Transfer</span></td>
+                <td><span class="badge badge-blue"><i class="ti ti-circle-check"></i> Dikonfirmasi</span></td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">SS-00140</code></td>
+                <td><div class="avatar-row"><div class="avatar" style="background:#f3f0ff;color:#4b3aad;">CM</div><span>Citra M.</span></div></td>
+                <td>Basket Utama</td>
+                <td>10 Mei</td>
+                <td>15.00–17.00</td>
+                <td style="font-weight:600;">Rp 240.000</td>
+                <td><span class="badge badge-green"><i class="ti ti-wallet"></i> E-Wallet</span></td>
+                <td><span class="badge badge-green"><i class="ti ti-check"></i> Selesai</span></td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">SS-00139</code></td>
+                <td><div class="avatar-row"><div class="avatar" style="background:var(--red-light);color:#8b2323;">DF</div><span>Dani F.</span></div></td>
+                <td>Futsal B</td>
+                <td>10 Mei</td>
+                <td>19.00–21.00</td>
+                <td style="font-weight:600;">Rp 160.000</td>
+                <td><span class="badge badge-gray"><i class="ti ti-building-bank"></i> Transfer</span></td>
+                <td><span class="badge badge-red"><i class="ti ti-x"></i> Dibatalkan</span></td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">SS-00138</code></td>
+                <td><div class="avatar-row"><div class="avatar" style="background:var(--amber-light);color:#7a4b00;">EP</div><span>Eka P.</span></div></td>
+                <td>Badminton B</td>
+                <td>09 Mei</td>
+                <td>07.00–09.00</td>
+                <td style="font-weight:600;">Rp 90.000</td>
+                <td><span class="badge badge-gray"><i class="ti ti-cash"></i> Cash</span></td>
+                <td><span class="badge badge-green"><i class="ti ti-check"></i> Selesai</span></td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">SS-00137</code></td>
+                <td><div class="avatar-row"><div class="avatar">FH</div><span>Fajar H.</span></div></td>
+                <td>Futsal A</td>
+                <td>08 Mei</td>
+                <td>17.00–19.00</td>
+                <td style="font-weight:600;">Rp 160.000</td>
+                <td><span class="badge badge-green"><i class="ti ti-wallet"></i> E-Wallet</span></td>
+                <td><span class="badge badge-green"><i class="ti ti-check"></i> Selesai</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:14px 20px;border-top:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--gray-400);">
+          <span>Menampilkan 6 dari 432 booking</span>
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-outline btn-sm"><i class="ti ti-chevron-left"></i></button>
+            <button class="btn btn-primary btn-sm">1</button>
+            <button class="btn btn-outline btn-sm">2</button>
+            <button class="btn btn-outline btn-sm">3</button>
+            <button class="btn btn-outline btn-sm"><i class="ti ti-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div><!-- end section-booking -->
+
+
+    <!-- ========================
+         SECTION: KELOLA USER
+         ======================== -->
+    <div id="section-user" style="display:none;">
+      <div class="page-header">
+        <h1 class="page-title">Kelola User</h1>
+        <p class="page-sub">Pantau dan kelola akun pengguna platform</p>
+      </div>
+
+      <!-- Summary mini -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+        <div class="card" style="padding:16px 18px;display:flex;align-items:center;gap:14px;">
+          <div class="stat-icon blue"><i class="ti ti-users"></i></div>
+          <div>
+            <div style="font-size:20px;font-weight:700;">1.247</div>
+            <div style="font-size:12px;color:var(--gray-400);">Total User</div>
+          </div>
+        </div>
+        <div class="card" style="padding:16px 18px;display:flex;align-items:center;gap:14px;">
+          <div class="stat-icon amber"><i class="ti ti-key"></i></div>
+          <div>
+            <div style="font-size:20px;font-weight:700;">34</div>
+            <div style="font-size:12px;color:var(--gray-400);">Owner GOR</div>
+          </div>
+        </div>
+        <div class="card" style="padding:16px 18px;display:flex;align-items:center;gap:14px;">
+          <div class="stat-icon red"><i class="ti ti-ban"></i></div>
+          <div>
+            <div style="font-size:20px;font-weight:700;">7</div>
+            <div style="font-size:12px;color:var(--gray-400);">Akun Banned</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <i class="ti ti-search"></i>
+          <input type="text" placeholder="Cari nama / email...">
+        </div>
+        <select class="filter-select">
+          <option value="">Semua Role</option>
+          <option>User</option>
+          <option>Owner</option>
+          <option>Admin</option>
+        </select>
+        <select class="filter-select">
+          <option value="">Semua Status</option>
+          <option>Aktif</option>
+          <option>Banned</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div style="overflow-x:auto;">
+          <table class="table">
+            <thead>
+              <tr><th>Nama</th><th>Email</th><th>Role</th><th>Bergabung</th><th>Status</th><th>Aksi</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="avatar-row"><div class="avatar">AR</div><div><div class="avatar-name">Andi Rahmawan</div></div></div></td>
+                <td style="color:var(--gray-400);">andi@email.com</td>
+                <td><span class="badge badge-blue">User</span></td>
+                <td>Jan 2025</td>
+                <td><span class="badge badge-green status-badge"><i class="ti ti-circle-check"></i> Aktif</span></td>
+                <td><button class="btn btn-danger btn-sm" onclick="banUser(this)"><i class="ti ti-ban"></i> Ban</button></td>
+              </tr>
+              <tr>
+                <td><div class="avatar-row"><div class="avatar" style="background:var(--amber-light);color:#7a4b00;">BH</div><div><div class="avatar-name">Bapak Hendra</div></div></div></td>
+                <td style="color:var(--gray-400);">hendra@email.com</td>
+                <td><span class="badge badge-amber">Owner</span></td>
+                <td>Feb 2025</td>
+                <td><span class="badge badge-green status-badge"><i class="ti ti-circle-check"></i> Aktif</span></td>
+                <td><button class="btn btn-danger btn-sm" onclick="banUser(this)"><i class="ti ti-ban"></i> Ban</button></td>
+              </tr>
+              <tr>
+                <td><div class="avatar-row"><div class="avatar" style="background:#f3f0ff;color:#4b3aad;">CM</div><div><div class="avatar-name">Citra Melati</div></div></div></td>
+                <td style="color:var(--gray-400);">citra@email.com</td>
+                <td><span class="badge badge-blue">User</span></td>
+                <td>Mar 2025</td>
+                <td><span class="badge badge-green status-badge"><i class="ti ti-circle-check"></i> Aktif</span></td>
+                <td><button class="btn btn-danger btn-sm" onclick="banUser(this)"><i class="ti ti-ban"></i> Ban</button></td>
+              </tr>
+              <tr>
+                <td><div class="avatar-row"><div class="avatar" style="background:var(--red-light);color:#8b2323;">DF</div><div><div class="avatar-name">Dani Fauzan</div></div></div></td>
+                <td style="color:var(--gray-400);">dani@email.com</td>
+                <td><span class="badge badge-blue">User</span></td>
+                <td>Apr 2025</td>
+                <td><span class="badge badge-red status-badge"><i class="ti ti-ban"></i> Banned</span></td>
+                <td><button class="btn btn-primary btn-sm" onclick="unbanUser(this)"><i class="ti ti-circle-check"></i> Aktifkan</button></td>
+              </tr>
+              <tr>
+                <td><div class="avatar-row"><div class="avatar" style="background:var(--green-light);color:var(--green-text);">EP</div><div><div class="avatar-name">Eka Pratiwi</div></div></div></td>
+                <td style="color:var(--gray-400);">eka@email.com</td>
+                <td><span class="badge badge-amber">Owner</span></td>
+                <td>Jan 2025</td>
+                <td><span class="badge badge-green status-badge"><i class="ti ti-circle-check"></i> Aktif</span></td>
+                <td><button class="btn btn-danger btn-sm" onclick="banUser(this)"><i class="ti ti-ban"></i> Ban</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:14px 20px;border-top:1px solid var(--gray-100);font-size:12.5px;color:var(--gray-400);">
+          Menampilkan 5 dari 1.247 pengguna
+        </div>
+      </div>
+    </div><!-- end section-user -->
+
+
+    <!-- ========================
+         SECTION: PENGATURAN
+         ======================== -->
+    <div id="section-setting" style="display:none;">
+      <div class="page-header">
+        <h1 class="page-title">Pengaturan Platform</h1>
+        <p class="page-sub">Konfigurasi umum platform SportSpace</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+        <!-- Umum -->
+        <div class="card">
+          <div class="card-header"><span class="card-title"><i class="ti ti-settings" style="color:var(--green);vertical-align:-2px;margin-right:6px;"></i> Umum</span></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">Nama Platform</label>
+              <input class="form-input" type="text" value="SportSpace">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Kontak <span>(tampil di footer)</span></label>
+              <input class="form-input" type="email" value="admin@sportspace.id">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Deskripsi Singkat</label>
+              <textarea class="form-textarea">Platform booking lapangan olahraga terpercaya di Indonesia.</textarea>
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;"><i class="ti ti-device-floppy"></i> Simpan Perubahan</button>
+          </div>
+        </div>
+
+        <!-- Fitur & Notifikasi -->
+        <div>
+          <div class="card" style="margin-bottom:16px;">
+            <div class="card-header"><span class="card-title"><i class="ti ti-toggle-right" style="color:var(--green);vertical-align:-2px;margin-right:6px;"></i> Fitur Platform</span></div>
+            <div class="card-body" style="padding-top:4px;padding-bottom:4px;">
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <strong>Registrasi User Baru</strong>
+                  <span>Izinkan pengguna baru mendaftar</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <strong>Pendaftaran Owner GOR</strong>
+                  <span>Izinkan GOR baru mendaftar</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <strong>Mode Maintenance</strong>
+                  <span>Matikan akses publik sementara</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <strong>Review & Rating</strong>
+                  <span>Tampilkan ulasan di halaman GOR</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><span class="card-title"><i class="ti ti-bell" style="color:var(--green);vertical-align:-2px;margin-right:6px;"></i> Notifikasi Admin</span></div>
+            <div class="card-body" style="padding-top:4px;padding-bottom:4px;">
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <strong>Email GOR Baru</strong>
+                  <span>Notif saat GOR mendaftar</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <strong>Email Booking Baru</strong>
+                  <span>Ringkasan harian booking</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- end section-setting -->
+
+  </main>
+</div><!-- end dashboard-layout -->
+
+<script src="js/main.js"></script>
+<script>
+  /* Render bar chart heights */
+  document.querySelectorAll('[data-val]').forEach(bar => {
+    const pct = parseInt(bar.dataset.val);
+    bar.style.height = pct + '%';
+  });
+</script>
+</body>
+</html>
