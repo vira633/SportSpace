@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
 
 :root {
-  --green:        #164f21;
+  --green:        #16a34a;
   --green-dark:   #15803d;
   --green-light:  #dcfce7;
   --green-50:     #f0fdf4;
@@ -42,13 +42,11 @@ a {
   text-decoration: none; 
   color: inherit; 
 }
-
 button { 
   font-family: inherit; 
   cursor: pointer; 
   border: none; 
 }
-
 input, select, textarea { 
   font-family: inherit; 
   outline: none;
@@ -94,8 +92,8 @@ input, select, textarea {
 }
 .navbar-actions {
    display: flex; 
-   align-items: center; 
-   gap: 14px; 
+   align-items: 
+   center; gap: 14px; 
   }
 
 /* LAYOUT */
@@ -110,33 +108,27 @@ input, select, textarea {
   background: var(--white);
   border-right: 1px solid var(--gray-200);
   padding: 24px 18px;
-  display: flex; 
-  flex-direction: column;
-  position: sticky; 
-  top: 72px;
+  display: flex; flex-direction: column;
+  position: sticky; top: 72px;
   height: calc(100vh - 72px);
   overflow-y: auto;
 }
+
 .sidebar-section {
-  font-size: 12px; 
-  font-weight: 700;
+  font-size: 12px; font-weight: 700;
   color: var(--gray-400);
   margin: 20px 0 14px;
   text-transform: uppercase;
 }
-.sidebar-section:first-child { 
-  margin-top: 0; 
-}
+.sidebar-section:first-child { margin-top: 0; }
+
 .sidebar-item {
   height: 48px;
   border-radius: 14px;
-  display: flex; 
-  align-items: center; 
-  gap: 12px;
+  display: flex; align-items: center; gap: 12px;
   padding: 0 16px;
   cursor: pointer;
-  font-size: 14px; 
-  font-weight: 600;
+  font-size: 14px; font-weight: 600;
   color: var(--dark);
   transition: .25s;
   margin-bottom: 6px;
@@ -149,7 +141,7 @@ input, select, textarea {
   color: var(--green); 
 }
 .sidebar-item.active {
-  background:#164f21;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
   color: white;
   box-shadow: 0 8px 18px rgba(34,197,94,.2);
 }
@@ -218,7 +210,7 @@ input, select, textarea {
   margin-top: 14px; 
 }
 .stat-up   { 
-  color: #164f21;
+  color: var(--green); 
 }
 .stat-down { 
   color: var(--red); 
@@ -228,8 +220,7 @@ input, select, textarea {
 .card {
   background: var(--white);
   border: 1px solid var(--gray-200);
-  border-radius: 24px; 
-  padding: 22px;
+  border-radius: 24px; padding: 22px;
   box-shadow: var(--shadow);
   margin-bottom: 20px;
   transition: .25s;
@@ -328,7 +319,7 @@ input, select, textarea {
   cursor: pointer;
 }
 .btn-primary { 
-  background: #164f21;; 
+  background: var(--green); 
   color: var(--white); 
   border: 1px solid var(--green); 
 }
@@ -355,7 +346,7 @@ input, select, textarea {
 .btn-sm   { 
   padding: 10px 16px; 
   border-radius: 12px; 
-  font-size: 12px; 
+  font-size: 13px; 
   font-weight: 600; 
 }
 .btn-full { 
@@ -450,6 +441,7 @@ select.form-input   {
 .modal-overlay.show { 
   display: flex; 
 }
+
 .modal-box {
   background: var(--white); 
   border-radius: 26px;
@@ -471,6 +463,7 @@ select.form-input   {
     opacity: 1; 
   }
 }
+
 .modal-header { 
   display: flex; 
   justify-content: space-between; 
@@ -539,6 +532,7 @@ select.form-input   {
   flex-wrap: wrap; 
   align-items: center; 
 }
+
 .search-input-wrap { 
   position: relative; 
   flex: 1; 
@@ -575,6 +569,7 @@ select.form-input   {
   grid-template-columns: 80px repeat(7, 1fr); 
   font-size: 12px; 
 }
+
 .schedule-header {
   background: var(--gray-100); 
   border-bottom: 1px solid var(--gray-200);
@@ -586,6 +581,7 @@ select.form-input   {
   text-transform: uppercase; 
   letter-spacing: .4px;
 }
+
 .schedule-time {
   background: var(--gray-50); 
   padding: 10px 8px; 
@@ -596,6 +592,7 @@ select.form-input   {
   border-bottom: 1px solid var(--gray-100); 
   border-right: 1px solid var(--gray-200);
 }
+
 .schedule-slot {
   padding: 8px; 
   min-height: 38px; 
@@ -621,8 +618,7 @@ select.form-input   {
 .chart-bar-wrap { 
   display: flex; 
   align-items: flex-end; 
-  gap: 8px; 
-  height: 100px; 
+  gap: 8px; height: 100px; 
   padding: 0 4px; 
 }
 .chart-bar-col  { 
@@ -674,7 +670,7 @@ select.form-input   {
 
 /* REVENUE CARD */
 .revenue-card {
-  background: linear-gradient(135deg, #15803d 0%, #164f21 100%);
+  background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
   border-radius: 22px; 
   padding: 24px; 
   color: white;
@@ -852,8 +848,7 @@ select.form-input   {
   align-items:start; 
 }
 .td-actions        { 
-  display:flex; 
-  gap:6px; 
+  display:flex; gap:6px; 
   padding:12px 14px; 
 }
 .btn-red           { 
@@ -962,8 +957,7 @@ select.form-input   {
 }
 .rev-amount { 
   font-family:var(--font-display); 
-  font-size:32px; 
-  font-weight:800; 
+  font-size:32px; font-weight:800; 
   letter-spacing:-1px; 
   margin-bottom:4px; 
 }
@@ -1204,17 +1198,10 @@ select.form-input   {
   margin-top:2px; 
 }
 .modal-close-btn {
-  background:var(--gray-100); 
-  border:none;
-  width:32px; 
-  height:32px; 
-  border-radius:var(--radius-md);
-  cursor:pointer; 
-  display:flex; 
-  align-items:center; 
-  justify-content:center;
-  font-size:17px; 
-  color:var(--gray-500);
+  background:var(--gray-100); border:none;
+  width:32px; height:32px; border-radius:var(--radius-md);
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  font-size:17px; color:var(--gray-500);
 }
 .modal-close-btn:hover { 
   background:var(--gray-200); 

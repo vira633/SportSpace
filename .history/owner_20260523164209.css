@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
 
 :root {
-  --green:        #164f21;
+  --green:        #16a34a;
   --green-dark:   #15803d;
   --green-light:  #dcfce7;
   --green-50:     #f0fdf4;
@@ -149,7 +149,7 @@ input, select, textarea {
   color: var(--green); 
 }
 .sidebar-item.active {
-  background:#164f21;
+  background: linear-gradient(135deg, #22c55e, #164f21);
   color: white;
   box-shadow: 0 8px 18px rgba(34,197,94,.2);
 }
@@ -218,7 +218,7 @@ input, select, textarea {
   margin-top: 14px; 
 }
 .stat-up   { 
-  color: #164f21;
+  color: var(--green); 
 }
 .stat-down { 
   color: var(--red); 
@@ -328,7 +328,7 @@ input, select, textarea {
   cursor: pointer;
 }
 .btn-primary { 
-  background: #164f21;; 
+  background: var(--green); 
   color: var(--white); 
   border: 1px solid var(--green); 
 }
@@ -674,7 +674,7 @@ select.form-input   {
 
 /* REVENUE CARD */
 .revenue-card {
-  background: linear-gradient(135deg, #15803d 0%, #164f21 100%);
+  background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
   border-radius: 22px; 
   padding: 24px; 
   color: white;

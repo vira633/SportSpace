@@ -7,7 +7,7 @@
 }
 
 :root{
-  --green:#164f21;
+  --green:#16a34a;
   --green-dark:#15803d;
   --green-light:#dcfce7;
   --blue:#2563eb;
@@ -215,9 +215,10 @@ body{
 }
 
 .sidebar-item.active{
-  background:#164f21;
+  background:linear-gradient(135deg,#22c55e,#16a34a);
   color:white;
-  box-shadow: 0 8px 18px rgba(34,197,94,.2);
+  box-shadow:
+  0 8px 18px rgba(34,197,94,.2);
 }
 
 .logout{
