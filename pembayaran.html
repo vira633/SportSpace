@@ -7,17 +7,17 @@
 
   <title>Pembayaran Booking — SportSpace</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="detail.css">
   <link rel="stylesheet" href="pembayaran.css">
 
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -80,8 +80,7 @@
 
           <div class="field-info">
 
-            <img src="lapangan-futsal.jpg"
-              alt="Lapangan">
+            <img src="lapangan-futsal.jpg" alt="Lapangan">
 
             <div>
 
@@ -147,8 +146,7 @@
           <div class="method-list">
 
             <!-- QRIS -->
-            <div class="method-card active"
-              onclick="selectPayment('qris', this)">
+            <div class="method-card active" onclick="selectPayment('qris', this)">
 
               <div class="method-left">
 
@@ -164,8 +162,7 @@
             </div>
 
             <!-- TRANSFER -->
-            <div class="method-card"
-              onclick="selectPayment('transfer', this)">
+            <div class="method-card" onclick="selectPayment('transfer', this)">
 
               <div class="method-left">
 
@@ -181,8 +178,7 @@
             </div>
 
             <!-- GOPAY -->
-            <div class="method-card"
-              onclick="selectPayment('gopay', this)">
+            <div class="method-card" onclick="selectPayment('gopay', this)">
 
               <div class="method-left">
 
@@ -198,8 +194,7 @@
             </div>
 
             <!-- DANA -->
-            <div class="method-card"
-              onclick="selectPayment('dana', this)">
+            <div class="method-card" onclick="selectPayment('dana', this)">
 
               <div class="method-left">
 
@@ -215,8 +210,7 @@
             </div>
 
             <!-- SHOPEEPAY -->
-            <div class="method-card"
-              onclick="selectPayment('shopeepay', this)">
+            <div class="method-card" onclick="selectPayment('shopeepay', this)">
 
               <div class="method-left">
 
@@ -232,8 +226,7 @@
             </div>
 
             <!-- CASH -->
-            <div class="method-card"
-              onclick="selectPayment('cash', this)">
+            <div class="method-card" onclick="selectPayment('cash', this)">
 
               <div class="method-left">
 
@@ -275,22 +268,19 @@
           </div>
 
           <!-- QRIS -->
-          <div id="payment-qris"
-            class="payment-content active">
-<div class="pay-banner">
+          <div id="payment-qris" class="payment-content active">
+            <div class="pay-banner">
 
-    <i class="ti ti-shield-check"></i>
+              <i class="ti ti-shield-check"></i>
 
-    <span>
-      Pembayaran aman & terenkripsi
-    </span>
+              <span>
+                Pembayaran aman & terenkripsi
+              </span>
 
-  </div>
+            </div>
             <div class="qr-box">
 
-              <img
-                id="qris-image"
-                src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=SPORTSPACE-QRIS"
+              <img id="qris-image" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=SPORTSPACE-QRIS"
                 alt="QRIS">
 
             </div>
@@ -307,25 +297,22 @@
               Scan QR menggunakan aplikasi e-wallet atau mobile banking.
             </p>
 
-           <div class="qr-actions">
+            <div class="qr-actions">
 
-  <button type="button"
-    class="pay-action-btn"
-    onclick="downloadQR()">
+              <button type="button" class="pay-action-btn" onclick="downloadQR()">
 
-    <i class="ti ti-download"></i>
-    Download QR
+                <i class="ti ti-download"></i>
+                Download QR
 
-  </button>
+              </button>
 
 
-</div>
+            </div>
 
           </div>
 
           <!-- TRANSFER -->
-          <div id="payment-transfer"
-            class="payment-content">
+          <div id="payment-transfer" class="payment-content">
 
             <div class="bank-box">
 
@@ -345,9 +332,7 @@
 
                   1234567890
 
-                  <button
-                    class="copy-btn"
-                    onclick="copyText('1234567890')">
+                  <button class="copy-btn" onclick="copyText('1234567890')">
 
                     Salin
 
@@ -370,8 +355,7 @@
           </div>
 
           <!-- GOPAY -->
-          <div id="payment-gopay"
-            class="payment-content">
+          <div id="payment-gopay" class="payment-content">
 
             <div class="wallet-box">
 
@@ -383,9 +367,7 @@
 
               </strong>
 
-              <button
-                class="copy-btn"
-                onclick="copyText('081234567890')">
+              <button class="copy-btn" onclick="copyText('081234567890')">
 
                 Salin Nomor
 
@@ -396,8 +378,7 @@
           </div>
 
           <!-- DANA -->
-          <div id="payment-dana"
-            class="payment-content">
+          <div id="payment-dana" class="payment-content">
 
             <div class="wallet-box">
 
@@ -409,9 +390,7 @@
 
               </strong>
 
-              <button
-                class="copy-btn"
-                onclick="copyText('081234567890')">
+              <button class="copy-btn" onclick="copyText('081234567890')">
 
                 Salin Nomor
 
@@ -422,8 +401,7 @@
           </div>
 
           <!-- SHOPEEPAY -->
-          <div id="payment-shopeepay"
-            class="payment-content">
+          <div id="payment-shopeepay" class="payment-content">
 
             <div class="wallet-box">
 
@@ -435,9 +413,7 @@
 
               </strong>
 
-              <button
-                class="copy-btn"
-                onclick="copyText('081234567890')">
+              <button class="copy-btn" onclick="copyText('081234567890')">
 
                 Salin Nomor
 
@@ -448,8 +424,7 @@
           </div>
 
           <!-- CASH -->
-          <div id="payment-cash"
-            class="payment-content">
+          <div id="payment-cash" class="payment-content">
 
             <div class="cash-box">
 
@@ -464,10 +439,7 @@
           </div>
 
           <!-- BUTTON -->
-          <button
-            id="pay-button"
-            onclick="confirmPayment()"
-            class="btn btn-primary btn-lg btn-full">
+          <button id="pay-button" onclick="confirmPayment()" class="btn btn-primary btn-lg btn-full">
 
             Saya Sudah Bayar
 
@@ -487,8 +459,7 @@
   </div>
 
   <!-- SUCCESS MODAL -->
-  <div id="success-modal"
-    class="success-modal">
+  <div id="success-modal" class="success-modal">
 
     <div class="success-box">
 
@@ -502,16 +473,13 @@
         Booking kamu berhasil dikonfirmasi.
       </p>
 
-      <a href="booking-success.html"
-        class="btn btn-primary btn-full">
+      <a href="booking-success.html" class="btn btn-primary btn-full">
 
         Lihat Detail Booking
 
       </a>
 
-      <button
-        onclick="closeModal()"
-        class="btn btn-outline btn-full">
+      <button onclick="closeModal()" class="btn btn-outline btn-full">
 
         Tutup
 
@@ -540,7 +508,7 @@
   <script>
 
     // SELECT PAYMENT
-    function selectPayment(type, element){
+    function selectPayment(type, element) {
 
       document
         .querySelectorAll('.method-card')
@@ -564,22 +532,22 @@
       const btn =
         document.getElementById('pay-button');
 
-      if(type === 'cash'){
+      if (type === 'cash') {
 
         btn.innerHTML =
-        'Konfirmasi Booking';
+          'Konfirmasi Booking';
 
       } else {
 
         btn.innerHTML =
-        'Saya Sudah Bayar';
+          'Saya Sudah Bayar';
 
       }
 
     }
 
     // COPY
-    function copyText(text){
+    function copyText(text) {
 
       navigator.clipboard.writeText(text);
 
@@ -588,7 +556,7 @@
     }
 
     // DOWNLOAD QR
-    function downloadQR(){
+    function downloadQR() {
 
       const qr =
         document.getElementById("qris-image").src;
@@ -606,7 +574,7 @@
     }
 
     // TOAST
-    function showToast(message){
+    function showToast(message) {
 
       const toast =
         document.getElementById("toast");
@@ -624,7 +592,7 @@
     }
 
     // SUCCESS MODAL
-    function confirmPayment(){
+    function confirmPayment() {
 
       document
         .getElementById("success-modal")
@@ -633,7 +601,7 @@
     }
 
     // CLOSE MODAL
-    function closeModal(){
+    function closeModal() {
 
       document
         .getElementById("success-modal")
@@ -657,54 +625,55 @@
 
       seconds =
         seconds < 10
-        ? "0" + seconds
-        : seconds;
+          ? "0" + seconds
+          : seconds;
 
       countdown.innerText =
         `${minutes}:${seconds}`;
 
-      if(time > 0){
+      if (time > 0) {
         time--;
       }
 
-    },1000);
+    }, 1000);
 
-    function downloadQR(){
+    function downloadQR() {
 
-  const qr =
-    document.getElementById('qrisImage');
+      const qr =
+        document.getElementById('qrisImage');
 
-  const imageUrl = qr.src;
+      const imageUrl = qr.src;
 
-  fetch(imageUrl)
-    .then(response => response.blob())
-    .then(blob => {
+      fetch(imageUrl)
+        .then(response => response.blob())
+        .then(blob => {
 
-      const blobUrl =
-        window.URL.createObjectURL(blob);
+          const blobUrl =
+            window.URL.createObjectURL(blob);
 
-      const link =
-        document.createElement('a');
+          const link =
+            document.createElement('a');
 
-      link.href = blobUrl;
+          link.href = blobUrl;
 
-      link.download = 'QRIS-SportSpace.png';
+          link.download = 'QRIS-SportSpace.png';
 
-      document.body.appendChild(link);
+          document.body.appendChild(link);
 
-      link.click();
+          link.click();
 
-      document.body.removeChild(link);
+          document.body.removeChild(link);
 
-      window.URL.revokeObjectURL(blobUrl);
+          window.URL.revokeObjectURL(blobUrl);
 
-      showToast('QR berhasil diunduh');
+          showToast('QR berhasil diunduh');
 
-    });
+        });
 
-}
+    }
 
   </script>
 
 </body>
+
 </html>
