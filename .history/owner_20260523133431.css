@@ -20,7 +20,6 @@
   --gray-700:     #374151;
   --dark:         #0f172a;
   --white:        #ffffff;
-  --font-display: 'Plus Jakarta Sans', sans-serif;
   --shadow:       0 6px 18px rgba(15,23,42,.05);
   --radius-md:    10px;
 }
@@ -42,13 +41,11 @@ a {
   text-decoration: none; 
   color: inherit; 
 }
-
 button { 
   font-family: inherit; 
   cursor: pointer; 
   border: none; 
 }
-
 input, select, textarea { 
   font-family: inherit; 
   outline: none;
@@ -56,30 +53,21 @@ input, select, textarea {
 
 /* NAVBAR */
 .navbar {
-  width: 100%; 
-  height: 72px;
+  width: 100%; height: 72px;
   background: rgba(255,255,255,.95);
   border-bottom: 1px solid var(--gray-200);
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between;
   padding: 0 28px;
-  position: sticky; 
-  top: 0; 
-  z-index: 999;
+  position: sticky; top: 0; z-index: 999;
 }
 .navbar-brand {
-  display: flex; 
-  align-items: center; 
-  gap: 10px;
+  display: flex; align-items: center; gap: 10px;
   font-family:'Syne', sans-serif;
-  font-size: 18px;
   color: var(--dark);
 }
 .navbar-brand i {
-  font-size: 25px; 
+  font-size: 30px; 
   color: #164f21; 
-  vertical-align: middle; 
 }
 .navbar-brand span {
   font-size: 18px; 
@@ -94,8 +82,8 @@ input, select, textarea {
 }
 .navbar-actions {
    display: flex; 
-   align-items: center; 
-   gap: 14px; 
+   align-items: 
+   center; gap: 14px; 
   }
 
 /* LAYOUT */
@@ -110,33 +98,27 @@ input, select, textarea {
   background: var(--white);
   border-right: 1px solid var(--gray-200);
   padding: 24px 18px;
-  display: flex; 
-  flex-direction: column;
-  position: sticky; 
-  top: 72px;
+  display: flex; flex-direction: column;
+  position: sticky; top: 72px;
   height: calc(100vh - 72px);
   overflow-y: auto;
 }
+
 .sidebar-section {
-  font-size: 12px; 
-  font-weight: 700;
+  font-size: 12px; font-weight: 700;
   color: var(--gray-400);
   margin: 20px 0 14px;
   text-transform: uppercase;
 }
-.sidebar-section:first-child { 
-  margin-top: 0; 
-}
+.sidebar-section:first-child { margin-top: 0; }
+
 .sidebar-item {
   height: 48px;
   border-radius: 14px;
-  display: flex; 
-  align-items: center; 
-  gap: 12px;
+  display: flex; align-items: center; gap: 12px;
   padding: 0 16px;
   cursor: pointer;
-  font-size: 14px; 
-  font-weight: 600;
+  font-size: 14px; font-weight: 600;
   color: var(--dark);
   transition: .25s;
   margin-bottom: 6px;
@@ -176,8 +158,7 @@ input, select, textarea {
 
 .page-title {
   font-family: var(--font-display);
-  font-size: 30px; 
-  font-weight: 800;
+  font-size: 35px; font-weight: 800;
   letter-spacing: -1px;
   margin-bottom: 20px;
 }
@@ -188,6 +169,7 @@ input, select, textarea {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px; margin-bottom: 24px;
 }
+
 .stat-card {
   background: var(--white);
   border: 1px solid var(--gray-200);
@@ -198,6 +180,7 @@ input, select, textarea {
 .stat-card:hover { 
   transform: translateY(-3px); 
 }
+
 .stat-value { 
   font-size: 25px; 
   font-weight: 800; 
@@ -228,8 +211,7 @@ input, select, textarea {
 .card {
   background: var(--white);
   border: 1px solid var(--gray-200);
-  border-radius: 24px; 
-  padding: 22px;
+  border-radius: 24px; padding: 22px;
   box-shadow: var(--shadow);
   margin-bottom: 20px;
   transition: .25s;
@@ -270,7 +252,7 @@ input, select, textarea {
 }
 .table tbody td {
   padding: 16px 14px; 
-  font-size: 12px;
+  font-size: 14px;
   border-bottom: 1px solid var(--gray-100);
   color: var(--dark); 
   vertical-align: middle;
@@ -355,7 +337,7 @@ input, select, textarea {
 .btn-sm   { 
   padding: 10px 16px; 
   border-radius: 12px; 
-  font-size: 12px; 
+  font-size: 13px; 
   font-weight: 600; 
 }
 .btn-full { 
@@ -450,6 +432,7 @@ select.form-input   {
 .modal-overlay.show { 
   display: flex; 
 }
+
 .modal-box {
   background: var(--white); 
   border-radius: 26px;
@@ -471,6 +454,7 @@ select.form-input   {
     opacity: 1; 
   }
 }
+
 .modal-header { 
   display: flex; 
   justify-content: space-between; 
@@ -539,6 +523,7 @@ select.form-input   {
   flex-wrap: wrap; 
   align-items: center; 
 }
+
 .search-input-wrap { 
   position: relative; 
   flex: 1; 
@@ -575,6 +560,7 @@ select.form-input   {
   grid-template-columns: 80px repeat(7, 1fr); 
   font-size: 12px; 
 }
+
 .schedule-header {
   background: var(--gray-100); 
   border-bottom: 1px solid var(--gray-200);
@@ -586,6 +572,7 @@ select.form-input   {
   text-transform: uppercase; 
   letter-spacing: .4px;
 }
+
 .schedule-time {
   background: var(--gray-50); 
   padding: 10px 8px; 
@@ -596,6 +583,7 @@ select.form-input   {
   border-bottom: 1px solid var(--gray-100); 
   border-right: 1px solid var(--gray-200);
 }
+
 .schedule-slot {
   padding: 8px; 
   min-height: 38px; 
@@ -621,8 +609,7 @@ select.form-input   {
 .chart-bar-wrap { 
   display: flex; 
   align-items: flex-end; 
-  gap: 8px; 
-  height: 100px; 
+  gap: 8px; height: 100px; 
   padding: 0 4px; 
 }
 .chart-bar-col  { 
@@ -852,8 +839,7 @@ select.form-input   {
   align-items:start; 
 }
 .td-actions        { 
-  display:flex; 
-  gap:6px; 
+  display:flex; gap:6px; 
   padding:12px 14px; 
 }
 .btn-red           { 
@@ -962,8 +948,7 @@ select.form-input   {
 }
 .rev-amount { 
   font-family:var(--font-display); 
-  font-size:32px; 
-  font-weight:800; 
+  font-size:32px; font-weight:800; 
   letter-spacing:-1px; 
   margin-bottom:4px; 
 }
@@ -1028,7 +1013,7 @@ select.form-input   {
   font-weight:700; 
 }
 .field-meta  { 
-  font-size:11px; 
+  font-size:12px; 
   color:var(--gray-400); 
   margin-top:2px; 
 }
@@ -1204,17 +1189,10 @@ select.form-input   {
   margin-top:2px; 
 }
 .modal-close-btn {
-  background:var(--gray-100); 
-  border:none;
-  width:32px; 
-  height:32px; 
-  border-radius:var(--radius-md);
-  cursor:pointer; 
-  display:flex; 
-  align-items:center; 
-  justify-content:center;
-  font-size:17px; 
-  color:var(--gray-500);
+  background:var(--gray-100); border:none;
+  width:32px; height:32px; border-radius:var(--radius-md);
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  font-size:17px; color:var(--gray-500);
 }
 .modal-close-btn:hover { 
   background:var(--gray-200); 
