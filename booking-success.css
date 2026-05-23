@@ -1,17 +1,17 @@
-.success-wrapper{
+.success-wrapper {
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 16px;
 }
 
-.success-grid{
+.success-grid {
   display: grid;
   grid-template-columns: 1.3fr .7fr;
   gap: 24px;
   align-items: start;
 }
 
-.success-card{
+.success-card {
   background: #fff;
   border-radius: var(--radius-xl);
   overflow: hidden;
@@ -19,35 +19,33 @@
   border: 1px solid var(--gray-100);
 }
 
-.success-banner{
+.success-banner {
   position: relative;
   height: 280px;
 }
 
-.success-banner img{
+.success-banner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.success-overlay{
+.success-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,.7),
-    rgba(0,0,0,.1)
-  );
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, .7),
+      rgba(0, 0, 0, .1));
 }
 
-.success-badge{
+.success-badge {
   position: absolute;
   top: 18px;
   right: 18px;
   z-index: 2;
 }
 
-.success-content{
+.success-content {
   position: absolute;
   bottom: 24px;
   left: 24px;
@@ -55,12 +53,12 @@
   z-index: 2;
 }
 
-.success-content h1{
+.success-content h1 {
   font-size: 32px;
   margin-bottom: 8px;
 }
 
-.success-meta{
+.success-meta {
   display: flex;
   gap: 18px;
   flex-wrap: wrap;
@@ -68,11 +66,11 @@
   opacity: .95;
 }
 
-.success-body{
+.success-body {
   padding: 28px;
 }
 
-.success-icon{
+.success-icon {
   width: 78px;
   height: 78px;
   border-radius: 50%;
@@ -83,12 +81,12 @@
   margin-bottom: 22px;
 }
 
-.success-icon i{
+.success-icon i {
   font-size: 40px;
   color: var(--green);
 }
 
-.booking-code{
+.booking-code {
   background: var(--gray-50);
   border: 1px dashed var(--gray-300);
   padding: 14px 18px;
@@ -99,18 +97,18 @@
   align-items: center;
 }
 
-.booking-code strong{
+.booking-code strong {
   font-size: 18px;
   color: var(--green);
 }
 
-.detail-list{
+.detail-list {
   margin-top: 26px;
   display: grid;
   gap: 14px;
 }
 
-.detail-item{
+.detail-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -118,17 +116,17 @@
   border-bottom: 1px solid var(--gray-100);
 }
 
-.detail-item span{
+.detail-item span {
   color: var(--gray-500);
   font-size: 14px;
 }
 
-.detail-item strong{
+.detail-item strong {
   color: var(--gray-800);
   font-size: 14px;
 }
 
-.side-card{
+.side-card {
   background: #fff;
   border-radius: var(--radius-xl);
   padding: 24px;
@@ -138,31 +136,31 @@
   top: 24px;
 }
 
-.status-box{
+.status-box {
   background: var(--blue-light);
   border-radius: var(--radius-md);
   padding: 16px;
   margin-bottom: 18px;
 }
 
-.status-box i{
+.status-box i {
   color: var(--blue);
   font-size: 22px;
   margin-bottom: 8px;
   display: block;
 }
 
-.timeline{
+.timeline {
   margin-top: 18px;
 }
 
-.timeline-item{
+.timeline-item {
   display: flex;
   gap: 12px;
   margin-bottom: 18px;
 }
 
-.timeline-dot{
+.timeline-dot {
   width: 14px;
   height: 14px;
   border-radius: 50%;
@@ -171,38 +169,38 @@
   flex-shrink: 0;
 }
 
-.timeline-item p{
+.timeline-item p {
   margin: 0;
   font-size: 13px;
   color: var(--gray-500);
   line-height: 1.6;
 }
 
-.timeline-item strong{
+.timeline-item strong {
   display: block;
   margin-bottom: 4px;
   color: var(--gray-800);
   font-size: 14px;
 }
 
-.btn-group{
+.btn-group {
   display: flex;
   gap: 12px;
   margin-top: 26px;
   flex-wrap: wrap;
 }
 
-@media(max-width: 900px){
+@media(max-width: 900px) {
 
-  .success-grid{
+  .success-grid {
     grid-template-columns: 1fr;
   }
 
-  .success-banner{
+  .success-banner {
     height: 220px;
   }
 
-  .success-content h1{
+  .success-content h1 {
     font-size: 24px;
   }
 

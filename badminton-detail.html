@@ -5,16 +5,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Detail Lapangan — SportSpace</title>
-
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="detail.css">
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 </head>
 
 <script>
@@ -24,9 +23,9 @@
   const selectedSlots = [];
 
   // SLOT
-  function toggleSlot(button){
+  function toggleSlot(button) {
 
-    if(button.classList.contains("penuh")) return;
+    if (button.classList.contains("penuh")) return;
 
     button.classList.toggle("selected");
 
@@ -35,7 +34,7 @@
 
     const slot = `${start} - ${end}`;
 
-    if(button.classList.contains("selected")){
+    if (button.classList.contains("selected")) {
 
       selectedSlots.push(slot);
 
@@ -44,8 +43,8 @@
       const index =
         selectedSlots.indexOf(slot);
 
-      if(index > -1){
-        selectedSlots.splice(index,1);
+      if (index > -1) {
+        selectedSlots.splice(index, 1);
       }
     }
 
@@ -53,18 +52,18 @@
   }
 
   // UPDATE RINGKASAN
-  function updateSummary(){
+  function updateSummary() {
 
-    if(selectedSlots.length === 0){
+    if (selectedSlots.length === 0) {
 
       document.getElementById("summary-time")
-      .innerText = "-";
+        .innerText = "-";
 
       document.getElementById("summary-duration")
-      .innerText = "0 Jam";
+        .innerText = "0 Jam";
 
       document.getElementById("summary-total")
-      .innerText = "Rp0";
+        .innerText = "Rp0";
 
       return;
     }
@@ -77,20 +76,20 @@
 
     const last =
       sorted[sorted.length - 1]
-      .split(" - ")[1];
+        .split(" - ")[1];
 
     document.getElementById("summary-time")
-    .innerText = `${first} - ${last}`;
+      .innerText = `${first} - ${last}`;
 
     document.getElementById("summary-duration")
-    .innerText =
+      .innerText =
       `${selectedSlots.length} Jam`;
 
     const total =
       selectedSlots.length * slotPrice;
 
     document.getElementById("summary-total")
-    .innerText =
+      .innerText =
       "Rp" + total.toLocaleString("id-ID");
   }
 
@@ -127,7 +126,7 @@
 
     <a href="index.html#lapangan" class="back-link">
 
-        <i class="ti ti-arrow-left"></i>
+      <i class="ti ti-arrow-left"></i>
 
     </a>
 
@@ -245,9 +244,7 @@
               <!-- MAP -->
               <div class="map-frame">
 
-                <iframe
-                  src="https://www.google.com/maps?q=Bantul+Yogyakarta&output=embed"
-                  loading="lazy"
+                <iframe src="https://www.google.com/maps?q=Bantul+Yogyakarta&output=embed" loading="lazy"
                   allowfullscreen>
                 </iframe>
 
@@ -256,8 +253,7 @@
               <!-- ACTION -->
               <div class="map-actions">
 
-                <a href="https://maps.google.com/?q=Bantul+Yogyakarta"
-                  target="_blank">
+                <a href="https://maps.google.com/?q=Bantul+Yogyakarta" target="_blank">
 
                   <button class="btn btn-primary">
                     <i class="ti ti-map-pin"></i>
@@ -309,8 +305,7 @@
 
           <div style="margin-bottom:24px;">
 
-            <label
-              style="display:block;font-size:14px;font-weight:600;margin-bottom:10px;color:var(--gray-700);">
+            <label style="display:block;font-size:14px;font-weight:600;margin-bottom:10px;color:var(--gray-700);">
 
               Pilih Tanggal Booking
 
@@ -324,142 +319,97 @@
 
           <div class="slots-grid">
 
-            <button class="slot-btn penuh"
-              data-start="07.00"
-              data-end="08.00">
+            <button class="slot-btn penuh" data-start="07.00" data-end="08.00">
 
               07.00–08.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="08.00"
-              data-end="09.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="08.00" data-end="09.00">
 
               08.00–09.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="09.00"
-              data-end="10.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="09.00" data-end="10.00">
 
               09.00–10.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="10.00"
-              data-end="11.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="10.00" data-end="11.00">
 
               10.00–11.00
 
             </button>
 
-            <button class="slot-btn penuh"
-              data-start="11.00"
-              data-end="12.00">
+            <button class="slot-btn penuh" data-start="11.00" data-end="12.00">
 
               11.00–12.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="12.00"
-              data-end="13.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="12.00" data-end="13.00">
 
               12.00–13.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="13.00"
-              data-end="14.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="13.00" data-end="14.00">
 
               13.00–14.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="14.00"
-              data-end="15.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="14.00" data-end="15.00">
 
               14.00–15.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="15.00"
-              data-end="16.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="15.00" data-end="16.00">
 
               15.00–16.00
 
             </button>
 
-            <button class="slot-btn penuh"
-              data-start="16.00"
-              data-end="17.00">
+            <button class="slot-btn penuh" data-start="16.00" data-end="17.00">
 
               16.00–17.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="17.00"
-              data-end="18.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="17.00" data-end="18.00">
 
               17.00–18.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="18.00"
-              data-end="19.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="18.00" data-end="19.00">
 
               18.00–19.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="19.00"
-              data-end="20.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="19.00" data-end="20.00">
 
               19.00–20.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="20.00"
-              data-end="21.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="20.00" data-end="21.00">
 
               20.00–21.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="21.00"
-              data-end="22.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="21.00" data-end="22.00">
 
               21.00–22.00
 
             </button>
 
-            <button class="slot-btn"
-              onclick="toggleSlot(this)"
-              data-start="22.00"
-              data-end="23.00">
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="22.00" data-end="23.00">
 
               22.00–23.00
 
@@ -642,24 +592,24 @@
       <script>
 
         const bookingDate =
-        document.getElementById("booking-date");
+          document.getElementById("booking-date");
 
-        bookingDate.addEventListener("change", function(){
+        bookingDate.addEventListener("change", function () {
 
           const tanggal = new Date(this.value);
 
           const hasil = tanggal.toLocaleDateString(
-          "id-ID",
-          {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-          }
+            "id-ID",
+            {
+              weekday: "long",
+              day: "numeric",
+              month: "long",
+              year: "numeric"
+            }
           );
 
           document.getElementById("summary-date")
-          .innerText = hasil;
+            .innerText = hasil;
 
         });
       </script>
@@ -701,11 +651,11 @@
           </div>
 
           <div class="summary-divider"></div>
-          
+
           <a href="pembayaran.html" class="btn btn-primary btn-lg btn-full" onclick="saveBookingData()">
             Lanjut Pembayaran
           </a>
-          
+
           <div class="alert alert-info" style="margin-top:18px;">
 
             <i class="ti ti-info-circle"></i>
@@ -782,4 +732,5 @@
   <script src="js/main.js"></script>
 
 </body>
+
 </html>
