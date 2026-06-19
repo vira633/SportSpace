@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin — SportSpace</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="brand">
+        <i class="ti ti-tournament"></i>
+        <span>SportSpace</span>
+        <div class="dot"></div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-group">MENU</div>
+        <div class="nav-item active" onclick="showSection('dashboard', this)"><i class="ti ti-smart-home"></i> Dashboard</div>
+        <div class="nav-item" onclick="showSection('venue', this)"><i class="ti ti-building"></i> Verifikasi GOR</div>
+        <div class="nav-item" onclick="showSection('booking', this)"><i class="ti ti-calendar-event"></i> Semua Booking</div>
+        <div class="nav-item" onclick="showSection('user', this)"><i class="ti ti-users"></i> Kelola User</div>
+
+        <div class="nav-group">LAINNYA</div>
+        <div class="nav-item" onclick="showSection('setting', this)"><i class="ti ti-settings"></i> Pengaturan</div>
+        <a href="login.html" class="nav-item logout-link"><i class="ti ti-logout"></i> Keluar</a>
+      </nav>
+    </div>
+
+    <div class="sidebar-user">
+      <div class="user-avatar">A</div>
+      <div class="user-info">
+        <div class="user-name">Admin</div>
+        <div class="user-role">Administrator</div>
+      </div>
+      <i class="ti ti-chevron-down"></i>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <span class="panel-tag">Admin Panel</span>
+      </div>
+      <div class="header-right">
+        <div class="notif-badge">
+          <i class="ti ti-bell"></i>
+          <span class="badge-count">4</span>
+        </div>
+        <button class="btn-exit"><i class="ti ti-logout"></i> Keluar</button>
+      </div>
+    </header>
+
+    <section id="section-dashboard" class="content-body">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Dashboard Admin</h1>
+          <p class="page-sub">Selamat datang! Pantau semua aktivitas platform di sini.</p>
+        </div>
+        <div class="date-picker">
+          <i class="ti ti-calendar"></i> Rabu, 14 Mei 2026
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon icon-blue"><i class="ti ti-users"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">1.247</div>
+            <div class="stat-label">Total Pengguna</div>
+          </div>
+          <div class="stat-trend trend-up"><i class="ti ti-trending-up"></i> +12% bulan ini</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-green"><i class="ti ti-building"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">87</div>
+            <div class="stat-label">GOR Terdaftar</div>
+          </div>
+          <div class="stat-trend trend-up"><i class="ti ti-trending-up"></i> +5 GOR baru</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-amber"><i class="ti ti-calendar-check"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">432</div>
+            <div class="stat-label">Booking Bulan Ini</div>
+          </div>
+          <div class="stat-trend trend-up"><i class="ti ti-trending-up"></i> +18% vs bulan lalu</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-red"><i class="ti ti-clock-hour-4"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Pending Verifikasi</div>
+          </div>
+          <div class="stat-trend trend-danger"><i class="ti ti-alert-circle"></i> Perlu tindakan</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-header">
+          <div class="header-title">
+            <i class="ti ti-receipt-2"></i>
+            <h3>Booking Terbaru</h3>
+          </div>
+          <button class="btn-text">Lihat Semua <i class="ti ti-arrow-right"></i></button>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>KODE</th>
+                <th>USER</th>
+                <th>LAPANGAN</th>
+                <th>TANGGAL</th>
+                <th>TOTAL</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="bold">SS-00142</td>
+                <td>Andi R.</td>
+                <td>Futsal A — GOR Maju</td>
+                <td>12 Mei 2026</td>
+                <td>Rp160.000</td>
+                <td><span class="status-badge pending">Pending</span></td>
+              </tr>
+              <tr>
+                <td class="bold">SS-00141</td>
+                <td>Budi S.</td>
+                <td>Badminton A — Arena 88</td>
+                <td>11 Mei 2026</td>
+                <td>Rp90.000</td>
+                <td><span class="status-badge confirmed">Dikonfirmasi</span></td>
+              </tr>
+              <tr>
+                <td class="bold">SS-00140</td>
+                <td>Citra M.</td>
+                <td>Basket — Court Pro</td>
+                <td>10 Mei 2026</td>
+                <td>Rp240.000</td>
+                <td><span class="status-badge finished">Selesai</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-venue" class="content-body" style="display:none;">
+        <h1 class="page-title">Verifikasi GOR</h1>
+    </section>
+    </main>
+</div>
+
+<script>
+function showSection(name, item) {
+  document.querySelectorAll('.content-body').forEach(s => s.style.display = 'none');
+  document.getElementById('section-' + name).style.display = 'block';
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  item.classList.add('active');
+}
+</script>
+
+</body>
+</html>

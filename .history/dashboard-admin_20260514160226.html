@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard Admin — SportSpace</title>
+
+  <link rel="stylesheet" href="admin.css">
+
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <a href="index.html" class="navbar-brand">
+
+      <i class="ti ti-tournament"></i>
+
+      <span>SportSpace</span>
+
+      <div class="dot"></div>
+
+    </a>
+
+    <div class="navbar-actions">
+
+      <span class="admin-text">
+        Admin Panel
+      </span>
+
+      <div class="notif">
+
+        <i class="ti ti-bell"></i>
+
+        <div class="notif-badge">
+          4
+        </div>
+
+      </div>
+
+      <a href="login.html">
+
+        <button class="btn btn-outline btn-sm">
+
+          <i class="ti ti-logout"></i>
+          Keluar
+
+        </button>
+
+      </a>
+
+    </div>
+
+  </nav>
+
+  <!-- LAYOUT -->
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div>
+
+        <div class="sidebar-section">
+          MENU
+        </div>
+
+        <div class="sidebar-menu">
+
+          <div class="sidebar-item active"
+          onclick="showSection('dashboard', this)">
+            <i class="ti ti-home"></i>
+            <span>Dashboard</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('venue', this)">
+            <i class="ti ti-building"></i>
+            <span>Verifikasi GOR</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('booking', this)">
+            <i class="ti ti-calendar-event"></i>
+            <span>Semua Booking</span>
+          </div>
+
+          <div class="sidebar-item"
+          onclick="showSection('user', this)">
+            <i class="ti ti-users"></i>
+            <span>Kelola User</span>
+          </div>
+
+        </div>
+
+        <div class="sidebar-section extra">
+          LAINNYA
+        </div>
+
+        <div class="sidebar-menu">
+
+          <div class="sidebar-item"
+          onclick="showSection('setting', this)">
+            <i class="ti ti-settings"></i>
+            <span>Pengaturan</span>
+          </div>
+
+          <a href="login.html" class="logout-link">
+
+            <div class="sidebar-item logout">
+
+              <i class="ti ti-logout"></i>
+
+              <span>Keluar</span>
+
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- PROFILE -->
+      <div class="sidebar-profile-container">
+
+        <div class="sidebar-profile"
+        onclick="toggleProfileMenu()">
+
+          <div class="profile-left">
+
+            <div class="avatar">
+              A
+            </div>
+
+            <div class="profile-info">
+
+              <div class="profile-name">
+                Admin
+              </div>
+
+              <div class="profile-role">
+                Administrator
+              </div>
+
+            </div>
+
+          </div>
+
+          <i class="ti ti-chevron-up"></i>
+
+        </div>
+
+        <!-- DROPDOWN -->
+        <div class="profile-dropdown"
+        id="profileDropdown">
+
+          <div class="dropdown-item">
+            <i class="ti ti-user"></i>
+            Profil Saya
+          </div>
+
+          <div class="dropdown-item">
+            <i class="ti ti-settings"></i>
+            Pengaturan Akun
+          </div>
+
+          <div class="dropdown-item">
+            <i class="ti ti-bell"></i>
+            Notifikasi
+          </div>
+
+          <a href="login.html"
+          class="dropdown-link">
+
+            <div class="dropdown-item logout-item">
+              <i class="ti ti-logout"></i>
+              Keluar
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="dashboard-content">
+
+      <!-- DASHBOARD -->
+      <section id="section-dashboard">
+
+        <div class="top-header">
+
+          <div>
+
+            <h1 class="page-title">
+              Dashboard Admin
+            </h1>
+
+            <p class="page-sub">
+              Selamat datang! Pantau semua aktivitas platform di sini.
+            </p>
+
+          </div>
+
+          <div class="date-card">
+
+            <i class="ti ti-calendar"></i>
+
+            Rabu, 14 Mei 2026
+
+          </div>
+
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-grid">
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div>
+
+                <div class="stat-value">
+                  1.247
+                </div>
+
+                <div class="stat-label">
+                  Total Pengguna
+                </div>
+
+              </div>
+
+              <div class="stat-icon blue-bg">
+                <i class="ti ti-users"></i>
+              </div>
+
+            </div>
+
+            <div class="stat-change stat-up">
+              <i class="ti ti-trending-up"></i>
+              +12% bulan ini
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- VERIFIKASI -->
+      <section id="section-venue" class="hidden">
+
+        <div class="top-header">
+
+          <div>
+
+            <h1 class="page-title">
+              Verifikasi GOR
+            </h1>
+
+            <p class="page-sub">
+              Kelola dan verifikasi GOR baru sebelum tampil di platform.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="venue-grid">
+
+          <div class="venue-card">
+
+            <div class="venue-top">
+
+              <div class="venue-icon">
+                <i class="ti ti-building-stadium"></i>
+              </div>
+
+              <span class="badge badge-amber">
+                Pending
+              </span>
+
+            </div>
+
+            <h3 class="venue-title">
+              GOR Sejahtera Mandiri
+            </h3>
+
+            <div class="venue-location">
+              <i class="ti ti-map-pin"></i>
+              Sleman, Yogyakarta
+            </div>
+
+            <div class="venue-info-list">
+
+              <div>
+                <i class="ti ti-user"></i>
+                Pemilik: Bapak Hendra
+              </div>
+
+              <div>
+                <i class="ti ti-calendar"></i>
+                Daftar: 09 Mei 2026
+              </div>
+
+            </div>
+
+            <div class="venue-actions">
+
+              <button class="btn btn-primary btn-sm"
+              onclick="acceptVenue('GOR Sejahtera Mandiri')">
+                Terima
+              </button>
+
+              <button class="btn btn-outline btn-sm reject-btn"
+              onclick="rejectVenue('GOR Sejahtera Mandiri')">
+                Tolak
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- BOOKING -->
+      <section id="section-booking" class="hidden">
+
+        <h1 class="page-title">
+          Semua Booking
+        </h1>
+
+      </section>
+
+      <!-- USER -->
+      <section id="section-user" class="hidden">
+
+        <div class="top-header">
+
+          <div>
+
+            <h1 class="page-title">
+              Kelola User
+            </h1>
+
+            <p class="page-sub">
+              Pantau akun pengguna SportSpace.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="user-grid">
+
+          <div class="user-card">
+
+            <div class="user-top">
+
+              <div class="user-avatar">
+                A
+              </div>
+
+              <span class="badge badge-blue">
+                User
+              </span>
+
+            </div>
+
+            <h3 class="user-name">
+              Andi Rahmawan
+            </h3>
+
+            <div class="user-email">
+              andi@email.com
+            </div>
+
+            <div class="user-role">
+              Bergabung sejak Januari 2026
+            </div>
+
+            <div class="user-actions">
+
+              <button class="btn btn-outline btn-sm"
+              onclick="showUserDetail(
+              'Andi Rahmawan',
+              'andi@email.com',
+              'User',
+              'Aktif'
+              )">
+                Detail
+              </button>
+
+              <button class="btn btn-outline btn-sm reject-btn"
+              onclick="banUser('Andi Rahmawan')">
+                Ban
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- SETTING -->
+      <section id="section-setting" class="hidden">
+
+        <div class="top-header">
+
+          <div>
+
+            <h1 class="page-title">
+              Pengaturan
+            </h1>
+
+            <p class="page-sub">
+              Atur konfigurasi utama platform SportSpace.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="setting-grid">
+
+          <div class="setting-card">
+
+            <h3>
+              Pengaturan Platform
+            </h3>
+
+            <div class="form-group">
+
+              <label>
+                Nama Platform
+              </label>
+
+              <input type="text"
+              value="SportSpace">
+
+            </div>
+
+            <div class="form-group">
+
+              <label>
+                Email Admin
+              </label>
+
+              <input type="email"
+              value="admin@sportspace.com">
+
+            </div>
+
+            <button class="btn btn-primary btn-sm"
+            onclick="saveSettings()">
+              Simpan Perubahan
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+
+    function showSection(name, item){
+
+      document
+      .querySelectorAll('[id^="section-"]')
+      .forEach(section => {
+        section.classList.add('hidden');
+      });
+
+      document
+      .getElementById('section-' + name)
+      .classList.remove('hidden');
+
+      document
+      .querySelectorAll('.sidebar-item')
+      .forEach(menu => {
+        menu.classList.remove('active');
+      });
+
+      item.classList.add('active');
+    }
+
+    function toggleProfileMenu(){
+
+      const dropdown =
+      document.getElementById('profileDropdown');
+
+      dropdown.classList.toggle('active');
+    }
+
+    function showToast(message, type = "success") {
+
+      const toast = document.createElement("div");
+
+      toast.className = `toast ${type}`;
+
+      toast.innerHTML = `
+        <i class="ti ${
+          type === "success"
+          ? "ti-circle-check"
+          : "ti-alert-circle"
+        }"></i>
+
+        <span>${message}</span>
+      `;
+
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add("show");
+      }, 100);
+
+      setTimeout(() => {
+
+        toast.classList.remove("show");
+
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+
+      }, 3000);
+    }
+
+    function acceptVenue(name){
+
+      showToast(
+        `GOR ${name} berhasil diverifikasi`,
+        "success"
+      );
+    }
+
+    function rejectVenue(name){
+
+      showToast(
+        `GOR ${name} ditolak`,
+        "danger"
+      );
+    }
+
+    function saveSettings(){
+
+      showToast(
+        "Pengaturan berhasil disimpan",
+        "success"
+      );
+    }
+
+    function showUserDetail(
+      name,
+      email,
+      role,
+      status
+    ){
+
+      alert(
+`DATA USER
+
+Nama  : ${name}
+Email : ${email}
+Role  : ${role}
+Status: ${status}`
+      );
+    }
+
+    function banUser(name){
+
+      showToast(
+        `${name} berhasil dibanned`,
+        "danger"
+      );
+    }
+
+  </script>
+
+</body>
+</html>

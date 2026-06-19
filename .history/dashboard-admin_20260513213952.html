@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin — SportSpace</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <i class="ti ti-tournament"></i>
+      <span>SportSpace</span>
+    </div>
+
+    <div class="navbar-right">
+      <span class="admin-text">Admin Panel</span>
+      <button class="btn btn-outline">
+        <i class="ti ti-logout"></i>
+        Keluar
+      </button>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-title">MENU</div>
+
+      <div class="sidebar-item active">
+        <i class="ti ti-dashboard"></i>
+        Dashboard
+      </div>
+
+      <div class="sidebar-item">
+        <i class="ti ti-building"></i>
+        Verifikasi GOR
+      </div>
+
+      <div class="sidebar-item">
+        <i class="ti ti-calendar"></i>
+        Semua Booking
+      </div>
+
+      <div class="sidebar-item">
+        <i class="ti ti-users"></i>
+        Kelola User
+      </div>
+
+      <div class="sidebar-title">LAINNYA</div>
+
+      <div class="sidebar-item">
+        <i class="ti ti-settings"></i>
+        Pengaturan
+      </div>
+
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <!-- HEADER -->
+      <div class="page-header">
+        <h1>Dashboard Admin</h1>
+        <p>
+          Selamat datang kembali 👋
+          Pantau seluruh aktivitas platform SportSpace di sini.
+        </p>
+      </div>
+
+      <!-- STATISTICS -->
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div>
+              <h2>1.247</h2>
+              <p>Total Pengguna</p>
+            </div>
+
+            <div class="stat-icon blue">
+              <i class="ti ti-users"></i>
+            </div>
+          </div>
+
+          <span class="stat-up">
+            <i class="ti ti-trending-up"></i>
+            +12% bulan ini
+          </span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div>
+              <h2>87</h2>
+              <p>GOR Terdaftar</p>
+            </div>
+
+            <div class="stat-icon green">
+              <i class="ti ti-building"></i>
+            </div>
+          </div>
+
+          <span class="stat-up">
+            <i class="ti ti-trending-up"></i>
+            +5 GOR baru
+          </span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div>
+              <h2>432</h2>
+              <p>Booking Bulan Ini</p>
+            </div>
+
+            <div class="stat-icon orange">
+              <i class="ti ti-calendar-check"></i>
+            </div>
+          </div>
+
+          <span class="stat-up">
+            <i class="ti ti-trending-up"></i>
+            +18% vs bulan lalu
+          </span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <div>
+              <h2>4</h2>
+              <p>Pending Verifikasi</p>
+            </div>
+
+            <div class="stat-icon red">
+              <i class="ti ti-clock"></i>
+            </div>
+          </div>
+
+          <span class="stat-down">
+            <i class="ti ti-alert-circle"></i>
+            Perlu tindakan
+          </span>
+        </div>
+
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-card">
+
+        <div class="table-header">
+          <h3>Booking Terbaru</h3>
+
+          <button class="btn btn-primary">
+            <i class="ti ti-plus"></i>
+            Tambah Data
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Kode</th>
+                <th>User</th>
+                <th>Lapangan</th>
+                <th>Tanggal</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>#SS001</td>
+                <td>Andi</td>
+                <td>Futsal A</td>
+                <td>12 Mei 2026</td>
+                <td>Rp160.000</td>
+                <td>
+                  <span class="badge pending">Pending</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td>#SS002</td>
+                <td>Budi</td>
+                <td>Basket Utama</td>
+                <td>11 Mei 2026</td>
+                <td>Rp240.000</td>
+                <td>
+                  <span class="badge success">Selesai</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td>#SS003</td>
+                <td>Citra</td>
+                <td>Badminton A</td>
+                <td>10 Mei 2026</td>
+                <td>Rp90.000</td>
+                <td>
+                  <span class="badge process">Dikonfirmasi</span>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin | SportSpace</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="ti ti-tournament"></i>
+      </div>
+
+      <div>
+        <h2>SportSpace</h2>
+        <p>Admin Panel</p>
+      </div>
+    </div>
+
+    <div class="menu-title">
+      MENU
+    </div>
+
+    <a href="#" class="menu-item active">
+      <i class="ti ti-layout-dashboard"></i>
+      Dashboard
+    </a>
+
+    <a href="#" class="menu-item">
+      <i class="ti ti-building"></i>
+      Verifikasi GOR
+    </a>
+
+    <a href="#" class="menu-item">
+      <i class="ti ti-calendar-event"></i>
+      Booking
+    </a>
+
+    <a href="#" class="menu-item">
+      <i class="ti ti-users"></i>
+      Kelola User
+    </a>
+
+    <a href="#" class="menu-item">
+      <i class="ti ti-report-money"></i>
+      Transaksi
+    </a>
+
+    <div class="menu-title">
+      LAINNYA
+    </div>
+
+    <a href="#" class="menu-item">
+      <i class="ti ti-settings"></i>
+      Pengaturan
+    </a>
+
+    <a href="#" class="menu-item logout">
+      <i class="ti ti-logout"></i>
+      Keluar
+    </a>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+      <div>
+        <h1>Dashboard Admin</h1>
+        <p>Kelola seluruh aktivitas SportSpace</p>
+      </div>
+
+      <div class="navbar-right">
+
+        <button class="notification-btn">
+          <i class="ti ti-bell"></i>
+        </button>
+
+        <div class="profile">
+          <img src="profile-admin.jpg" alt="profil admin">
+          <div>
+            <h4>Admin SportSpace</h4>
+            <p>Administrator</p>
+          </div>
+        </div>
+
+      </div>
+
+    </nav>
+
+    <!-- STATISTICS -->
+    <section class="stats-grid">
+
+      <div class="stat-card">
+
+        <div class="stat-top">
+
+          <div>
+            <span>Total Pengguna</span>
+            <h2>1.247</h2>
+          </div>
+
+          <div class="stat-icon blue">
+            <i class="ti ti-users"></i>
+          </div>
+
+        </div>
+
+        <div class="stat-info success">
+          <i class="ti ti-trending-up"></i>
+          +12% bulan ini
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-top">
+
+          <div>
+            <span>GOR Terdaftar</span>
+            <h2>87</h2>
+          </div>
+
+          <div class="stat-icon green">
+            <i class="ti ti-building"></i>
+          </div>
+
+        </div>
+
+        <div class="stat-info success">
+          <i class="ti ti-trending-up"></i>
+          +5 GOR baru
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-top">
+
+          <div>
+            <span>Total Booking</span>
+            <h2>432</h2>
+          </div>
+
+          <div class="stat-icon orange">
+            <i class="ti ti-calendar-check"></i>
+          </div>
+
+        </div>
+
+        <div class="stat-info success">
+          <i class="ti ti-trending-up"></i>
+          +18% dari bulan lalu
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-top">
+
+          <div>
+            <span>Pending Verifikasi</span>
+            <h2>4</h2>
+          </div>
+
+          <div class="stat-icon red">
+            <i class="ti ti-alert-circle"></i>
+          </div>
+
+        </div>
+
+        <div class="stat-info danger">
+          <i class="ti ti-info-circle"></i>
+          Perlu tindakan admin
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TABLE -->
+    <section class="table-section">
+
+      <div class="section-header">
+
+        <div>
+          <h3>Booking Terbaru</h3>
+          <p>Daftar transaksi terbaru pengguna</p>
+        </div>
+
+        <button class="btn-primary">
+          <i class="ti ti-plus"></i>
+          Tambah Data
+        </button>
+
+      </div>
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Kode</th>
+              <th>User</th>
+              <th>Lapangan</th>
+              <th>Tanggal</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>#SS001</td>
+              <td>Andi</td>
+              <td>Futsal A</td>
+              <td>13 Mei 2026</td>
+              <td>Rp160.000</td>
+              <td>
+                <span class="badge pending">
+                  Pending
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>#SS002</td>
+              <td>Budi</td>
+              <td>Basket Pro</td>
+              <td>12 Mei 2026</td>
+              <td>Rp240.000</td>
+              <td>
+                <span class="badge success">
+                  Selesai
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>#SS003</td>
+              <td>Citra</td>
+              <td>Badminton A</td>
+              <td>11 Mei 2026</td>
+              <td>Rp90.000</td>
+              <td>
+                <span class="badge process">
+                  Dikonfirmasi
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>#SS004</td>
+              <td>Dani</td>
+              <td>Futsal B</td>
+              <td>10 Mei 2026</td>
+              <td>Rp160.000</td>
+              <td>
+                <span class="badge cancel">
+                  Dibatalkan
+                </span>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+</html>
