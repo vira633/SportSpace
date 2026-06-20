@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Lapangan — SportSpace</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="detail.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<script>
+
+  const slotPrice = 45000;
+
+  const selectedSlots = [];
+
+  // SLOT
+  function toggleSlot(button) {
+
+    if (button.classList.contains("penuh")) return;
+
+    button.classList.toggle("selected");
+
+    const start = button.dataset.start;
+    const end = button.dataset.end;
+
+    const slot = `${start} - ${end}`;
+
+    if (button.classList.contains("selected")) {
+
+      selectedSlots.push(slot);
+
+    } else {
+
+      const index =
+        selectedSlots.indexOf(slot);
+
+      if (index > -1) {
+        selectedSlots.splice(index, 1);
+      }
+    }
+
+    updateSummary();
+  }
+
+  // UPDATE RINGKASAN
+  function updateSummary() {
+
+    if (selectedSlots.length === 0) {
+
+      document.getElementById("summary-time")
+        .innerText = "-";
+
+      document.getElementById("summary-duration")
+        .innerText = "0 Jam";
+
+      document.getElementById("summary-total")
+        .innerText = "Rp0";
+
+      return;
+    }
+
+    const sorted =
+      [...selectedSlots].sort();
+
+    const first =
+      sorted[0].split(" - ")[0];
+
+    const last =
+      sorted[sorted.length - 1]
+        .split(" - ")[1];
+
+    document.getElementById("summary-time")
+      .innerText = `${first} - ${last}`;
+
+    document.getElementById("summary-duration")
+      .innerText =
+      `${selectedSlots.length} Jam`;
+
+    const total =
+      selectedSlots.length * slotPrice;
+
+    document.getElementById("summary-total")
+      .innerText =
+      "Rp" + total.toLocaleString("id-ID");
+  }
+
+</script>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <i class="ti ti-bowling"></i>
+      <span>SportSpace</span>
+      <div class="dot"></div>
+    </div>
+
+    <div class="navbar-links">
+      <a href="index.html">Beranda</a>
+      <a href="index.html#lapangan" class="active">Lapangan</a>
+      <a href="index.html#tentang">Tentang</a>
+    </div>
+
+    <div class="navbar-actions">
+      <a href="riwayat.html">
+        <button class="btn btn-outline btn-sm">Riwayat</button>
+      </a>
+
+      <a href="login.html">
+        <button class="btn btn-primary btn-sm">Akun</button>
+      </a>
+    </div>
+  </nav>
+
+  <div class="back-button">
+
+    <a href="index.html#lapangan" class="back-link">
+
+      <i class="ti ti-arrow-left"></i>
+
+    </a>
+
+  </div>
+
+  <div class="detail-wrapper">
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      <a href="index.html">Beranda</a>
+      <i class="ti ti-chevron-right"></i>
+      <a href=index.html#lapangan>Lapangan</a>
+      <i class="ti ti-chevron-right"></i>
+      <span style="color:var(--gray-700);">
+        Arena Badminton 88 — Court A
+      </span>
+    </div>
+
+    <div class="detail-grid">
+
+      <!-- KIRI -->
+      <div class="detail-main">
+
+        <!-- HERO CARD -->
+        <div class="detail-card">
+
+          <div class="detail-image">
+            <img src="badminton.jpg" alt="Lapangan Badminton">
+
+            <div class="detail-overlay"></div>
+
+            <div class="detail-badge">
+              <span class="badge badge-green">Tersedia</span>
+            </div>
+          </div>
+
+          <div class="detail-content">
+
+            <div class="detail-header">
+
+              <div class="detail-title">
+
+                <h1>Arena Badminton 88</h1>
+
+                <div class="detail-location">
+
+                  <p style="font-size:14px;color:var(--gray-400);">
+
+                    <i class="ti ti-building"></i>
+                    Badminton Court A
+
+                    &nbsp;&nbsp;
+
+                    <i class="ti ti-map-pin"></i>
+                    Bantul, Yogyakarta
+
+                  </p>
+
+                </div>
+
+                <div class="detail-rating">
+
+                  <span class="stars">★★★★★</span>
+
+                  <span class="rating-text">
+                    4.5 (18 ulasan)
+                  </span>
+
+                  <span>
+                    <i class="ti ti-feather"></i>
+                    Badminton
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div class="detail-price">
+                Rp45.000
+                <span>/jam</span>
+              </div>
+
+            </div>
+
+            <p style="color:var(--gray-500);line-height:1.8;margin-top:18px;">
+
+              Lapangan badminton indoor dengan lantai vinyl berkualitas,
+              pencahayaan terang, serta fasilitas lengkap seperti ruang tunggu,
+              toilet, area parkir, dan kantin. Cocok untuk latihan maupun pertandingan.
+
+            </p>
+
+            <!-- MAP LOKASI -->
+            <div class="section-card">
+
+              <div class="map-header">
+
+                <div>
+
+                  <h2>Lokasi Lapangan</h2>
+
+                  <p>
+                    Bantul, Yogyakarta
+                  </p>
+
+                </div>
+
+                <div class="distance-badge">
+                  <i class="ti ti-route"></i>
+                  3.1 km
+                </div>
+
+              </div>
+
+              <!-- MAP -->
+              <div class="map-frame">
+
+                <iframe src="https://www.google.com/maps?q=Bantul+Yogyakarta&output=embed" loading="lazy"
+                  allowfullscreen>
+                </iframe>
+
+              </div>
+
+              <!-- ACTION -->
+              <div class="map-actions">
+
+                <a href="https://maps.google.com/?q=Bantul+Yogyakarta" target="_blank">
+
+                  <button class="btn btn-primary">
+                    <i class="ti ti-map-pin"></i>
+                    Buka Google Maps
+                  </button>
+
+                </a>
+
+                <button class="btn btn-outline">
+                  <i class="ti ti-navigation"></i>
+                  Petunjuk Arah
+                </button>
+
+              </div>
+
+            </div>
+
+            <div class="info-grid">
+
+              <div class="info-box">
+                <div class="label">Jam Operasional</div>
+                <div class="value">07.00 - 23.00</div>
+              </div>
+
+              <div class="info-box">
+                <div class="label">Kapasitas</div>
+                <div class="value">4 Pemain</div>
+              </div>
+
+              <div class="info-box">
+                <div class="label">Jenis Lantai</div>
+                <div class="value">Vinyl</div>
+              </div>
+
+              <div class="info-box">
+                <div class="label">Fasilitas</div>
+                <div class="value">Parkir, Toilet, & Kantin</div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- BOOKING -->
+        <div class="section-card">
+
+          <h2>Pilih Jadwal Booking</h2>
+
+          <div style="margin-bottom:24px;">
+
+            <label style="display:block;font-size:14px;font-weight:600;margin-bottom:10px;color:var(--gray-700);">
+
+              Pilih Tanggal Booking
+
+            </label>
+
+            <div class="calendar-input">
+              <input type="date" id="booking-date">
+            </div>
+
+          </div>
+
+          <div class="slots-grid">
+
+            <button class="slot-btn penuh" data-start="07.00" data-end="08.00">
+
+              07.00–08.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="08.00" data-end="09.00">
+
+              08.00–09.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="09.00" data-end="10.00">
+
+              09.00–10.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="10.00" data-end="11.00">
+
+              10.00–11.00
+
+            </button>
+
+            <button class="slot-btn penuh" data-start="11.00" data-end="12.00">
+
+              11.00–12.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="12.00" data-end="13.00">
+
+              12.00–13.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="13.00" data-end="14.00">
+
+              13.00–14.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="14.00" data-end="15.00">
+
+              14.00–15.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="15.00" data-end="16.00">
+
+              15.00–16.00
+
+            </button>
+
+            <button class="slot-btn penuh" data-start="16.00" data-end="17.00">
+
+              16.00–17.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="17.00" data-end="18.00">
+
+              17.00–18.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="18.00" data-end="19.00">
+
+              18.00–19.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="19.00" data-end="20.00">
+
+              19.00–20.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="20.00" data-end="21.00">
+
+              20.00–21.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="21.00" data-end="22.00">
+
+              21.00–22.00
+
+            </button>
+
+            <button class="slot-btn" onclick="toggleSlot(this)" data-start="22.00" data-end="23.00">
+
+              22.00–23.00
+
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- REVIEW -->
+        <div class="section-card">
+
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+
+            <h2>Ulasan Pengguna</h2>
+
+            <div class="detail-rating">
+
+              <span class="stars">
+
+                <i class="ti ti-star-filled active"></i>
+                <i class="ti ti-star-filled active"></i>
+                <i class="ti ti-star-filled active"></i>
+                <i class="ti ti-star-filled active"></i>
+                <i class="ti ti-star-filled half"></i>
+
+              </span>
+
+              <div class="rating-text">
+                <strong>4.5</strong>
+                <span>/5</span>
+              </div>
+
+              <span class="review-count">
+                (18 ulasan)
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="review-item">
+
+            <div class="review-header">
+
+              <div class="review-user">
+
+                <div class="avatar green">RA</div>
+
+                <div>
+
+                  <strong>Rama Aditya</strong>
+
+                  <span class="stars">
+
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+
+                  </span>
+
+                </div>
+
+              </div>
+
+              <span style="font-size:13px;color:var(--gray-400);">
+                3 hari lalu
+              </span>
+
+            </div>
+
+            <p style="color:var(--gray-500);line-height:1.7;">
+
+              Lapangannya nyaman dan bersih banget.
+              Cocok buat latihan rutin sama teman.
+
+            </p>
+
+          </div>
+
+          <div class="review-item">
+
+            <div class="review-header">
+
+              <div class="review-user">
+
+                <div class="avatar blue">SN</div>
+
+                <div>
+
+                  <strong>Sinta Nurhaliza</strong>
+
+                  <span class="stars">
+
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+
+                  </span>
+
+                </div>
+
+              </div>
+
+              <span style="font-size:13px;color:var(--gray-400);">
+                1 minggu lalu
+              </span>
+
+            </div>
+
+            <p style="color:var(--gray-500);line-height:1.7;">
+
+              Tempat strategis dan pencahayaan terang.
+              Harga juga masih ramah kantong.
+
+            </p>
+
+          </div>
+
+          <div class="review-item">
+
+            <div class="review-header">
+
+              <div class="review-user">
+
+                <div class="avatar pink">DK</div>
+
+                <div>
+
+                  <strong>Dimas Kurniawan</strong>
+
+                  <span class="stars">
+
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+
+                  </span>
+
+                </div>
+
+              </div>
+
+              <span style="font-size:13px;color:var(--gray-400);">
+                2 minggu lalu
+              </span>
+
+            </div>
+
+            <p style="color:var(--gray-500);line-height:1.7;">
+
+              Fasilitas lengkap dan booking cepat lewat aplikasi.
+              Recommended banget!
+
+            </p>
+
+          </div>
+
+          <div class="more-review">
+
+            <button class="btn-more" onclick="showMoreReviews()">
+
+              Lihat lebih banyak
+
+              <i class="ti ti-chevron-down"></i>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <script>
+
+        const bookingDate =
+          document.getElementById("booking-date");
+
+        bookingDate.addEventListener("change", function () {
+
+          const tanggal = new Date(this.value);
+
+          const hasil = tanggal.toLocaleDateString(
+            "id-ID",
+            {
+              weekday: "long",
+              day: "numeric",
+              month: "long",
+              year: "numeric"
+            }
+          );
+
+          document.getElementById("summary-date")
+            .innerText = hasil;
+
+        });
+      </script>
+
+      <!-- KANAN -->
+      <div class="detail-sidebar">
+
+        <div class="booking-card">
+
+          <h2 style="font-size:22px;margin-bottom:24px;">
+            Ringkasan Booking
+          </h2>
+
+          <div class="summary-row">
+            <span>Lapangan</span>
+            <strong>Badminton Court A</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Tanggal</span>
+            <strong id="summary-date">Pilih tanggal</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Jam</span>
+            <strong id="summary-time">-</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Durasi</span>
+            <strong id="summary-duration">0 Jam</strong>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row" style="font-size:18px;">
+            <span>Total</span>
+            <strong id="summary-total">Rp0</strong>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <a href="pembayaran.html" class="btn btn-primary btn-lg btn-full" onclick="saveBookingData()">
+            Lanjut Pembayaran
+          </a>
+
+          <div class="alert alert-info" style="margin-top:18px;">
+
+            <i class="ti ti-info-circle"></i>
+
+            Booking akan dikonfirmasi setelah pembayaran diverifikasi.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="owner-card">
+
+    <h3 style="font-size:16px;margin-bottom:18px;">
+
+      <i class="ti ti-building-store"></i>
+      Info Arena
+
+    </h3>
+
+    <div class="owner-profile">
+
+      <div class="avatar green">
+        AB
+      </div>
+
+      <div>
+
+        <strong style="display:block;">
+          David Smith
+        </strong>
+
+        <span style="font-size:13px;color:var(--gray-400);">
+          Pengelola Arena
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="summary-divider"></div>
+
+    <div class="owner-info">
+      <i class="ti ti-phone"></i>
+      0813-7788-9900
+    </div>
+
+    <div class="owner-info">
+      <i class="ti ti-map-pin"></i>
+      Bantul, Yogyakarta
+    </div>
+
+  </div>
+
+  <footer class="footer">
+
+    <strong>SportSpace</strong>
+
+    &nbsp;·&nbsp;
+
+    Booking lapangan olahraga mudah & cepat
+
+    &nbsp;·&nbsp;
+
+    &copy; 2025
+
+  </footer>
+
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>

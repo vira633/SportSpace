@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+<<<<<<< HEAD
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -179,3 +180,364 @@ function submitBooking() {
 </script>
 </body>
 </html>
+=======
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Booking Berhasil — SportSpace</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="detail.css">
+  <link rel="stylesheet" href="booking-success.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="navbar-brand">
+      <i class="ti ti-bowling"></i>
+      <span>SportSpace</span>
+      <div class="dot"></div>
+    </div>
+
+    <div class="navbar-links">
+      <a href="index.html">Beranda</a>
+      <a href="index.html#lapangan">Lapangan</a>
+      <a href="index.html#tentang">Tentang</a>
+    </div>
+
+    <div class="navbar-actions">
+
+      <a href="riwayat.html">
+        <button class="btn btn-outline btn-sm">
+          Riwayat
+        </button>
+      </a>
+
+      <a href="login.html">
+        <button class="btn btn-primary btn-sm">
+          Akun
+        </button>
+      </a>
+
+    </div>
+
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="success-wrapper">
+
+    <div class="success-grid">
+
+      <!-- KIRI -->
+      <div class="success-card">
+
+        <!-- BANNER -->
+        <div class="success-banner">
+
+          <img src="lapangan-futsal.jpg" alt="Lapangan">
+
+          <div class="success-overlay"></div>
+
+          <div class="success-badge">
+            <span class="badge badge-green">
+              Booking Berhasil
+            </span>
+          </div>
+
+          <div class="success-content">
+
+            <h1>Booking Terkonfirmasi 🎉</h1>
+
+            <div class="success-meta">
+
+              <span>
+                <i class="ti ti-building"></i>
+                GOR Maju Jaya
+              </span>
+
+              <span>
+                <i class="ti ti-ball-football"></i>
+                Futsal
+              </span>
+
+              <span>
+                <i class="ti ti-map-pin"></i>
+                Sleman, Yogyakarta
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- BODY -->
+        <div class="success-body">
+
+          <div class="success-icon">
+            <i class="ti ti-check"></i>
+          </div>
+
+          <h2 style="font-size:28px;margin-bottom:10px;">
+            Pembayaran Berhasil
+          </h2>
+
+          <p style="color:var(--gray-500);line-height:1.8;">
+
+            Booking lapangan kamu sudah berhasil dikonfirmasi.
+            Silakan datang sesuai jadwal yang sudah dipilih dan tunjukkan
+            kode booking kepada pemilik GOR saat check-in.
+
+          </p>
+
+          <!-- BOOKING CODE -->
+          <div class="booking-code">
+
+            <div>
+
+              <span style="font-size:13px;color:var(--gray-400);display:block;">
+                Kode Booking
+              </span>
+
+              <strong>SS-2025-00142</strong>
+
+            </div>
+
+            <button class="btn btn-outline btn-sm" onclick="copyCode()">
+
+              <i class="ti ti-copy"></i>
+              Salin
+
+            </button>
+
+          </div>
+
+          <!-- DETAIL -->
+          <div class="detail-list">
+
+            <div class="detail-item">
+              <span>Lapangan</span>
+              <strong>Lapangan Futsal A</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Tanggal</span>
+              <strong>Senin, 12 Mei 2025</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Jam</span>
+              <strong>13.00 – 15.00</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Durasi</span>
+              <strong>2 Jam</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>Total Pembayaran</span>
+
+              <strong style="color:var(--green);font-size:18px;">
+                Rp160.000
+              </strong>
+            </div>
+
+          </div>
+
+          <!-- BUTTON -->
+          <div class="btn-group">
+
+            <a href="riwayat.html">
+
+              <button class="btn btn-primary btn-lg">
+
+                <i class="ti ti-history"></i>
+                Lihat Riwayat
+
+              </button>
+
+            </a>
+
+            <a href="index.html">
+
+              <button class="btn btn-outline btn-lg">
+
+                <i class="ti ti-home"></i>
+                Kembali ke Beranda
+
+              </button>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- KANAN -->
+      <div class="side-card">
+
+        <h3 style="font-size:18px;margin-bottom:18px;">
+          Status Booking
+        </h3>
+
+        <div class="status-box">
+
+          <i class="ti ti-info-circle"></i>
+
+          <strong style="display:block;margin-bottom:6px;color:var(--blue);">
+            Booking Aktif
+          </strong>
+
+          <p style="font-size:13px;color:var(--blue);line-height:1.7;margin:0;">
+
+            Datang 15 menit sebelum jadwal bermain dimulai
+            untuk proses check-in.
+
+          </p>
+
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="timeline">
+
+          <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div>
+
+              <strong>Booking Dibuat</strong>
+
+              <p>
+                Senin, 12 Mei 2025 · 09.12 WIB
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div>
+
+              <strong>Pembayaran Diverifikasi</strong>
+
+              <p>
+                Pembayaran berhasil diterima oleh sistem SportSpace.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div>
+
+              <strong>Siap Digunakan</strong>
+
+              <p>
+                Lapangan siap digunakan sesuai jadwal booking.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <!-- OWNER -->
+        <h3 style="font-size:16px;margin-bottom:14px;">
+          Info Pemilik GOR
+        </h3>
+
+        <div class="owner-profile">
+
+          <div class="avatar green">
+            BS
+          </div>
+
+          <div>
+
+            <strong style="display:block;">
+              Bapak Suharto
+            </strong>
+
+            <span style="font-size:13px;color:var(--gray-400);">
+              Pemilik GOR
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <div class="owner-info">
+          <i class="ti ti-phone"></i>
+          0812-3456-7890
+        </div>
+
+        <div class="owner-info">
+          <i class="ti ti-map-pin"></i>
+          Jl. Kaliurang Km 7, Sleman
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <strong>SportSpace</strong>
+
+    &nbsp;·&nbsp;
+
+    Booking lapangan olahraga mudah & cepat
+
+    &nbsp;·&nbsp;
+
+    &copy; 2025
+
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+
+    function copyCode() {
+
+      navigator.clipboard.writeText("SS-2025-00142");
+
+      alert("Kode booking berhasil disalin!");
+
+    }
+
+  </script>
+
+</body>
+
+</html>
+>>>>>>> master
