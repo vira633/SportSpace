@@ -1,0 +1,789 @@
+<?php
+include 'config.php';
+
+if (!isset($_GET['id'])) {
+  die("Lapangan tidak ditemukan");
+}
+
+$field_id = (int) $_GET['id'];
+
+$query = mysqli_query($conn, "
+SELECT *
+FROM fields
+WHERE field_id='$field_id'
+");
+
+$field = mysqli_fetch_assoc($query);
+
+if (!$field) {
+  die("Data lapangan tidak ditemukan");
+}
+$tanggal =
+  $_GET['tanggal']
+  ?? date('Y-m-d');
+
+$bookings = mysqli_query($conn, "
+SELECT jam_mulai,jam_selesai
+FROM booking
+WHERE field_id='$field_id'
+AND tanggal='$tanggal'
+AND status!='dibatalkan'
+");
+$booking_id =
+$_SESSION['booking_id']
+?? null;
+if($booking_id){
+
+    $q = mysqli_query($conn,"
+    SELECT *
+    FROM booking
+    WHERE booking_id='$booking_id'
+    ");
+
+    $booking =
+    mysqli_fetch_assoc($q);
+}
+
+$jamPenuh = [];
+
+while ($b = mysqli_fetch_assoc($bookings)) {
+  $jamPenuh[] =
+    substr($b['jam_mulai'], 0, 5);
+}
+?>
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Lapangan — SportSpace</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="detail.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<script>
+
+  const slotPrice = <?= $field['harga']; ?>;
+
+  const selectedSlots = [];
+
+  // SLOT
+  function toggleSlot(button) {
+
+    if (button.classList.contains("penuh")) return;
+
+    button.classList.toggle("selected");
+
+    const start = button.dataset.start;
+    const end = button.dataset.end;
+
+    const slot = `${start} - ${end}`;
+
+    if (button.classList.contains("selected")) {
+
+      selectedSlots.push(slot);
+
+    } else {
+
+      const index =
+        selectedSlots.indexOf(slot);
+
+      if (index > -1) {
+        selectedSlots.splice(index, 1);
+      }
+    }
+
+    updateSummary();
+  }
+
+  // UPDATE RINGKASAN
+  function updateSummary() {
+
+    if (selectedSlots.length === 0) {
+
+      document.getElementById("summary-time")
+        .innerText = "-";
+
+      document.getElementById("summary-duration")
+        .innerText = "0 Jam";
+
+      document.getElementById("summary-total")
+        .innerText = "Rp0";
+
+      return;
+    }
+
+    const sorted =
+      [...selectedSlots].sort();
+
+    const first =
+      sorted[0].split(" - ")[0];
+
+    const last =
+      sorted[sorted.length - 1]
+        .split(" - ")[1];
+
+    document.getElementById("jam_mulai").value =
+      first.replace(".", ":");
+
+    document.getElementById("jam_selesai").value =
+      last.replace(".", ":");
+
+    document.getElementById("durasi").value =
+      selectedSlots.length;
+
+    document.getElementById("total").value =
+      selectedSlots.length * slotPrice;
+
+
+    document.getElementById("summary-time")
+      .innerText = `${first} - ${last}`;
+
+    document.getElementById("summary-duration")
+      .innerText =
+      `${selectedSlots.length} Jam`;
+
+    const total =
+      selectedSlots.length * slotPrice;
+
+    document.getElementById("summary-total")
+      .innerText =
+      "Rp" + total.toLocaleString("id-ID");
+  }
+
+</script>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="navbar-brand">
+      <i class="ti ti-bowling"></i>
+      <span>SportSpace</span>
+      <div class="dot"></div>
+    </div>
+
+    <div class="navbar-links">
+      <a href="index.html">Beranda</a>
+      <a href="index.html#lapangan" class="active">Lapangan</a>
+      <a href="index.html#tentang">Tentang</a>
+    </div>
+
+    <div class="navbar-actions">
+
+      <a href="riwayat.html">
+        <button class="btn btn-outline btn-sm">
+          Riwayat
+        </button>
+      </a>
+
+      <a href="login.html">
+        <button class="btn btn-primary btn-sm">
+          Akun
+        </button>
+      </a>
+
+    </div>
+
+  </nav>
+
+  <div class="back-button">
+
+    <a href="index.html#lapangan" class="back-link">
+
+      <i class="ti ti-arrow-left"></i>
+
+    </a>
+
+  </div>
+
+  <div class="detail-wrapper">
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+
+      <a href="index.html">Beranda</a>
+
+      <i class="ti ti-chevron-right"></i>
+
+      <a href=index.html#lapangan>Lapangan</a>
+
+      <i class="ti ti-chevron-right"></i>
+
+      <span style="color:var(--gray-700);">
+        GOR Maju Jaya — Lapangan Futsal A
+      </span>
+
+    </div>
+
+    <div class="detail-grid">
+
+      <!-- KIRI -->
+      <div class="detail-main">
+
+        <!-- HERO CARD -->
+        <div class="detail-card">
+
+          <div class="detail-image">
+
+
+            <img src="<?= $field['gambar']; ?>" alt="<?= $field['nama_lapangan']; ?>">
+
+            <div class="detail-overlay"></div>
+
+            <div class="detail-badge">
+              <span class="badge badge-green">
+                <?php echo ucfirst($field['status']); ?>
+              </span>
+            </div>
+
+          </div>
+
+          <div class="detail-content">
+
+            <div class="detail-header">
+
+              <div class="detail-title">
+
+                <h1><?php echo $field['nama_lapangan']; ?></h1>
+
+                <div class="detail-location">
+
+                  <p style="font-size:14px;color:var(--gray-400);">
+
+                    <i class="ti ti-building"></i>
+                    <?php echo $field['nama_lapangan']; ?>
+
+                    &nbsp;&nbsp;
+
+                    <i class="ti ti-map-pin"></i>
+                    <?php echo $field['lokasi']; ?>
+
+                  </p>
+
+                </div>
+
+                <div class="detail-rating">
+
+                  <span class="stars">★★★★★</span>
+
+                  <span class="rating-text">
+                    4.8 (24 ulasan)
+                  </span>
+
+                  <span>
+                    <i class="ti ti-ball-football"></i>
+                    <?php echo $field['jenis']; ?>
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div class="detail-price">
+
+                RRp<?php echo number_format($field['harga'], 0, ',', '.'); ?>
+
+                <span>/jam</span>
+
+              </div>
+
+            </div>
+
+            <p style="color:var(--gray-500);line-height:1.8;margin-top:18px;">
+            <p>
+              <?php echo $field['deskripsi']; ?>
+            </p>
+
+            </p>
+
+            <!-- MAP LOKASI -->
+            <div class="section-card">
+
+              <div class="map-header">
+
+                <div>
+
+                  <h2>Lokasi Lapangan</h2>
+
+                  <p>
+                    Jl. Kaliurang Km 7, Sleman, Yogyakarta
+                  </p>
+
+                </div>
+
+                <div class="distance-badge">
+
+                  <i class="ti ti-route"></i>
+                  2.4 km
+
+                </div>
+
+              </div>
+
+              <!-- MAP -->
+              <div class="map-frame">
+                <iframe src="<?= $field['maps_link']; ?>" loading="lazy" allowfullscreen>
+                </iframe>
+              </div>
+
+              <!-- ACTION -->
+              <div class="map-actions">
+
+                <a href="<?= $field['google_maps_url']; ?>" target="_blank">
+
+                  <button class="btn btn-primary">
+
+                    <i class="ti ti-map-pin"></i>
+                    Buka Google Maps
+
+                  </button>
+
+                </a>
+
+                <button class="btn btn-outline">
+
+                  <i class="ti ti-navigation"></i>
+                  Petunjuk Arah
+
+                </button>
+
+              </div>
+
+              <div class="info-grid">
+
+                <div class="info-box">
+                  <?php echo $field['jam_operasional']; ?>
+                </div>
+
+                <div class="info-box">
+                  <?php echo $field['kapasitas']; ?> Pemain
+                </div>
+
+                <div class="info-box">
+                  <?php echo $field['jenis_lantai']; ?>
+
+                </div>
+
+                <div class="info-box">
+                  <?php echo $field['fasilitas']; ?>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- BOOKING -->
+          <div class="section-card">
+
+            <h2>Pilih Jadwal Booking</h2>
+
+            <div style="margin-bottom:24px;">
+
+              <label style="display:block;font-size:14px;font-weight:600;margin-bottom:10px;color:var(--gray-700);">
+
+                Pilih Tanggal Booking
+
+              </label>
+
+              <div class="calendar-input">
+                <input type="date" id="booking-date-display">
+              </div>
+
+            </div>
+
+            <div class="slots-grid">
+
+              <?php
+
+              for ($jam = 6; $jam < 22; $jam++) {
+
+                $mulai =
+                  sprintf('%02d:00', $jam);
+
+                $selesai =
+                  sprintf('%02d:00', $jam + 1);
+
+                $penuh =
+                  in_array(
+                    $mulai,
+                    $jamPenuh
+                  );
+
+                ?>
+
+                <button class="slot-btn <?= $penuh ? 'penuh' : '' ?>" <?php if (!$penuh): ?> onclick="toggleSlot(this)"
+                  <?php endif; ?> data-start="   <?= str_replace(':', '.', $mulai) ?>"
+                  data-end="<?= str_replace(':', '.', $selesai) ?>">
+
+                  <?= str_replace(':', '.', $mulai) ?>
+                  –
+                  <?= str_replace(':', '.', $selesai) ?>
+
+                </button>
+
+              <?php } ?>
+
+            </div>
+            <!-- REVIEW -->
+            <div class="section-card">
+
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+
+                <h2>Ulasan Pengguna</h2>
+
+                <div class="detail-rating">
+
+                  <span class="stars">
+
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled active"></i>
+                    <i class="ti ti-star-filled half"></i>
+
+                  </span>
+
+                  <div class="rating-text">
+
+                    <strong>4.8</strong>
+                    <span>/5</span>
+
+                  </div>
+
+                  <span class="review-count">
+                    (24 ulasan)
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div class="review-item">
+
+                <div class="review-header">
+
+                  <div class="review-user">
+
+                    <div class="avatar green">AR</div>
+
+                    <div>
+
+                      <strong>Andi Ramadhan</strong>
+
+                      <span class="stars">
+
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                  <span style="font-size:13px;color:var(--gray-400);">
+                    2 hari lalu
+                  </span>
+
+                </div>
+
+                <p style="color:var(--gray-500);line-height:1.7;">
+
+                  Lapangannya bersih, nyaman, dan pencahayaan bagus banget buat main malam.
+
+                </p>
+
+              </div>
+
+              <div class="review-item">
+
+                <div class="review-header">
+
+                  <div class="review-user">
+
+                    <div class="avatar blue">DW</div>
+
+                    <div>
+
+                      <strong>Dewi Wulan</strong>
+
+                      <span class="stars">
+
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                  <span style="font-size:13px;color:var(--gray-400);">
+                    1 minggu lalu
+                  </span>
+
+                </div>
+
+                <p style="color:var(--gray-500);line-height:1.7;">
+
+                  Parkiran luas, tempatnya strategis. Harga segini udah worth banget, pasti balik lagi!
+
+                </p>
+
+              </div>
+
+              <div class="review-item">
+
+                <div class="review-header">
+
+                  <div class="review-user">
+
+                    <div class="avatar pink">RF</div>
+
+                    <div>
+
+                      <strong>Rizki F.</strong>
+
+                      <span class="stars">
+
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+                        <i class="ti ti-star-filled active"></i>
+
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                  <span style="font-size:13px;color:var(--gray-400);">
+                    2 minggu lalu
+                  </span>
+
+                </div>
+
+                <p style="color:var(--gray-500);line-height:1.7;">
+
+                  Fasilitas lengkap, ada kantin juga. Proses booking lewat app gampang banget. GG!
+
+                </p>
+
+              </div>
+
+              <div class="more-review">
+
+                <button class="btn-more" onclick="showMoreReviews()">
+
+                  Lihat lebih banyak
+
+                  <i class="ti ti-chevron-down"></i>
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <script>
+
+            const bookingDate =
+              document.getElementById("booking-date-display");
+
+            bookingDate.addEventListener("change", function () {
+
+              document.getElementById("booking-date").value =
+                this.value;
+
+              const tanggal =
+                new Date(this.value);
+
+              const hasil =
+                tanggal.toLocaleDateString(
+                  "id-ID",
+                  {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                  }
+                );
+
+              document.getElementById("summary-date")
+                .innerText = hasil;
+
+            });
+
+          </script>
+          <div class="owner-card">
+
+            <h3 style="font-size:16px;margin-bottom:18px;">
+
+              <i class="ti ti-building-store"></i>
+              Info GOR
+
+            </h3>
+
+            <div class="owner-profile">
+
+              <div class="avatar green">
+                <?php
+                $inisial = '';
+                $nama = explode(' ', $field['owner_name']);
+
+                foreach ($nama as $n) {
+                  $inisial .= strtoupper(substr($n, 0, 1));
+                }
+
+                echo substr($inisial, 0, 2);
+                ?>
+              </div>
+
+              <div>
+
+                <strong style="display:block;">
+                  <?= htmlspecialchars($field['owner_name']); ?>
+                </strong>
+
+                <span style="font-size:13px;color:var(--gray-400);">
+                  Pemilik GOR
+                </span>
+
+
+              </div>
+
+              <div class="summary-divider"></div>
+
+              <div class="owner-info">
+                <i class="ti ti-phone"></i>
+                <?= htmlspecialchars($field['owner_phone']); ?>
+              </div>
+
+              <div class="owner-info">
+                <i class="ti ti-map-pin"></i>
+                <?= htmlspecialchars($field['owner_address']); ?>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- KANAN -->
+      <div class="detail-sidebar">
+
+        <div class="booking-card">
+
+          <h2 style="font-size:22px;margin-bottom:24px;">
+            Ringkasan Booking
+          </h2>
+
+          <div class="summary-row">
+            <span>Lapangan</span>
+            <strong>
+              <?php echo $field['nama_lapangan']; ?>
+            </strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Tanggal</span>
+            <strong id="summary-date">Pilih tanggal</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Jam</span>
+            <strong id="summary-time">-</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Durasi</span>
+            <strong id="summary-duration">0 Jam</strong>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row" style="font-size:18px;">
+            <span>Total</span>
+            <strong id="summary-total">Rp0</strong>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <form action="pembayaran.php" method="POST">
+
+            <input type="hidden" name="field_id" value="<?= $field['field_id']; ?>">
+
+            <input type="hidden" name="harga" value="<?= $field['harga']; ?>">
+
+            <input type="hidden" id="jam_mulai" name="jam_mulai">
+
+            <input type="hidden" id="jam_selesai" name="jam_selesai">
+
+            <input type="hidden" id="durasi" name="durasi">
+
+            <input type="hidden" id="total" name="total">
+
+            <input type="hidden" id="booking-date" name="tanggal">
+
+            <button type="submit" class="btn btn-primary btn-lg btn-full">
+
+              Lanjut Pembayaran
+
+            </button>
+
+          </form>
+
+          <div class="alert alert-info" style="margin-top:18px;">
+
+            <i class="ti ti-info-circle"></i>
+
+            Booking akan dikonfirmasi setelah pembayaran diverifikasi.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+  <footer class="footer">
+
+    <strong>SportSpace</strong>
+
+    &nbsp;·&nbsp;
+
+    Booking lapangan olahraga mudah & cepat
+
+    &nbsp;·&nbsp;
+
+    &copy; <?= date('Y'); ?>
+
+  </footer>
+
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
