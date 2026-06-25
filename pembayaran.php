@@ -1,3 +1,32 @@
+<?php
+include 'config.php';
+
+$field_id = $_POST['field_id'];
+
+$tanggal = $_POST['tanggal'];
+
+$jam_mulai = $_POST['jam_mulai'];
+
+$jam_selesai = $_POST['jam_selesai'];
+
+$durasi = $_POST['durasi'];
+
+$field = mysqli_fetch_assoc(
+  mysqli_query($conn, "
+SELECT *
+FROM fields
+WHERE field_id='$field_id'
+")
+);
+
+$biaya_admin = 2500;
+
+$total =
+  ($durasi * $field['harga'])
+  +
+  $biaya_admin;
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -51,7 +80,7 @@
   <!-- BACK -->
   <div class="back-button">
 
-    <a href="futsal-detail.html" class="back-link">
+    <a href="detail.php?id=<?= $field['field_id'] ?>">
       <i class="ti ti-arrow-left"></i>
     </a>
 
@@ -80,20 +109,15 @@
 
           <div class="field-info">
 
-            <img src="lapangan-futsal.jpg" alt="Lapangan">
+            <img src="<?= $field['gambar']; ?>">
 
             <div>
 
-              <h3>Lapangan Futsal A</h3>
-
-              <p>
-                <i class="ti ti-building"></i>
-                GOR Maju Jaya
-              </p>
+              <h3><?= $field['nama_lapangan']; ?></h3>
 
               <p>
                 <i class="ti ti-map-pin"></i>
-                Jl. Kaliurang Km 7, Sleman
+                <?= $field['lokasi']; ?>
               </p>
 
             </div>
@@ -104,22 +128,30 @@
 
             <div class="summary-item">
               <span>Tanggal</span>
-              <strong>Senin, 12 Mei 2025</strong>
+              <strong>
+                <?= date('d F Y', strtotime($tanggal)); ?>
+              </strong>
             </div>
 
             <div class="summary-item">
               <span>Jam Main</span>
-              <strong>13.00 - 15.00</strong>
+              <strong>
+                <?= substr($jam_mulai, 0, 5); ?>
+                -
+                <?= substr($jam_selesai, 0, 5); ?>
+              </strong>
             </div>
 
             <div class="summary-item">
               <span>Durasi</span>
-              <strong>2 Jam</strong>
+              <strong><?= $durasi ?> Jam</strong>
             </div>
 
             <div class="summary-item">
               <span>Harga / Jam</span>
-              <strong>Rp80.000</strong>
+              <strong>
+                Rp<?= number_format($field['harga'], 0, ',', '.'); ?>
+              </strong>
             </div>
 
             <div class="summary-item">
@@ -129,7 +161,9 @@
 
             <div class="summary-item total">
               <span>Total Pembayaran</span>
-              <strong>Rp162.500</strong>
+              <strong>
+                Rp<?= number_format($total, 0, ',', '.'); ?>
+              </strong>
             </div>
 
           </div>
@@ -439,11 +473,31 @@
           </div>
 
           <!-- BUTTON -->
-          <button id="pay-button" onclick="confirmPayment()" class="btn btn-primary btn-lg btn-full">
+          <form action="proses-pembayaran.php" method="POST">
 
-            Saya Sudah Bayar
+            <input type="hidden" name="field_id" value="<?= $field_id ?>">
 
-          </button>
+            <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
+
+            <input type="hidden" name="jam_mulai" value="<?= $jam_mulai ?>">
+
+            <input type="hidden" name="jam_selesai" value="<?= $jam_selesai ?>">
+
+            <input type="hidden" name="durasi" value="<?= $durasi ?>">
+
+            <input type="hidden" name="total" value="<?= $total ?>">
+
+            <input type="hidden" id="metode" name="metode" value="qris">
+
+            <button id="pay-button" type="submit" class="btn btn-primary btn-lg btn-full">
+
+              Saya Sudah Bayar
+
+            </button>
+
+          </form>
+
+          </form>
 
         </div>
 
@@ -510,6 +564,8 @@
     // SELECT PAYMENT
     function selectPayment(type, element) {
 
+
+      document.getElementById("metode").value = type;
       document
         .querySelectorAll('.method-card')
         .forEach(card => {

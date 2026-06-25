@@ -1,3 +1,60 @@
+<?php
+
+include 'config.php';
+
+$booking_id = $_GET['id'];
+
+$query = mysqli_query($conn, "
+SELECT
+    b.*,
+    f.*,
+    p.total,
+    p.metode,
+    p.tanggal_bayar,
+
+    o.nama AS owner_nama,
+    o.telepon,
+    o.alamat
+
+FROM booking b
+
+JOIN fields f
+ON b.field_id = f.field_id
+
+JOIN payment p
+ON b.booking_id = p.booking_id
+
+LEFT JOIN owners o
+ON f.field_id = o.field_id
+
+WHERE b.booking_id = '$booking_id'
+");
+$data = mysqli_fetch_assoc($query);
+
+if (!$data) {
+  die("Booking tidak ditemukan");
+}
+
+$durasi =
+  (
+    strtotime($data['jam_selesai'])
+    -
+    strtotime($data['jam_mulai'])
+  )
+  /
+  3600;
+
+$kode_booking =
+  "SS-" .
+  date('Y') .
+  "-" .
+  str_pad(
+    $data['booking_id'],
+    5,
+    "0",
+    STR_PAD_LEFT
+  );
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -64,7 +121,7 @@
         <!-- BANNER -->
         <div class="success-banner">
 
-          <img src="lapangan-futsal.jpg" alt="Lapangan">
+          <img src="<?= $data['gambar']; ?>">
 
           <div class="success-overlay"></div>
 
@@ -82,17 +139,17 @@
 
               <span>
                 <i class="ti ti-building"></i>
-                GOR Maju Jaya
+                <?= $data['nama_lapangan']; ?>
               </span>
 
               <span>
                 <i class="ti ti-ball-football"></i>
-                Futsal
+                <?= $data['jenis']; ?>
               </span>
 
               <span>
                 <i class="ti ti-map-pin"></i>
-                Sleman, Yogyakarta
+                <?= $data['lokasi']; ?>
               </span>
 
             </div>
@@ -129,7 +186,9 @@
                 Kode Booking
               </span>
 
-              <strong>SS-2025-00142</strong>
+              <strong>
+                <?= $kode_booking ?>
+              </strong>
 
             </div>
 
@@ -147,29 +206,48 @@
 
             <div class="detail-item">
               <span>Lapangan</span>
-              <strong>Lapangan Futsal A</strong>
+              <strong>
+                <?= $data['nama_lapangan']; ?>
+              </strong>
             </div>
 
             <div class="detail-item">
               <span>Tanggal</span>
-              <strong>Senin, 12 Mei 2025</strong>
+              <strong>
+                <?= date(
+                  'l, d F Y',
+                  strtotime($data['tanggal'])
+                ); ?>
+              </strong>
             </div>
 
             <div class="detail-item">
               <span>Jam</span>
-              <strong>13.00 – 15.00</strong>
+              <strong>
+                <?= substr($data['jam_mulai'], 0, 5); ?>
+                -
+                <?= substr($data['jam_selesai'], 0, 5); ?>
+              </strong>
             </div>
 
             <div class="detail-item">
               <span>Durasi</span>
-              <strong>2 Jam</strong>
+              <strong>
+                <?= $durasi ?> Jam
+              </strong>
             </div>
 
             <div class="detail-item">
               <span>Total Pembayaran</span>
 
               <strong style="color:var(--green);font-size:18px;">
-                Rp160.000
+                Rp
+                <?= number_format(
+                  $data['total'],
+                  0,
+                  ',',
+                  '.'
+                ); ?>
               </strong>
             </div>
 
@@ -242,7 +320,11 @@
               <strong>Booking Dibuat</strong>
 
               <p>
-                Senin, 12 Mei 2025 · 09.12 WIB
+                <?= date(
+                  'd M Y H:i',
+                  strtotime($data['created_at'])
+                ); ?>
+                WIB
               </p>
 
             </div>
@@ -258,7 +340,8 @@
               <strong>Pembayaran Diverifikasi</strong>
 
               <p>
-                Pembayaran berhasil diterima oleh sistem SportSpace.
+                Pembayaran <?= ucfirst($data['metode']); ?>
+                berhasil diterima.
               </p>
 
             </div>
@@ -293,15 +376,14 @@
         <div class="owner-profile">
 
           <div class="avatar green">
-            BS
+            <?= strtoupper(substr($data['owner_nama'], 0, 1)); ?>
           </div>
 
           <div>
 
-            <strong style="display:block;">
-              Bapak Suharto
+            <strong>
+              <?= $data['owner_nama']; ?>
             </strong>
-
             <span style="font-size:13px;color:var(--gray-400);">
               Pemilik GOR
             </span>
@@ -314,12 +396,12 @@
 
         <div class="owner-info">
           <i class="ti ti-phone"></i>
-          0812-3456-7890
+          <?= $data['telepon']; ?>
         </div>
 
         <div class="owner-info">
           <i class="ti ti-map-pin"></i>
-          Jl. Kaliurang Km 7, Sleman
+          <?= $data['alamat']; ?>
         </div>
 
       </div>
@@ -348,7 +430,9 @@
 
     function copyCode() {
 
-      navigator.clipboard.writeText("SS-2025-00142");
+      navigator.clipboard.writeText(
+        "<?= $kode_booking ?>"
+      );
 
       alert("Kode booking berhasil disalin!");
 
