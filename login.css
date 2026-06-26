@@ -18,8 +18,8 @@ body{
     padding:30px;
 
     background:
-    radial-gradient(circle at top left,#10b98125,transparent 35%),
-    radial-gradient(circle at bottom right,#10b98120,transparent 35%),
+    radial-gradient(circle at top left,#164f2125,transparent 35%),
+    radial-gradient(circle at bottom right,#164f2120,transparent 35%),
     #f8fafc;
 }
 
@@ -55,7 +55,7 @@ body{
 }
 
 .auth-logo i{
-    color:#10b981;
+    color:#164f21;
     font-size:28px;
 }
 
@@ -83,8 +83,8 @@ body{
 }
 
 .tab-btn.active{
-    color:#10b981;
-    border-bottom:3px solid #10b981;
+    color:#164f21;
+    border-bottom:3px solid #164f21;
 }
 
 .tab-panel{
@@ -146,8 +146,8 @@ body{
 }
 
 .input-icon input:focus{
-    border-color:#10b981;
-    box-shadow:0 0 0 4px rgba(16,185,129,.12);
+    border-color:#164f21;
+    box-shadow:0 0 0 4px rgba(22,79,33,.12);
 }
 
 .btn{
@@ -171,12 +171,12 @@ body{
 }
 
 .btn-primary{
-    background:#10b981;
+    background:#164f21;
     color:white;
 }
 
 .btn-primary:hover{
-    background:#059669;
+    background:#1f9b32;
 }
 
 .btn-outline{
