@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user['role'] == 'admin') {
         echo json_encode(['status' => 'success', 'message' => 'Login berhasil!', 'redirect' => 'dashboard-admin.html']);
     } else {
-        echo json_encode(['status' => 'success', 'message' => 'Login berhasil!', 'redirect' => 'index.html']);
+        echo json_encode(['status' => 'success', 'message' => 'Login berhasil!', 'redirect' => 'index.php']);
     }
 
     $stmt->close();

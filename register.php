@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['email']   = $email;
         $_SESSION['role']    = 'user';
 
-        echo json_encode(['status' => 'success', 'message' => 'Registrasi berhasil!', 'redirect' => 'index.html']);
+        echo json_encode(['status' => 'success', 'message' => 'Registrasi berhasil!', 'redirect' => 'index.php']);
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Terjadi kesalahan, coba lagi.']);
     }
