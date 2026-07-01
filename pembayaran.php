@@ -61,7 +61,7 @@ $total =
     </div>
 
     <div class="navbar-links">
-      <a href="index.html">Beranda</a>
+      <a href="index.php">Beranda</a>
       <a href="#" class="active">Pembayaran</a>
     </div>
 

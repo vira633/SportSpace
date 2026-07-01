@@ -172,9 +172,9 @@ while ($b = mysqli_fetch_assoc($bookings)) {
     </div>
 
     <div class="navbar-links">
-      <a href="index.html">Beranda</a>
-      <a href="index.html#lapangan" class="active">Lapangan</a>
-      <a href="index.html#tentang">Tentang</a>
+      <a href="index.php">Beranda</a>
+      <a href="index.php#lapangan" class="active">Lapangan</a>
+      <a href="index.php#tentang">Tentang</a>
     </div>
 
     <div class="navbar-actions">
@@ -197,7 +197,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
   <div class="back-button">
 
-    <a href="index.html#lapangan" class="back-link">
+    <a href="index.php#lapangan" class="back-link">
 
       <i class="ti ti-arrow-left"></i>
 
@@ -210,11 +210,11 @@ while ($b = mysqli_fetch_assoc($bookings)) {
     <!-- BREADCRUMB -->
     <div class="breadcrumb">
 
-      <a href="index.html">Beranda</a>
+      <a href="index.php">Beranda</a>
 
       <i class="ti ti-chevron-right"></i>
 
-      <a href=index.html#lapangan>Lapangan</a>
+      <a href=index.php#lapangan>Lapangan</a>
 
       <i class="ti ti-chevron-right"></i>
 
