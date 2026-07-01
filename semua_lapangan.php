@@ -6,14 +6,16 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Semua Lapangan — SportSpace</title>
   <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="semua_lapangan.css"> 
+  <link rel="stylesheet" href="semua_lapangan.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
 </head>
+
 <body>
 
   <!-- NAVBAR (Pleketiplek dari index.php) -->
@@ -45,7 +47,8 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
   <div class="section" id="lapangan" style="min-height: 70vh;">
     <div class="section-header" style="margin-bottom: 20px;">
       <div>
-        <a href="index.php" style="font-size:12px; color:var(--gray-400); font-weight:600; display:inline-flex; align-items:center; gap:4px; margin-bottom:8px;">
+        <a href="index.php"
+          style="font-size:12px; color:var(--gray-400); font-weight:600; display:inline-flex; align-items:center; gap:4px; margin-bottom:8px;">
           <i class="ti ti-arrow-left"></i> Kembali ke Beranda
         </a>
         <h2 class="section-title">Semua Lapangan</h2>
@@ -54,7 +57,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
     </div>
 
     <div class="filter-search-wrapper">
-      
+
       <!-- SISI KIRI: Dropdowns -->
       <div class="filter-dropdown-group">
         <div class="filter-select-box">
@@ -81,7 +84,8 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
       <div class="search-input-group">
         <div class="search-bar-box">
           <i class="ti ti-search"></i>
-          <input type="text" id="filterNama" class="search-input-field" placeholder="Cari lapangan..." onkeyup="jalankanFilterFasilitas()">
+          <input type="text" id="filterNama" class="search-input-field" placeholder="Cari lapangan..."
+            onkeyup="jalankanFilterFasilitas()">
         </div>
       </div>
 
@@ -91,15 +95,18 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
       <?php if ($result && $result->num_rows > 0): ?>
         <?php while ($lap = $result->fetch_assoc()): ?>
           <?php
-            $badge_class = $lap['status'] === 'tersedia' ? 'badge-green' : 'badge-amber';
-            $badge_text  = $lap['status'] === 'tersedia' ? 'Tersedia' : 'Penuh hari ini';
+          $badge_class = $lap['status'] === 'tersedia' ? 'badge-green' : 'badge-amber';
+          $badge_text = $lap['status'] === 'tersedia' ? 'Tersedia' : 'Penuh hari ini';
 
-            $icon = 'ti-ball-football';
-            if ($lap['jenis'] === 'badminton') $icon = 'ti-feather';
-            if ($lap['jenis'] === 'basket')    $icon = 'ti-ball-basketball';
-            if ($lap['jenis'] === 'renang')    $icon = 'ti-swimming';
+          $icon = 'ti-ball-football';
+          if ($lap['jenis'] === 'badminton')
+            $icon = 'ti-feather';
+          if ($lap['jenis'] === 'basket')
+            $icon = 'ti-ball-basketball';
+          if ($lap['jenis'] === 'renang')
+            $icon = 'ti-swimming';
 
-            $foto = !empty($lap['gambar']) ? $lap['gambar'] : 'lapangan-futsal.jpg';
+          $foto = !empty($lap['gambar']) ? $lap['gambar'] : 'lapangan-futsal.jpg';
           ?>
           <div class="field-card" data-sport="<?= strtolower($lap['jenis']) ?>" data-lokasi="yogyakarta">
             <div class="field-img">
@@ -122,10 +129,17 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
                 <div class="field-price">
                   Rp<?= number_format($lap['harga'], 0, ',', '.') ?> <span>/jam</span>
                 </div>
+
                 <?php if ($lap['status'] === 'tersedia'): ?>
-                  <a href="detail.php?id=<?= $lap['field_id'] ?>" class="btn-link">
-                    <button class="btn btn-primary btn-sm">Booking <i class="ti ti-arrow-right"></i></button>
-                  </a>
+                  <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="detail.php?id=<?= $lap['field_id'] ?>" class="btn-link">
+                      <button class="btn btn-primary btn-sm">Booking <i class="ti ti-arrow-right"></i></button>
+                    </a>
+                  <?php else: ?>
+                    <a href="login.html" class="btn-link">
+                      <button class="btn btn-outline btn-sm" style="white-space: nowrap;">Booking</button>
+                    </a>
+                  <?php endif; ?>
                 <?php else: ?>
                   <a href="detail.php?id=<?= $lap['field_id'] ?>" class="btn-link">
                     <button class="btn btn-outline btn-sm">Lihat</button>
@@ -136,7 +150,8 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
           </div>
         <?php endwhile; ?>
       <?php else: ?>
-        <p style="color:var(--gray-400); grid-column: 1/-1; text-align:center; padding: 40px 0;">Belum ada data lapangan di dalam database.</p>
+        <p style="color:var(--gray-400); grid-column: 1/-1; text-align:center; padding: 40px 0;">Belum ada data lapangan
+          di dalam database.</p>
       <?php endif; ?>
     </div>
   </div>
@@ -164,7 +179,8 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
           <a href="https://wa.me/6285184736633" target="_blank" rel="noopener noreferrer">
             <i class="ti ti-brand-whatsapp"></i> Chat on WhatsApp
           </a>
-          <a href="https://www.instagram.com/vierreverie?igsh=bmV0Ymk3Z20ybGVv" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/vierreverie?igsh=bmV0Ymk3Z20ybGVv" target="_blank"
+            rel="noopener noreferrer">
             <i class="ti ti-brand-instagram"></i> Follow us on Instagram
           </a>
         </div>
@@ -200,4 +216,5 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
   </script>
 
 </body>
+
 </html>
