@@ -35,7 +35,6 @@
             <button class="tab-btn" id="btn-register">Daftar</button>
         </div>
 
-        <!-- PANEL LOGIN -->
         <div class="tab-panel active" id="panel-login">
 
             <form id="form-login">
@@ -56,7 +55,6 @@
                     </div>
                 </div>
 
-                <!-- Pesan error login -->
                 <div id="error-login" style="color:red;font-size:13px;margin-bottom:10px;display:none;"></div>
 
                 <button type="submit" class="btn btn-primary btn-full">
@@ -84,7 +82,6 @@
 
         </div>
 
-        <!-- PANEL REGISTER -->
         <div class="tab-panel" id="panel-register">
 
             <form id="form-register">
@@ -113,7 +110,6 @@
                     </div>
                 </div>
 
-                <!-- Pesan error register -->
                 <div id="error-register" style="color:red;font-size:13px;margin-bottom:10px;display:none;"></div>
 
                 <button type="submit" class="btn btn-primary btn-full">
@@ -136,19 +132,24 @@ const registerBtn = document.getElementById("btn-register");
 const loginPanel  = document.getElementById("panel-login");
 const registerPanel = document.getElementById("panel-register");
 
-loginBtn.addEventListener("click", () => {
+// Fungsi pembantu ganti ke tab login
+function aktifkanTabLogin() {
     loginBtn.classList.add("active");
     registerBtn.classList.remove("active");
     loginPanel.classList.add("active");
     registerPanel.classList.remove("active");
-});
+}
 
-registerBtn.addEventListener("click", () => {
+// Fungsi pembantu ganti ke tab register
+function aktifkanTabRegister() {
     registerBtn.classList.add("active");
     loginBtn.classList.remove("active");
     registerPanel.classList.add("active");
     loginPanel.classList.remove("active");
-});
+}
+
+loginBtn.addEventListener("click", aktifkanTabLogin);
+registerBtn.addEventListener("click", aktifkanTabRegister);
 
 // ── Form Login ────────────────────────────────────
 document.getElementById('form-login').addEventListener('submit', function(e) {
@@ -209,6 +210,14 @@ document.getElementById('form-register').addEventListener('submit', function(e) 
         errorDiv.style.display = 'block';
         errorDiv.textContent = 'Terjadi kesalahan, coba lagi.';
     });
+});
+
+// ── SCRIPT SAKTI DETEKSI OTOMATIS ──────────────────
+// Mengecek URL saat halaman selesai dimuat
+window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash === '#register') {
+        aktifkanTabRegister(); // Langsung pindah ke form daftar
+    }
 });
 </script>
 
