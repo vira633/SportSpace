@@ -77,7 +77,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
         <h2 class="section-title">Lapangan tersedia</h2>
         <p class="section-subtitle">Pilih lapangan terbaik di sekitarmu</p>
       </div>
-      <a href="daftar-lapangan.php" style="font-size:13px;color:var(--green);font-weight:600;">Lihat semua <i class="ti ti-arrow-right"></i></a>
+      <a href="semua_lapangan.php" style="font-size:13px;color:var(--green);font-weight:600;">Lihat semua <i class="ti ti-arrow-right"></i></a>
     </div>
 
     <div class="sport-chips" style="margin-bottom:20px;">
