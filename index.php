@@ -34,10 +34,14 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
         <span style="font-size:14px;color:var(--green);font-weight:600;">
           Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!
         </span>
-        <a href="logout.php"><button class="btn btn-outline btn-sm">Keluar</button></a>
+
+        <a href="logout.php" onclick="return confirm('Yakin ingin keluar dari akun Anda?');">
+          <button class="btn btn-outline btn-sm">Keluar</button>
+        </a>
+
       <?php else: ?>
         <a href="login.html"><button class="btn btn-outline btn-sm">Masuk</button></a>
-        <a href="login.html"><button class="btn btn-primary btn-sm">Daftar</button></a>
+        <a href="login.html#register"><button class="btn btn-primary btn-sm">Daftar</button></a>
       <?php endif; ?>
     </div>
   </nav>
