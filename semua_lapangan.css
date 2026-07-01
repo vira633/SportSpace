@@ -1,0 +1,100 @@
+
+.filter-search-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important; /* Memisahkan grup dropdown ke kiri, search ke kanan */
+  align-items: center !important;
+  gap: 20px !important;
+  margin: 15px 0 35px 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Kelompok Kiri: Kategori & Lokasi */
+.filter-dropdown-group {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+/* Kotak Dropdown Pembungkus */
+.filter-select-box {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  padding: 10px 16px !important;
+  gap: 8px !important;
+}
+
+/* Tag Select Elemen Asli */
+.filter-select-field {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #0f172a !important;
+  cursor: pointer !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  padding-right: 4px !important;
+}
+
+/* Kelompok Kanan: Kolom Cari + Tombol */
+.search-input-group {
+  flex: 1 !important;
+  max-width: 450px !important; /* Membatasi lebar search bar di ujung kanan */
+  width: 100% !important;
+}
+
+/* Kotak Input Pembungkus */
+.search-bar-box {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  padding: 6px 6px 6px 16px !important; /* Diatur paddingnya agar tombol di dalam pas */
+  gap: 12px !important;
+}
+
+.search-bar-box i {
+  color: #94a3b8 !important;
+  font-size: 18px !important;
+}
+
+/* Tag Input Elemen Asli */
+.search-input-field {
+  width: 100% !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 14px !important;
+  color: #334155 !important;
+}
+
+/* RESPONSIVE KHUSUS LAYAR HP (Otomatis menumpuk ke bawah kalau layar kekecilan) */
+@media (max-width: 768px) {
+  .filter-search-wrapper {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+  }
+  .filter-dropdown-group {
+    width: 100% !important;
+  }
+  .filter-select-box {
+    flex: 1 !important;
+    justify-content: center !important;
+  }
+  .search-input-group {
+    max-width: 100% !important;
+  }
+}
