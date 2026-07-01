@@ -77,7 +77,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
         <h2 class="section-title">Lapangan tersedia</h2>
         <p class="section-subtitle">Pilih lapangan terbaik di sekitarmu</p>
       </div>
-      <a href="#" style="font-size:13px;color:var(--green);font-weight:600;">Lihat semua <i class="ti ti-arrow-right"></i></a>
+      <a href="daftar-lapangan.php" style="font-size:13px;color:var(--green);font-weight:600;">Lihat semua <i class="ti ti-arrow-right"></i></a>
     </div>
 
     <div class="sport-chips" style="margin-bottom:20px;">
@@ -102,7 +102,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
           if ($lap['jenis'] === 'renang')    $icon = 'ti-swimming';
 
           // Foto lapangan
-          $foto = !empty($lap['gambar']) ? 'uploads/' . $lap['gambar'] : 'lapangan-futsal.jpg';
+          $foto = !empty($lap['gambar']) ? $lap['gambar'] : 'lapangan-futsal.jpg';
         ?>
         <div class="field-card" data-sport="<?= strtolower($lap['jenis']) ?>">
           <div class="field-img">
@@ -176,9 +176,37 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
     <a href="login.html"><button class="btn btn-white btn-lg">Daftar sebagai pemilik GOR <i class="ti ti-arrow-right"></i></button></a>
   </div>
 
-  <footer class="footer">
-    <strong>SportSpace</strong> &nbsp;·&nbsp; Booking lapangan olahraga mudah & cepat &nbsp;·&nbsp; &copy; 2025
-  </footer>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-info">
+        <div class="footer-brand">
+          <strong>
+            <i class="ti ti-bowling"></i>
+            SportSpace
+          </strong>
+        </div>
+        <p>&copy; 2026 SportSpace. All Rights Reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-right">
+  <div class="footer-social">
+    <a href="https://wa.me/6285184736633" target="_blank" rel="noopener noreferrer">
+      <i class="ti ti-brand-whatsapp"></i> Chat on WhatsApp
+    </a>
+    <a href="https://www.instagram.com/vierreverie?igsh=bmV0Ymk3Z20ybGVv" target="_blank" rel="noopener noreferrer">
+      <i class="ti ti-brand-instagram"></i> Follow us on Instagram
+    </a>
+  </div>
+</div>
+  </div>
+</footer>
+
 
   <script src="main.js"></script>
   <script>
