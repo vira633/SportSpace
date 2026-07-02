@@ -37,8 +37,7 @@ $total =
   <title>Pembayaran Booking — SportSpace</title>
 
   <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="detail.css">
-  <link rel="stylesheet" href="pembayaran.css">
+  <link rel="stylesheet" href="pembayaran.css?v=<?= time(); ?>">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
 
@@ -101,8 +100,8 @@ $total =
 
             <h2>Detail Booking</h2>
 
-            <span class="badge badge-green">
-              Menunggu Pembayaran
+            <span class="pay-status">
+              Menunggu Konfirmasi
             </span>
 
           </div>
@@ -167,7 +166,75 @@ $total =
             </div>
 
           </div>
+          <div class="booking-timeline">
 
+            <h3>Status Booking</h3>
+
+            <div class="timeline-item active">
+
+              <div class="timeline-icon">
+                <i class="ti ti-circle-check"></i>
+              </div>
+
+              <div class="timeline-content">
+
+                <strong>Booking Dibuat</strong>
+
+                <p>Booking berhasil dibuat dan data telah disimpan.</p>
+
+              </div>
+
+            </div>
+
+            <div class="timeline-item current">
+
+              <div class="timeline-icon">
+                <i class="ti ti-loader-2"></i>
+              </div>
+
+              <div class="timeline-content">
+
+                <strong>Menunggu Konfirmasi</strong>
+
+                <p>Menunggu konfirmasi pembayaran atau persetujuan admin.</p>
+
+              </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+              <div class="timeline-icon">
+                <i class="ti ti-calendar-check"></i>
+              </div>
+
+              <div class="timeline-content">
+
+                <strong>Booking Terkonfirmasi</strong>
+
+                <p>Booking siap digunakan sesuai jadwal.</p>
+
+              </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+              <div class="timeline-icon">
+                <i class="ti ti-trophy"></i>
+              </div>
+
+              <div class="timeline-content">
+
+                <strong>Selesai Bermain</strong>
+
+                <p>Terima kasih telah menggunakan SportSpace.</p>
+
+              </div>
+
+            </div>
+
+          </div>
         </div>
 
         <!-- METODE -->
@@ -323,7 +390,11 @@ $total =
 
               <span>Total Bayar</span>
 
-              <strong>Rp162.500</strong>
+              <strong>
+
+                Rp<?= number_format($total, 0, ',', '.'); ?>
+
+              </strong>
 
             </div>
 
@@ -491,11 +562,11 @@ $total =
 
             <button id="pay-button" type="submit" class="btn btn-primary btn-lg btn-full">
 
-              Saya Sudah Bayar
+              <i class="ti ti-check"></i>
+
+              Konfirmasi Pembayaran
 
             </button>
-
-          </form>
 
           </form>
 
@@ -512,36 +583,6 @@ $total =
     Berhasil disalin
   </div>
 
-  <!-- SUCCESS MODAL -->
-  <div id="success-modal" class="success-modal">
-
-    <div class="success-box">
-
-      <div class="success-icon">
-        <i class="ti ti-check"></i>
-      </div>
-
-      <h2>Pembayaran Berhasil</h2>
-
-      <p>
-        Booking kamu berhasil dikonfirmasi.
-      </p>
-
-      <a href="booking-success.html" class="btn btn-primary btn-full">
-
-        Lihat Detail Booking
-
-      </a>
-
-      <button onclick="closeModal()" class="btn btn-outline btn-full">
-
-        Tutup
-
-      </button>
-
-    </div>
-
-  </div>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -590,13 +631,17 @@ $total =
 
       if (type === 'cash') {
 
-        btn.innerHTML =
-          'Konfirmasi Booking';
+        btn.innerHTML = `
+        <i class="ti ti-calendar-check"></i>
+        Konfirmasi Booking
+    `;
 
       } else {
 
-        btn.innerHTML =
-          'Saya Sudah Bayar';
+        btn.innerHTML = `
+        <i class="ti ti-check"></i>
+        Konfirmasi Pembayaran
+    `;
 
       }
 
@@ -608,25 +653,6 @@ $total =
       navigator.clipboard.writeText(text);
 
       showToast("Berhasil disalin");
-
-    }
-
-    // DOWNLOAD QR
-    function downloadQR() {
-
-      const qr =
-        document.getElementById("qris-image").src;
-
-      const link =
-        document.createElement("a");
-
-      link.href = qr;
-
-      link.download =
-        "QRIS-SportSpace.png";
-
-      link.click();
-
     }
 
     // TOAST
@@ -644,25 +670,6 @@ $total =
         toast.classList.remove("show");
 
       }, 2200);
-
-    }
-
-    // SUCCESS MODAL
-    function confirmPayment() {
-
-      document
-        .getElementById("success-modal")
-        .classList.add("active");
-
-    }
-
-    // CLOSE MODAL
-    function closeModal() {
-
-      document
-        .getElementById("success-modal")
-        .classList.remove("active");
-
     }
 
     // COUNTDOWN
@@ -671,7 +678,7 @@ $total =
     const countdown =
       document.getElementById("countdown");
 
-    setInterval(() => {
+    const timer = setInterval(() => {
 
       let minutes =
         Math.floor(time / 60);
@@ -691,12 +698,31 @@ $total =
         time--;
       }
 
+      if (time <= 0) {
+
+        clearInterval(timer);
+
+        countdown.innerHTML = "Expired";
+
+        const btn =
+          document.getElementById("pay-button");
+
+        btn.disabled = true;
+        btn.style.opacity = ".6";
+        btn.style.cursor = "not-allowed";
+        btn.innerHTML = `
+            <i class="ti ti-clock-x"></i>
+            Waktu Habis
+        `;
+
+      }
+
     }, 1000);
 
     function downloadQR() {
 
       const qr =
-        document.getElementById('qrisImage');
+        document.getElementById('qris-image');
 
       const imageUrl = qr.src;
 

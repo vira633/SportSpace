@@ -65,7 +65,7 @@ $kode_booking =
   <title>Booking Berhasil — SportSpace</title>
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="detail.css">
-  <link rel="stylesheet" href="booking-success.css">
+  <link rel="stylesheet" href="booking-success.css?v=<?= time(); ?>">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -255,7 +255,17 @@ $kode_booking =
 
           <!-- BUTTON -->
           <div class="btn-group">
+            <a href="invoice.php?id=<?= $booking_id ?>&from=success">
 
+              <button class="btn btn-primary btn-lg">
+
+                <i class="ti ti-file-invoice"></i>
+
+                Lihat Invoice
+
+              </button>
+
+            </a>
             <a href="riwayat.html">
 
               <button class="btn btn-primary btn-lg">
@@ -309,56 +319,90 @@ $kode_booking =
         </div>
 
         <!-- TIMELINE -->
-        <div class="timeline">
+        <div class="booking-status">
 
-          <div class="timeline-item">
+          <h3>Status Booking</h3>
 
-            <div class="timeline-dot"></div>
+          <div class="status-item done">
 
-            <div>
+            <div class="status-circle">
+              <i class="ti ti-check"></i>
+            </div>
+
+            <div class="status-text">
 
               <strong>Booking Dibuat</strong>
 
-              <p>
+              <span>
+
                 <?= date(
                   'd M Y H:i',
                   strtotime($data['created_at'])
                 ); ?>
-                WIB
-              </p>
+
+              </span>
 
             </div>
 
           </div>
 
-          <div class="timeline-item">
+          <div class="status-item done">
 
-            <div class="timeline-dot"></div>
+            <div class="status-circle">
+              <i class="ti ti-credit-card"></i>
+            </div>
 
-            <div>
+            <div class="status-text">
 
               <strong>Pembayaran Diverifikasi</strong>
 
-              <p>
-                Pembayaran <?= ucfirst($data['metode']); ?>
-                berhasil diterima.
-              </p>
+              <span>
+
+                Pembayaran
+                <?= ucfirst($data['metode']); ?>
+                berhasil diverifikasi.
+
+              </span>
 
             </div>
 
           </div>
 
-          <div class="timeline-item">
+          <div class="status-item active">
 
-            <div class="timeline-dot"></div>
+            <div class="status-circle">
+              <i class="ti ti-calendar-check"></i>
+            </div>
 
-            <div>
+            <div class="status-text">
 
-              <strong>Siap Digunakan</strong>
+              <strong>Booking Terkonfirmasi</strong>
 
-              <p>
-                Lapangan siap digunakan sesuai jadwal booking.
-              </p>
+              <span>
+
+                Datang 15 menit sebelum jadwal bermain.
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="status-item">
+
+            <div class="status-circle">
+              <i class="ti ti-trophy"></i>
+            </div>
+
+            <div class="status-text">
+
+              <strong>Selesai Bermain</strong>
+
+              <span>
+
+                Terima kasih telah menggunakan SportSpace.
+
+              </span>
 
             </div>
 

@@ -4,7 +4,7 @@ session_start();
 
 include 'config.php';
 
-$user_id = 2; // sementara
+$user_id = $_SESSION['user_id'];
 
 $field_id = $_POST['field_id'];
 $tanggal = $_POST['tanggal'];
@@ -29,6 +29,10 @@ AND (
 ");
 
 
+$status_booking = ($metode == "cash")
+    ? "terkonfirmasi"
+    : "menunggu_verifikasi";
+
 $sql = "
 INSERT INTO booking
 (
@@ -46,7 +50,7 @@ VALUES
     '$tanggal',
     '$jam_mulai',
     '$jam_selesai',
-    'terkonfirmasi'
+    '$status_booking'
 )
 ";
 
@@ -59,16 +63,16 @@ if (!$result) {
 /* AMBIL ID BOOKING BARU */
 $booking_id = mysqli_insert_id($conn);
 $booking_code =
-"SS-" .
-date('Y') .
-"-" .
-str_pad(
-    $booking_id,
-    5,
-    "0",
-    STR_PAD_LEFT
-);
-mysqli_query($conn,"
+    "SS-" .
+    date('Y') .
+    "-" .
+    str_pad(
+        $booking_id,
+        5,
+        "0",
+        STR_PAD_LEFT
+    );
+mysqli_query($conn, "
 UPDATE booking
 SET booking_code='$booking_code'
 WHERE booking_id='$booking_id'
@@ -92,9 +96,43 @@ VALUES
 
 $result2 = mysqli_query($conn, $sqlPayment);
 
+
 if (!$result2) {
     die('Payment Error: ' . mysqli_error($conn));
 }
+/* ===========================
+   SIMPAN NOTIFIKASI
+=========================== */
 
+if ($metode == "cash") {
+
+    $judul = "Booking Berhasil Dibuat";
+
+    $isi = "Booking berhasil dibuat. Silakan lakukan pembayaran saat tiba di lokasi sesuai jadwal.";
+
+} else {
+
+    $judul = "Konfirmasi Pembayaran Diterima";
+
+    $isi = "Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.";
+
+}
+
+mysqli_query($conn, "
+INSERT INTO notifications
+(
+    user_id,
+    booking_id,
+    judul,
+    isi
+)
+VALUES
+(
+    '$user_id',
+    '$booking_id',
+    '$judul',
+    '$isi'
+)
+");
 header('Location: booking-success.php?id=' . $booking_id);
 exit;
