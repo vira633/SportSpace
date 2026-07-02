@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# VS Code Local History
+.history/
+
+# XAMPP upload sementara (jika ada)
+uploads/
+
+# File log
+*.log
+
