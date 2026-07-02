@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 02, 2026 at 01:25 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Host: localhost
+-- Waktu pembuatan: 02 Jul 2026 pada 18.32
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `booking`
+-- Struktur dari tabel `booking`
 --
 
 CREATE TABLE `booking` (
@@ -40,7 +40,7 @@ CREATE TABLE `booking` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `booking`
+-- Dumping data untuk tabel `booking`
 --
 
 INSERT INTO `booking` (`booking_id`, `user_id`, `field_id`, `tanggal`, `jam_mulai`, `jam_selesai`, `status`, `created_at`, `booking_code`) VALUES
@@ -53,20 +53,20 @@ INSERT INTO `booking` (`booking_id`, `user_id`, `field_id`, `tanggal`, `jam_mula
 (7, 2, 2, '2026-07-03', '07:00:00', '09:00:00', 'terkonfirmasi', '2026-07-01 18:22:37', 'SS-2026-00007'),
 (8, 3, 1, '2026-07-03', '07:00:00', '10:00:00', 'terkonfirmasi', '2026-07-01 20:33:47', 'SS-2026-00008'),
 (9, 3, 1, '2026-07-02', '17:00:00', '18:00:00', 'terkonfirmasi', '2026-07-01 20:49:57', 'SS-2026-00009'),
-(10, 3, 2, '2026-07-03', '08:00:00', '10:00:00', '', '2026-07-01 21:47:45', 'SS-2026-00010'),
-(11, 3, 2, '2026-07-03', '08:00:00', '10:00:00', '', '2026-07-01 21:50:25', 'SS-2026-00011'),
-(12, 3, 2, '2026-07-03', '08:00:00', '10:00:00', '', '2026-07-01 22:04:01', 'SS-2026-00012'),
-(13, 3, 2, '2026-07-03', '08:00:00', '10:00:00', '', '2026-07-01 22:12:12', 'SS-2026-00013'),
+(10, 3, 2, '2026-07-03', '08:00:00', '10:00:00', 'tertunda', '2026-07-01 21:47:45', 'SS-2026-00010'),
+(11, 3, 2, '2026-07-03', '08:00:00', '10:00:00', 'selesai', '2026-07-01 21:50:25', 'SS-2026-00011'),
+(12, 3, 2, '2026-07-03', '08:00:00', '10:00:00', 'selesai', '2026-07-01 22:04:01', 'SS-2026-00012'),
+(13, 3, 2, '2026-07-03', '08:00:00', '10:00:00', 'terkonfirmasi', '2026-07-01 22:12:12', 'SS-2026-00013'),
 (14, 3, 1, '2026-07-04', '18:00:00', '20:00:00', 'terkonfirmasi', '2026-07-01 22:31:29', 'SS-2026-00014'),
-(15, 3, 1, '2026-07-03', '20:00:00', '21:00:00', '', '2026-07-01 22:41:44', 'SS-2026-00015'),
-(16, 3, 1, '2026-07-04', '07:00:00', '09:00:00', '', '2026-07-01 22:52:37', 'SS-2026-00016'),
-(17, 3, 1, '2026-07-03', '07:00:00', '08:00:00', '', '2026-07-02 05:29:18', 'SS-2026-00017'),
-(18, 3, 2, '2026-07-25', '07:00:00', '09:00:00', '', '2026-07-02 10:08:27', 'SS-2026-00018');
+(15, 3, 1, '2026-07-03', '20:00:00', '21:00:00', 'tertunda', '2026-07-01 22:41:44', 'SS-2026-00015'),
+(16, 3, 1, '2026-07-04', '07:00:00', '09:00:00', 'tertunda', '2026-07-01 22:52:37', 'SS-2026-00016'),
+(17, 3, 1, '2026-07-03', '07:00:00', '08:00:00', 'tertunda', '2026-07-02 05:29:18', 'SS-2026-00017'),
+(18, 3, 2, '2026-07-25', '07:00:00', '09:00:00', 'selesai', '2026-07-02 10:08:27', 'SS-2026-00018');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chat`
+-- Struktur dari tabel `chat`
 --
 
 CREATE TABLE `chat` (
@@ -81,7 +81,7 @@ CREATE TABLE `chat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `chat`
+-- Dumping data untuk tabel `chat`
 --
 
 INSERT INTO `chat` (`chat_id`, `user_id`, `booking_id`, `field_id`, `sender`, `pesan`, `waktu`, `status`) VALUES
@@ -93,7 +93,7 @@ INSERT INTO `chat` (`chat_id`, `user_id`, `booking_id`, `field_id`, `sender`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `favorites`
+-- Struktur dari tabel `favorites`
 --
 
 CREATE TABLE `favorites` (
@@ -104,7 +104,7 @@ CREATE TABLE `favorites` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `favorites`
+-- Dumping data untuk tabel `favorites`
 --
 
 INSERT INTO `favorites` (`favorite_id`, `user_id`, `field_id`, `created_at`) VALUES
@@ -114,11 +114,12 @@ INSERT INTO `favorites` (`favorite_id`, `user_id`, `field_id`, `created_at`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fields`
+-- Struktur dari tabel `fields`
 --
 
 CREATE TABLE `fields` (
   `field_id` int(11) NOT NULL,
+  `owner_id` int(11) DEFAULT NULL,
   `nama_lapangan` varchar(100) NOT NULL,
   `jenis` varchar(50) NOT NULL,
   `harga` decimal(10,2) NOT NULL,
@@ -134,23 +135,28 @@ CREATE TABLE `fields` (
   `jenis_lantai` varchar(50) DEFAULT NULL,
   `fasilitas` text DEFAULT NULL,
   `maps_link` text DEFAULT NULL,
-  `google_maps_url` text DEFAULT NULL
+  `google_maps_url` text DEFAULT NULL,
+  `verifikasi` enum('pending','diterima','ditolak') NOT NULL DEFAULT 'pending',
+  `durasi_slot` int(11) NOT NULL DEFAULT 1,
+  `hari_libur` text DEFAULT NULL,
+  `aktif` enum('aktif','nonaktif') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `fields`
+-- Dumping data untuk tabel `fields`
 --
 
-INSERT INTO `fields` (`field_id`, `nama_lapangan`, `jenis`, `harga`, `status`, `lokasi`, `gambar`, `deskripsi`, `owner_name`, `owner_phone`, `owner_address`, `jam_operasional`, `kapasitas`, `jenis_lantai`, `fasilitas`, `maps_link`, `google_maps_url`) VALUES
-(1, 'Lapangan Futsal A - GOR Maju Jaya', 'Futsal', 80000.00, 'tersedia', 'Jl. Kaliurang Km 7, Sleman', 'lapangan-futsal.jpg', 'Lapangan futsal premium dengan lantai vinyl.', 'Bapak Suharto', '081234567890', 'Jl. Kaliurang Km 7, Sleman', '06.00 - 22.00', 10, 'Vinyl', 'Parkir, Toilet, Kantin', 'https://www.google.com/maps?q=Jl.+Kaliurang+Km+7+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Kaliurang+Km+7+Sleman'),
-(2, 'Arena Badminton 88', 'Badminton', 45000.00, 'tersedia', 'Jl. Magelang Km 5, Yogyakarta', 'badminton.jpg', 'Lapangan badminton indoor dengan pencahayaan terang dan area bermain nyaman.', 'Bapak Andi', '081298765432', 'Jl. Magelang Km 5, Yogyakarta', '07.00 - 22.00', 4, 'Karpet Badminton', 'Toilet, Kantin, Parkir', 'https://www.google.com/maps?q=Jl.+Magelang+Km+5+Yogyakarta&output=embed', 'https://maps.google.com/?q=Jl.+Magelang+Km+5+Yogyakarta'),
-(3, 'Basket Court Pro', 'Basket', 120000.00, 'penuh', 'Kota Yogyakarta', 'lapangan-basket.jpg', 'Lapangan basket indoor premium dengan lantai kayu berkualitas, ring standar pertandingan dan tribun penonton.', 'Basket Court Pro', '081290907788', 'Kota Yogyakarta', '08.00 - 23.00', 14, 'Kayu Indoor', 'Tribun, Toilet, Kantin', 'https://www.google.com/maps?q=Kota+Yogyakarta&output=embed', 'https://maps.google.com/?q=Kota+Yogyakarta'),
-(4, 'GOR Sport Center', 'Futsal', 70000.00, 'tersedia', 'Jl. Ringroad Utara, Sleman', 'lapangan-futsal2.jpg', 'Lapangan futsal indoor dengan rumput sintetis dan fasilitas lengkap.', 'Bapak Budi', '081377778888', 'Jl. Ringroad Utara, Sleman', '06.00 - 23.00', 10, 'Rumput Sintetis', 'Toilet, Mushola, Parkir', 'https://www.google.com/maps?q=Jl.+Ringroad+Utara+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Ringroad+Utara+Sleman');
+INSERT INTO `fields` (`field_id`, `owner_id`, `nama_lapangan`, `jenis`, `harga`, `status`, `lokasi`, `gambar`, `deskripsi`, `owner_name`, `owner_phone`, `owner_address`, `jam_operasional`, `kapasitas`, `jenis_lantai`, `fasilitas`, `maps_link`, `google_maps_url`, `verifikasi`, `durasi_slot`, `hari_libur`, `aktif`) VALUES
+(1, NULL, 'Lapangan Futsal A ', 'Futsal', 80000.00, 'tersedia', 'Jl. Kaliurang Km 7, Sleman', '1783003824_images.png', 'Lapangan futsal premium dengan lantai vinyl.', 'Bapak Suharto', '081234567890', 'Jl. Kaliurang Km 7, Sleman', '06.00 - 22.00', 10, 'Vinyl', 'Parkir, Toilet, Kantin', 'https://www.google.com/maps?q=Jl.+Kaliurang+Km+7+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Kaliurang+Km+7+Sleman', 'diterima', 1, NULL, 'aktif'),
+(2, NULL, 'Arena Badminton 88', 'Badminton', 45000.00, 'tersedia', 'Jl. Magelang Km 5, Yogyakarta', 'badminton.jpg', 'Lapangan badminton indoor dengan pencahayaan terang dan area bermain nyaman.', 'Bapak Andi', '081298765432', 'Jl. Magelang Km 5, Yogyakarta', '07.00 - 22.00', 4, 'Karpet Badminton', 'Toilet, Kantin, Parkir', 'https://www.google.com/maps?q=Jl.+Magelang+Km+5+Yogyakarta&output=embed', 'https://maps.google.com/?q=Jl.+Magelang+Km+5+Yogyakarta', 'pending', 1, NULL, 'aktif'),
+(3, NULL, 'Basket Court Pro', 'Basket', 120000.00, 'penuh', 'Kota Yogyakarta', 'lapangan-basket.jpg', 'Lapangan basket indoor premium dengan lantai kayu berkualitas, ring standar pertandingan dan tribun penonton.', 'Basket Court Pro', '081290907788', 'Kota Yogyakarta', '08.00 - 23.00', 14, 'Kayu Indoor', 'Tribun, Toilet, Kantin', 'https://www.google.com/maps?q=Kota+Yogyakarta&output=embed', 'https://maps.google.com/?q=Kota+Yogyakarta', 'ditolak', 1, NULL, 'aktif'),
+(4, NULL, 'GOR Sport Center', 'Futsal', 70000.00, 'tersedia', 'Jl. Ringroad Utara, Sleman', 'lapangan-futsal2.jpg', 'Lapangan futsal indoor dengan rumput sintetis dan fasilitas lengkap.', 'Bapak Budi', '081377778888', 'Jl. Ringroad Utara, Sleman', '06.00 - 23.00', 10, 'Rumput Sintetis', 'Toilet, Mushola, Parkir', 'https://www.google.com/maps?q=Jl.+Ringroad+Utara+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Ringroad+Utara+Sleman', 'diterima', 1, NULL, 'aktif'),
+(6, NULL, 'Lapangan Basket A', 'Basket', 90000.00, 'tersedia', 'Jl. Kaliurang Km 9, Sleman', '1783004273_38217690_8599310.png', '                ', NULL, NULL, NULL, '08:00 - 22:00', 15, 'Vinyl', NULL, NULL, NULL, 'ditolak', 1, NULL, 'aktif');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifications`
+-- Struktur dari tabel `notifications`
 --
 
 CREATE TABLE `notifications` (
@@ -164,7 +170,7 @@ CREATE TABLE `notifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `notifications`
+-- Dumping data untuk tabel `notifications`
 --
 
 INSERT INTO `notifications` (`notification_id`, `user_id`, `booking_id`, `judul`, `isi`, `status`, `created_at`) VALUES
@@ -183,31 +189,32 @@ INSERT INTO `notifications` (`notification_id`, `user_id`, `booking_id`, `judul`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `owners`
+-- Struktur dari tabel `owners`
 --
 
 CREATE TABLE `owners` (
   `owner_id` int(11) NOT NULL,
   `field_id` int(11) DEFAULT NULL,
   `nama` varchar(100) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
   `telepon` varchar(20) DEFAULT NULL,
   `alamat` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `owners`
+-- Dumping data untuk tabel `owners`
 --
 
-INSERT INTO `owners` (`owner_id`, `field_id`, `nama`, `telepon`, `alamat`) VALUES
-(1, 1, 'Bapak Suharto', '081234567890', 'Jl. Kaliurang Km 7, Sleman'),
-(2, 3, 'Basket Court Pro', '0812-9090-7788', 'Kota Yogyakarta'),
-(3, 2, 'Bapak Andi', '081298765432', 'Jl. Magelang Km 5, Yogyakarta'),
-(4, 4, 'Bapak Budi', '081377778888', 'Jl. Ringroad Utara, Sleman');
+INSERT INTO `owners` (`owner_id`, `field_id`, `nama`, `email`, `telepon`, `alamat`) VALUES
+(1, 1, 'Bapak Suharto', '', '081234567890', 'Jl. Kaliurang Km 7, Sleman'),
+(2, 3, 'Basket Court Pro', '', '0812-9090-7788', 'Kota Yogyakarta'),
+(3, 2, 'Bapak Andi', '', '081298765432', 'Jl. Magelang Km 5, Yogyakarta'),
+(4, 4, 'Bapak Budi', '', '081377778888', 'Jl. Ringroad Utara, Sleman');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payment`
+-- Struktur dari tabel `payment`
 --
 
 CREATE TABLE `payment` (
@@ -220,7 +227,7 @@ CREATE TABLE `payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `payment`
+-- Dumping data untuk tabel `payment`
 --
 
 INSERT INTO `payment` (`payment_id`, `booking_id`, `metode`, `total`, `status`, `tanggal_bayar`) VALUES
@@ -246,7 +253,7 @@ INSERT INTO `payment` (`payment_id`, `booking_id`, `metode`, `total`, `status`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -259,7 +266,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`user_id`, `nama`, `email`, `password`, `role`, `created_at`) VALUES
@@ -272,7 +279,7 @@ INSERT INTO `users` (`user_id`, `nama`, `email`, `password`, `role`, `created_at
 --
 
 --
--- Indexes for table `booking`
+-- Indeks untuk tabel `booking`
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`booking_id`),
@@ -280,121 +287,121 @@ ALTER TABLE `booking`
   ADD KEY `field_id` (`field_id`);
 
 --
--- Indexes for table `chat`
+-- Indeks untuk tabel `chat`
 --
 ALTER TABLE `chat`
   ADD PRIMARY KEY (`chat_id`);
 
 --
--- Indexes for table `favorites`
+-- Indeks untuk tabel `favorites`
 --
 ALTER TABLE `favorites`
   ADD PRIMARY KEY (`favorite_id`);
 
 --
--- Indexes for table `fields`
+-- Indeks untuk tabel `fields`
 --
 ALTER TABLE `fields`
   ADD PRIMARY KEY (`field_id`);
 
 --
--- Indexes for table `notifications`
+-- Indeks untuk tabel `notifications`
 --
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`notification_id`);
 
 --
--- Indexes for table `owners`
+-- Indeks untuk tabel `owners`
 --
 ALTER TABLE `owners`
   ADD PRIMARY KEY (`owner_id`),
   ADD KEY `field_id` (`field_id`);
 
 --
--- Indexes for table `payment`
+-- Indeks untuk tabel `payment`
 --
 ALTER TABLE `payment`
   ADD PRIMARY KEY (`payment_id`),
   ADD KEY `booking_id` (`booking_id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `booking`
+-- AUTO_INCREMENT untuk tabel `booking`
 --
 ALTER TABLE `booking`
   MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `chat`
+-- AUTO_INCREMENT untuk tabel `chat`
 --
 ALTER TABLE `chat`
   MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `favorites`
+-- AUTO_INCREMENT untuk tabel `favorites`
 --
 ALTER TABLE `favorites`
   MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `fields`
+-- AUTO_INCREMENT untuk tabel `fields`
 --
 ALTER TABLE `fields`
-  MODIFY `field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `field_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `notifications`
+-- AUTO_INCREMENT untuk tabel `notifications`
 --
 ALTER TABLE `notifications`
   MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `owners`
+-- AUTO_INCREMENT untuk tabel `owners`
 --
 ALTER TABLE `owners`
   MODIFY `owner_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `payment`
+-- AUTO_INCREMENT untuk tabel `payment`
 --
 ALTER TABLE `payment`
   MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `booking`
+-- Ketidakleluasaan untuk tabel `booking`
 --
 ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`field_id`) REFERENCES `fields` (`field_id`);
 
 --
--- Constraints for table `owners`
+-- Ketidakleluasaan untuk tabel `owners`
 --
 ALTER TABLE `owners`
   ADD CONSTRAINT `owners_ibfk_1` FOREIGN KEY (`field_id`) REFERENCES `fields` (`field_id`);
 
 --
--- Constraints for table `payment`
+-- Ketidakleluasaan untuk tabel `payment`
 --
 ALTER TABLE `payment`
   ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `booking` (`booking_id`);
