@@ -10,6 +10,7 @@ $queryBookingTerbaru = mysqli_query(
         users.nama,
         fields.nama_lapangan,
         booking.tanggal,
+        payment.total,
         booking.status
     FROM booking
 
@@ -18,6 +19,9 @@ $queryBookingTerbaru = mysqli_query(
 
     JOIN fields
     ON booking.field_id = fields.field_id
+
+    LEFT JOIN payment
+    ON booking.booking_id = payment.booking_id
 
     ORDER BY booking.booking_id DESC
 

@@ -1,4 +1,5 @@
 <?php
+
 include "get-admin-dashboard.php";
 include "get-booking-terbaru.php";
 include "get-users.php";
@@ -243,37 +244,36 @@ include "get-all-booking.php";
             <tbody>
               <?php while($row = mysqli_fetch_assoc($queryBookingTerbaru)) : ?>
                 <tr>
+                  <td><?= $row['booking_code']; ?></td>
+                  <td><?= $row['nama']; ?></td>
+                  <td><?= $row['nama_lapangan']; ?></td>
+                  <td><?= $row['tanggal']; ?></td>
+                  <td>Rp<?= number_format($row['total'], 0, ",", ".") ?></td>
                   <td>
-                    <?= $row['booking_code']; ?>
-                  </td>
-
-                  <td>
-                    <?= $row['nama']; ?>
-                  </td>
-
-                  <td>
-                    <?= $row['nama_lapangan']; ?>
-                  </td>
-
-                  <td>
-                    <?= $row['tanggal']; ?>
-                  </td>
-
-                  <td>
-                    -
-                  </td>
-                  
-                  <td>
-                    <?= $row['status']; ?>
+                    <?php
+                    $status = strtolower($row['status']);
+                    
+                    if($status == "terkonfirmasi"){
+                      echo '<span class="status-badge success">Terkonfirmasi</span>';
+                    }
+                    elseif($status == "tertunda"){
+                      echo '<span class="status-badge warning">Tertunda</span>';
+                    }
+                    elseif($status == "dibatalkan"){
+                      echo '<span class="status-badge danger">Dibatalkan</span>';
+                    }
+                    else{
+                      echo '<span class="status-badge">'.$row['status'].'</span>';
+                    }
+                    ?>
                   </td>
                 </tr>
-
-<?php endwhile; ?>
+              <?php endwhile; ?>
             </tbody>
-            </table>
-          </div>
+          </table>
         </div>
-      </section>
+      </div>
+    </section>
       
       <!-- VERIFIKASI -->
        <section id="section-venue" class="hidden">
@@ -281,11 +281,34 @@ include "get-all-booking.php";
           <div>
             <h1 class="page-title"> Verifikasi GOR </h1>
             <p class="page-sub"> Kelola dan verifikasi GOR baru sebelum tampil di platform. </p>
+
+            <div class="filter-status">
+
+    <a href="dashboard-admin.php?filter=semua#section-venue" class="filter-btn">
+        Semua
+    </a>
+
+    <a href="dashboard-admin.php?filter=pending#section-venue" class="filter-btn">
+        Pending
+    </a>
+
+    <a href="dashboard-admin.php?filter=diterima#section-venue" class="filter-btn">
+        Diterima
+    </a>
+
+    <a href="dashboard-admin.php?filter=ditolak#section-venue" class="filter-btn">
+        Ditolak
+    </a>
+
+</div>
+
           </div>
         </div>
-        <div class="venue-grid">
 
-          <?php while($venue = mysqli_fetch_assoc($queryVerifikasi)) : ?>
+        <div class="venue-grid">
+          <?php if(mysqli_num_rows($queryVerifikasi) > 0): ?>
+            <?php while($venue = mysqli_fetch_assoc($queryVerifikasi)) : ?>
+
             <div class="venue-card">
               <div class="venue-top">
 
@@ -293,7 +316,17 @@ include "get-all-booking.php";
                   <i class="ti ti-building-stadium"></i>
                 </div>
 
-                <span class="badge badge-amber">
+                <?php
+                $badge = "badge-amber";
+                if($venue['verifikasi'] == "diterima"){
+                  $badge = "badge-green";
+                }
+                elseif($venue['verifikasi'] == "ditolak"){
+                  $badge = "badge-red";
+                }
+                ?>
+
+                <span class="badge <?= $badge; ?>">
                   <?= ucfirst($venue['verifikasi']); ?>
                 </span>
               </div>
@@ -312,7 +345,7 @@ include "get-all-booking.php";
                 <div>
                   <i class="ti ti-user"></i>
                   Pemilik:
-                  <?= $venue['owner_name']; ?>
+                  <?= $venue['owner_name'] ?? '-'; ?>
                 </div>
                 
                 <div>
@@ -323,22 +356,31 @@ include "get-all-booking.php";
               </div>
               
               <div class="venue-actions">
-                <a 
+                <a
                   href="approve-gor.php?id=<?= $venue['field_id']; ?>"
-                  class="btn btn-primary btn-sm" >
+                  class="btn btn-primary btn-sm"
+                  onclick="return confirm('Yakin ingin menerima GOR ini?')">
                   Terima
                 </a>
                 
                 <a
                   href="reject-gor.php?id=<?= $venue['field_id']; ?>"
-                  class="btn btn-outline btn-sm reject-btn" >
+                  class="btn btn-outline btn-sm reject-btn"
+                  onclick="return confirm('Yakin ingin menolak GOR ini?')">
                   Tolak
                 </a>
               </div>
             </div>
             <?php endwhile; ?>
-          </div>
-        </section>
+            <?php else: ?>
+              <div class="empty-state">
+                <i class="ti ti-building-stadium"></i>
+                <h3>Belum ada GOR yang menunggu verifikasi</h3>
+                <p>Semua pengajuan GOR sudah diproses.</p>
+              </div>
+              <?php endif; ?>
+            </div>
+          </section>
       
       <!-- BOOKING -->
        <section id="section-booking" class="hidden">
@@ -463,8 +505,49 @@ include "get-all-booking.php";
         </section>
       </main>
     </div>
+
+    <?php
+    $toast = "";
+    if(isset($_GET['notif'])){
+      if($_GET['notif'] == "approve"){
+        $toast = "GOR berhasil diterima.";
+      }
+      elseif($_GET['notif'] == "reject"){
+        $toast = "GOR berhasil ditolak.";
+      }
+    }
+    ?>
     
     <script>
+      console.log("SCRIPT BERJALAN");
+
+      window.addEventListener("load", function(){
+
+    <?php if($toast != ""): ?>
+        showToast("<?= $toast ?>");
+
+        const url = new URL(window.location);
+        url.searchParams.delete("notif");
+        history.replaceState({}, "", url);
+    <?php endif; ?>
+
+    const hash = window.location.hash;
+
+    if(hash === "#section-venue"){
+        showSection("venue", document.querySelectorAll(".sidebar-item")[1]);
+    }
+    else if(hash === "#section-booking"){
+        showSection("booking", document.querySelectorAll(".sidebar-item")[2]);
+    }
+    else if(hash === "#section-user"){
+        showSection("user", document.querySelectorAll(".sidebar-item")[3]);
+    }
+    else if(hash === "#section-setting"){
+        showSection("setting", document.querySelectorAll(".sidebar-item")[4]);
+    }
+
+});
+
     function showSection(name, item){
       document
       .querySelectorAll('[id^="section-"]')
@@ -561,6 +644,25 @@ include "get-all-booking.php";
         }
       }
     );
+
+    window.addEventListener("load", function () {
+
+    const hash = window.location.hash;
+
+    if(hash === "#section-venue"){
+        showSection("venue", document.querySelectorAll(".sidebar-item")[1]);
+    }
+    else if(hash === "#section-booking"){
+        showSection("booking", document.querySelectorAll(".sidebar-item")[2]);
+    }
+    else if(hash === "#section-user"){
+        showSection("user", document.querySelectorAll(".sidebar-item")[3]);
+    }
+    else if(hash === "#section-setting"){
+        showSection("setting", document.querySelectorAll(".sidebar-item")[4]);
+    }
+
+});
     
     </script>
     </body>

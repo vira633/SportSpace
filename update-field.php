@@ -13,7 +13,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $kapasitas = $_POST['kapasitas'];
     $jam_operasional = $_POST['jam_operasional'];
     $deskripsi = $_POST['deskripsi'];
-    $aktif = $_POST['aktif'];
     $gambar = $_FILES['gambar'];
     
 
@@ -28,8 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             kapasitas = '$kapasitas',
             jenis_lantai = '$jenis_lantai',
             jam_operasional = '$jam_operasional',
-            deskripsi = '$deskripsi',
-            aktif = '$aktif'
+            deskripsi = '$deskripsi'
         WHERE field_id = '$id'
         ");
 
@@ -54,13 +52,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $folder = __DIR__ . "/uploads/fields/";
     $tujuan = $folder . $namaGambar;
     move_uploaded_file($gambar['tmp_name'], $tujuan);
-
-    if(
+    if (
         !empty($fieldLama['gambar']) &&
         file_exists($folder . $fieldLama['gambar'])
-    ){
-        unlink($folder . $fieldLama['gambar']);
-    }
+        ) {
+            unlink($folder . $fieldLama['gambar']);
+            }
     
     $query = mysqli_query($conn,"
     UPDATE fields
@@ -73,7 +70,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         jenis_lantai = '$jenis_lantai',
         jam_operasional = '$jam_operasional',
         deskripsi = '$deskripsi',
-        aktif = '$aktif',
         gambar = '$namaGambar'
 
     WHERE field_id = '$id'
