@@ -1,0 +1,305 @@
+body {
+    background: #f6f8fb;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.invoice-wrapper {
+
+    max-width: 900px;
+
+    margin: 40px auto;
+
+    padding: 20px;
+
+}
+
+.invoice-card {
+
+    background: #fff;
+
+    border-radius: 28px;
+
+    padding: 40px;
+
+    box-shadow: 0 15px 45px rgba(0, 0, 0, .08);
+
+    border: 1px solid #ececec;
+
+}
+
+.invoice-header {
+    border-bottom: 2px dashed #ececec;
+
+    padding-bottom: 24px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    margin-bottom: 30px;
+
+}
+
+.invoice-header h1 {
+
+    font-size: 34px;
+
+    color: #16a34a;
+
+    margin-bottom: 6px;
+
+}
+
+.invoice-header p {
+
+    color: #6b7280;
+
+    letter-spacing: 2px;
+
+    font-size: 13px;
+
+}
+
+.status {
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+.status.paid {
+
+    background: #dcfce7;
+
+    color: #15803d;
+
+}
+
+.status.pending {
+
+    background: #fef3c7;
+
+    color: #d97706;
+
+}
+
+.status.cancel {
+
+    background: #fee2e2;
+
+    color: #dc2626;
+
+}
+
+.divider {
+
+    height: 1px;
+
+    background: #ececec;
+
+    margin: 28px 0;
+
+}
+
+.invoice-info {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 40px;
+
+    margin-top: 5px;
+
+}
+
+.invoice-info span {
+
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+
+}
+
+.invoice-info strong {
+
+    font-size: 18px;
+
+}
+
+.invoice-detail {
+
+    display: grid;
+
+    gap: 16px;
+
+}
+
+.row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+.row span {
+
+    color: #6b7280;
+
+}
+
+.row strong {
+
+    color: #111827;
+
+}
+
+.total-box {
+
+    text-align: right;
+
+}
+
+.total-box span {
+
+    display: block;
+
+    color: #6b7280;
+
+    margin-bottom: 8px;
+
+}
+
+.total-box h2 {
+
+    color: #16a34a;
+
+    font-size: 34px;
+
+}
+
+.owner-box {
+
+    line-height: 1.9;
+
+}
+
+.owner-box strong {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+}
+
+.thanks {
+
+    text-align: center;
+
+    color: #6b7280;
+
+    margin-top: 15px;
+
+}
+
+.invoice-button {
+
+    margin-top: 35px;
+
+    display: flex;
+
+    justify-content: center;
+
+}
+
+@media print {
+
+    body {
+
+        background: white;
+
+    }
+
+    .invoice-wrapper {
+
+        max-width: 100%;
+
+        margin: 0;
+
+        padding: 0;
+
+    }
+
+    .invoice-card {
+
+        box-shadow: none;
+
+        border: none;
+
+        border-radius: 0;
+
+    }
+
+    .invoice-button {
+
+        display: none;
+
+    }
+
+}
+
+.back-button {
+
+    max-width: 900px;
+
+    margin: 20px auto 0;
+
+    padding: 0 20px;
+
+}
+
+.back-link {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    text-decoration: none;
+
+    color: #6b7280;
+
+    font-weight: 600;
+
+    transition: .2s;
+
+}
+
+.back-link:hover {
+
+    color: #16a34a;
+
+    transform: translateX(-3px);
+
+}
+
+.back-link i {
+
+    font-size: 22px;
+
+}

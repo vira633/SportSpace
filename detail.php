@@ -1,5 +1,12 @@
 <?php
+session_start();
 include 'config.php';
+
+if (!isset($_SESSION['user_id'])) {
+  die("Silakan login terlebih dahulu.");
+}
+
+$user_id = $_SESSION['user_id'];
 
 if (!isset($_GET['id'])) {
   die("Lapangan tidak ditemukan");
@@ -14,6 +21,16 @@ WHERE field_id='$field_id'
 ");
 
 $field = mysqli_fetch_assoc($query);
+
+
+$qFav = mysqli_query($conn, "
+SELECT *
+FROM favorites
+WHERE user_id='$user_id'
+AND field_id='$field_id'
+");
+
+$isFavorite = mysqli_num_rows($qFav) > 0;
 
 if (!$field) {
   die("Data lapangan tidak ditemukan");
@@ -30,17 +47,17 @@ AND tanggal='$tanggal'
 AND status!='dibatalkan'
 ");
 $booking_id =
-$_SESSION['booking_id']
-?? null;
-if($booking_id){
+  $_SESSION['booking_id']
+  ?? null;
+if ($booking_id) {
 
-    $q = mysqli_query($conn,"
+  $q = mysqli_query($conn, "
     SELECT *
     FROM booking
     WHERE booking_id='$booking_id'
     ");
 
-    $booking =
+  $booking =
     mysqli_fetch_assoc($q);
 }
 
@@ -253,20 +270,31 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
               <div class="detail-title">
 
-                <h1><?php echo $field['nama_lapangan']; ?></h1>
+                <div class="title-row">
+
+                  <h1>
+                    <?= $field['nama_lapangan']; ?>
+                  </h1>
+
+                  <button id="favoriteBtn" class="favorite-btn <?= $isFavorite ? 'active' : ''; ?>"
+                    data-field="<?= $field['field_id']; ?>">
+
+                    <i class="ti <?= $isFavorite ? 'ti-heart-filled' : 'ti-heart'; ?>"></i>
+
+                  </button>
+
+                </div>
 
                 <div class="detail-location">
 
-                  <p style="font-size:14px;color:var(--gray-400);">
-
+                  <p>
                     <i class="ti ti-building"></i>
-                    <?php echo $field['nama_lapangan']; ?>
+                    <?= $field['nama_lapangan']; ?>
 
                     &nbsp;&nbsp;
 
                     <i class="ti ti-map-pin"></i>
-                    <?php echo $field['lokasi']; ?>
-
+                    <?= $field['lokasi']; ?>
                   </p>
 
                 </div>
@@ -281,18 +309,21 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
                   <span>
                     <i class="ti ti-ball-football"></i>
-                    <?php echo $field['jenis']; ?>
+                    <?= $field['jenis']; ?>
                   </span>
 
                 </div>
 
-              </div>
+                <div class="price-row">
 
-              <div class="detail-price">
+                  <strong>
+                    Rp
+                    <?= number_format($field['harga'], 0, ',', '.'); ?>
+                  </strong>
 
-                RRp<?php echo number_format($field['harga'], 0, ',', '.'); ?>
+                  <span>/jam</span>
 
-                <span>/jam</span>
+                </div>
 
               </div>
 
@@ -684,6 +715,12 @@ while ($b = mysqli_fetch_assoc($bookings)) {
               </div>
 
             </div>
+            <a href="chat.php?field_id=<?= $field['field_id'] ?>" class="btn btn-primary btn-full">
+
+              <i class="ti ti-message-circle"></i>
+              Chat Admin
+
+            </a>
           </div>
         </div>
       </div>
@@ -783,7 +820,53 @@ while ($b = mysqli_fetch_assoc($bookings)) {
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    const favBtn = document.getElementById("favoriteBtn");
 
+    if (favBtn) {
+
+      favBtn.onclick = function () {
+
+        const field_id = this.dataset.field;
+
+        fetch("favorite.php", {
+
+          method: "POST",
+
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+
+          body: "field_id=" + field_id
+
+        })
+
+          .then(res => res.json())
+
+          .then(data => {
+
+            if (data.status == "added") {
+
+              favBtn.classList.add("active");
+
+              favBtn.innerHTML = '<i class="ti ti-heart-filled"></i>';
+
+            }
+
+            if (data.status == "removed") {
+
+              favBtn.classList.remove("active");
+
+              favBtn.innerHTML = '<i class="ti ti-heart"></i>';
+
+            }
+
+          });
+
+      }
+
+    }
+  </script>
 </body>
 
 </html>
