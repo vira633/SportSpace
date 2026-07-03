@@ -12,6 +12,20 @@ $jam_mulai = $_POST['jam_mulai'];
 $jam_selesai = $_POST['jam_selesai'];
 $total = $_POST['total'];
 $metode = $_POST['metode'];
+$bank = $_POST['bank'] ?? null;
+if (
+    empty($tanggal) ||
+    empty($jam_mulai) ||
+    empty($jam_selesai)
+) {
+
+    echo "<script>
+        alert('Silakan pilih tanggal dan jam booking terlebih dahulu!');
+        history.back();
+    </script>";
+
+    exit;
+}
 
 $cek = mysqli_query($conn, "
 SELECT *
@@ -28,28 +42,31 @@ AND (
 )
 ");
 
-
 $status_booking = ($metode == "cash")
     ? "terkonfirmasi"
-    : "menunggu_verifikasi";
+    : "tertunda";
 
 $sql = "
-INSERT INTO booking
-(
+INSERT INTO booking (
     user_id,
     field_id,
     tanggal,
     jam_mulai,
     jam_selesai,
+    total,
+    metode_pembayaran,
+    bank,
     status
 )
-VALUES
-(
+VALUES (
     '$user_id',
     '$field_id',
     '$tanggal',
     '$jam_mulai',
     '$jam_selesai',
+    '$total',
+    '$metode',
+    '$bank',
     '$status_booking'
 )
 ";
@@ -82,6 +99,7 @@ INSERT INTO payment
 (
 booking_id,
 metode,
+bank,
 total,
 status
 )
@@ -89,6 +107,7 @@ VALUES
 (
 '$booking_id',
 '$metode',
+'$bank',
 '$total',
 'tertunda'
 )
@@ -103,6 +122,7 @@ if (!$result2) {
 /* ===========================
    SIMPAN NOTIFIKASI
 =========================== */
+
 
 if ($metode == "cash") {
 
@@ -135,4 +155,5 @@ VALUES
 )
 ");
 header('Location: booking-success.php?id=' . $booking_id);
+
 exit;

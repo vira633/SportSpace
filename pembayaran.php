@@ -419,13 +419,29 @@ $total =
           <!-- TRANSFER -->
           <div id="payment-transfer" class="payment-content">
 
+            <div class="bank-select">
+
+              <label>Pilih Bank</label>
+
+              <select id="bankSelect" onchange="changeBank()">
+
+                <option value="bca">BCA</option>
+                <option value="bri">BRI</option>
+                <option value="mandiri">Mandiri</option>
+                <option value="bni">BNI</option>
+                <option value="bsi">BSI</option>
+
+              </select>
+
+            </div>
+
             <div class="bank-box">
 
               <div class="bank-item">
 
                 <span>Bank</span>
 
-                <strong>BCA</strong>
+                <strong id="bankNama">BCA</strong>
 
               </div>
 
@@ -435,9 +451,9 @@ $total =
 
                 <strong>
 
-                  1234567890
+                  <span id="bankRek">1234567890</span>
 
-                  <button class="copy-btn" onclick="copyText('1234567890')">
+                  <button class="copy-btn" type="button" onclick="copyBank()">
 
                     Salin
 
@@ -451,7 +467,9 @@ $total =
 
                 <span>Atas Nama</span>
 
-                <strong>Bapak Suharto</strong>
+                <strong id="bankAtasNama">
+                  SportSpace Indonesia
+                </strong>
 
               </div>
 
@@ -545,7 +563,7 @@ $total =
 
           <!-- BUTTON -->
           <form action="proses-pembayaran.php" method="POST">
-
+      
             <input type="hidden" name="field_id" value="<?= $field_id ?>">
 
             <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
@@ -559,6 +577,7 @@ $total =
             <input type="hidden" name="total" value="<?= $total ?>">
 
             <input type="hidden" id="metode" name="metode" value="qris">
+            <input type="hidden" id="bank" name="bank" value="">
 
             <button id="pay-button" type="submit" class="btn btn-primary btn-lg btn-full">
 
@@ -567,7 +586,7 @@ $total =
               Konfirmasi Pembayaran
 
             </button>
-
+  
           </form>
 
         </div>
@@ -751,6 +770,69 @@ $total =
           showToast('QR berhasil diunduh');
 
         });
+
+    }
+
+    const bankData = {
+
+      bca: {
+        nama: "BCA",
+        rekening: "1234567890",
+        pemilik: "SportSpace Indonesia"
+      },
+
+      bri: {
+        nama: "BRI",
+        rekening: "9876543210",
+        pemilik: "SportSpace Indonesia"
+      },
+
+      mandiri: {
+        nama: "Mandiri",
+        rekening: "111222333444",
+        pemilik: "SportSpace Indonesia"
+      },
+
+      bni: {
+        nama: "BNI",
+        rekening: "555666777888",
+        pemilik: "SportSpace Indonesia"
+      },
+
+      bsi: {
+        nama: "BSI",
+        rekening: "7001234567",
+        pemilik: "SportSpace Indonesia"
+      }
+
+    };
+
+    function changeBank() {
+
+      const bank =
+        document.getElementById("bankSelect").value;
+
+      document.getElementById("bankNama").innerHTML =
+        bankData[bank].nama;
+
+      document.getElementById("bankRek").innerHTML =
+        bankData[bank].rekening;
+
+      document.getElementById("bankAtasNama").innerHTML =
+        bankData[bank].pemilik;
+
+        document.getElementById("bank").value = bank;
+
+    }
+
+    function copyBank() {
+
+      const nomor =
+        document.getElementById("bankRek").innerText;
+
+      navigator.clipboard.writeText(nomor);
+
+      showToast("Nomor rekening berhasil disalin");
 
     }
 

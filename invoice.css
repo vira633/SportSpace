@@ -170,7 +170,13 @@ body {
 
 .total-box {
 
-    text-align: right;
+    background:#ecfdf5;
+
+    padding:24px;
+
+    border-radius:22px;
+
+    text-align:right;
 
 }
 
@@ -262,44 +268,37 @@ body {
 
 }
 
-.back-button {
-
-    max-width: 900px;
-
-    margin: 20px auto 0;
-
-    padding: 0 20px;
-
+.invoice-card{
+    position: relative;
 }
 
-.back-link {
+.close-invoice{
+    position:absolute;
+    top:20px;
+    left:20px;
 
-    display: inline-flex;
+    width:42px;
+    height:42px;
 
-    align-items: center;
+    border-radius:50%;
+    background:#f5f5f5;
 
-    gap: 8px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    text-decoration: none;
+    text-decoration:none;
+    color:#555;
 
-    color: #6b7280;
-
-    font-weight: 600;
-
-    transition: .2s;
-
+    transition:.25s;
 }
 
-.back-link:hover {
-
-    color: #16a34a;
-
-    transform: translateX(-3px);
-
+.close-invoice i{
+    font-size:22px;
 }
 
-.back-link i {
-
-    font-size: 22px;
-
+.close-invoice:hover{
+    background:#16a34a;
+    color:#fff;
+    transform:rotate(90deg);
 }

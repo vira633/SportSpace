@@ -115,20 +115,13 @@ if ($from == "success") {
 </head>
 
 <body>
-    <div class="back-button">
 
-        <a href="<?= $backLink ?>" class="back-link">
-
-            <i class="ti ti-arrow-left"></i>
-
-            <?= $backText ?>
-
-        </a>
-
-    </div>
     <div class="invoice-wrapper">
 
         <div class="invoice-card">
+            <a href="<?= $backLink ?>" class="close-invoice">
+                <i class="ti ti-x"></i>
+            </a>
 
             <!-- HEADER -->
             <div class="invoice-header">

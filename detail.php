@@ -64,8 +64,20 @@ if ($booking_id) {
 $jamPenuh = [];
 
 while ($b = mysqli_fetch_assoc($bookings)) {
-  $jamPenuh[] =
-    substr($b['jam_mulai'], 0, 5);
+
+  $awal =
+    (int) substr($b['jam_mulai'], 0, 2);
+
+  $akhir =
+    (int) substr($b['jam_selesai'], 0, 2);
+
+  for ($i = $awal; $i < $akhir; $i++) {
+
+    $jamPenuh[] =
+      sprintf("%02d:00", $i);
+
+  }
+
 }
 ?>
 <!DOCTYPE html>
@@ -93,7 +105,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
   // SLOT
   function toggleSlot(button) {
-
+    if (button.disabled) return;
     if (button.classList.contains("penuh")) return;
 
     button.classList.toggle("selected");
@@ -428,7 +440,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
               </label>
 
               <div class="calendar-input">
-                <input type="date" id="booking-date-display">
+                <input type="date" id="booking-date-display" min="<?= date('Y-m-d'); ?>">
               </div>
 
             </div>
@@ -453,9 +465,12 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
                 ?>
 
-                <button class="slot-btn <?= $penuh ? 'penuh' : '' ?>" <?php if (!$penuh): ?> onclick="toggleSlot(this)"
-                  <?php endif; ?> data-start="   <?= str_replace(':', '.', $mulai) ?>"
-                  data-end="<?= str_replace(':', '.', $selesai) ?>">
+                <button class="slot-btn <?= $penuh ? 'penuh' : '' ?>" id="slot-<?= $mulai ?>" <?= $penuh ? 'disabled' : '' ?>
+                  onclick="toggleSlot(this)"
+                  data-start="
+                <?= $jam ?>"
+                  data-end="
+                <?= str_replace(':', '.', $selesai) ?>">
 
                   <?= str_replace(':', '.', $mulai) ?>
                   –
@@ -645,11 +660,11 @@ while ($b = mysqli_fetch_assoc($bookings)) {
               document.getElementById("booking-date").value =
                 this.value;
 
-              const tanggal =
+              const tanggalFormat =
                 new Date(this.value);
 
-              const hasil =
-                tanggal.toLocaleDateString(
+              document.getElementById("summary-date").innerText =
+                tanggalFormat.toLocaleDateString(
                   "id-ID",
                   {
                     weekday: "long",
@@ -659,10 +674,49 @@ while ($b = mysqli_fetch_assoc($bookings)) {
                   }
                 );
 
-              document.getElementById("summary-date")
-                .innerText = hasil;
+              fetch(
+                "cek-jadwal.php?field_id=<?= $field_id ?>&tanggal=" + this.value
+              )
+
+                .then(res => res.json())
+
+                .then(data => {
+                  console.log(data);
+                  document.querySelectorAll(".slot-btn").forEach(btn => {
+
+                    btn.classList.remove("selected");
+                    btn.classList.remove("penuh");
+
+                    btn.disabled = false;
+
+                  });
+
+                  selectedSlots.length = 0;
+
+                  updateSummary();
+
+                  data.forEach(jam => {
+
+                    const btn =
+                      document.getElementById("slot-" + jam);
+
+                    if (btn) {
+
+                     btn.classList.add("penuh");
+                     btn.classList.add("booked");
+
+                     btn.disabled=true;
+
+                    }
+
+                  });
+
+                  disablePastTime();
+
+                });
 
             });
+
 
           </script>
           <div class="owner-card">
@@ -718,7 +772,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
             <a href="chat.php?field_id=<?= $field['field_id'] ?>" class="btn btn-primary btn-full">
 
               <i class="ti ti-message-circle"></i>
-              Chat Admin
+              Chat Owner
 
             </a>
           </div>
@@ -764,7 +818,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
           <div class="summary-divider"></div>
 
-          <form action="pembayaran.php" method="POST">
+          <form action="pembayaran.php" method="POST" onsubmit="return cekBooking();">
 
             <input type="hidden" name="field_id" value="<?= $field['field_id']; ?>">
 
@@ -866,7 +920,71 @@ while ($b = mysqli_fetch_assoc($bookings)) {
       }
 
     }
+    function cekBooking() {
+
+      const tanggal =
+        document.getElementById("booking-date").value;
+      const jam = document.getElementById("jam_mulai").value;
+
+      if (tanggal === "" || jam === "") {
+        alert("Silakan pilih tanggal dan jam booking terlebih dahulu!");
+        return false;
+      }
+
+      return true;
+    }
+
+    function disablePastTime(){
+
+    const tanggal =
+    document.getElementById("booking-date-display").value;
+
+    if(tanggal=="") return;
+
+    const today=new Date();
+
+    const selected=new Date(tanggal);
+
+    document.querySelectorAll(".slot-btn").forEach(btn=>{
+
+        if(!btn.classList.contains("booked")){
+
+            btn.disabled=false;
+
+            btn.classList.remove("penuh");
+
+        }
+
+    });
+
+    if(selected.toDateString()!=today.toDateString())
+        return;
+
+    const nowHour=today.getHours();
+
+    document.querySelectorAll(".slot-btn").forEach(btn=>{
+
+        const start=parseInt(btn.dataset.start);
+
+        if(start<=nowHour){
+
+            btn.disabled=true;
+
+            btn.classList.add("penuh");
+
+        }
+
+    });
+
+    }
+     
+    window.onload=function(){
+
+      disablePastTime();
+
+    }
   </script>
+
 </body>
 
 </html>
