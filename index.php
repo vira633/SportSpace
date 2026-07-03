@@ -112,7 +112,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
           $icon = 'ti-swimming';
 
         // Foto lapangan
-        $foto = !empty($lap['gambar']) ? $lap['gambar'] : 'lapangan-futsal.jpg';
+        $foto = 'uploads/fields/' . $lap['gambar'];
         ?>
         <div class="field-card" data-sport="<?= strtolower($lap['jenis']) ?>">
           <div class="field-img">
