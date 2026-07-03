@@ -1422,7 +1422,7 @@ unset($_SESSION['toast']);
                   class="form-input"
                   id="new-gambar"
                   name="gambar"
-                  accept="image/*">
+                  accept="image/*" required>
                   
                 <div id="preview-container" style="display:none; margin-top:12px;">
                   <img
