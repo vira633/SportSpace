@@ -2,6 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
+-- Host: 127.0.0.1
+-- Generation Time: Jul 03, 2026 at 10:57 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 -- Host: localhost
 -- Waktu pembuatan: 02 Jul 2026 pada 18.32
 -- Versi server: 10.4.28-MariaDB
@@ -147,7 +151,7 @@ CREATE TABLE `fields` (
 --
 
 INSERT INTO `fields` (`field_id`, `owner_id`, `nama_lapangan`, `jenis`, `harga`, `status`, `lokasi`, `gambar`, `deskripsi`, `owner_name`, `owner_phone`, `owner_address`, `jam_operasional`, `kapasitas`, `jenis_lantai`, `fasilitas`, `maps_link`, `google_maps_url`, `verifikasi`, `durasi_slot`, `hari_libur`, `aktif`) VALUES
-(1, NULL, 'Lapangan Futsal A ', 'Futsal', 80000.00, 'tersedia', 'Jl. Kaliurang Km 7, Sleman', '1783003824_images.png', 'Lapangan futsal premium dengan lantai vinyl.', 'Bapak Suharto', '081234567890', 'Jl. Kaliurang Km 7, Sleman', '06.00 - 22.00', 10, 'Vinyl', 'Parkir, Toilet, Kantin', 'https://www.google.com/maps?q=Jl.+Kaliurang+Km+7+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Kaliurang+Km+7+Sleman', 'diterima', 1, NULL, 'aktif'),
+(1, NULL, 'Lapangan Futsal A ', 'Futsal', 80000.00, 'tersedia', 'Jl. Kaliurang Km 7, Sleman', '1783050779_lapangan-futsal.jpg', 'Lapangan futsal premium dengan lantai vinyl.', 'Bapak Suharto', '081234567890', 'Jl. Kaliurang Km 7, Sleman', '06.00 - 22.00', 10, 'Vinyl', 'Parkir, Toilet, Kantin', 'https://www.google.com/maps?q=Jl.+Kaliurang+Km+7+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Kaliurang+Km+7+Sleman', 'diterima', 1, NULL, 'aktif'),
 (2, NULL, 'Arena Badminton 88', 'Badminton', 45000.00, 'tersedia', 'Jl. Magelang Km 5, Yogyakarta', 'badminton.jpg', 'Lapangan badminton indoor dengan pencahayaan terang dan area bermain nyaman.', 'Bapak Andi', '081298765432', 'Jl. Magelang Km 5, Yogyakarta', '07.00 - 22.00', 4, 'Karpet Badminton', 'Toilet, Kantin, Parkir', 'https://www.google.com/maps?q=Jl.+Magelang+Km+5+Yogyakarta&output=embed', 'https://maps.google.com/?q=Jl.+Magelang+Km+5+Yogyakarta', 'pending', 1, NULL, 'aktif'),
 (3, NULL, 'Basket Court Pro', 'Basket', 120000.00, 'penuh', 'Kota Yogyakarta', 'lapangan-basket.jpg', 'Lapangan basket indoor premium dengan lantai kayu berkualitas, ring standar pertandingan dan tribun penonton.', 'Basket Court Pro', '081290907788', 'Kota Yogyakarta', '08.00 - 23.00', 14, 'Kayu Indoor', 'Tribun, Toilet, Kantin', 'https://www.google.com/maps?q=Kota+Yogyakarta&output=embed', 'https://maps.google.com/?q=Kota+Yogyakarta', 'ditolak', 1, NULL, 'aktif'),
 (4, NULL, 'GOR Sport Center', 'Futsal', 70000.00, 'tersedia', 'Jl. Ringroad Utara, Sleman', 'lapangan-futsal2.jpg', 'Lapangan futsal indoor dengan rumput sintetis dan fasilitas lengkap.', 'Bapak Budi', '081377778888', 'Jl. Ringroad Utara, Sleman', '06.00 - 23.00', 10, 'Rumput Sintetis', 'Toilet, Mushola, Parkir', 'https://www.google.com/maps?q=Jl.+Ringroad+Utara+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Ringroad+Utara+Sleman', 'diterima', 1, NULL, 'aktif'),
@@ -194,6 +198,7 @@ INSERT INTO `notifications` (`notification_id`, `user_id`, `booking_id`, `judul`
 
 CREATE TABLE `owners` (
   `owner_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `field_id` int(11) DEFAULT NULL,
   `nama` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
@@ -205,11 +210,8 @@ CREATE TABLE `owners` (
 -- Dumping data untuk tabel `owners`
 --
 
-INSERT INTO `owners` (`owner_id`, `field_id`, `nama`, `email`, `telepon`, `alamat`) VALUES
-(1, 1, 'Bapak Suharto', '', '081234567890', 'Jl. Kaliurang Km 7, Sleman'),
-(2, 3, 'Basket Court Pro', '', '0812-9090-7788', 'Kota Yogyakarta'),
-(3, 2, 'Bapak Andi', '', '081298765432', 'Jl. Magelang Km 5, Yogyakarta'),
-(4, 4, 'Bapak Budi', '', '081377778888', 'Jl. Ringroad Utara, Sleman');
+INSERT INTO `owners` (`owner_id`, `user_id`, `field_id`, `nama`, `email`, `telepon`, `alamat`) VALUES
+(1, 7, NULL, 'Budi Santoso', 'budi34@gmail.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -261,7 +263,7 @@ CREATE TABLE `users` (
   `nama` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` enum('user','admin') NOT NULL DEFAULT 'user',
+  `role` enum('user','admin','owner') NOT NULL DEFAULT 'user',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -272,7 +274,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `nama`, `email`, `password`, `role`, `created_at`) VALUES
 (2, 'Admin SportSpace', 'admin@sportspace.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', '2026-06-13 09:28:16'),
 (3, 'Siti Maysaroh', 'maysaarou@students.amikom.ac.id', '$2y$10$I7KpPrTCkbuka5r/7gWk8ub2SoGQBKZl8Tad6Bh9MSN914ffOUlJ.', 'user', '2026-06-23 18:49:08'),
-(4, 'Maysa', 'maysaa@students.amikom.ac.id', '$2y$10$Iunqp.u35GEGZccDd7WCBuvODLFpfWX0rFtPjv7xBM7Pu6hcB3FL6', 'user', '2026-07-02 10:26:25');
+(4, 'Maysa', 'maysaa@students.amikom.ac.id', '$2y$10$Iunqp.u35GEGZccDd7WCBuvODLFpfWX0rFtPjv7xBM7Pu6hcB3FL6', 'user', '2026-07-02 10:26:25'),
+(5, 'vier', 'vierrie@gmail.com', '$2y$10$dbhGKnwomud10JoCpYkpRu3jEEWn2XDffjYygxNF3DNirBgCkHsB2', 'user', '2026-07-03 04:07:26'),
+(7, 'Budi Santoso', 'budi34@gmail.com', '$2y$10$fuH8n/gtYKomid3wUL4ReuX1u3d6ZiZnTWXtTfGWdP2xQuIG924A2', 'owner', '2026-07-03 05:06:32'),
+(8, 'mpruy', 'mpruy34@gmail.com', '$2y$10$sn7ql/xAGuyrNTwUOIFVse6Hd6qw6qdN3sLVgWoegEGWedsZHMYDO', 'user', '2026-07-03 05:17:23');
 
 --
 -- Indexes for dumped tables
@@ -315,7 +320,8 @@ ALTER TABLE `notifications`
 --
 ALTER TABLE `owners`
   ADD PRIMARY KEY (`owner_id`),
-  ADD KEY `field_id` (`field_id`);
+  ADD KEY `field_id` (`field_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeks untuk tabel `payment`
@@ -369,7 +375,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT untuk tabel `owners`
 --
 ALTER TABLE `owners`
-  MODIFY `owner_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `owner_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `payment`
@@ -381,7 +387,7 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -398,7 +404,7 @@ ALTER TABLE `booking`
 -- Ketidakleluasaan untuk tabel `owners`
 --
 ALTER TABLE `owners`
-  ADD CONSTRAINT `owners_ibfk_1` FOREIGN KEY (`field_id`) REFERENCES `fields` (`field_id`);
+  ADD CONSTRAINT `owners_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Ketidakleluasaan untuk tabel `payment`
