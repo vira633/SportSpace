@@ -42,8 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['role']    = $user['role'];
 
     // Arahkan berdasarkan role
-    if ($user['role'] == 'admin') {
+    if ($user['role'] === 'admin') {
         echo json_encode(['status' => 'success', 'message' => 'Login berhasil!', 'redirect' => 'dashboard-admin.php']);
+    } elseif ($user['role'] === 'owner') {
+        echo json_encode(['status' => 'success', 'message' => 'Login berhasil!', 'redirect' => 'dashboard-owner.php']);
     } else {
         echo json_encode(['status' => 'success', 'message' => 'Login berhasil!', 'redirect' => 'index.php']);
     }
