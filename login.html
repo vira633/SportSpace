@@ -10,8 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="login.css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
 </head>
 <body>
 
@@ -21,10 +20,9 @@
 
         <div class="auth-top">
             <div class="auth-logo">
-                <i class="ti ti-tournament"></i>
+                <i class="ti ti-bowling"></i>
                 SportSpace
             </div>
-
             <p class="auth-desc">
                 Platform booking lapangan olahraga #1 di Yogyakarta
             </p>
@@ -36,9 +34,7 @@
         </div>
 
         <div class="tab-panel active" id="panel-login">
-
             <form id="form-login">
-
                 <div class="form-group">
                     <label>Email</label>
                     <div class="input-icon">
@@ -61,7 +57,6 @@
                     Masuk
                     <i class="ti ti-arrow-right"></i>
                 </button>
-
             </form>
 
             <div class="divider">
@@ -69,23 +64,15 @@
             </div>
 
             <div class="role-buttons">
-                <button class="btn btn-outline" onclick="window.location.href='login-admin.html'">
-                    <i class="ti ti-shield"></i>
-                    Admin
-                </button>
-
-                <button class="btn btn-outline" onclick="window.location.href='login-owner.html'">
+                <button class="btn btn-outline" onclick="window.location.href='login-owner.html'" style="width: 100%;">
                     <i class="ti ti-building"></i>
                     Pemilik GOR
                 </button>
             </div>
-
         </div>
 
         <div class="tab-panel" id="panel-register">
-
             <form id="form-register">
-
                 <div class="form-group">
                     <label>Nama Lengkap</label>
                     <div class="input-icon">
@@ -110,29 +97,36 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label>Daftar Sebagai</label>
+                    <div class="input-icon">
+                        <i class="ti ti-users"></i>
+                        <select name="role" id="regRole">
+                            <option value="user">User</option>
+                            <option value="owner">Pemilik GOR (Owner)</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div id="error-register" style="color:red;font-size:13px;margin-bottom:10px;display:none;"></div>
 
                 <button type="submit" class="btn btn-primary btn-full">
                     Buat Akun
                     <i class="ti ti-arrow-right"></i>
                 </button>
-
             </form>
-
         </div>
 
     </div>
-
 </div>
 
 <script>
-// ── Tab switcher ──────────────────────────────────
+// Tab switcher 
 const loginBtn    = document.getElementById("btn-login");
 const registerBtn = document.getElementById("btn-register");
 const loginPanel  = document.getElementById("panel-login");
 const registerPanel = document.getElementById("panel-register");
 
-// Fungsi pembantu ganti ke tab login
 function aktifkanTabLogin() {
     loginBtn.classList.add("active");
     registerBtn.classList.remove("active");
@@ -140,7 +134,6 @@ function aktifkanTabLogin() {
     registerPanel.classList.remove("active");
 }
 
-// Fungsi pembantu ganti ke tab register
 function aktifkanTabRegister() {
     registerBtn.classList.add("active");
     loginBtn.classList.remove("active");
@@ -151,14 +144,12 @@ function aktifkanTabRegister() {
 loginBtn.addEventListener("click", aktifkanTabLogin);
 registerBtn.addEventListener("click", aktifkanTabRegister);
 
-// ── Form Login ────────────────────────────────────
+// Ajax Login
 document.getElementById('form-login').addEventListener('submit', function(e) {
     e.preventDefault();
-
     const email    = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
     const errorDiv = document.getElementById('error-login');
-
     errorDiv.style.display = 'none';
 
     fetch('login.php', {
@@ -174,28 +165,23 @@ document.getElementById('form-login').addEventListener('submit', function(e) {
             errorDiv.style.display = 'block';
             errorDiv.textContent = data.message;
         }
-    })
-    .catch(() => {
-        errorDiv.style.display = 'block';
-        errorDiv.textContent = 'Terjadi kesalahan, coba lagi.';
     });
 });
 
-// ── Form Register ─────────────────────────────────
+// Ajax Register
 document.getElementById('form-register').addEventListener('submit', function(e) {
     e.preventDefault();
-
     const nama     = document.getElementById('regNama').value;
     const email    = document.getElementById('regEmail').value;
     const password = document.getElementById('regPassword').value;
+    const role     = document.getElementById('regRole').value; 
     const errorDiv = document.getElementById('error-register');
-
     errorDiv.style.display = 'none';
 
     fetch('register.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `nama=${encodeURIComponent(nama)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+        body: `nama=${encodeURIComponent(nama)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&role=${encodeURIComponent(role)}`
     })
     .then(res => res.json())
     .then(data => {
@@ -212,14 +198,11 @@ document.getElementById('form-register').addEventListener('submit', function(e) 
     });
 });
 
-// ── SCRIPT SAKTI DETEKSI OTOMATIS ──────────────────
-// Mengecek URL saat halaman selesai dimuat
 window.addEventListener('DOMContentLoaded', () => {
     if (window.location.hash === '#register') {
-        aktifkanTabRegister(); // Langsung pindah ke form daftar
+        aktifkanTabRegister();
     }
 });
 </script>
-
 </body>
 </html>
