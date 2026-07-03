@@ -16,7 +16,6 @@ body{
     justify-content:center;
     align-items:center;
     padding:30px;
-
     background:
     radial-gradient(circle at top left,#164f2125,transparent 35%),
     radial-gradient(circle at bottom right,#164f2120,transparent 35%),
@@ -26,15 +25,9 @@ body{
 .auth-card{
     width:100%;
     max-width:450px;
-
     background:white;
-
     border-radius:24px;
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.08),
-    0 20px 60px rgba(0,0,0,.08);
-
+    box-shadow: 0 10px 30px rgba(0,0,0,.08), 0 20px 60px rgba(0,0,0,.08);
     overflow:hidden;
 }
 
@@ -48,7 +41,6 @@ body{
     justify-content:center;
     align-items:center;
     gap:10px;
-
     font-size:26px;
     font-weight:800;
     color:#111827;
@@ -98,14 +90,8 @@ body{
 }
 
 @keyframes fade{
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
 }
 
 .form-group{
@@ -130,18 +116,16 @@ body{
     left:14px;
     transform:translateY(-50%);
     color:#9ca3af;
+    z-index: 10;
 }
 
 .input-icon input{
     width:100%;
     padding:13px 14px 13px 42px;
-
     border:1.5px solid #d1d5db;
     border-radius:12px;
-
     font-size:14px;
     outline:none;
-
     transition:.3s;
 }
 
@@ -150,46 +134,49 @@ body{
     box-shadow:0 0 0 4px rgba(22,79,33,.12);
 }
 
+/* GAYA KHUSUS UNTUK DROPDOWN SELECT */
+.input-icon select {
+    width: 100% !important;
+    display: block !important;
+    height: 46px !important;
+    padding: 10px 14px 10px 42px !important;
+    border: 1.5px solid #d1d5db !important;
+    border-radius: 12px !important;
+    font-size: 14px !important;
+    font-family: inherit !important;
+    color: #374151 !important;
+    background-color: white !important;
+    outline: none !important;
+    cursor: pointer !important;
+    -webkit-appearance: select !important;
+    -moz-appearance: select !important;
+    appearance: select !important;
+    transition: .3s;
+}
+
+.input-icon select:focus {
+    border-color: #164f21 !important;
+    box-shadow: 0 0 0 4px rgba(22, 79, 33, .12) !important;
+}
+
 .btn{
     border:none;
     cursor:pointer;
     border-radius:12px;
     font-size:14px;
     font-weight:700;
-
     display:flex;
     justify-content:center;
     align-items:center;
     gap:8px;
-
     transition:.3s;
 }
 
-.btn-full{
-    width:100%;
-    padding:14px;
-}
-
-.btn-primary{
-    background:#164f21;
-    color:white;
-}
-
-.btn-primary:hover{
-    background:#1f9b32;
-}
-
-.btn-outline{
-    background:white;
-    border:1.5px solid #e5e7eb;
-    color:#374151;
-    flex:1;
-    padding:12px;
-}
-
-.btn-outline:hover{
-    background:#f9fafb;
-}
+.btn-full{ width:100%; padding:14px; }
+.btn-primary{ background:#164f21; color:white; }
+.btn-primary:hover{ background:#1f9b32; }
+.btn-outline{ background:white; border:1.5px solid #e5e7eb; color:#374151; flex:1; padding:12px; }
+.btn-outline:hover{ background:#f9fafb; }
 
 .divider{
     display:flex;
@@ -199,31 +186,11 @@ body{
     color:#9ca3af;
     font-size:13px;
 }
-
-.divider::before,
-.divider::after{
-    content:"";
-    flex:1;
-    border-bottom:1px solid #e5e7eb;
-}
-
-.divider span{
-    padding:0 12px;
-}
-
-.role-buttons{
-    display:flex;
-    gap:12px;
-}
+.divider::before, .divider::after{ content:""; flex:1; border-bottom:1px solid #e5e7eb; }
+.divider span{ padding:0 12px; }
+.role-buttons{ display:flex; gap:12px; }
 
 @media(max-width:500px){
-
-    .auth-card{
-        border-radius:18px;
-    }
-
-    .role-buttons{
-        flex-direction:column;
-    }
-
+    .auth-card{ border-radius:18px; }
+    .role-buttons{ flex-direction:column; }
 }
