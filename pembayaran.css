@@ -698,3 +698,23 @@
     gap:6px;
 
 }
+
+.bank-select{
+    margin-bottom:20px;
+}
+
+.bank-select label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.bank-select select{
+    width:100%;
+    padding:12px 15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+    cursor:pointer;
+}
