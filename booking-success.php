@@ -94,7 +94,7 @@ $kode_booking =
 
     <div class="navbar-actions">
 
-      <a href="riwayat.html">
+      <a href="riwayat.php">
         <button class="btn btn-outline btn-sm">
           Riwayat
         </button>
