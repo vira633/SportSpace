@@ -2,29 +2,41 @@
 
 include "config.php";
 
-$filter = $_GET['filter'] ?? 'pending';
+$filter = $_GET['filter'] ?? 'semua';
 
 $where = "";
 
 if($filter != "semua"){
-    $where = "WHERE fields.verifikasi='$filter'";
+    $where = "WHERE f.verifikasi='$filter'";
 }
+
+$totalSemua = mysqli_fetch_assoc(
+    mysqli_query($conn, "SELECT COUNT(*) total FROM fields")
+)['total'];
+
+$totalPending = mysqli_fetch_assoc(
+    mysqli_query($conn, "SELECT COUNT(*) total FROM fields WHERE verifikasi='pending'")
+)['total'];
+
+$totalDiterima = mysqli_fetch_assoc(
+    mysqli_query($conn, "SELECT COUNT(*) total FROM fields WHERE verifikasi='diterima'")
+)['total'];
+
+$totalDitolak = mysqli_fetch_assoc(
+    mysqli_query($conn, "SELECT COUNT(*) total FROM fields WHERE verifikasi='ditolak'")
+)['total'];
 
 $queryVerifikasi = mysqli_query($conn,"
 SELECT
-    fields.*,
-    owners.nama AS owner_name,
-    owners.telepon,
-    owners.alamat
-
-FROM fields
-
-LEFT JOIN owners
-ON owners.field_id = fields.field_id
+    f.*,
+    u.nama AS nama_owner
+FROM fields f
+LEFT JOIN users u
+ON f.owner_id = u.user_id
 
 $where
 
-ORDER BY fields.field_id DESC
+ORDER BY f.field_id DESC
 ");
 
 if(!$queryVerifikasi){
