@@ -10,7 +10,20 @@ $field_id = $_POST['field_id'];
 $tanggal = $_POST['tanggal'];
 $jam_mulai = $_POST['jam_mulai'];
 $jam_selesai = $_POST['jam_selesai'];
-$total = $_POST['total'];
+$field = mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT harga
+FROM fields
+WHERE field_id='$field_id'
+")
+);
+
+$biaya_admin = 2500;
+
+$total =
+($_POST['durasi'] * $field['harga'])
++
+$biaya_admin;
 $metode = $_POST['metode'];
 $bank = $_POST['bank'] ?? null;
 if (

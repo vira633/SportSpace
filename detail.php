@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 session_start();
 include 'config.php';
 
@@ -75,9 +76,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
     $jamPenuh[] =
       sprintf("%02d:00", $i);
-
   }
-
 }
 ?>
 <!DOCTYPE html>
@@ -98,7 +97,6 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 </head>
 
 <script>
-
   const slotPrice = <?= $field['harga']; ?>;
 
   const selectedSlots = [];
@@ -110,24 +108,53 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
     button.classList.toggle("selected");
 
+    const semuaJam = [];
+
+    document.querySelectorAll(".slot-btn.selected").forEach(btn => {
+
+      semuaJam.push(parseInt(btn.dataset.start));
+
+    });
+
+    semuaJam.sort((a, b) => a - b);
+
+    let urut = true;
+
+    for (let i = 1; i < semuaJam.length; i++) {
+
+      if (semuaJam[i] - semuaJam[i - 1] != 1) {
+
+        urut = false;
+        break;
+
+      }
+
+    }
+
+    if (!urut) {
+
+      alert("Jam booking harus berurutan!");
+
+      button.classList.remove("selected");
+
+      return;
+
+    }
+
     const start = button.dataset.start;
     const end = button.dataset.end;
 
     const slot = `${start} - ${end}`;
 
-    if (button.classList.contains("selected")) {
+    selectedSlots.length = 0;
 
-      selectedSlots.push(slot);
+    document.querySelectorAll(".slot-btn.selected").forEach(btn => {
 
-    } else {
+      selectedSlots.push(
+        btn.dataset.start + " - " + btn.dataset.end
+      );
 
-      const index =
-        selectedSlots.indexOf(slot);
-
-      if (index > -1) {
-        selectedSlots.splice(index, 1);
-      }
-    }
+    });
 
     updateSummary();
   }
@@ -149,15 +176,14 @@ while ($b = mysqli_fetch_assoc($bookings)) {
       return;
     }
 
-    const sorted =
-      [...selectedSlots].sort();
+    const sorted = [...selectedSlots].sort();
 
     const first =
       sorted[0].split(" - ")[0];
 
     const last =
       sorted[sorted.length - 1]
-        .split(" - ")[1];
+      .split(" - ")[1];
 
     document.getElementById("jam_mulai").value =
       first.replace(".", ":");
@@ -186,7 +212,6 @@ while ($b = mysqli_fetch_assoc($bookings)) {
       .innerText =
       "Rp" + total.toLocaleString("id-ID");
   }
-
 </script>
 
 <body>
@@ -463,7 +488,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
                     $jamPenuh
                   );
 
-                ?>
+              ?>
 
                 <button class="slot-btn <?= $penuh ? 'penuh' : '' ?>" id="slot-<?= $mulai ?>" <?= $penuh ? 'disabled' : '' ?>
                   onclick="toggleSlot(this)"
@@ -651,11 +676,10 @@ while ($b = mysqli_fetch_assoc($bookings)) {
           </div>
 
           <script>
-
             const bookingDate =
               document.getElementById("booking-date-display");
 
-            bookingDate.addEventListener("change", function () {
+            bookingDate.addEventListener("change", function() {
 
               document.getElementById("booking-date").value =
                 this.value;
@@ -665,8 +689,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
               document.getElementById("summary-date").innerText =
                 tanggalFormat.toLocaleDateString(
-                  "id-ID",
-                  {
+                  "id-ID", {
                     weekday: "long",
                     day: "numeric",
                     month: "long",
@@ -675,8 +698,8 @@ while ($b = mysqli_fetch_assoc($bookings)) {
                 );
 
               fetch(
-                "cek-jadwal.php?field_id=<?= $field_id ?>&tanggal=" + this.value
-              )
+                  "cek-jadwal.php?field_id=<?= $field_id ?>&tanggal=" + this.value
+                )
 
                 .then(res => res.json())
 
@@ -702,10 +725,10 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
                     if (btn) {
 
-                     btn.classList.add("penuh");
-                     btn.classList.add("booked");
+                      btn.classList.add("penuh");
+                      btn.classList.add("booked");
 
-                     btn.disabled=true;
+                      btn.disabled = true;
 
                     }
 
@@ -716,8 +739,6 @@ while ($b = mysqli_fetch_assoc($bookings)) {
                 });
 
             });
-
-
           </script>
           <div class="owner-card">
 
@@ -879,21 +900,21 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
     if (favBtn) {
 
-      favBtn.onclick = function () {
+      favBtn.onclick = function() {
 
         const field_id = this.dataset.field;
 
         fetch("favorite.php", {
 
-          method: "POST",
+            method: "POST",
 
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
 
-          body: "field_id=" + field_id
+            body: "field_id=" + field_id
 
-        })
+          })
 
           .then(res => res.json())
 
@@ -920,6 +941,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
       }
 
     }
+
     function cekBooking() {
 
       const tanggal =
@@ -934,51 +956,51 @@ while ($b = mysqli_fetch_assoc($bookings)) {
       return true;
     }
 
-    function disablePastTime(){
+    function disablePastTime() {
 
-    const tanggal =
-    document.getElementById("booking-date-display").value;
+      const tanggal =
+        document.getElementById("booking-date-display").value;
 
-    if(tanggal=="") return;
+      if (tanggal == "") return;
 
-    const today=new Date();
+      const today = new Date();
 
-    const selected=new Date(tanggal);
+      const selected = new Date(tanggal);
 
-    document.querySelectorAll(".slot-btn").forEach(btn=>{
+      document.querySelectorAll(".slot-btn").forEach(btn => {
 
-        if(!btn.classList.contains("booked")){
+        if (!btn.classList.contains("booked")) {
 
-            btn.disabled=false;
+          btn.disabled = false;
 
-            btn.classList.remove("penuh");
+          btn.classList.remove("penuh");
 
         }
 
-    });
+      });
 
-    if(selected.toDateString()!=today.toDateString())
+      if (selected.toDateString() != today.toDateString())
         return;
 
-    const nowHour=today.getHours();
+      const nowHour = today.getHours();
 
-    document.querySelectorAll(".slot-btn").forEach(btn=>{
+      document.querySelectorAll(".slot-btn").forEach(btn => {
 
-        const start=parseInt(btn.dataset.start);
+        const start = parseInt(btn.dataset.start);
 
-        if(start<=nowHour){
+        if (start <= nowHour) {
 
-            btn.disabled=true;
+          btn.disabled = true;
 
-            btn.classList.add("penuh");
+          btn.classList.add("penuh");
 
         }
 
-    });
+      });
 
     }
-     
-    window.onload=function(){
+
+    window.onload = function() {
 
       disablePastTime();
 
