@@ -11,5 +11,5 @@ mysqli_query(
     WHERE field_id='$id'"
 );
 
-header("Location: dashboard-admin.php?notif=approve");
+header("Location: dashboard-admin.php?notif=approve#section-venue");
 exit;

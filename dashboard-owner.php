@@ -114,7 +114,7 @@ unset($_SESSION['toast']);
 
     <div class="sidebar-item" onclick="showSection('profil',this)">
       <i class="ti ti-building"></i> 
-      Profil GOR
+      Profil Owner
     </div>
 
     <a href="login.html" style="color:inherit;">

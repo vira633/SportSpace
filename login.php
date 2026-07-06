@@ -15,7 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Cari user berdasarkan email
-    $stmt = $conn->prepare("SELECT user_id, nama, email, password, role FROM users WHERE email = ?");
+    $stmt = $conn->prepare("
+    SELECT user_id, nama, email, password, role, aktif
+    FROM users
+    WHERE email = ?
+    ");
+
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -34,6 +39,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
         exit;
     }
+
+    // Cek apakah akun diban
+    if ($user['aktif'] == 'nonaktif') {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Akun Anda telah dinonaktifkan. Silakan hubungi administrator.'
+        ]);
+        $stmt->close();
+        exit;
+        }
 
     // Login berhasil — simpan ke session
     $_SESSION['user_id'] = $user['user_id'];

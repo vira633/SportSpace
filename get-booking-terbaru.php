@@ -10,6 +10,8 @@ $queryBookingTerbaru = mysqli_query(
         users.nama,
         fields.nama_lapangan,
         booking.tanggal,
+        booking.jam_mulai,
+        booking.jam_selesai,
         payment.total,
         booking.status
     FROM booking
