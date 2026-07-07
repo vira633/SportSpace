@@ -150,9 +150,13 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
     document.querySelectorAll(".slot-btn.selected").forEach(btn => {
 
-      selectedSlots.push(
-        btn.dataset.start + " - " + btn.dataset.end
-      );
+      selectedSlots.push({
+
+        start: btn.dataset.start,
+
+        end: btn.dataset.end
+
+      });
 
     });
 
@@ -176,20 +180,26 @@ while ($b = mysqli_fetch_assoc($bookings)) {
       return;
     }
 
-    const sorted = [...selectedSlots].sort();
+    const sorted = [...selectedSlots].sort((a, b) => {
 
-    const first =
-      sorted[0].split(" - ")[0];
+      return a.start.localeCompare(b.start);
 
-    const last =
-      sorted[sorted.length - 1]
-      .split(" - ")[1];
+    });
 
-    document.getElementById("jam_mulai").value =
-      first.replace(".", ":");
+    const first = sorted[0].start;
 
-    document.getElementById("jam_selesai").value =
-      last.replace(".", ":");
+    const last = sorted[sorted.length - 1].end;
+
+    console.log(selectedSlots);
+    console.log(first);
+    console.log(last);
+
+    document.getElementById("jam_mulai").value = first;
+
+    document.getElementById("jam_selesai").value = last;
+
+    console.log(first);
+    console.log(last);
 
     document.getElementById("durasi").value =
       selectedSlots.length;
@@ -488,23 +498,16 @@ while ($b = mysqli_fetch_assoc($bookings)) {
                     $jamPenuh
                   );
 
-              ?>
+                ?>
 
-                <button class="slot-btn <?= $penuh ? 'penuh' : '' ?>" id="slot-<?= $mulai ?>" <?= $penuh ? 'disabled' : '' ?>
-                  onclick="toggleSlot(this)"
-                  data-start="
-                <?= $jam ?>"
-                  data-end="
-                <?= str_replace(':', '.', $selesai) ?>">
+                <button class="slot-btn <?= $penuh ? 'penuh' : '' ?>" id="slot-<?= $mulai ?>" <?= $penuh ? 'disabled' : '' ?> onclick="toggleSlot(this)" data-start="<?= $mulai ?>" data-end="<?= $selesai ?>">
 
                   <?= str_replace(':', '.', $mulai) ?>
-                  –
+                  -
                   <?= str_replace(':', '.', $selesai) ?>
 
                 </button>
-
               <?php } ?>
-
             </div>
             <!-- REVIEW -->
             <div class="section-card">
@@ -679,7 +682,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
             const bookingDate =
               document.getElementById("booking-date-display");
 
-            bookingDate.addEventListener("change", function() {
+            bookingDate.addEventListener("change", function () {
 
               document.getElementById("booking-date").value =
                 this.value;
@@ -690,16 +693,16 @@ while ($b = mysqli_fetch_assoc($bookings)) {
               document.getElementById("summary-date").innerText =
                 tanggalFormat.toLocaleDateString(
                   "id-ID", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                  }
+                  weekday: "long",
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric"
+                }
                 );
 
               fetch(
-                  "cek-jadwal.php?field_id=<?= $field_id ?>&tanggal=" + this.value
-                )
+                "cek-jadwal.php?field_id=<?= $field_id ?>&tanggal=" + this.value
+              )
 
                 .then(res => res.json())
 
@@ -900,21 +903,21 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
     if (favBtn) {
 
-      favBtn.onclick = function() {
+      favBtn.onclick = function () {
 
         const field_id = this.dataset.field;
 
         fetch("favorite.php", {
 
-            method: "POST",
+          method: "POST",
 
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
 
-            body: "field_id=" + field_id
+          body: "field_id=" + field_id
 
-          })
+        })
 
           .then(res => res.json())
 
@@ -1000,7 +1003,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
     }
 
-    window.onload = function() {
+    window.onload = function () {
 
       disablePastTime();
 
