@@ -31,13 +31,30 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
     </div>
     <div class="navbar-actions">
       <?php if (isset($_SESSION['user_id'])): ?>
-        <span style="font-size:14px;color:var(--green);font-weight:600;">
-          Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!
-        </span>
 
-        <a href="logout.php" onclick="return confirm('Yakin ingin keluar dari akun Anda?');">
-          <button class="btn btn-outline btn-sm">Keluar</button>
-        </a>
+        <div class="user-dropdown-container">
+          <button type="button" class="user-dropdown-trigger" onclick="toggleUserDropdown(event)">
+            <i class="ti ti-user-circle" style="font-size: 20px;"></i>
+            <span>Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
+            <i class="ti ti-chevron-down arrow-icon"></i>
+          </button>
+
+          <div class="user-dropdown-menu" id="userMenuDropdown">
+            <a href="profile.php" class="user-dropdown-item">
+              <i class="ti ti-user"></i> Profile
+            </a>
+            <a href="riwayat.php" class="user-dropdown-item">
+              <i class="ti ti-history"></i> Riwayat
+            </a>
+            <a href="favourite" class="user-dropdown-item">
+              <i class="ti ti-heart"></i> Favorit
+            </a>
+            <div class="user-dropdown-divider"></div>
+            <a href="logout.php" class="user-dropdown-item logout-danger">
+              <i class="ti ti-logout"></i> Keluar
+            </a>
+          </div>
+        </div>
 
       <?php else: ?>
         <a href="login.html"><button class="btn btn-outline btn-sm">Masuk</button></a>
@@ -112,7 +129,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
           $icon = 'ti-swimming';
 
         // Foto lapangan
-        $foto = 'uploads/fields/' . $lap['gambar'];
+        $gambar = "uploads/fields/" . $lap['gambar'];
         ?>
         <div class="field-card" data-sport="<?= strtolower($lap['jenis']) ?>">
           <div class="field-img">
@@ -202,7 +219,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
       <h2>Punya GOR atau lapangan?</h2>
       <p>Daftarkan venumu dan mulai terima booking online. Gratis, mudah, dan transparan.</p>
     </div>
-    <a href="login.html"><button class="btn btn-white btn-lg">Daftar sebagai pemilik GOR <i
+    <a href="login.html#register"><button class="btn btn-white btn-lg">Daftar sebagai pemilik GOR <i
           class="ti ti-arrow-right"></i></button></a>
   </div>
 
@@ -240,7 +257,30 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
 
 
   <script src="main.js"></script>
+
   <script>
+    // 1. Fungsi Dropdown User Sakti (Udah digabung di sini biar langsung kenal)
+    function toggleUserDropdown(event) {
+      event.stopPropagation();
+      const dropdown = document.getElementById('userMenuDropdown');
+      if (dropdown) {
+        dropdown.classList.toggle('show');
+      }
+    }
+
+    // Klik di luar menu buat nutup otomatis dropdown-nya
+    document.addEventListener('click', function (event) {
+      const dropdown = document.getElementById('userMenuDropdown');
+      const trigger = document.querySelector('.user-dropdown-trigger');
+
+      if (dropdown && dropdown.classList.contains('show')) {
+        if (trigger && !dropdown.contains(event.target) && !trigger.contains(event.target)) {
+          dropdown.classList.remove('show');
+        }
+      }
+    });
+
+    // 2. Fungsi Bawaan Kelompokmu (Filter Kategori Olahraga)
     function filterSport(chip, sport) {
       document.querySelectorAll('.sport-chip').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
@@ -249,6 +289,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
       });
     }
 
+    // 3. Fungsi Bawaan Kelompokmu (Scroll Efek Navbar)
     window.addEventListener('scroll', () => {
       let current = "";
       const sections = document.querySelectorAll("section[id], div[id].section");
@@ -268,7 +309,5 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
       });
     });
   </script>
-
 </body>
-
 </html>

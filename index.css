@@ -932,9 +932,127 @@ a {
   color: var(--green);
 }
 
+/* Styling Tombol Masuk & Daftar Asli */
+.btn-login {
+  color: var(--green);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: opacity 0.2s;
+}
+
+.btn-login:hover {
+  opacity: 0.8;
+}
+
+.btn-register {
+  background-color: var(--green);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  transition: background 0.2s;
+}
+
+.btn-register:hover {
+  background-color: var(--green-mid);
+}
+
 .fields-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
   margin-block: 16px;
+}
+
+/* Container Utama Dropdown */
+.user-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tombol Trigger (Halo, Nama User!) */
+.user-dropdown-trigger {
+  background: none;
+  border: none;
+  color: var(--green);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s;
+}
+
+.user-dropdown-trigger:hover {
+  background-color: var(--gray-100);
+}
+
+/* Kotak Dropdown Melayang Ke Bawah */
+.user-dropdown-menu {
+  display: none; /* Sembunyikan default */
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  min-width: 180px;
+  background-color: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  padding: 6px 0;
+}
+
+/* Class Tampil saat di-klik */
+.user-dropdown-menu.show {
+  display: block;
+  animation: slideDownNav 0.2s ease-out;
+}
+
+/* Item Menu di Dalam Dropdown */
+.user-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: var(--gray-800);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: background 0.2s;
+}
+
+.user-dropdown-item:hover {
+  background-color: var(--gray-50);
+  color: var(--green);
+}
+
+/* Garis Pembatas */
+.user-dropdown-divider {
+  height: 1px;
+  background-color: var(--gray-200);
+  margin: 6px 0;
+}
+
+/* Item Keluar (Warna Merah) */
+.user-dropdown-item.logout-danger {
+  color: var(--red);
+}
+
+.user-dropdown-item.logout-danger:hover {
+  background-color: var(--red-light);
+  color: var(--red);
+}
+
+@keyframes slideDownNav {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
