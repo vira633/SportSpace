@@ -229,11 +229,11 @@ while ($b = mysqli_fetch_assoc($bookings)) {
   <!-- NAVBAR -->
   <nav class="navbar">
 
-    <div class="navbar-brand">
+    <a href="index.php" class="navbar-brand">
       <i class="ti ti-bowling"></i>
       <span>SportSpace</span>
       <div class="dot"></div>
-    </div>
+    </a>
 
     <div class="navbar-links">
       <a href="index.php">Beranda</a>

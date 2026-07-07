@@ -471,7 +471,7 @@ $kode_booking =
 
     &nbsp;·&nbsp;
 
-    &copy; 2025
+    &copy; 2026
 
   </footer>
 
