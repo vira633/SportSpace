@@ -243,7 +243,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
     <div class="navbar-actions">
 
-      <a href="riwayat.html">
+      <a href="riwayat.php">
         <button class="btn btn-outline btn-sm">
           Riwayat
         </button>
@@ -754,50 +754,56 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
             <div class="owner-profile">
 
-              <div class="avatar green">
-                <?php
-                $inisial = '';
-                $nama = explode(' ', $field['owner_name']);
+              <?php
+              $inisial = "";
 
-                foreach ($nama as $n) {
-                  $inisial .= strtoupper(substr($n, 0, 1));
+              if (!empty($field['owner_name'])) {
+
+                $kata = explode(" ", trim($field['owner_name']));
+
+                foreach ($kata as $k) {
+                  $inisial .= strtoupper(substr($k, 0, 1));
                 }
 
-                echo substr($inisial, 0, 2);
-                ?>
+                $inisial = substr($inisial, 0, 2);
+
+              } else {
+
+                $inisial = "PG";
+
+              }
+              ?>
+
+               <div class="avatar green">
+                <?= $inisial ?>
               </div>
 
-              <div>
+              <div class="owner-text">
 
-                <strong style="display:block;">
-                  <?= htmlspecialchars($field['owner_name']); ?>
-                </strong>
+                <h4>
+                  <?= $field['owner_name']; ?>
+                </h4>
+                <span>Pemilik GOR</span>
 
-                <span style="font-size:13px;color:var(--gray-400);">
-                  Pemilik GOR
-                </span>
-
-
-              </div>
-
-              <div class="summary-divider"></div>
-
-              <div class="owner-info">
-                <i class="ti ti-phone"></i>
-                <?= htmlspecialchars($field['owner_phone']); ?>
-              </div>
-
-              <div class="owner-info">
-                <i class="ti ti-map-pin"></i>
-                <?= htmlspecialchars($field['owner_address']); ?>
               </div>
 
             </div>
-            <a href="chat.php?field_id=<?= $field['field_id'] ?>" class="btn btn-primary btn-full">
 
+            <div class="summary-divider"></div>
+
+            <div class="owner-info">
+              <i class="ti ti-phone"></i>
+              <?= htmlspecialchars($field['owner_phone']); ?>
+            </div>
+
+            <div class="owner-info">
+              <i class="ti ti-map-pin"></i>
+              <?= htmlspecialchars($field['owner_address']); ?>
+            </div>
+
+            <a href="chat.php?field_id=<?= $field['field_id']; ?>" class="btn btn-primary btn-full">
               <i class="ti ti-message-circle"></i>
               Chat Owner
-
             </a>
           </div>
         </div>

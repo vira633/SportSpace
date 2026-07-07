@@ -238,7 +238,7 @@ if ($from == "success") {
 
                     <span>Metode</span>
 
-                    <strong><?= strtoupper($data['metode']) ?></strong>
+                    <strong><?= strtoupper($data['metode_pembayaran']) ?></strong>
 
                 </div>
 
@@ -266,11 +266,57 @@ if ($from == "success") {
 
             <div class="owner-box">
 
-                <strong>Pemilik GOR</strong>
+                <h3>Pemilik GOR</h3>
 
-                <p><?= $data['owner_nama'] ?></p>
+                <?php
+                $inisial = "";
 
-                <p><?= $data['telepon'] ?></p>
+                if (!empty($data['owner_name'])) {
+
+                    $nama = explode(" ", trim($data['owner_name']));
+
+                    foreach ($nama as $n) {
+                        $inisial .= strtoupper(substr($n, 0, 1));
+                    }
+
+                    $inisial = substr($inisial, 0, 2);
+
+                } else {
+
+                    $inisial = "PG";
+
+                }
+                ?>
+
+                <div class="owner-profile">
+
+                    <div class="owner-detail">
+
+                        <h4><?= $data['owner_name'] ?></h4>
+
+                        <div class="owner-contact">
+
+                            <div>
+
+                                <i class="ti ti-phone"></i>
+
+                                <?= $data['owner_phone'] ?>
+
+                            </div>
+
+                            <div>
+
+                                <i class="ti ti-map-pin"></i>
+
+                                <?= $data['owner_address'] ?>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 

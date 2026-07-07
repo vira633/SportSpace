@@ -426,13 +426,13 @@ $kode_booking =
         <div class="owner-profile">
 
           <div class="avatar green">
-            <?= strtoupper(substr($data['owner_nama'], 0, 1)); ?>
+            <?= strtoupper(substr($data['owner_name'], 0, 1)); ?>
           </div>
 
           <div>
 
             <strong>
-              <?= $data['owner_nama']; ?>
+              <?= $data['owner_name']; ?>
             </strong>
             <span style="font-size:13px;color:var(--gray-400);">
               Pemilik GOR
@@ -446,12 +446,12 @@ $kode_booking =
 
         <div class="owner-info">
           <i class="ti ti-phone"></i>
-          <?= $data['telepon']; ?>
+          <?= $data['owner_phone']; ?>
         </div>
 
         <div class="owner-info">
           <i class="ti ti-map-pin"></i>
-          <?= $data['alamat']; ?>
+          <?= $data['owner_address']; ?>
         </div>
 
       </div>
