@@ -119,6 +119,19 @@ if ($from == "success") {
     <div class="invoice-wrapper">
 
         <div class="invoice-card">
+
+            <?php
+            if (
+                $data['booking_status'] == "terkonfirmasi" ||
+                $data['booking_status'] == "selesai"
+            ) {
+                ?>
+                <div class="stamp paid-stamp">
+                    LUNAS
+                </div>
+                <?php
+            }
+            ?>
             <a href="<?= $backLink ?>" class="close-invoice">
                 <i class="ti ti-x"></i>
             </a>
@@ -138,19 +151,19 @@ if ($from == "success") {
 
                 if ($data['booking_status'] == "terkonfirmasi") {
 
-                    echo '<span class="status paid">PAID</span>';
+                    echo '<span class="status paid">terkonfirmasi</span>';
 
                 } elseif ($data['booking_status'] == "tertunda") {
 
-                    echo '<span class="status pending">PENDING</span>';
+                    echo '<span class="status pending">tertunda</span>';
 
                 } elseif ($data['booking_status'] == "dibatalkan") {
 
-                    echo '<span class="status cancel">CANCELLED</span>';
+                    echo '<span class="status cancel">dibatalkan</span>';
 
                 } else {
 
-                    echo '<span class="status paid">SELESAI</span>';
+                    echo '<span class="status paid">selesai</span>';
 
                 }
 

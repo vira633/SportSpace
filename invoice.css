@@ -345,3 +345,40 @@ body {
     color: #fff;
     transform: rotate(90deg);
 }
+
+.invoice-card{
+    position: relative;
+    overflow: hidden;
+}
+
+.stamp{
+    position:absolute;
+    top:120px;
+    right:-25px;
+
+    width:180px;
+    text-align:center;
+
+    padding:12px 0;
+
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:3px;
+
+    transform:rotate(30deg);
+
+    border:5px solid;
+
+    opacity:.18;
+
+    pointer-events:none;
+
+    z-index:20;
+
+    font-family:'Syne',sans-serif;
+}
+
+.paid-stamp{
+    color:#16a34a;
+    border-color:#16a34a;
+}
