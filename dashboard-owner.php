@@ -114,7 +114,7 @@ unset($_SESSION['toast']);
 
     <div class="sidebar-item" onclick="showSection('profil',this)">
       <i class="ti ti-building"></i> 
-      Profil Owner
+      Pengaturan
     </div>
 
     <a href="login.html" style="color:inherit;">
@@ -547,9 +547,10 @@ unset($_SESSION['toast']);
           </div>
           
           <div class="field-status">
+
             <div class="booking-status">
               <small>Status Booking</small>
-              <span class="booking-badge">
+              <span class="booking-badge <?= strtolower($field['status']) == 'tersedia' ? 'badge-green' : 'badge-red'; ?>">
                 <?= ucfirst($field['status']); ?>
               </span>
             </div>
@@ -557,11 +558,11 @@ unset($_SESSION['toast']);
             <div class="lapangan-status">
               <small>Status Lapangan</small>
               <span
-                class="lapangan-text"
-                id="status-text-<?= $field['field_id']; ?>">
-                <?= ucfirst($field['aktif']); ?>
-              </span>
-            </div>
+              id="status-text-<?= $field['field_id']; ?>"
+              class="lapangan-badge <?= strtolower($field['aktif']) == 'aktif' ? 'badge-green' : 'badge-red'; ?>">
+              <?= ucfirst($field['aktif']); ?>
+            </span>
+          </div>
           </div>
           
           <div class="field-btns">
@@ -677,7 +678,7 @@ unset($_SESSION['toast']);
           <option value="">Semua Status</option>
           <option value="tertunda">Tertunda</option>
           <option value="terkonfirmasi">Terkonfirmasi</option>
-          <option value="dibatalkan">Dibatalkan</option>
+          <option value="dibatalkan">Ditolak</option>
           <option value="selesai">Selesai</option>
         </select>
 
@@ -713,12 +714,12 @@ unset($_SESSION['toast']);
 
         <div class="stat-chip amber">
           <i class="ti ti-clock"></i>
-          <span><?= $pending['total']; ?> Pending</span>
+          <span><?= $pending['total']; ?> Tertunda</span>
         </div>
 
         <div class="stat-chip blue">
           <i class="ti ti-calendar-check"></i>
-          <span><?= $konfirmasi['total']; ?> Dikonfirmasi</span>
+          <span><?= $konfirmasi['total']; ?> Terkonfirmasi</span>
         </div>
 
         <div class="stat-chip green">
@@ -845,6 +846,7 @@ unset($_SESSION['toast']);
     <!-- KELOLA JADWAL -->
      <div id="section-jadwal" style="display:none;">
       <h1 class="page-title">Kelola Jadwal</h1>
+      <div class="flex-between">
 
       <div class="jadwal-filter">
 
@@ -925,6 +927,7 @@ unset($_SESSION['toast']);
           </a>
         </div>
       </div>
+    </div>
       
       <div class="legend">
         <div class="legend-item"><div class="legend-dot booked"></div> Terpesan</div>
@@ -1141,166 +1144,116 @@ unset($_SESSION['toast']);
         </form>
       </div>
 
-    <!-- PROFIL GOR -->
-    <div id="section-profil" style="<?= $section=='profil' ? 'display:block;' : 'display:none;' ?>" >
-    <h1 class="page-title">Profil GOR</h1>
-    <div class="card card-no-mb">
-      <div class="card-header">
-        <i class="ti ti-edit icon-green"></i> 
-        Edit Informasi GOR
-      </div>
+    <!-- PROFIL OWNER -->
+    <div id="section-profil" style="<?= $section=='profil' ? 'display:block;' : 'display:none;' ?>">
 
-      <div class="card-body">
-        <form
-          action="update-profile-owner.php"
-          method="POST"
-          enctype="multipart/form-data">
+    <h1 class="page-title">Pengaturan</h1>
 
-          <input
-            type="hidden"
-            name="field_id"
-            value="<?= $profil['field_id']; ?>">
+    <div class="setting-grid">
 
-          <input
-            type="hidden"
-            name="owner_id"
-            value="<?= $profil['owner_id']; ?>">
-        
-          <div class="grid-form">
+        <!-- CARD PROFIL OWNER -->
 
-            <div class="form-group col-span-2">
-              <label class="form-label">Nama GOR</label>
-              <input
-                type="text"
-                class="form-input"
-                name="nama_lapangan"
-                value="<?= $profil['nama_lapangan']; ?>">
-            </div>
+        <div class="setting-card">
 
-            <div class="form-group col-span-2">
-              <label class="form-label">Alamat Lengkap</label>
-              <input
-                type="text"
-                class="form-input"
-                name="lokasi"
-                value="<?= $profil['lokasi']; ?>">
-            </div>
+              <h3>
+                <i class="ti ti-user-circle"></i>
+                Profil Owner
+              </h3>
 
-            <div class="form-group">
-              <label class="form-label">Nama Owner</label>
-              <input
-                type="text"
-                class="form-input"
-                name="nama"
-                value="<?= $profil['nama']; ?>">
-            </div>
+            <form action="update-profile-owner.php" method="POST">
 
-            <div class="form-group">
-              <label class="form-label">Nomor HP / WA</label>
-              <input
-                type="tel"
-                class="form-input"
-                name="telepon"
-                value="<?= $profil['telepon']; ?>">
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Email</label>
-              <input
-                type="email"
-                class="form-input"
-                name="email"
-                value="<?= $profil['email']; ?>"
-                placeholder="Masukkan email owner">
-            </div>
-
-            <div class="form-group col-span-2">
-              <label class="form-label">Deskripsi GOR</label>
-              <textarea
-                class="form-input textarea-input"
-                name="deskripsi"
-                rows="5"><?= $profil['deskripsi']; ?>
-              </textarea>
-            </div>
-
-            <div class="form-group col-span-2">
-              <label class="form-label">Fasilitas Tersedia</label>
-
-              <?php
-                $fasilitas = array_map('trim', explode(",", $profil['fasilitas']));
-              ?>
-
-              <div class="profil-facilities">
-                <label>
+              <div class="form-group">
+                  <label>Nama Owner</label>
                   <input
-                    type="checkbox"
-                    name="fasilitas[]"
-                    value="Parkir"
-                    <?= in_array("Parkir",$fasilitas) ? "checked" : ""; ?>>
-                    Parkir
-                </label>
-                
-                <label>
-                  <input
-                    type="checkbox"
-                    name="fasilitas[]"
-                    value="Kantin"
-                    <?= in_array("Kantin",$fasilitas) ? "checked" : ""; ?>>
-                    Kantin
-                </label>
-                
-                <label>
-                  <input
-                    type="checkbox"
-                    name="fasilitas[]"
-                    value="Mushola"
-                    <?= in_array("Mushola",$fasilitas) ? "checked" : ""; ?>>
-                    Mushola
-                </label>
-                
-                <label>
-                  <input
-                    type="checkbox"
-                    name="fasilitas[]"
-                    value="Toilet"
-                    <?= in_array("Toilet",$fasilitas) ? "checked" : ""; ?>>
-                    Kamar Mandi
-                </label>
-                
-                <label>
-                  <input
-                    type="checkbox"
-                    name="fasilitas[]"
-                    value="Loker"
-                    <?= in_array("Loker",$fasilitas) ? "checked" : ""; ?>>
-                    Loker
-                </label>
-                
-                <label>
-                  <input
-                    type="checkbox"
-                    name="fasilitas[]"
-                    value="WiFi"
-                    <?= in_array("WiFi",$fasilitas) ? "checked" : ""; ?>>
-                    WiFi
-                </label>
+                      type="text"
+                      name="nama"
+                      class="form-input"
+                      value="<?= htmlspecialchars($profil['nama'] ?? ''); ?>">
               </div>
-            </div>
-          </div>
 
-          <div class="flex-actions">
-            <button type="submit" class="btn btn-primary">
-              <i class="ti ti-device-floppy"></i>
-              Simpan Perubahan
-            </button>
-            <button type="reset" class="btn btn-outline">
-              Reset
-            </button>
-          </div>
-        </form>
-      </div>
+              <div class="form-group">
+                  <label>Email</label>
+                  <input
+                      type="email"
+                      name="email"
+                      class="form-input"
+                      value="<?= htmlspecialchars($profil['email'] ?? ''); ?>"
+                      required>
+              </div>
+
+              <div class="form-group">
+                  <label>Nomor HP / WA</label>
+                  <input
+                      type="text"
+                      name="telepon"
+                      class="form-input"
+                      value="<?= htmlspecialchars($profil['telepon'] ?? ''); ?>">
+              </div>
+
+              <button
+                  type="submit"
+                  class="btn btn-primary btn-sm">
+                  Perbarui Profil
+              </button>
+
+          </form>
+
+        </div>
+
+        <!-- CARD PASSWORD -->
+
+        <div class="setting-card">
+
+            <h3>
+                <i class="ti ti-lock-password"></i>
+                Ubah Password
+            </h3>
+
+            <form action="update-password-owner.php" method="POST">
+
+              <div class="form-group">
+                  <label>Password Lama</label>
+                  <input
+                    type="password"
+                    name="password_lama"
+                    class="form-input"
+                    placeholder="Masukkan password lama"
+                    required>
+              </div>
+
+              <div class="form-group">
+                  <label>Password Baru</label>
+                  <input
+                    type="password"
+                    name="password_baru"
+                    class="form-input"
+                    placeholder="Masukkan password baru"
+                    required>
+              </div>
+
+              <div class="form-group">
+                  <label>Konfirmasi Password Baru</label>
+                  <input
+                    type="password"
+                    name="konfirmasi_password"
+                    class="form-input"
+                    placeholder="Ulangi password baru"
+                    required>
+              </div>
+
+              <button
+                  type="submit"
+                  class="btn btn-primary">
+                  Ubah Password
+              </button>
+
+          </form>
+
+        </div>
+
     </div>
-  </div>
+
+</div>
 </main>
 </div>
 
@@ -1724,12 +1677,19 @@ async function toggleFieldStatus(element, fieldId) {
         const result = await response.json();
 
         const statusText = document.getElementById(`status-text-${fieldId}`);
+
         if(result.success && statusText){
           statusText.textContent =
           result.status.charAt(0).toUpperCase() +
           result.status.slice(1);
-        }
 
+          statusText.classList.remove("badge-green", "badge-red");
+          if(result.status === "aktif"){
+            statusText.classList.add("badge-green");
+          }else{
+            statusText.classList.add("badge-red");
+          }
+        }
         if (!result.success) {
 
             element.checked = !statusSebelumnya;

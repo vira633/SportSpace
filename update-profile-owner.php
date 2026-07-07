@@ -3,52 +3,25 @@ session_start();
 
 include "config.php";
 
-$field_id = $_POST['field_id'];
-$owner_id = $_POST['owner_id'];
+$userId   = $_SESSION['user_id'];
 
-$nama_lapangan = $_POST['nama_lapangan'];
-$lokasi = $_POST['lokasi'];
-$deskripsi = $_POST['deskripsi'];
+$nama     = $_POST['nama'];
+$email    = $_POST['email'];
+$telepon  = $_POST['telepon'];
 
-$nama_owner = $_POST['nama'];
-$telepon = $_POST['telepon'];
-$email = $_POST['email'];
-$alamat = $_POST['alamat'];
-
-$fasilitas = "";
-
-if(isset($_POST['fasilitas'])){
-    $fasilitas = implode(",", $_POST['fasilitas']);
-}
-
-$queryFields = mysqli_query($conn,"
-UPDATE fields
-SET
-nama_lapangan='$nama_lapangan',
-lokasi='$lokasi',
-owner_name='$nama_owner',
-owner_phone='$telepon',
-owner_address='$alamat',
-fasilitas='$fasilitas',
-deskripsi='$deskripsi'
-WHERE field_id='$field_id'
-");
-
-$queryOwner = mysqli_query($conn,"
+$query = mysqli_query($conn,"
 UPDATE owners
 SET
-nama='$nama_owner',
-telepon='$telepon',
-alamat='$alamat',
-email='$email'
-WHERE owner_id='$owner_id'
+nama='$nama',
+email='$email',
+telepon='$telepon'
+WHERE user_id='$userId'
 ");
 
-if($queryFields && $queryOwner){
+if($query){
 
-    $_SESSION['success'] = "Profil GOR berhasil diperbarui.";
-
-    $_SESSION['open_section'] = "profil";
+    $_SESSION['toast'] = "Profil berhasil diperbarui.";
+    $_SESSION['open_section']="profil";
 
     header("Location: dashboard-owner.php");
     exit;
