@@ -7,6 +7,7 @@ include "get-users.php";
 include "get-verifikasi.php";
 include "get-all-booking.php";
 include "get-admin-profile.php";
+
 ?>
 
 <?php
@@ -481,7 +482,7 @@ date("Y");
               
               <a href="dashboard-admin.php?filter=pending"
                 class="filter-btn <?= $filter=='pending' ? 'active' : '' ?>">
-                Pending (<?= $totalPending ?>)
+                Tertunda (<?= $totalPending ?>)
               </a>
               
               <a href="dashboard-admin.php?filter=diterima"

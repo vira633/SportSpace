@@ -2,18 +2,13 @@
 
 include "config.php";
 
+$userId = $_SESSION['user_id'] ?? 0;
+
 $queryProfil = mysqli_query($conn,"
-SELECT
-    fields.*,
-    owners.owner_id,
-    owners.nama,
-    owners.telepon,
-    owners.alamat,
-    owners.email
-FROM fields
-LEFT JOIN owners
-ON owners.field_id = fields.field_id
-LIMIT 1
+    SELECT *
+    FROM owners
+    WHERE user_id='$userId'
+    LIMIT 1
 ");
 
 $profil = mysqli_fetch_assoc($queryProfil);
