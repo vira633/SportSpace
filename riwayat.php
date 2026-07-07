@@ -60,6 +60,15 @@ WHERE user_id='$user_id'
 AND status='dibatalkan'
 "))['total'];
 
+
+$now = date("Y-m-d H:i:s");
+
+mysqli_query($conn, "
+UPDATE booking
+SET status='selesai'
+WHERE status='terkonfirmasi'
+AND CONCAT(tanggal,' ',jam_selesai) <= '$now'
+");
 /* ===========================
    RIWAYAT BOOKING
 =========================== */
@@ -73,7 +82,8 @@ f.nama_lapangan,
 f.jenis,
 f.gambar,
 f.lokasi,
-f.owner_name
+f.owner_name,
+f.owner_phone
 
 FROM booking b
 
@@ -83,6 +93,7 @@ ON b.field_id=f.field_id
 WHERE b.user_id='$user_id'
 
 ORDER BY b.booking_id DESC
+
 ");
 ?>
 
@@ -97,21 +108,23 @@ ORDER BY b.booking_id DESC
 
   <title>Riwayat Booking</title>
 
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
 
   <link rel="stylesheet" href="riwayat.css?v=<?= time(); ?>">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="index.css?v=<?= time(); ?>">
 
 </head>
 
 <body>
 
   <nav class="navbar">
+
     <div class="navbar-brand">
       <i class="ti ti-bowling"></i>
       <span>SportSpace</span>
       <div class="dot"></div>
     </div>
+
   </nav>
 
   <div class="container">
@@ -154,28 +167,23 @@ ORDER BY b.booking_id DESC
       <div class="filter">
 
         <button class="active" data-filter="semua">
-          Semua
-          (<?= $totalBooking ?>)
+          Semua (<?= $totalBooking ?>)
         </button>
 
         <button data-filter="menunggu">
-          Menunggu
-          (<?= $totalMenunggu ?>)
+          Menunggu (<?= $totalMenunggu ?>)
         </button>
 
         <button data-filter="terkonfirmasi">
-          Terkonfirmasi
-          (<?= $totalKonfirmasi ?>)
+          Terkonfirmasi (<?= $totalKonfirmasi ?>)
         </button>
 
         <button data-filter="selesai">
-          Selesai
-          (<?= $totalSelesai ?>)
+          Selesai (<?= $totalSelesai ?>)
         </button>
 
         <button data-filter="dibatalkan">
-          Dibatalkan
-          (<?= $totalBatal ?>)
+          Dibatalkan (<?= $totalBatal ?>)
         </button>
 
       </div>
@@ -227,7 +235,9 @@ ORDER BY b.booking_id DESC
 
           ?>
 
-          <div class="booking-card" data-status="<?= $status ?>" data-name="<?= strtolower($row['nama_lapangan']); ?>">
+          <div class="booking-card" data-id="<?= $row['booking_id']; ?>" data-status="<?= $status ?>"
+            data-name="<?= strtolower($row['nama_lapangan']); ?>" data-date="<?= $row['tanggal']; ?>"
+            data-start="<?= $row['jam_mulai']; ?>" data-end="<?= $row['jam_selesai']; ?>">
 
             <!-- FOTO -->
 
@@ -311,6 +321,14 @@ ORDER BY b.booking_id DESC
 
                 <div>
 
+                  <i class="ti ti-phone"></i>
+
+                  <?= $row['owner_phone']; ?>
+
+                </div>
+
+                <div>
+
                   <i class="ti ti-ticket"></i>
 
                   <?= $row['booking_code']; ?>
@@ -327,7 +345,7 @@ ORDER BY b.booking_id DESC
 
                 <div>
 
-                  <i class="ti ti-timer"></i>
+                  <i class="ti ti-time-duration-45"></i>
 
                   <?= $durasi ?> Jam
 
@@ -357,6 +375,9 @@ ORDER BY b.booking_id DESC
 
                   <?php if ($status == "menunggu konfirmasi" || $status == "tertunda") { ?>
 
+                    <a href="reschedule.php?id=<?= $row['booking_id']; ?>" class="btn btn-reschedule">
+                      Reschedule
+                    </a>
                     <a href="batalkan_booking.php?id=<?= $row['booking_id']; ?>" class="btn btn-cancel"
                       onclick="return confirm('Yakin ingin membatalkan booking?')">
 
@@ -365,6 +386,7 @@ ORDER BY b.booking_id DESC
                     </a>
 
                   <?php } ?>
+
 
                   <?php if ($status == "selesai") { ?>
 
@@ -399,65 +421,130 @@ ORDER BY b.booking_id DESC
   </div> <!-- container -->
   <script>
 
-    const cards = document.querySelectorAll(".booking-card");
-
-    const search = document.getElementById("searchInput");
-
-    search.addEventListener("keyup", function () {
-
-      let key = this.value.toLowerCase();
-
-      cards.forEach(card => {
-
-        let nama = card.dataset.name;
-
-        card.style.display = nama.includes(key) ? "flex" : "none";
-
-      });
-
-    });
-
     const buttons = document.querySelectorAll(".filter button");
+
+    const bookingList = document.querySelector(".booking-list");
+    const cards = [...document.querySelectorAll(".booking-card")];
 
     buttons.forEach(btn => {
 
       btn.onclick = function () {
 
         buttons.forEach(b => b.classList.remove("active"));
-
         this.classList.add("active");
 
-        let status = this.dataset.filter;
+        let filter = this.dataset.filter;
 
-        cards.forEach(card => {
+        let result = [...cards];
 
-          if (status == "semua") {
+        if (filter == "semua") {
 
-            card.style.display = "flex";
+          result.sort((a, b) => {
 
-          } else if (status == "menunggu") {
+            return Number(b.dataset.id) - Number(a.dataset.id);
 
-            card.style.display =
-              (
-                card.dataset.status == "menunggu konfirmasi" ||
-                card.dataset.status == "tertunda"
-              )
-                ? "flex" : "none";
+          });
 
-          } else {
+        }
 
-            card.style.display =
-              card.dataset.status == status
-                ? "flex" : "none";
+        else if (filter == "menunggu") {
 
-          }
+          result = result.filter(card =>
+
+            card.dataset.status == "menunggu konfirmasi"
+
+            ||
+
+            card.dataset.status == "tertunda"
+
+          );
+
+          result.sort((a, b) => {
+
+            let t1 = new Date(a.dataset.date + " " + a.dataset.start);
+
+            let t2 = new Date(b.dataset.date + " " + b.dataset.start);
+
+            return t1 - t2;
+
+          });
+
+        }
+
+        else if (filter == "terkonfirmasi") {
+
+          result = result.filter(card =>
+
+            card.dataset.status == "terkonfirmasi"
+
+          );
+
+          result.sort((a, b) => {
+
+            let t1 = new Date(a.dataset.date + " " + a.dataset.start);
+
+            let t2 = new Date(b.dataset.date + " " + b.dataset.start);
+
+            return t1 - t2;
+
+          });
+
+        }
+
+        else if (filter == "dibatalkan") {
+
+          result = result.filter(card =>
+
+            card.dataset.status == "dibatalkan"
+
+          );
+
+          result.sort((a, b) => {
+
+            let t1 = new Date(a.dataset.date + " " + a.dataset.start);
+
+            let t2 = new Date(b.dataset.date + " " + b.dataset.start);
+
+            return t1 - t2;
+
+          });
+
+        }
+
+        else if (filter == "selesai") {
+
+          result = result.filter(card =>
+
+            card.dataset.status == "selesai"
+
+          );
+
+          result.sort((a, b) => {
+
+            let t1 = new Date(a.dataset.date + " " + a.dataset.end);
+
+            let t2 = new Date(b.dataset.date + " " + b.dataset.end);
+
+            return t2 - t1;
+
+          });
+
+        }
+
+        cards.forEach(card => card.style.display = "none");
+
+        result.forEach(card => {
+
+          card.style.display = "flex";
+
+          bookingList.appendChild(card);
 
         });
 
       }
 
     });
-
+    document.querySelector('.filter button.active').click();
   </script>
 </body>
 
