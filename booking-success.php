@@ -25,24 +25,30 @@ JOIN payment p
 ON b.booking_id = p.booking_id
 
 LEFT JOIN owners o
-ON f.field_id = o.field_id
+ON f.owner_id = o.owner_id
 
 WHERE b.booking_id = '$booking_id'
 ");
 $data = mysqli_fetch_assoc($query);
 
+
 if (!$data) {
   die("Booking tidak ditemukan");
 }
 
-$durasi =
-  (
-    strtotime($data['jam_selesai'])
-    -
-    strtotime($data['jam_mulai'])
-  )
-  /
-  3600;
+$durasi = intval(
+
+(
+strtotime($data['jam_selesai'])
+-
+strtotime($data['jam_mulai'])
+)
+
+/
+
+3600
+
+);
 
 $kode_booking =
   "SS-" .
@@ -266,7 +272,7 @@ $kode_booking =
               </button>
 
             </a>
-            <a href="riwayat.html">
+            <a href="riwayat.php">
 
               <button class="btn btn-primary btn-lg">
 
