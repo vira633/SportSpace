@@ -378,7 +378,7 @@ ORDER BY b.booking_id DESC
                     <a href="reschedule.php?id=<?= $row['booking_id']; ?>" class="btn btn-reschedule">
                       Reschedule
                     </a>
-                    <a href="batalkan_booking.php?id=<?= $row['booking_id']; ?>" class="btn btn-cancel"
+                    <a href="batalkan-booking.php?id=<?= $row['booking_id']; ?>" class="btn btn-cancel"
                       onclick="return confirm('Yakin ingin membatalkan booking?')">
 
                       Batalkan
