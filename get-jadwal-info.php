@@ -106,7 +106,6 @@ WHERE field_id='".$info['field_id']."'
 AND status='terkonfirmasi'
 ");
 
-
 $dataBooking = mysqli_fetch_assoc($queryBookingHariIni);
 
 $queryBookingKemarin = mysqli_query($conn,"
