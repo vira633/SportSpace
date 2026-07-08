@@ -83,13 +83,43 @@
     </div>
 
     <script>
-        // ── Form Login Pemilik GOR ──────────────────────────────
+        // ── Form Login Pemilik GOR (beneran cek ke database) ──────────────────────────────
         document.getElementById('form-login').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Sementara mengarahkan langsung ke dashboard owner untuk tujuan UI/UX
-            // (Karena backend & tabel database untuk owner belum tersedia sepenuhnya)
-            window.location.href = 'dashboard-owner.php';
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorDiv = document.getElementById('error-login');
+            errorDiv.style.display = 'none';
+
+            fetch('login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        if (data.redirect === 'dashboard-owner.php') {
+                            // Role-nya beneran owner, boleh lanjut
+                            window.location.href = data.redirect;
+                        } else {
+                            // Login berhasil, tapi role-nya BUKAN owner (misal user biasa/admin)
+                            // Bersihin dulu session yang kebentuk biar gak nyangkut
+                            fetch('logout.php').finally(() => {
+                                errorDiv.style.display = 'block';
+                                errorDiv.textContent = 'Akun ini bukan akun Pemilik GOR.';
+                            });
+                        }
+                    } else {
+                        errorDiv.style.display = 'block';
+                        errorDiv.textContent = data.message;
+                    }
+                })
+                .catch(() => {
+                    errorDiv.style.display = 'block';
+                    errorDiv.textContent = 'Terjadi kesalahan, coba lagi.';
+                });
         });
     </script>
 

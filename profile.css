@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700&family=Syne:wght=700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #F9F9F8;
+    /* --gray-50 */
+    color: #2A2A28;
+    /* --gray-800 */
+    min-height: 100vh;
+    line-height: 1.6;
+    font-size: 15px;
+    /* Sesuai body index.css */
+}
+
+/* NAVBAR */
+.profile-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid #E5E5E2;
+    /* --gray-200 */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 18px;
+    /* Sesuai navbar-brand index.css */
+    font-weight: 800;
+    color: #1A1A18;
+    /* --gray-900 */
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+}
+
+.navbar-brand i {
+    font-size: 25px;
+    /* Sesuai navbar-brand i index.css */
+    color: #164f21;
+    /* --green */
+    vertical-align: middle;
+}
+
+.navbar-brand .dot {
+    width: 4px;
+    height: 4px;
+    background: #164f21;
+    /* --green */
+    border-radius: 100%;
+    transform: translateY(6px);
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-link {
+    font-size: 14px;
+    /* Sesuai navbar-links a index.css */
+    color: #5C5B56;
+    /* --gray-600 */
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #164f21;
+    /* --green */
+}
+
+.btn-logout {
+    font-size: 13px;
+    /* Sesuai btn-sm index.css */
+    color: #C0392B;
+    /* --red */
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    /* Sesuai btn-sm index.css */
+    border: 1.5px solid #E5E5E2;
+    /* --gray-200 */
+    border-radius: 10px;
+    /* --radius-md */
+    font-weight: 600;
+    transition: all .15s;
+}
+
+.btn-logout:hover {
+    border-color: #C0392B;
+    /* --red */
+    background: #FDECEA;
+    /* --red-light */
+}
+
+/* BANNER UTAMA */
+.profile-header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #F2F2F0;
+    /* Ganti garis pembatas card-title lama */
+}
+
+.center-avatar {
+    width: 72px;
+    height: 72px;
+    background: #eaf7ed;
+    /* Hijau soft maskot */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.center-avatar i {
+    font-size: 28px;
+    color: #164f21;
+    /* --green */
+}
+
+.profile-header-center h1 {
+    font-family: 'Plus Jakaera Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #1A1A18;
+    margin-bottom: 4px;
+}
+
+.profile-header-center p {
+    font-size: 13.5px;
+    color: #5C5B56;
+    /* --gray-600 */
+}
+
+.banner-info h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    /* Sesuai owner-banner h2 index.css */
+    font-weight: 800;
+    color: #FFFFFF;
+    /* --white */
+    margin-bottom: 4px;
+}
+
+.banner-info p {
+    font-size: 13px;
+    /* Disesuaikan agar lebih rapih */
+    color: #9C9A92;
+    /* --gray-400 */
+}
+
+/* CONTAINER LAYOUT */
+.profile-container {
+    max-width: 600px;
+    margin: 32px auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* CARD PROFILE */
+.profile-card {
+    background: #FFFFFF;
+    /* --white */
+    border-radius: 16px;
+    /* --radius-lg */
+    padding: 24px;
+    /* Sedikit dikecilkan porsinya */
+    border: 1px solid #E5E5E2;
+    /* --gray-200 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .06), 0 1px 2px rgba(0, 0, 0, .04);
+    /* --shadow-sm */
+}
+
+.card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    /* Menyamakan heading teks di dalam card index */
+    font-weight: 800;
+    color: #1A1A18;
+    /* --gray-900 */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F2F2F0;
+    /* --gray-100 */
+}
+
+/* FORM ELEMENTS */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 13px;
+    /* Sesuai form-label index.css */
+    font-weight: 600;
+    color: #2A2A28;
+    /* --gray-800 */
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    /* Sesuai form-input index.css */
+    font-size: 14px;
+    /* Sesuai form-input index.css */
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    border: 1.5px solid #E5E5E2;
+    /* --gray-200 */
+    border-radius: 10px;
+    /* --radius-md */
+    background: #FFFFFF;
+    /* --white */
+    color: #2A2A28;
+    /* --gray-800 */
+    outline: none;
+    transition: border-color .15s;
+}
+
+.form-group input:focus {
+    border-color: #164f21;
+    /* --green */
+    box-shadow: 0 0 0 3px rgba(22, 79, 33, 0.08);
+}
+
+/* TOMBOL SIMPAN */
+.btn-save {
+    background: #164f21;
+    /* --green */
+    color: #FFFFFF;
+    /* --white */
+    border: none;
+    padding: 9px 18px;
+    /* Sesuai btn normal di index.css */
+    border-radius: 10px;
+    /* --radius-md */
+    font-size: 14px;
+    /* Sesuai btn normal di index.css */
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    transition: all .15s;
+    margin-top: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.btn-save:hover {
+    background: #1f9b32;
+    /* --green-mid */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    /* --shadow-md */
+}
+
+/* QUICK ACTIONS CARD */
+.quick-actions {
+    background: #FFFFFF;
+    /* --white */
+    border: 1px solid #E5E5E2;
+    /* --gray-200 */
+    border-radius: 16px;
+    /* --radius-lg */
+    padding: 4px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .06), 0 1px 2px rgba(0, 0, 0, .04);
+    /* --shadow-sm */
+    overflow: hidden;
+}
+
+.quick-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    /* Dipersempit agar proporsional */
+    text-decoration: none;
+    color: #2A2A28;
+    /* --gray-800 */
+    font-size: 14px;
+    /* Sesuai user-dropdown-item di index.css */
+    font-weight: 500;
+    transition: background .15s, color .15s;
+    border-bottom: 1px solid #F2F2F0;
+    /* --gray-100 */
+}
+
+.quick-card:last-child {
+    border-bottom: none;
+}
+
+.quick-card:hover {
+    background: #F9F9F8;
+    /* --gray-50 */
+    color: #164f21;
+    /* --green */
+}
+
+.quick-card i:first-child {
+    font-size: 18px;
+    color: #164f21;
+    /* --green */
+    width: 24px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .profile-banner {
+        padding: 32px 20px;
+    }
+
+    .profile-navbar {
+        padding: 12px 16px;
+    }
+}
+
+/* CONTAINER UNTUK TOMBOL KEMBALI */
+.profile-back-wrapper {
+    max-width: 600px;
+    /* Ukuran ini harus sama dengan max-width .profile-container kamu */
+    margin: 24px auto 0 auto;
+    /* Memberi jarak dari navbar atas */
+    padding: 0 16px;
+    /* Padding kiri-kanan agar sejajar dengan isi card */
+}
+
+/* GAYA TOMBOL KEMBALI MINIMALIS */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #5C5B56;
+    /* --gray-600 */
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+/* EFEK HOVER USER FRIENDLY */
+.btn-back:hover {
+    color: #164f21;
+    transform: translateX(-4px);
+}
+ 
+.btn-back i {
+    font-size: 18px;
+}
+
+.back-button-container {
+    padding: 24px 32px 0 32px; 
+    margin-bottom: -8px; 
+}
+
+@media (max-width: 768px) {
+    .back-button-container {
+        padding: 16px 16px 0 16px; 
+    }
+}
