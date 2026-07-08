@@ -315,7 +315,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
           <div class="detail-image">
 
 
-            <img src="<?= $field['gambar']; ?>" alt="<?= $field['nama_lapangan']; ?>">
+           <img src="uploads/fields/<?= $field['gambar']; ?>" alt="<?= $field['nama_lapangan']; ?>">
 
             <div class="detail-overlay"></div>
 

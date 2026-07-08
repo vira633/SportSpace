@@ -193,7 +193,7 @@ $from = $_GET['from'] ?? 'index';
 
                         <div class="favorite-image">
 
-                            <img src="<?= $row['gambar']; ?>" alt="<?= $row['nama_lapangan']; ?>">
+                            <img src="uploads/fields/<?= $row['gambar']; ?>" alt="<?= $row['nama_lapangan']; ?>">
 
                             <button class="love active" data-id="<?= $row['field_id']; ?>">
 
