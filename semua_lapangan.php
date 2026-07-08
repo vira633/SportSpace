@@ -140,7 +140,7 @@ if ($lokasiResult) {
           if ($lap['jenis'] === 'renang')
             $icon = 'ti-swimming';
 
-          $foto = !empty($lap['gambar']) ? $lap['gambar'] : 'lapangan-futsal.jpg';
+          $foto = !empty($lap['gambar']) ? "uploads/fields/" . $lap['gambar'] : 'lapangan-futsal.jpg';
           $lokasiAsli = !empty($lap['lokasi']) ? $lap['lokasi'] : 'Yogyakarta';
           $lokasiSlug = strtolower(trim(preg_replace('/\s+/', '-', $lokasiAsli)));
           ?>
