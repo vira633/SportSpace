@@ -2,11 +2,11 @@
 require 'config.php';
 session_start();
 
-$result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
+$result = $conn->query("SELECT * FROM fields WHERE aktif='aktif' AND verifikasi='diterima' ORDER BY field_id ASC");
 
 // Ambil daftar lokasi unik buat isi dropdown Lokasi
 $lokasiList = [];
-$lokasiResult = $conn->query("SELECT DISTINCT lokasi FROM fields WHERE lokasi IS NOT NULL AND lokasi != '' ORDER BY lokasi ASC");
+$lokasiResult = $conn->query("SELECT DISTINCT lokasi FROM fields WHERE aktif='aktif' AND verifikasi='diterima' AND lokasi IS NOT NULL AND lokasi != '' ORDER BY lokasi ASC");
 if ($lokasiResult) {
   while ($row = $lokasiResult->fetch_assoc()) {
     $lokasiList[] = $row['lokasi'];
