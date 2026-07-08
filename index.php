@@ -46,7 +46,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
             <a href="riwayat.php" class="user-dropdown-item">
               <i class="ti ti-history"></i> Riwayat
             </a>
-            <a href="favourite" class="user-dropdown-item">
+            <a href="favorite.php" class="user-dropdown-item">
               <i class="ti ti-heart"></i> Favorit
             </a>
             <div class="user-dropdown-divider"></div>
@@ -133,7 +133,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
         ?>
         <div class="field-card" data-sport="<?= strtolower($lap['jenis']) ?>">
           <div class="field-img">
-            <img src="<?= htmlspecialchars($foto) ?>" alt="<?= htmlspecialchars($lap['nama_lapangan']) ?>">
+            <img src="<?= htmlspecialchars($gambar) ?>" alt="<?= htmlspecialchars($lap['nama_lapangan']) ?>">
             <span class="badge <?= $badge_class ?>"><?= $badge_text ?></span>
           </div>
           <div class="field-body">

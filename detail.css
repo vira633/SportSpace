@@ -621,41 +621,45 @@ body {
   color: var(--gray-400);
 }
 
+/* ===========================
+   FAVORITE BUTTON
+=========================== */
+
 .favorite-btn {
 
-  width: 56px;
-
-  height: 56px;
+  width: 52px;
+  height: 52px;
 
   border: none;
-
   border-radius: 50%;
 
-  background: #fff5f7;
-
   display: flex;
-
   justify-content: center;
-
   align-items: center;
+
+  background: #fff;
 
   cursor: pointer;
 
-  flex-shrink: 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .12);
 
   transition: .25s;
-
-  box-shadow: 0 10px 25px rgba(255, 0, 80, .12);
 
 }
 
 .favorite-btn i {
 
-  font-size: 30px;
+  font-size: 26px;
 
-  color: #d1d5db;
+  color: #9ca3af;
 
   transition: .25s;
+
+}
+
+.favorite-btn.active {
+
+  background: #ffe5e5;
 
 }
 
@@ -667,7 +671,51 @@ body {
 
 .favorite-btn:hover {
 
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+
+}
+
+.favorite-btn i {
+  font-size: 28px;
+  color: #9ca3af;
+  transition: .25s;
+}
+
+/* Saat sudah difavoritkan */
+
+.favorite-btn.active {
+  background: #ffe8ec;
+}
+
+.favorite-btn.active i {
+  color: #ef4444;
+}
+
+/* Efek klik */
+
+.favorite-btn:active {
+  transform: scale(.92);
+}
+
+/* Animasi muncul */
+
+.favorite-btn.active i {
+  animation: favoritePop .35s ease;
+}
+
+@keyframes favoritePop {
+
+  0% {
+    transform: scale(.5);
+  }
+
+  60% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 
 }
 
@@ -757,34 +805,34 @@ body {
 
 }
 
-.header-left{
-    display:flex;
-    align-items:center;
-    gap:16px;
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.back-btn{
-    width:42px;
-    height:42px;
+.back-btn {
+  width: 42px;
+  height: 42px;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    border-radius:50%;
-    text-decoration:none;
+  border-radius: 50%;
+  text-decoration: none;
 
-    background:#f3f4f6;
-    color:#374151;
+  background: #f3f4f6;
+  color: #374151;
 
-    transition:.2s;
+  transition: .2s;
 }
 
-.back-btn:hover{
-    background:#16a34a;
-    color:#fff;
+.back-btn:hover {
+  background: #16a34a;
+  color: #fff;
 }
 
-.back-btn i{
-    font-size:22px;
+.back-btn i {
+  font-size: 22px;
 }
