@@ -222,6 +222,8 @@ while ($b = mysqli_fetch_assoc($bookings)) {
       .innerText =
       "Rp" + total.toLocaleString("id-ID");
   }
+
+
 </script>
 
 <body>
@@ -259,9 +261,23 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
   </nav>
 
+  <?php
+
+  $from = $_GET['from'] ?? 'index';
+
+  if ($from == "favorite") {
+    $backLink = "favorite.php";
+  } elseif ($from == "riwayat") {
+    $backLink = "riwayat.php";
+  } else {
+    $backLink = "index.php#lapangan";
+  }
+
+  ?>
+
   <div class="back-button">
 
-    <a href="index.php#lapangan" class="back-link">
+    <a href="<?= $backLink ?>" class="back-link">
 
       <i class="ti ti-arrow-left"></i>
 
@@ -283,7 +299,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
       <i class="ti ti-chevron-right"></i>
 
       <span style="color:var(--gray-700);">
-        GOR Maju Jaya — Lapangan Futsal A
+        <?= $field['nama_lapangan']; ?>
       </span>
 
     </div>
@@ -323,13 +339,12 @@ while ($b = mysqli_fetch_assoc($bookings)) {
                     <?= $field['nama_lapangan']; ?>
                   </h1>
 
-                  <button id="favoriteBtn" class="favorite-btn <?= $isFavorite ? 'active' : ''; ?>"
+                  <button class="favorite-btn <?= $isFavorite ? 'active' : '' ?>" id="favoriteBtn"
                     data-field="<?= $field['field_id']; ?>">
 
-                    <i class="ti <?= $isFavorite ? 'ti-heart-filled' : 'ti-heart'; ?>"></i>
+                    <i class="ti <?= $isFavorite ? 'ti-heart-filled' : 'ti-heart' ?>"></i>
 
                   </button>
-
                 </div>
 
                 <div class="detail-location">
@@ -774,7 +789,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
               }
               ?>
 
-               <div class="avatar green">
+              <div class="avatar green">
                 <?= $inisial ?>
               </div>
 
@@ -909,19 +924,19 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
     if (favBtn) {
 
-      favBtn.onclick = function () {
+      favBtn.addEventListener("click", function () {
 
         const field_id = this.dataset.field;
 
-        fetch("favorite.php", {
+        fetch("toggle_favorite.php", {
 
           method: "POST",
 
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            "Content-Type": "application/x-www-form-urlencoded"
           },
 
-          body: "field_id=" + field_id
+          body: "field_id=" + encodeURIComponent(field_id)
 
         })
 
@@ -929,27 +944,34 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
           .then(data => {
 
-            if (data.status == "added") {
+            if (!data.success) return;
+
+            const icon = favBtn.querySelector("i");
+
+            if (data.favorite) {
 
               favBtn.classList.add("active");
 
-              favBtn.innerHTML = '<i class="ti ti-heart-filled"></i>';
+              icon.classList.remove("ti-heart");
+              icon.classList.add("ti-heart-filled");
 
-            }
-
-            if (data.status == "removed") {
+            } else {
 
               favBtn.classList.remove("active");
 
-              favBtn.innerHTML = '<i class="ti ti-heart"></i>';
+              icon.classList.remove("ti-heart-filled");
+              icon.classList.add("ti-heart");
 
             }
 
-          });
+          })
 
-      }
+      })
+
+        .catch(err => console.log(err));
 
     }
+
 
     function cekBooking() {
 
