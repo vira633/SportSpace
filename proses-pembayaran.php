@@ -167,6 +167,7 @@ VALUES
     '$isi'
 )
 ");
-header('Location: booking-success.php?id=' . $booking_id);
+echo $booking_id;
 
+header("Location: booking-success.php?id=".$booking_id);
 exit;

@@ -119,11 +119,11 @@ ORDER BY b.booking_id DESC
 
   <nav class="navbar">
 
-    <div class="navbar-brand">
+    <a href="index.php" class="navbar-brand">
       <i class="ti ti-bowling"></i>
       <span>SportSpace</span>
       <div class="dot"></div>
-    </div>
+    </a>
 
   </nav>
 
@@ -133,10 +133,19 @@ ORDER BY b.booking_id DESC
 
       <div class="left-header">
 
-        <a href="index.php" class="back-btn">
+        <?php
+        $from = $_GET['from'] ?? 'index';
+        $booking_id = $_GET['id'] ?? '';
 
+        if ($from === 'booking-success' && $booking_id != '') {
+          $backLink = "booking-success.php?id=" . $booking_id;
+        } else {
+          $backLink = "index.php#lapangan";
+        }
+        ?>
+
+        <a href="<?= $backLink ?>" class="back-btn">
           <i class="ti ti-arrow-left"></i>
-
         </a>
 
         <div class="title-area">

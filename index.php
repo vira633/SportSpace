@@ -44,7 +44,7 @@ SELECT * FROM fields WHERE aktif='aktif'ORDER BY field_id ASC");
             <a href="profile.php" class="user-dropdown-item">
               <i class="ti ti-user"></i> Profile
             </a>
-            <a href="riwayat.php" class="user-dropdown-item">
+            <a href="riwayat.php?from=index" class="user-dropdown-item">
               <i class="ti ti-history"></i> Riwayat
             </a>
             <a href="favorite.php" class="user-dropdown-item">
@@ -116,6 +116,35 @@ SELECT * FROM fields WHERE aktif='aktif'ORDER BY field_id ASC");
     <div class="fields-grid">
       <?php while ($lap = $result->fetch_assoc()): ?>
         <?php
+        /* ===========================
+   STATUS LAPANGAN HARI INI
+=========================== */
+
+        $hariIni = date("Y-m-d");
+
+        $cekBooking = mysqli_fetch_assoc(mysqli_query($conn, "
+SELECT COUNT(*) total
+FROM booking
+WHERE field_id='" . $lap['field_id'] . "'
+AND tanggal='$hariIni'
+AND status IN(
+'tertunda',
+'menunggu konfirmasi',
+'terkonfirmasi'
+)
+"));
+
+        if ($cekBooking['total'] >= 17) {
+
+          $badge_class = "badge-amber";
+          $badge_text = "Penuh Hari Ini";
+
+        } else {
+
+          $badge_class = "badge-green";
+          $badge_text = "Tersedia";
+
+        }
         // Tentukan badge berdasarkan status
         $badge_class = $lap['status'] === 'tersedia' ? 'badge-green' : 'badge-amber';
         $badge_text = $lap['status'] === 'tersedia' ? 'Tersedia' : 'Penuh hari ini';
@@ -154,7 +183,7 @@ SELECT * FROM fields WHERE aktif='aktif'ORDER BY field_id ASC");
                 Rp<?= number_format($lap['harga'], 0, ',', '.') ?> <span>/jam</span>
               </div>
 
-              <?php if ($lap['status'] === 'tersedia'): ?>
+              <?php if($badge_text=="Tersedia"): ?>
                 <?php if (isset($_SESSION['user_id'])): ?>
                   <a href="detail.php?id=<?= $lap['field_id'] ?>" class="btn-link">
                     <button class="btn btn-primary btn-sm">Booking <i class="ti ti-arrow-right"></i></button>

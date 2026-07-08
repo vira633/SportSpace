@@ -1,7 +1,12 @@
 <?php
 include "config.php";
 
-$field_id = $_GET['field_id'];
+if (!isset($_GET['field_id']) || !isset($_GET['tanggal'])) {
+    echo json_encode([]);
+    exit;
+}
+
+$field_id = (int) $_GET['field_id'];
 $tanggal = $_GET['tanggal'];
 
 $booking = [];
