@@ -61,7 +61,7 @@ $inisial = strtoupper(substr($user['nama'], 0, 1));
     </nav>
 
     <div class="back-button-container">
-        <a href="index.php" class="btn-back">
+        <a href="index.php" class="btn-back" id="btnBack" onclick="return kembaliDinamis(event)">
             <i class="ti ti-arrow-left"></i>
         </a>
     </div>
@@ -131,6 +131,21 @@ $inisial = strtoupper(substr($user['nama'], 0, 1));
             </a>
         </div>
     </div>
+    <script>
+        // Tombol Kembali Dinamis: balik ke halaman asal (semua_lapangan.php, index.php, dll)
+        // href="index.php" tetap jadi fallback kalau JS mati atau nggak ada histori
+        function kembaliDinamis(event) {
+            // Kalau ada histori dari SportSpace sendiri, pakai itu
+            if (document.referrer && document.referrer.includes(window.location.host)) {
+                event.preventDefault();
+                window.history.back();
+                return false;
+            }
+            // Kalau nggak ada referrer sama sekali (misal buka lewat bookmark/refresh),
+            // biarin href="index.php" bawaan yang jalan
+            return true;
+        }
+    </script>
 
 </body>
 

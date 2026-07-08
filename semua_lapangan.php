@@ -3,6 +3,15 @@ require 'config.php';
 session_start();
 
 $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
+
+// Ambil daftar lokasi unik buat isi dropdown Lokasi
+$lokasiList = [];
+$lokasiResult = $conn->query("SELECT DISTINCT lokasi FROM fields WHERE lokasi IS NOT NULL AND lokasi != '' ORDER BY lokasi ASC");
+if ($lokasiResult) {
+  while ($row = $lokasiResult->fetch_assoc()) {
+    $lokasiList[] = $row['lokasi'];
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -32,14 +41,31 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
     </div>
     <div class="navbar-actions">
       <?php if (isset($_SESSION['user_id'])): ?>
-        <span style="font-size:14px;color:var(--green);font-weight:600;">
-          Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!
-        </span>
 
-        <!-- PASTIKAN LINKNYA SEPERTI DI BAWAH INI -->
-        <a href="logout.php" onclick="return confirm('Yakin ingin keluar dari akun Anda?');">
-          <button class="btn btn-outline btn-sm">Keluar</button>
-        </a>
+        <div class="user-dropdown-container">
+          <button type="button" class="user-dropdown-trigger" onclick="toggleUserDropdown(event)">
+            <i class="ti ti-user-circle" style="font-size: 20px;"></i>
+            <span>Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
+            <i class="ti ti-chevron-down arrow-icon"></i>
+          </button>
+
+          <div class="user-dropdown-menu" id="userMenuDropdown">
+            <a href="profile.php" class="user-dropdown-item">
+              <i class="ti ti-user"></i> Profile
+            </a>
+            <a href="riwayat.php" class="user-dropdown-item">
+              <i class="ti ti-history"></i> Riwayat
+            </a>
+            <a href="favorite.php" class="user-dropdown-item">
+              <i class="ti ti-heart"></i> Favorit
+            </a>
+            <div class="user-dropdown-divider"></div>
+            <a href="logout.php" class="user-dropdown-item logout-danger"
+              onclick="return confirm('Yakin ingin keluar dari akun Anda?');">
+              <i class="ti ti-logout"></i> Keluar
+            </a>
+          </div>
+        </div>
 
       <?php else: ?>
         <a href="login.html"><button class="btn btn-outline btn-sm">Masuk</button></a>
@@ -64,20 +90,26 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
       <div class="filter-dropdown-group">
         <div class="filter-select-box">
           <i class="ti ti-git-fork"></i>
-          <select id="filterKategori" class="filter-select-field" onchange="jalankanFilterFasilitas()">
+          <select id="filterKategori" class="filter-select-field" onchange="handleKategoriChange()">
             <option value="semua">Kategori ▾</option>
             <option value="futsal">Futsal</option>
             <option value="badminton">Badminton</option>
             <option value="basket">Basket</option>
             <option value="renang">Renang</option>
+            <option value="lainnya">Lainnya...</option>
           </select>
+          <input type="text" id="filterKategoriLainnya" class="filter-kategori-lainnya-input"
+            placeholder="cth: voli" style="display:none;" onkeyup="jalankanFilterFasilitas()">
         </div>
 
         <div class="filter-select-box">
           <i class="ti ti-map-pin"></i>
           <select id="filterLokasi" class="filter-select-field" onchange="jalankanFilterFasilitas()">
             <option value="semua">Lokasi ▾</option>
-            <option value="yogyakarta">Yogyakarta</option>
+            <?php foreach ($lokasiList as $lok): ?>
+              <?php $slug = strtolower(trim(preg_replace('/\s+/', '-', $lok))); ?>
+              <option value="<?= htmlspecialchars($slug) ?>"><?= htmlspecialchars($lok) ?></option>
+            <?php endforeach; ?>
           </select>
         </div>
       </div>
@@ -86,7 +118,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
       <div class="search-input-group">
         <div class="search-bar-box">
           <i class="ti ti-search"></i>
-          <input type="text" id="filterNama" class="search-input-field" placeholder="Cari lapangan..."
+          <input type="text" id="filterNama" class="search-input-field" placeholder="Cari nama atau lokasi lapangan..."
             onkeyup="jalankanFilterFasilitas()">
         </div>
       </div>
@@ -109,8 +141,10 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
             $icon = 'ti-swimming';
 
           $foto = !empty($lap['gambar']) ? $lap['gambar'] : 'lapangan-futsal.jpg';
+          $lokasiAsli = !empty($lap['lokasi']) ? $lap['lokasi'] : 'Yogyakarta';
+          $lokasiSlug = strtolower(trim(preg_replace('/\s+/', '-', $lokasiAsli)));
           ?>
-          <div class="field-card" data-sport="<?= strtolower($lap['jenis']) ?>" data-lokasi="yogyakarta">
+          <div class="field-card" data-sport="<?= strtolower($lap['jenis']) ?>" data-lokasi="<?= htmlspecialchars($lokasiSlug) ?>">
             <div class="field-img">
               <img src="<?= htmlspecialchars($foto) ?>" alt="<?= htmlspecialchars($lap['nama_lapangan']) ?>">
               <span class="badge <?= $badge_class ?>"><?= $badge_text ?></span>
@@ -120,7 +154,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
                 <div class="field-name"><?= htmlspecialchars($lap['nama_lapangan']) ?></div>
               </div>
               <div class="field-meta">
-                <span><i class="ti ti-map-pin"></i> Yogyakarta</span>
+                <span class="field-lokasi-text" title="<?= htmlspecialchars($lokasiAsli) ?>"><i class="ti ti-map-pin"></i> <?= htmlspecialchars($lokasiAsli) ?></span>
                 <span><i class="ti <?= $icon ?>"></i> <?= htmlspecialchars($lap['jenis']) ?></span>
               </div>
               <div class="field-rating">
@@ -192,8 +226,47 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
 
   <!-- SCRIPT REAL-TIME FILTER -->
   <script>
+    // Dropdown User (biar sinkron sama index.php)
+    function toggleUserDropdown(event) {
+      event.stopPropagation();
+      const dropdown = document.getElementById('userMenuDropdown');
+      if (dropdown) {
+        dropdown.classList.toggle('show');
+      }
+    }
+
+    document.addEventListener('click', function (event) {
+      const dropdown = document.getElementById('userMenuDropdown');
+      const trigger = document.querySelector('.user-dropdown-trigger');
+
+      if (dropdown && dropdown.classList.contains('show')) {
+        if (trigger && !dropdown.contains(event.target) && !trigger.contains(event.target)) {
+          dropdown.classList.remove('show');
+        }
+      }
+    });
+
+    // Muncul/sembunyi input "Lainnya" pas dropdown kategori diganti
+    function handleKategoriChange() {
+      const select = document.getElementById('filterKategori');
+      const inputLainnya = document.getElementById('filterKategoriLainnya');
+      const box = select.closest('.filter-select-box');
+
+      if (select.value === 'lainnya') {
+        inputLainnya.style.display = 'inline-block';
+        inputLainnya.focus();
+        if (box) box.classList.add('is-expanded');
+      } else {
+        inputLainnya.style.display = 'none';
+        inputLainnya.value = '';
+        if (box) box.classList.remove('is-expanded');
+      }
+      jalankanFilterFasilitas();
+    }
+
     function jalankanFilterFasilitas() {
       const kategoriPilihan = document.getElementById('filterKategori').value.toLowerCase();
+      const kategoriLainnya = document.getElementById('filterKategoriLainnya').value.toLowerCase().trim();
       const lokasiPilihan = document.getElementById('filterLokasi').value.toLowerCase();
       const namaPilihan = document.getElementById('filterNama').value.toLowerCase();
 
@@ -203,10 +276,20 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
         const sportType = card.dataset.sport;
         const lokasiType = card.dataset.lokasi;
         const namaLapangan = card.querySelector('.field-name').textContent.toLowerCase();
+        const lokasiText = card.querySelector('.field-lokasi-text').textContent.toLowerCase();
 
-        const matchKategori = (kategoriPilihan === 'semua' || sportType === kategoriPilihan);
+        let matchKategori;
+        if (kategoriPilihan === 'semua') {
+          matchKategori = true;
+        } else if (kategoriPilihan === 'lainnya') {
+          // Kalau belum ngetik apa-apa, tampilkan semua dulu
+          matchKategori = kategoriLainnya === '' ? true : sportType.includes(kategoriLainnya);
+        } else {
+          matchKategori = sportType === kategoriPilihan;
+        }
+
         const matchLokasi = (lokasiPilihan === 'semua' || lokasiType === lokasiPilihan);
-        const matchNama = namaLapangan.includes(namaPilihan);
+        const matchNama = namaLapangan.includes(namaPilihan) || lokasiText.includes(namaPilihan);
 
         if (matchKategori && matchLokasi && matchNama) {
           card.style.display = 'block';
