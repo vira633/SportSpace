@@ -65,7 +65,7 @@ unset($_SESSION['toast']);
     <div class="dot"></div>
   </a>
   <div class="navbar-actions">
-    <a href="login.html">
+    <a href="index.php">
       <button class="btn btn-outline btn-sm">
         <i class="ti ti-logout"></i>
         Keluar
@@ -133,31 +133,43 @@ unset($_SESSION['toast']);
       <div class="stats-grid">
       <div class="stat-card">
         <div class="row-between">
+
           <div>
             <div class="stat-value">
               <?= $bookingHariIni['total']; ?>
             </div>
             <div class="stat-label">Booking Hari Ini</div>
           </div>
+
           <div class="icon-badge green">
             <i class="ti ti-calendar-check"></i>
           </div>
         </div>
+
         <div class="stat-change stat-up">
 
-          <?php if($selisihBooking > 0){ ?>
+          <?php if($bookingKemarin['total'] == 0){ ?>
+
+          <i class="ti ti-calendar-check"></i>
+          <?= $bookingHariIni['total']; ?> booking terkonfirmasi hari ini
+
+          <?php } elseif($selisihBooking > 0){ ?>
+
           <i class="ti ti-trending-up"></i>
-          +<?= $selisihBooking ?> dibanding kemarin
-          
+          +<?= $selisihBooking; ?> dibanding kemarin
+
           <?php } elseif($selisihBooking < 0){ ?>
+
           <i class="ti ti-trending-down"></i>
-          <?= $selisihBooking ?> dibanding kemarin
-          
+          <?= abs($selisihBooking); ?> dibanding kemarin
+
           <?php } else { ?>
+
           <i class="ti ti-minus"></i>
           Sama seperti kemarin
-          
+
           <?php } ?>
+
         </div>
       </div>
       <div class="stat-card">
@@ -172,6 +184,7 @@ unset($_SESSION['toast']);
             <i class="ti ti-clock"></i>
           </div>
         </div>
+
         <div class="stat-change" style="color:var(--amber);">
           <?php if($pending['total'] == 0){ ?>
           <i class="ti ti-circle-check"></i>
@@ -186,6 +199,7 @@ unset($_SESSION['toast']);
           <?= $pending['total']; ?> booking menunggu konfirmasi
           <?php } ?>
         </div>
+        
       </div>
       <div class="stat-card">
         <div class="row-between">
@@ -199,24 +213,28 @@ unset($_SESSION['toast']);
             <i class="ti ti-cash"></i>
           </div>
         </div>
-        <div class="stat-change stat-up">
-          <i class="ti ti-trending-up"></i>
-          <div class="stat-change stat-up">
-            
-          <?php if($persentasePendapatan > 0){ ?>
-          <i class="ti ti-trending-up"></i>
-          +<?= round($persentasePendapatan); ?>% dari bulan lalu
-          
-          <?php }elseif($persentasePendapatan < 0){ ?>
-          <i class="ti ti-trending-down"></i>
-          <?= abs(round($persentasePendapatan)); ?>% lebih rendah dari bulan lalu
-          
-          <?php }else{ ?>
-          <i class="ti ti-minus"></i>
-          Sama dengan bulan lalu
-          <?php } ?>
+
+        <div class="stat-change">
+
+        <?php if($persentasePendapatan > 0){ ?>
+
+            <i class="ti ti-trending-up"></i>
+            +<?= round($persentasePendapatan); ?>% dibanding bulan lalu
+
+        <?php } elseif($persentasePendapatan < 0){ ?>
+
+            <i class="ti ti-trending-down"></i>
+            <?= abs(round($persentasePendapatan)); ?>% dibanding bulan lalu
+
+        <?php } else { ?>
+
+            <i class="ti ti-minus"></i>
+            Sama dengan bulan lalu
+
+        <?php } ?>
+
         </div>
-      </div>
+
     </div>
     <div class="stat-card">
     <div class="row-between">
@@ -287,51 +305,86 @@ unset($_SESSION['toast']);
     </div>
 
     <div class="card card-no-mb">
-      <div class="card-header">Booking 7 Hari Terakhir</div>
-      <div class="card-body">
+    <div class="card-header">Booking 7 Hari Terakhir</div>
+
+    <div class="card-body">
+
+    <?php if(array_sum($booking7Hari) == 0){ ?>
+
+    <div class="chart-empty">
+        <i class="ti ti-chart-bar chart-empty-icon"></i>
+        <h4>Belum Ada Booking</h4>
+    </div>
+
+    <?php } else { ?>
+
         <div class="chart-bar-wrap">
-          
-          <?php
-          $hari = ["Sen","Sel","Rab","Kam","Jum","Sab","Min"];
-          $hariFull = [
-            "Senin",
-            "Selasa",
-            "Rabu",
-            "Kamis",
-            "Jumat",
-            "Sabtu",
-            "Minggu"
+
+            <?php
+            $translate = [
+                "Mon" => "Sen",
+                "Tue" => "Sel",
+                "Wed" => "Rab",
+                "Thu" => "Kam",
+                "Fri" => "Jum",
+                "Sat" => "Sab",
+                "Sun" => "Min"
             ];
-            
+
+            $translateFull = [
+                "Monday" => "Senin",
+                "Tuesday" => "Selasa",
+                "Wednesday" => "Rabu",
+                "Thursday" => "Kamis",
+                "Friday" => "Jumat",
+                "Saturday" => "Sabtu",
+                "Sunday" => "Minggu"
+            ];
+
+            $hariIni = date('N') - 1;
+
             foreach($booking7Hari as $index => $jumlah){
-              $tinggi = ($jumlah / $maxBooking) * 100;
-              if($jumlah == 0){
-                $tinggi = 4;
+
+                $senin = strtotime("monday this week");
+                $tanggal = date("Y-m-d", strtotime("+$index day", $senin));
+
+                $label = $translate[date("D", strtotime($tanggal))];
+                $tooltip = $translateFull[date("l", strtotime($tanggal))];
+
+                $tinggi = ($jumlah / $maxBooking) * 90;
+
+                if($jumlah == 0){
+                    $tinggi = 4;
                 }
-                ?>
-                
-                <div class="chart-bar-col">
-                  <div class="chart-bar-area">
+            ?>
+
+            <div class="chart-bar-col">
+                <div class="chart-bar-area">
+
                     <div class="chart-tooltip">
-                      <?= $hariFull[$index] ?><br>
-                      <strong><?= $jumlah ?> Booking</strong>
+                        <?= $tooltip ?><br>
+                        <?= $tanggal ?><br>
+                        <strong><?= $jumlah ?> Booking</strong>
                     </div>
+
                     <div
-                    class="chart-bar <?= $index==6 ? 'active' : ''; ?>"
-                    style="height:<?= $tinggi ?>%">
-                  </div>
+                        class="chart-bar <?= $index==$hariIni ? 'active' : ''; ?>"
+                        style="height:<?= $tinggi ?>%">
+                    </div>
+
                 </div>
+
                 <div
-                
-                class="chart-bar-label"
-                <?= $index==6 ? 'style="color:var(--green);font-weight:700;"' : ''; ?>>
-                <?= $hari[$index] ?>
-              </div>
+                    class="chart-bar-label"
+                    <?= $index==$hariIni ? 'style="color:var(--green);font-weight:700;"' : ''; ?>>
+                    <?= $label ?>
+                </div>
+
             </div>
-            
+
             <?php } ?>
-          
           </div>
+          <?php } ?>
         </div>
       </div>
     </div>
@@ -384,7 +437,7 @@ unset($_SESSION['toast']);
               class="btn btn-outline btn-sm btn-red"
               onclick="return confirm('Yakin ingin menolak booking ini?');">
               <i class="ti ti-x"></i>
-              Tolak
+              Batalkan
               </a>
             </div>
           </td>
@@ -422,7 +475,7 @@ unset($_SESSION['toast']);
     elseif($row['status'] == "dibatalkan"){
       $icon = "ti-circle-x";
       $class = "act-icon-red";
-      $judul = "Booking ditolak";
+      $judul = "Booking dibatalkan";
     }
     elseif($row['status'] == "selesai"){
       $icon = "ti-info-circle";
@@ -678,7 +731,7 @@ unset($_SESSION['toast']);
           <option value="">Semua Status</option>
           <option value="tertunda">Tertunda</option>
           <option value="terkonfirmasi">Terkonfirmasi</option>
-          <option value="dibatalkan">Ditolak</option>
+          <option value="dibatalkan">Dibatalkan</option>
           <option value="selesai">Selesai</option>
         </select>
 
@@ -691,6 +744,7 @@ unset($_SESSION['toast']);
           $queryFilterLapangan = mysqli_query($conn,"
             SELECT nama_lapangan
             FROM fields
+            WHERE owner_id='$owner_id'
             ORDER BY nama_lapangan
           ");
           
@@ -729,7 +783,7 @@ unset($_SESSION['toast']);
 
         <div class="stat-chip red">
           <i class="ti ti-circle-x"></i>
-          <span><?= $dibatalkan['total']; ?> Ditolak</span>
+          <span><?= $dibatalkan['total']; ?> Dibatalkan</span>
         </div>
 
       </div>
@@ -755,39 +809,29 @@ unset($_SESSION['toast']);
                 <tr>
 
                   <td>
-                    <code class="code-pill">
                       <?= $booking['booking_code']; ?>
-                    </code>
                   </td>
 
                   <td>
-                    <b><?= $booking['nama']; ?></b>
+                    <?= $booking['nama']; ?>
                   </td>
                   
                   <td class="booking-field">
-                    <strong>
-                      <?= $booking['nama_lapangan']; ?>
-                    </strong>
+                    <?= $booking['nama_lapangan']; ?>
                   </td>
                   
                   <td>
-                    <strong>
-                      <?= $booking['tanggal']; ?>
-                    </strong>
+                    <?= $booking['tanggal']; ?>
                   </td>
                   
                   <td>
-                    <strong>
-                      <?= $booking['jam_mulai']; ?>
-                      -
-                      <?= $booking['jam_selesai']; ?>
-                    </strong>
+                    <?= $booking['jam_mulai']; ?>
+                    -
+                    <?= $booking['jam_selesai']; ?>
                   </td>
                   
                   <td>
-                    <b>
-                      Rp <?= number_format($booking['harga'],0,',','.'); ?>
-                    </b>
+                    Rp <?= number_format($booking['harga'],0,',','.'); ?>
                   </td>
                   
                   <td>
@@ -828,7 +872,7 @@ unset($_SESSION['toast']);
                         <a
                         href="tolak-booking.php?id=<?= $booking['booking_id']; ?>"
                         class="btn btn-outline btn-sm btn-red">
-                        Tolak
+                        Batalkan
                         </a>
                       </div>
                       <?php else : ?>
@@ -860,6 +904,7 @@ unset($_SESSION['toast']);
         $qField = mysqli_query($conn,"
             SELECT field_id,nama_lapangan
             FROM fields
+            WHERE owner_id='$owner_id'
             ORDER BY nama_lapangan
         ");
 
@@ -978,7 +1023,9 @@ unset($_SESSION['toast']);
 
             $jamMulai = strtotime($jam_buka);
             $jamSelesai = strtotime($jam_tutup);
-            $durasi = $info['durasi_slot'] * 3600;
+            $durasi = isset($info['durasi_slot'])
+            ? $info['durasi_slot'] * 3600
+            : 3600;
             for($jam = $jamMulai; $jam < $jamSelesai; $jam += $durasi){
           ?>
           
@@ -1086,13 +1133,13 @@ unset($_SESSION['toast']);
                   <select name="durasi_slot" class="form-input">
                     <option
                       value="1"
-                      <?= $info['durasi_slot']==1 ? 'selected' : ''; ?>>
+                      <?= (($info['durasi_slot'] ?? 1)==1) ? 'selected' : ''; ?>>
                       1 Jam
                     </option>
                     
                     <option
                       value="2"
-                      <?= $info['durasi_slot']==2 ? 'selected' : ''; ?>>
+                      <?= (($info['durasi_slot'] ?? 1)==2) ? 'selected' : ''; ?>>
                       2 Jam
                     </option>
                   </select>
