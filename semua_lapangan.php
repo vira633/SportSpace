@@ -54,10 +54,8 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
       <div>
         <a href="index.php"
           style="font-size:12px; color:var(--gray-400); font-weight:600; display:inline-flex; align-items:center; gap:4px; margin-bottom:8px;">
-          <i class="ti ti-arrow-left"></i> Kembali ke Beranda
+          <i class="ti ti-arrow-left"></i>
         </a>
-        <h2 class="section-title">Semua Lapangan</h2>
-        <p class="section-subtitle">Temukan Lapangan yang anda mau</p>
       </div>
     </div>
 
