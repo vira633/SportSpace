@@ -127,7 +127,7 @@ $kode_booking =
         <!-- BANNER -->
         <div class="success-banner">
 
-          <img src="<?= $data['gambar']; ?>">
+          <img src="uploads/fields/<?= $data['gambar']; ?>" alt="<?= $data['nama_lapangan']; ?>">
 
           <div class="success-overlay"></div>
 

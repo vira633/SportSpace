@@ -243,7 +243,7 @@ ORDER BY b.booking_id DESC
 
             <div class="booking-image">
 
-              <img src="<?= $row['gambar']; ?>" alt="<?= $row['nama_lapangan']; ?>">
+              <img src="uploads/fields/<?= $row['gambar']; ?>" alt="<?= $row['nama_lapangan']; ?>">
 
             </div>
 

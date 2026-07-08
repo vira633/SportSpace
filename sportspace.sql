@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2026 at 02:28 PM
+-- Generation Time: Jul 08, 2026 at 02:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -47,23 +47,23 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`booking_id`, `user_id`, `field_id`, `tanggal`, `jam_mulai`, `jam_selesai`, `status`, `created_at`, `booking_code`, `metode_pembayaran`, `bank`, `total`) VALUES
-(1, 2, 1, '2026-06-26', '06:00:00', '08:00:00', 'terkonfirmasi', '2026-06-24 17:51:56', NULL, NULL, NULL, 0.00),
-(2, 2, 1, '2026-06-27', '06:00:00', '08:00:00', 'terkonfirmasi', '2026-06-24 17:53:18', NULL, NULL, NULL, 0.00),
-(3, 2, 1, '2026-06-27', '06:00:00', '08:00:00', 'terkonfirmasi', '2026-06-24 17:56:14', 'SS-2026-00003', NULL, NULL, 0.00),
-(4, 2, 2, '2026-06-27', '07:00:00', '09:00:00', 'terkonfirmasi', '2026-06-25 12:05:52', 'SS-2026-00004', NULL, NULL, 0.00),
-(5, 2, 4, '2026-06-26', '13:00:00', '15:00:00', 'terkonfirmasi', '2026-06-25 12:07:50', 'SS-2026-00005', NULL, NULL, 0.00),
+(1, 2, 1, '2026-06-26', '06:00:00', '08:00:00', 'selesai', '2026-06-24 17:51:56', NULL, NULL, NULL, 0.00),
+(2, 2, 1, '2026-06-27', '06:00:00', '08:00:00', 'selesai', '2026-06-24 17:53:18', NULL, NULL, NULL, 0.00),
+(3, 2, 1, '2026-06-27', '06:00:00', '08:00:00', 'selesai', '2026-06-24 17:56:14', 'SS-2026-00003', NULL, NULL, 0.00),
+(4, 2, 2, '2026-06-27', '07:00:00', '09:00:00', 'selesai', '2026-06-25 12:05:52', 'SS-2026-00004', NULL, NULL, 0.00),
+(5, 2, 4, '2026-06-26', '13:00:00', '15:00:00', 'selesai', '2026-06-25 12:07:50', 'SS-2026-00005', NULL, NULL, 0.00),
 (6, 2, 2, '2026-07-10', '07:00:00', '10:00:00', 'terkonfirmasi', '2026-07-01 03:58:49', 'SS-2026-00006', NULL, NULL, 0.00),
-(7, 2, 2, '2026-07-03', '07:00:00', '09:00:00', 'terkonfirmasi', '2026-07-01 18:22:37', 'SS-2026-00007', NULL, NULL, 0.00),
-(8, 3, 1, '2026-07-03', '07:00:00', '10:00:00', 'terkonfirmasi', '2026-07-01 20:33:47', 'SS-2026-00008', NULL, NULL, 0.00),
-(9, 3, 1, '2026-07-02', '17:00:00', '18:00:00', 'terkonfirmasi', '2026-07-01 20:49:57', 'SS-2026-00009', NULL, NULL, 0.00),
+(7, 2, 2, '2026-07-03', '07:00:00', '09:00:00', 'selesai', '2026-07-01 18:22:37', 'SS-2026-00007', NULL, NULL, 0.00),
+(8, 3, 1, '2026-07-03', '07:00:00', '10:00:00', 'selesai', '2026-07-01 20:33:47', 'SS-2026-00008', NULL, NULL, 0.00),
+(9, 3, 1, '2026-07-02', '17:00:00', '18:00:00', 'selesai', '2026-07-01 20:49:57', 'SS-2026-00009', NULL, NULL, 0.00),
 (10, 3, 2, '2026-07-03', '08:00:00', '10:00:00', '', '2026-07-01 21:47:45', 'SS-2026-00010', NULL, NULL, 0.00),
 (11, 3, 2, '2026-07-03', '08:00:00', '10:00:00', 'selesai', '2026-07-01 21:50:25', 'SS-2026-00011', NULL, NULL, 0.00),
 (12, 3, 2, '2026-07-03', '08:00:00', '10:00:00', 'selesai', '2026-07-01 22:04:01', 'SS-2026-00012', NULL, NULL, 0.00),
-(13, 3, 2, '2026-07-03', '08:00:00', '10:00:00', 'terkonfirmasi', '2026-07-01 22:12:12', 'SS-2026-00013', NULL, NULL, 0.00),
-(14, 3, 1, '2026-07-04', '18:00:00', '20:00:00', 'terkonfirmasi', '2026-07-01 22:31:29', 'SS-2026-00014', NULL, NULL, 0.00),
-(15, 3, 1, '2026-07-03', '20:00:00', '21:00:00', 'terkonfirmasi', '2026-07-01 22:41:44', 'SS-2026-00015', NULL, NULL, 0.00),
-(16, 3, 1, '2026-07-04', '07:00:00', '09:00:00', 'terkonfirmasi', '2026-07-01 22:52:37', 'SS-2026-00016', NULL, NULL, 0.00),
-(17, 3, 1, '2026-07-03', '07:00:00', '08:00:00', 'terkonfirmasi', '2026-07-02 05:29:18', 'SS-2026-00017', NULL, NULL, 0.00),
+(13, 3, 2, '2026-07-03', '08:00:00', '10:00:00', 'selesai', '2026-07-01 22:12:12', 'SS-2026-00013', NULL, NULL, 0.00),
+(14, 3, 1, '2026-07-04', '18:00:00', '20:00:00', 'selesai', '2026-07-01 22:31:29', 'SS-2026-00014', NULL, NULL, 0.00),
+(15, 3, 1, '2026-07-03', '20:00:00', '21:00:00', 'selesai', '2026-07-01 22:41:44', 'SS-2026-00015', NULL, NULL, 0.00),
+(16, 3, 1, '2026-07-04', '07:00:00', '09:00:00', 'selesai', '2026-07-01 22:52:37', 'SS-2026-00016', NULL, NULL, 0.00),
+(17, 3, 1, '2026-07-03', '07:00:00', '08:00:00', 'selesai', '2026-07-02 05:29:18', 'SS-2026-00017', NULL, NULL, 0.00),
 (18, 3, 2, '2026-07-25', '07:00:00', '09:00:00', 'selesai', '2026-07-02 10:08:27', 'SS-2026-00018', NULL, NULL, 0.00),
 (19, 4, 1, '2026-07-04', '08:00:00', '10:00:00', '', '2026-07-03 07:18:28', 'SS-2026-00019', NULL, NULL, 0.00),
 (20, 4, 1, '0000-00-00', '08:00:00', '09:00:00', '', '2026-07-03 07:53:33', 'SS-2026-00020', NULL, NULL, 0.00),
@@ -71,11 +71,26 @@ INSERT INTO `booking` (`booking_id`, `user_id`, `field_id`, `tanggal`, `jam_mula
 (22, 4, 1, '2026-07-18', '19:00:00', '20:00:00', '', '2026-07-03 09:29:31', 'SS-2026-00022', 'shopeepay', '', 82500.00),
 (23, 4, 1, '2026-07-16', '09:00:00', '10:00:00', '', '2026-07-03 09:45:14', 'SS-2026-00023', 'qris', '', 82500.00),
 (24, 4, 1, '2026-07-16', '09:00:00', '10:00:00', '', '2026-07-03 09:48:30', 'SS-2026-00024', 'shopeepay', '', 82500.00),
-(25, 4, 1, '2026-07-04', '10:00:00', '11:00:00', 'terkonfirmasi', '2026-07-03 10:00:41', 'SS-2026-00025', 'transfer', '', 82500.00),
-(26, 4, 2, '2026-07-04', '09:00:00', '10:00:00', 'tertunda', '2026-07-03 10:02:02', 'SS-2026-00026', 'transfer', 'mandiri', 47500.00),
-(27, 4, 2, '2026-07-10', '09:00:00', '11:00:00', 'tertunda', '2026-07-03 10:13:36', 'SS-2026-00027', 'transfer', 'mandiri', 92500.00),
-(28, 4, 1, '2026-07-03', '00:00:19', '20:00:00', 'tertunda', '2026-07-03 11:25:26', 'SS-2026-00028', 'transfer', 'mandiri', 82500.00),
-(29, 4, 1, '2026-07-06', '00:00:18', '20:00:00', 'tertunda', '2026-07-06 10:45:42', 'SS-2026-00029', 'dana', '', 162500.00);
+(25, 4, 1, '2026-07-04', '10:00:00', '11:00:00', 'selesai', '2026-07-03 10:00:41', 'SS-2026-00025', 'transfer', '', 82500.00),
+(26, 4, 2, '2026-07-04', '09:00:00', '10:00:00', 'selesai', '2026-07-03 10:02:02', 'SS-2026-00026', 'transfer', 'mandiri', 47500.00),
+(27, 4, 2, '2026-07-10', '09:00:00', '11:00:00', 'terkonfirmasi', '2026-07-03 10:13:36', 'SS-2026-00027', 'transfer', 'mandiri', 92500.00),
+(28, 4, 1, '2026-07-03', '00:00:19', '20:00:00', 'selesai', '2026-07-03 11:25:26', 'SS-2026-00028', 'transfer', 'mandiri', 82500.00),
+(29, 4, 1, '2026-07-06', '00:00:18', '20:00:00', 'selesai', '2026-07-06 10:45:42', 'SS-2026-00029', 'dana', '', 162500.00),
+(30, 4, 1, '2026-07-08', '00:00:20', '22:00:00', 'terkonfirmasi', '2026-07-06 17:38:22', 'SS-2026-00030', 'qris', '', 162500.00),
+(31, 4, 1, '2026-07-07', '06:00:00', '08:00:00', 'selesai', '2026-07-06 18:23:47', 'SS-2026-00031', 'qris', '', 162500.00),
+(32, 4, 1, '2026-07-07', '18:00:00', '20:00:00', 'selesai', '2026-07-06 18:24:58', 'SS-2026-00032', 'qris', '', 162500.00),
+(33, 4, 2, '2026-07-11', '12:00:00', '14:00:00', 'terkonfirmasi', '2026-07-06 18:27:57', 'SS-2026-00033', 'qris', '', 92500.00),
+(34, 4, 1, '2026-07-07', '17:00:00', '18:00:00', 'dibatalkan', '2026-07-07 09:36:03', 'SS-2026-00034', 'qris', '', 82500.00),
+(35, 4, 1, '2026-07-10', '14:00:00', '15:00:00', 'dibatalkan', '2026-07-07 09:46:48', 'SS-2026-00035', 'qris', '', 82500.00),
+(36, 4, 1, '2026-07-07', '21:00:00', '22:00:00', 'selesai', '2026-07-07 10:00:41', 'SS-2026-00036', 'qris', '', 82500.00),
+(37, 4, 3, '2026-07-07', '19:00:00', '21:00:00', 'selesai', '2026-07-07 11:57:11', 'SS-2026-00037', 'qris', '', 242500.00),
+(38, 4, 4, '2026-07-09', '08:00:00', '09:00:00', 'dibatalkan', '2026-07-07 11:58:36', 'SS-2026-00038', 'qris', '', 72500.00),
+(39, 4, 4, '2026-07-08', '06:00:00', '08:00:00', 'selesai', '2026-07-07 12:16:40', 'SS-2026-00039', 'cash', '', 142500.00),
+(40, 4, 1, '2026-07-18', '07:00:00', '09:00:00', 'dibatalkan', '2026-07-07 12:29:36', 'SS-2026-00040', 'qris', '', 162500.00),
+(41, 4, 1, '2026-07-09', '13:00:00', '14:00:00', 'terkonfirmasi', '2026-07-08 11:50:15', 'SS-2026-00041', 'qris', '', 82500.00),
+(42, 4, 4, '2026-07-08', '20:00:00', '21:00:00', 'terkonfirmasi', '2026-07-08 11:55:02', 'SS-2026-00042', 'cash', '', 72500.00),
+(43, 4, 1, '2026-07-09', '06:00:00', '07:00:00', 'dibatalkan', '2026-07-08 11:55:50', 'SS-2026-00043', 'transfer', '', 82500.00),
+(44, 4, 2, '2026-07-09', '13:00:00', '14:00:00', 'tertunda', '2026-07-08 12:05:30', 'SS-2026-00044', 'qris', '', 47500.00);
 
 -- --------------------------------------------------------
 
@@ -126,8 +141,7 @@ CREATE TABLE `favorites` (
 INSERT INTO `favorites` (`favorite_id`, `user_id`, `field_id`, `created_at`) VALUES
 (4, 3, 1, '2026-07-01 19:20:55'),
 (6, 3, 2, '2026-07-01 19:31:09'),
-(7, 4, 1, '2026-07-03 07:15:57'),
-(8, 4, 2, '2026-07-03 07:16:20');
+(21, 4, 1, '2026-07-08 11:40:05');
 
 -- --------------------------------------------------------
 
@@ -165,11 +179,11 @@ CREATE TABLE `fields` (
 --
 
 INSERT INTO `fields` (`field_id`, `owner_id`, `nama_lapangan`, `jenis`, `harga`, `status`, `lokasi`, `gambar`, `deskripsi`, `owner_name`, `owner_phone`, `owner_address`, `jam_operasional`, `kapasitas`, `jenis_lantai`, `fasilitas`, `maps_link`, `google_maps_url`, `verifikasi`, `durasi_slot`, `hari_libur`, `aktif`) VALUES
-(1, NULL, 'Lapangan Futsal A ', 'Futsal', 80000.00, 'tersedia', 'Jl. Kaliurang Km 7, Sleman', 'lapangan-futsal.jpg', 'Lapangan futsal premium dengan lantai vinyl.              ', 'Bapak Suharto', '081234567890', 'Jl. Kaliurang Km 7, Sleman', '06.00 - 22.00', 10, 'Vinyl', 'Parkir,Kantin,Toilet', 'https://www.google.com/maps?q=Jl.+Kaliurang+Km+7+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Kaliurang+Km+7+Sleman', 'pending', 1, NULL, 'aktif'),
-(2, NULL, 'Arena Badminton 88', 'Badminton', 45000.00, 'tersedia', 'Jl. Magelang Km 5, Yogyakarta', 'badminton.jpg', 'Lapangan badminton indoor dengan pencahayaan terang dan area bermain nyaman.', 'Bapak Andi', '081298765432', 'Jl. Magelang Km 5, Yogyakarta', '07.00 - 22.00', 4, 'Karpet Badminton', 'Toilet, Kantin, Parkir', 'https://www.google.com/maps?q=Jl.+Magelang+Km+5+Yogyakarta&output=embed', 'https://maps.google.com/?q=Jl.+Magelang+Km+5+Yogyakarta', 'pending', 1, NULL, 'aktif'),
-(3, NULL, 'Basket Court Pro', 'Basket', 120000.00, 'penuh', 'Kota Yogyakarta', 'lapangan-basket.jpg', 'Lapangan basket indoor premium dengan lantai kayu berkualitas, ring standar pertandingan dan tribun penonton.', 'Basket Court Pro', '081290907788', 'Kota Yogyakarta', '08.00 - 23.00', 14, 'Kayu Indoor', 'Tribun, Toilet, Kantin', 'https://www.google.com/maps?q=Kota+Yogyakarta&output=embed', 'https://maps.google.com/?q=Kota+Yogyakarta', 'ditolak', 1, NULL, 'aktif'),
-(4, NULL, 'GOR Sport Center', 'Futsal', 70000.00, 'tersedia', 'Jl. Ringroad Utara, Sleman', 'lapangan-futsal2.jpg', 'Lapangan futsal indoor dengan rumput sintetis dan fasilitas lengkap.', 'Bapak Budi', '081377778888', 'Jl. Ringroad Utara, Sleman', '06.00 - 23.00', 10, 'Rumput Sintetis', 'Toilet, Mushola, Parkir', 'https://www.google.com/maps?q=Jl.+Ringroad+Utara+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Ringroad+Utara+Sleman', 'diterima', 1, NULL, 'nonaktif'),
-(6, NULL, 'Lapangan Basket A', 'Basket', 90000.00, 'tersedia', 'Jl. Kaliurang Km 9, Sleman', '1783079207_баскетбол.jpg', '                ', NULL, NULL, NULL, '08:00 - 22:00', 15, 'Vinyl', NULL, NULL, NULL, 'diterima', 1, NULL, 'aktif');
+(1, NULL, 'Lapangan Futsal A ', 'Futsal', 80000.00, 'tersedia', 'Jl. Kaliurang Km 7, Sleman', '1783510794_lapangan-futsal.jpg', 'Lapangan futsal premium dengan lantai vinyl.              ', 'Bapak Suharto', '081234567890', 'Jl. Kaliurang Km 7, Sleman', '06:00 - 22:00', 10, 'Vinyl', 'Parkir,Kantin,Toilet', 'https://www.google.com/maps?q=Jl.+Kaliurang+Km+7+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Kaliurang+Km+7+Sleman', 'pending', 1, '2026-07-09 s/d 2026-07-10', 'aktif'),
+(2, NULL, 'Arena Badminton 88', 'Badminton', 45000.00, 'tersedia', 'Jl. Magelang Km 5, Yogyakarta', '1783510827_badminton.jpg', 'Lapangan badminton indoor dengan pencahayaan terang dan area bermain nyaman.', 'Bapak Andi', '081298765432', 'Jl. Magelang Km 5, Yogyakarta', '07:00 - 22:00', 4, 'Karpet Badminton', 'Toilet, Kantin, Parkir', 'https://www.google.com/maps?q=Jl.+Magelang+Km+5+Yogyakarta&output=embed', 'https://maps.google.com/?q=Jl.+Magelang+Km+5+Yogyakarta', 'pending', 1, '2026-07-09 s/d 2026-07-15', 'aktif'),
+(3, NULL, 'Basket Court Pro', 'Basket', 120000.00, 'penuh', 'Kota Yogyakarta', '1783510911_lapangan-basket.jpg', 'Lapangan basket indoor premium dengan lantai kayu berkualitas, ring standar pertandingan dan tribun penonton.', 'Basket Court Pro', '081290907788', 'Kota Yogyakarta', '08.00 - 23.00', 14, 'Kayu Indoor', 'Tribun, Toilet, Kantin', 'https://www.google.com/maps?q=Kota+Yogyakarta&output=embed', 'https://maps.google.com/?q=Kota+Yogyakarta', 'ditolak', 1, NULL, 'aktif'),
+(4, NULL, 'GOR Sport Center', 'Futsal', 70000.00, 'tersedia', 'Jl. Ringroad Utara, Sleman', '1783510931_lapangan-futsal2.jpg', 'Lapangan futsal indoor dengan rumput sintetis dan fasilitas lengkap.', 'Bapak Budi', '081377778888', 'Jl. Ringroad Utara, Sleman', '06.00 - 23.00', 10, 'Rumput Sintetis', 'Toilet, Mushola, Parkir', 'https://www.google.com/maps?q=Jl.+Ringroad+Utara+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Ringroad+Utara+Sleman', 'diterima', 1, NULL, 'aktif'),
+(6, NULL, 'Lapangan Basket A', 'Basket', 90000.00, 'tersedia', 'Jl. Kaliurang Km 9, Sleman', 'lapangan-basket.jpg', '                ', NULL, NULL, NULL, '08:00 - 22:00', 15, 'Vinyl', NULL, NULL, NULL, 'diterima', 1, NULL, 'nonaktif');
 
 -- --------------------------------------------------------
 
@@ -210,7 +224,25 @@ INSERT INTO `notifications` (`notification_id`, `user_id`, `booking_id`, `judul`
 (16, 4, 26, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-03 10:02:02'),
 (17, 4, 27, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-03 10:13:36'),
 (18, 4, 28, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-03 11:25:26'),
-(19, 4, 29, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-06 10:45:42');
+(19, 4, 29, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-06 10:45:42'),
+(20, 4, 30, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-06 17:38:22'),
+(21, 4, 31, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-06 18:23:47'),
+(22, 4, 32, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-06 18:24:58'),
+(23, 4, 33, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-06 18:27:57'),
+(24, 4, 34, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-07 09:36:03'),
+(25, 4, 35, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-07 09:46:48'),
+(26, 4, 36, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-07 10:00:41'),
+(27, 4, 37, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-07 11:57:11'),
+(28, 4, 38, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-07 11:58:36'),
+(29, 4, 39, 'Booking Berhasil Dibuat', 'Booking berhasil dibuat. Silakan lakukan pembayaran saat tiba di lokasi sesuai jadwal.', 'belum', '2026-07-07 12:16:40'),
+(30, 4, 40, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-07 12:29:36'),
+(31, 4, 40, 'Booking Dibatalkan', 'Booking telah berhasil dibatalkan.', 'belum', '2026-07-08 11:28:44'),
+(32, 4, 38, 'Booking Dibatalkan', 'Booking telah berhasil dibatalkan.', 'belum', '2026-07-08 11:29:07'),
+(33, 4, 41, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-08 11:50:15'),
+(34, 4, 42, 'Booking Berhasil Dibuat', 'Booking berhasil dibuat. Silakan lakukan pembayaran saat tiba di lokasi sesuai jadwal.', 'belum', '2026-07-08 11:55:02'),
+(35, 4, 43, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-08 11:55:50'),
+(36, 4, 43, 'Booking Dibatalkan', 'Booking telah berhasil dibatalkan.', 'belum', '2026-07-08 11:56:21'),
+(37, 4, 44, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-08 12:05:30');
 
 -- --------------------------------------------------------
 
@@ -282,7 +314,22 @@ INSERT INTO `payment` (`payment_id`, `booking_id`, `metode`, `total`, `status`, 
 (23, 26, 'transfer', 47500.00, 'tertunda', '2026-07-03 10:02:02', 'mandiri'),
 (24, 27, 'transfer', 92500.00, 'tertunda', '2026-07-03 10:13:36', 'mandiri'),
 (25, 28, 'transfer', 82500.00, 'tertunda', '2026-07-03 11:25:26', 'mandiri'),
-(26, 29, '', 162500.00, 'tertunda', '2026-07-06 10:45:42', '');
+(26, 29, '', 162500.00, 'tertunda', '2026-07-06 10:45:42', ''),
+(27, 30, '', 162500.00, 'tertunda', '2026-07-06 17:38:22', ''),
+(28, 31, '', 162500.00, 'tertunda', '2026-07-06 18:23:47', ''),
+(29, 32, '', 162500.00, 'tertunda', '2026-07-06 18:24:58', ''),
+(30, 33, '', 92500.00, 'tertunda', '2026-07-06 18:27:57', ''),
+(31, 34, '', 82500.00, 'tertunda', '2026-07-07 09:36:03', ''),
+(32, 35, '', 82500.00, 'tertunda', '2026-07-07 09:46:48', ''),
+(33, 36, '', 82500.00, 'tertunda', '2026-07-07 10:00:41', ''),
+(34, 37, '', 242500.00, 'tertunda', '2026-07-07 11:57:11', ''),
+(35, 38, '', 72500.00, '', '2026-07-07 11:58:36', ''),
+(36, 39, 'cash', 142500.00, 'tertunda', '2026-07-07 12:16:40', ''),
+(37, 40, '', 162500.00, '', '2026-07-07 12:29:36', ''),
+(38, 41, '', 82500.00, 'tertunda', '2026-07-08 11:50:15', ''),
+(39, 42, 'cash', 72500.00, 'tertunda', '2026-07-08 11:55:02', ''),
+(40, 43, 'transfer', 82500.00, '', '2026-07-08 11:55:50', ''),
+(41, 44, '', 47500.00, 'tertunda', '2026-07-08 12:05:30', '');
 
 -- --------------------------------------------------------
 
@@ -381,7 +428,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `chat`
@@ -393,7 +440,7 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `fields`
@@ -405,7 +452,7 @@ ALTER TABLE `fields`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `owners`
@@ -417,7 +464,7 @@ ALTER TABLE `owners`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`
