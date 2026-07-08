@@ -2,7 +2,7 @@
 
 include "config.php";
 
-$filter = $_GET['filter'] ?? 'semua';
+$filter = $_GET['filter'] ?? 'pending';
 
 $where = "";
 

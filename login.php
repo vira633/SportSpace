@@ -52,9 +52,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Login berhasil — simpan ke session
     $_SESSION['user_id'] = $user['user_id'];
+    $_SESSION['owner_id'] = $user['owner_id'];
     $_SESSION['nama']    = $user['nama'];
     $_SESSION['email']   = $user['email'];
     $_SESSION['role']    = $user['role'];
+
+    if ($user['role'] === 'owner') {
+
+    $stmtOwner = $conn->prepare("
+        SELECT owner_id
+        FROM owners
+        WHERE user_id = ?
+        LIMIT 1
+    ");
+
+    $stmtOwner->bind_param("i", $user['user_id']);
+    $stmtOwner->execute();
+
+    $ownerResult = $stmtOwner->get_result();
+
+    if ($ownerResult->num_rows > 0) {
+        $owner = $ownerResult->fetch_assoc();
+        $_SESSION['owner_id'] = $owner['owner_id'];
+    }
+
+    $stmtOwner->close();
+}
 
     // Arahkan berdasarkan role
     if ($user['role'] === 'admin') {
