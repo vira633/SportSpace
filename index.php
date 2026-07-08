@@ -3,7 +3,8 @@ require 'config.php';
 session_start();
 
 // Ambil semua lapangan dari database
-$result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
+$result = $conn->query("
+SELECT * FROM fields WHERE aktif='aktif'ORDER BY field_id ASC");
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -50,7 +51,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
               <i class="ti ti-heart"></i> Favorit
             </a>
             <div class="user-dropdown-divider"></div>
-            <a href="logout.php" onclick="return confirm('Yakin ingin keluar dari akun Anda?');" class="user-dropdown-item logout-danger">
+            <a href="logout.php" class="user-dropdown-item logout-danger">
               <i class="ti ti-logout"></i> Keluar
             </a>
           </div>
@@ -310,4 +311,5 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
     });
   </script>
 </body>
+
 </html>

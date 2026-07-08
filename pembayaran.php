@@ -108,7 +108,7 @@ $total =
 
           <div class="field-info">
 
-            <img src="<?= $field['gambar']; ?>">
+            <img src="uploads/fields/<?= $field['gambar']; ?>" alt="<?= $field['nama_lapangan']; ?>">
 
             <div>
 
