@@ -65,7 +65,7 @@ unset($_SESSION['toast']);
     <div class="dot"></div>
   </a>
   <div class="navbar-actions">
-    <a href="index.php">
+    <a href="logout.php" onclick="return confirm('Yakin ingin keluar dari akun Anda?');">
       <button class="btn btn-outline btn-sm">
         <i class="ti ti-logout"></i>
         Keluar
@@ -117,7 +117,7 @@ unset($_SESSION['toast']);
       Pengaturan
     </div>
 
-    <a href="login.html" style="color:inherit;">
+    <a href="logout.php" style="color:inherit;" onclick="return confirm('Yakin ingin keluar dari akun Anda?');">
       <div class="sidebar-item sidebar-logout">
         <i class="ti ti-logout"></i> 
         Keluar
