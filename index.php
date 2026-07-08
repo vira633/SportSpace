@@ -3,7 +3,7 @@ require 'config.php';
 session_start();
 
 // Ambil semua lapangan dari database
-$result = $conn->query("SELECT * FROM fields WHERE aktif='aktif'ORDER BY field_id ASC");
+$result = $conn->query("SELECT * FROM fields WHERE aktif='aktif' AND verifikasi='diterima' ORDER BY field_id ASC");
 ?>
 <!DOCTYPE html>
 <html lang="id">
