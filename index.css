@@ -166,6 +166,18 @@ a {
   color: var(--green);
 }
 
+.btn-warning {
+  background: var(--amber-light);
+  border: 1.5px solid var(--amber-light);
+  color: var(--amber);
+}
+
+.btn-warning:hover {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: var(--white);
+}
+
 .btn-sm {
   padding: 6px 14px;
   font-size: 13px;
