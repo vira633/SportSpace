@@ -78,6 +78,26 @@ while ($b = mysqli_fetch_assoc($bookings)) {
       sprintf("%02d:00", $i);
   }
 }
+
+// CEK HARI LIBUR (sinkron sama format dari dashboard-owner: "2026-07-10 s/d 2026-07-15")
+$isLibur = false;
+
+if (!empty($field['hari_libur'])) {
+
+  $rentangLibur = explode(" s/d ", $field['hari_libur']);
+
+  $liburMulai = $rentangLibur[0] ?? "";
+  $liburSelesai = $rentangLibur[1] ?? "";
+
+  if (
+    !empty($liburMulai) &&
+    !empty($liburSelesai) &&
+    $tanggal >= $liburMulai &&
+    $tanggal <= $liburSelesai
+  ) {
+    $isLibur = true;
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -490,9 +510,15 @@ while ($b = mysqli_fetch_assoc($bookings)) {
               </label>
 
               <div class="calendar-input">
-                <input type="date" id="booking-date-display" min="<?= date('Y-m-d'); ?>">
+                <input type="date" id="booking-date-display" min="<?= date('Y-m-d'); ?>" value="<?= htmlspecialchars($tanggal) ?>">
               </div>
 
+            </div>
+
+            <!-- NOTICE HARI LIBUR -->
+            <div id="liburNotice" class="libur-notice" style="<?= $isLibur ? 'display:flex;' : 'display:none;' ?>">
+              <i class="ti ti-calendar-off"></i>
+              Lapangan tutup/libur pada tanggal ini. Silakan pilih tanggal lain.
             </div>
 
             <div class="slots-grid">
@@ -511,7 +537,7 @@ while ($b = mysqli_fetch_assoc($bookings)) {
                   in_array(
                     $mulai,
                     $jamPenuh
-                  );
+                  ) || $isLibur;
 
                 ?>
 
@@ -723,10 +749,14 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
                 .then(data => {
                   console.log(data);
+
+                  const liburNotice = document.getElementById("liburNotice");
+
                   document.querySelectorAll(".slot-btn").forEach(btn => {
 
                     btn.classList.remove("selected");
                     btn.classList.remove("penuh");
+                    btn.classList.remove("booked");
 
                     btn.disabled = false;
 
@@ -736,21 +766,37 @@ while ($b = mysqli_fetch_assoc($bookings)) {
 
                   updateSummary();
 
-                  data.forEach(jam => {
+                  if (data.libur) {
 
-                    const btn =
-                      document.getElementById("slot-" + jam);
+                    // Hari libur: semua slot diblok, tampilin notice
+                    liburNotice.style.display = "flex";
 
-                    if (btn) {
-
+                    document.querySelectorAll(".slot-btn").forEach(btn => {
                       btn.classList.add("penuh");
-                      btn.classList.add("booked");
-
                       btn.disabled = true;
+                    });
 
-                    }
+                  } else {
 
-                  });
+                    liburNotice.style.display = "none";
+
+                    data.penuh.forEach(jam => {
+
+                      const btn =
+                        document.getElementById("slot-" + jam);
+
+                      if (btn) {
+
+                        btn.classList.add("penuh");
+                        btn.classList.add("booked");
+
+                        btn.disabled = true;
+
+                      }
+
+                    });
+
+                  }
 
                   disablePastTime();
 

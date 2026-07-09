@@ -5,7 +5,7 @@ include "config.php";
 $user_id = $_SESSION['user_id'];
 
 $queryOwner = mysqli_query($conn,"
-SELECT owner_id
+SELECT owner_id, nama, telepon, alamat
 FROM owners
 WHERE user_id='$user_id'
 LIMIT 1
@@ -19,6 +19,11 @@ if(!$owner){
 
 $owner_id = $owner['owner_id'];
 
+// Data owner buat auto-fill (biar owner ga perlu ngetik ulang tiap tambah lapangan)
+$owner_name = $owner['nama'] ?? '';
+$owner_phone = $owner['telepon'] ?? '';
+$owner_address = $owner['alamat'] ?? '';
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $nama = $_POST['nama_lapangan'];
     $jenis = $_POST['jenis'];
@@ -28,6 +33,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $jenis_lantai = $_POST['jenis_lantai'];
     $jam = $_POST['jam_operasional'];
     $deskripsi = $_POST['deskripsi'];
+    $fasilitas = $_POST['fasilitas'] ?? '';
+
+    // Auto-generate link Google Maps dari alamat lokasi
+    $lokasiEncoded = urlencode($lokasi);
+    $maps_link = "https://www.google.com/maps?q=" . $lokasiEncoded . "&output=embed";
+    $google_maps_url = "https://maps.google.com/?q=" . $lokasiEncoded;
 
     $gambar = $_FILES['gambar'];
     $namaGambar = time() . "_" . basename($gambar["name"]);
@@ -46,9 +57,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     lokasi,
     gambar,
     deskripsi,
+    owner_name,
+    owner_phone,
+    owner_address,
     jam_operasional,
     kapasitas,
     jenis_lantai,
+    fasilitas,
+    maps_link,
+    google_maps_url,
     verifikasi,
     aktif
     )
@@ -63,9 +80,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     '$lokasi',
     '$namaGambar',
     '$deskripsi',
+    '$owner_name',
+    '$owner_phone',
+    '$owner_address',
     '$jam',
     '$kapasitas',
     '$jenis_lantai',
+    '$fasilitas',
+    '$maps_link',
+    '$google_maps_url',
     'pending',
     'nonaktif'
     )

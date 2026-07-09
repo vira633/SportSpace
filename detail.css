@@ -805,6 +805,28 @@ body {
 
 }
 
+.libur-notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+
+  padding: 14px 18px;
+  border-radius: 16px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  margin-bottom: 20px;
+}
+
+.libur-notice i {
+  font-size: 20px;
+}
+
 .header-left {
   display: flex;
   align-items: center;

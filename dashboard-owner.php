@@ -674,7 +674,8 @@ unset($_SESSION['toast']);
                     '<?= addslashes($field['jenis_lantai']); ?>',
                     '<?= addslashes($field['jam_operasional']); ?>',
                     '<?= addslashes($field['deskripsi']); ?>',
-                    '<?= $gambarEdit; ?>'
+                    '<?= $gambarEdit; ?>',
+                    '<?= addslashes($field['fasilitas'] ?? ''); ?>'
                 )">
                 <i class="ti ti-edit"></i>
                 Edit
@@ -1383,11 +1384,20 @@ unset($_SESSION['toast']);
             class="form-input"
             id="new-jenis"
             name="jenis"
-            required>
-            <option>Futsal</option>
-            <option>Badminton</option>
-            <option>Basket</option>
+            required
+            onchange="handleJenisChange(this)">
+            <option value="Futsal">Futsal</option>
+            <option value="Badminton">Badminton</option>
+            <option value="Basket">Basket</option>
+            <option value="Renang">Renang</option>
+            <option value="Lainnya">Lainnya...</option>
           </select>
+          <input
+            type="text"
+            class="form-input"
+            id="new-jenis-lainnya"
+            placeholder="Ketik jenis olahraga lain"
+            style="display:none;margin-top:8px;">
         </div>
 
         <div class="form-group">
@@ -1448,6 +1458,16 @@ unset($_SESSION['toast']);
                   rows="3"
                   name="deskripsi">
                 </textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Fasilitas</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  id="new-fasilitas"
+                  name="fasilitas"
+                  placeholder="cth: Parkir, Kantin, Toilet">
               </div>
 
               <div class="form-group">
@@ -1535,11 +1555,20 @@ unset($_SESSION['toast']);
       <label class="form-label">Jenis Olahraga</label>
       <select class="form-input"
         id="edit-jenis"
-        name="jenis">
-        <option>Futsal</option>
-        <option>Badminton</option>
-        <option>Basket</option>
+        name="jenis"
+        onchange="handleJenisChange(this)">
+        <option value="Futsal">Futsal</option>
+        <option value="Badminton">Badminton</option>
+        <option value="Basket">Basket</option>
+        <option value="Renang">Renang</option>
+        <option value="Lainnya">Lainnya...</option>
       </select>
+      <input
+        type="text"
+        class="form-input"
+        id="edit-jenis-lainnya"
+        placeholder="Ketik jenis olahraga lain"
+        style="display:none;margin-top:8px;">
     </div>
 
     <div class="form-group">
@@ -1601,7 +1630,15 @@ unset($_SESSION['toast']);
         rows="3"></textarea>
     </div>
 
-
+    <div class="form-group">
+      <label class="form-label">Fasilitas</label>
+      <input
+        type="text"
+        class="form-input"
+        id="edit-fasilitas"
+        name="fasilitas"
+        placeholder="cth: Parkir, Kantin, Toilet">
+    </div>
 
     <div class="form-group"></div>
 
@@ -1706,7 +1743,8 @@ function openEditModal(
   jenis_lantai,
   jam_operasional,
   deskripsi,
-  gambar
+  gambar,
+  fasilitas
 ){
   document.getElementById("edit-id").value = id;
 
@@ -1718,14 +1756,39 @@ function openEditModal(
   document.getElementById("edit-kapasitas").value = kapasitas;
   document.getElementById("edit-jam").value = jam_operasional;
   document.getElementById("edit-deskripsi").value = deskripsi;
+  document.getElementById("edit-fasilitas").value = fasilitas || "";
   
   const sel = document.getElementById("edit-jenis");
-  
+  const inputLainnya = document.getElementById("edit-jenis-lainnya");
+
+  let ketemu = false;
+
   for(let o of sel.options){
     if(o.value===jenis || o.text===jenis){
       o.selected = true;
+      ketemu = true;
       break;
     }
+  }
+
+  if(ketemu){
+    // Kategori standar, sembunyikan input custom
+    inputLainnya.style.display = "none";
+    inputLainnya.value = "";
+    sel.name = "jenis";
+    inputLainnya.removeAttribute("name");
+  }else{
+    // Kategori custom (bukan Futsal/Badminton/Basket/Renang), pindah ke mode "Lainnya"
+    for(let o of sel.options){
+      if(o.value === "Lainnya"){
+        o.selected = true;
+        break;
+      }
+    }
+    inputLainnya.style.display = "block";
+    inputLainnya.value = jenis;
+    sel.removeAttribute("name");
+    inputLainnya.name = "jenis";
   }
   
   document.getElementById("edit-modal").classList.add("show");
@@ -1738,6 +1801,27 @@ function openEditModal(
   }else{
     preview.style.display = "none";
     noPhoto.style.display = "flex";
+  }
+}
+
+// Toggle input "Lainnya" buat kategori olahraga custom (dipakai form Tambah & Edit)
+function handleJenisChange(select) {
+  const inputId = select.id.replace("jenis", "jenis-lainnya");
+  const inputLainnya = document.getElementById(inputId);
+
+  if (!inputLainnya) return;
+
+  if (select.value === "Lainnya") {
+    inputLainnya.style.display = "block";
+    inputLainnya.setAttribute("required", "required");
+    select.removeAttribute("name");
+    inputLainnya.name = "jenis";
+  } else {
+    inputLainnya.style.display = "none";
+    inputLainnya.value = "";
+    inputLainnya.removeAttribute("required");
+    inputLainnya.removeAttribute("name");
+    select.name = "jenis";
   }
 }
 
