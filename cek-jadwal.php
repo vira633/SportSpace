@@ -4,6 +4,10 @@ include "config.php";
 $field_id = $_GET['field_id'];
 $tanggal = $_GET['tanggal'];
 
+// Optional: dipakai pas reschedule, biar booking yang lagi di-reschedule
+// gak dianggap "nabrak dirinya sendiri" dan bikin slotnya keliatan penuh
+$exclude_id = isset($_GET['exclude_id']) ? (int) $_GET['exclude_id'] : 0;
+
 $booking = [];
 $libur = false;
 
@@ -37,6 +41,7 @@ if (!$libur) {
     WHERE field_id='$field_id'
     AND tanggal='$tanggal'
     AND status!='dibatalkan'
+    AND booking_id!='$exclude_id'
     ");
 
     while($r = mysqli_fetch_assoc($q)){

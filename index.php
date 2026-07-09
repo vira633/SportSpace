@@ -117,15 +117,57 @@ $result = $conn->query("SELECT * FROM fields WHERE aktif='aktif' AND verifikasi=
         <?php
         // Cek apakah lapangan lagi libur HARI INI (rentang tanggal dari dashboard owner)
         $isLiburHariIni = false;
+        $hariIni = date('Y-m-d');
 
         if (!empty($lap['hari_libur'])) {
           $rentangLibur = explode(" s/d ", $lap['hari_libur']);
           $liburMulai = $rentangLibur[0] ?? '';
           $liburSelesai = $rentangLibur[1] ?? '';
-          $hariIni = date('Y-m-d');
 
           if (!empty($liburMulai) && !empty($liburSelesai) && $hariIni >= $liburMulai && $hariIni <= $liburSelesai) {
             $isLiburHariIni = true;
+          }
+        }
+
+        // Cek apakah semua slot jadwal hari ini sudah penuh (dibooking) atau sudah lewat jam
+        // Logikanya disamain persis sama detail.php: slot jam 06:00 - 22:00 per 1 jam,
+        // dan booking yang ngeblok slot adalah semua yang statusnya BUKAN 'dibatalkan'
+        $isPenuhHariIni = false;
+
+        if (!$isLiburHariIni) {
+          $jamSekarangInt = (int) date('H');
+
+          $stmtBooking = $conn->prepare("SELECT jam_mulai, jam_selesai FROM booking WHERE field_id = ? AND tanggal = ? AND status != 'dibatalkan'");
+          $stmtBooking->bind_param("is", $lap['field_id'], $hariIni);
+          $stmtBooking->execute();
+          $bookingHariIni = $stmtBooking->get_result()->fetch_all(MYSQLI_ASSOC);
+          $stmtBooking->close();
+
+          // Bikin daftar jam yang udah kebooking, misal ["06:00","07:00", ...]
+          $jamPenuh = [];
+          foreach ($bookingHariIni as $b) {
+            $awal = (int) substr($b['jam_mulai'], 0, 2);
+            $akhir = (int) substr($b['jam_selesai'], 0, 2);
+            for ($i = $awal; $i < $akhir; $i++) {
+              $jamPenuh[] = sprintf('%02d:00', $i);
+            }
+          }
+
+          // Cek satu-satu slot dari jam 06:00 s/d 21:00 (sama kayak di halaman detail)
+          $adaSlotKosong = false;
+          for ($jam = 6; $jam < 22; $jam++) {
+            $mulai = sprintf('%02d:00', $jam);
+            $sudahDibooking = in_array($mulai, $jamPenuh);
+            $sudahLewat = $jam <= $jamSekarangInt;
+
+            if (!$sudahDibooking && !$sudahLewat) {
+              $adaSlotKosong = true;
+              break;
+            }
+          }
+
+          if (!$adaSlotKosong) {
+            $isPenuhHariIni = true;
           }
         }
 
@@ -134,7 +176,7 @@ $result = $conn->query("SELECT * FROM fields WHERE aktif='aktif' AND verifikasi=
           $badge_class = 'badge-amber';
           $badge_text = 'Libur hari ini';
           $statusTampil = 'libur';
-        } elseif ($lap['status'] === 'tersedia') {
+        } elseif ($lap['status'] === 'tersedia' && !$isPenuhHariIni) {
           $badge_class = 'badge-green';
           $badge_text = 'Tersedia';
           $statusTampil = 'tersedia';
