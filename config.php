@@ -1,7 +1,9 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
+
 $host = "localhost";
 $user = "root";
-$pass = "";      
+$pass = "";
 $dbname = "sportspace";
 
 $conn = new mysqli($host, $user, $pass, $dbname);

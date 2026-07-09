@@ -2,6 +2,23 @@
 session_start();
 include "config.php";
 
+$user_id = $_SESSION['user_id'];
+
+$queryOwner = mysqli_query($conn,"
+SELECT owner_id
+FROM owners
+WHERE user_id='$user_id'
+LIMIT 1
+");
+
+$owner = mysqli_fetch_assoc($queryOwner);
+
+if(!$owner){
+    die("Owner tidak ditemukan.");
+}
+
+$owner_id = $owner['owner_id'];
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $nama = $_POST['nama_lapangan'];
     $jenis = $_POST['jenis'];
@@ -21,6 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $query = mysqli_query($conn,"
     INSERT INTO fields
     (
+    owner_id,
     nama_lapangan,
     jenis,
     harga,
@@ -37,6 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     VALUES
     (
+    '$owner_id',
     '$nama',
     '$jenis',
     '$harga',

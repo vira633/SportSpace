@@ -245,7 +245,7 @@ input, select, textarea {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 18px;
-  font-size: 20px; 
+  font-size: 18px; 
   font-weight: 800; 
   color: var(--dark);
 }
@@ -406,17 +406,27 @@ input, select, textarea {
     font-weight:600;
     color:#1f2937;
 }
-.form-input  {
-  width: 100%; 
+.form-input{
+  width:100%;
   height:50px;
   padding:0 16px;
-  border: 1px solid #dbe3eb;
-  border-radius: 16px;
-  font-size: 15px; 
-  color: var(--dark); 
-  background: var(--white);
-  font-family: inherit; 
-  transition: border-color .2s;
+  border:1px solid #dbe3eb;
+  border-radius:13px;
+
+  font-size:14px;
+  font-weight:400;
+  color:#6b7280;
+
+  background:var(--white);
+  font-family:inherit;
+}
+select.form-input{
+    height:42px;
+    line-height:42px;
+}
+
+input[type="date"].form-input{
+    height:42px;
 }
 .form-input:focus { 
   border-color: var(--green); 
@@ -634,7 +644,7 @@ select.form-input   {
   display: flex; 
   gap: 10px; 
   margin-bottom: 18px; 
-  flex-wrap: wrap; 
+  flex-wrap: nowrap;
   align-items: center; 
 }
 .search-input-wrap { 
@@ -1559,17 +1569,13 @@ select.form-input   {
 
 /* Filter select widths */
 .select-status { 
-  width:auto; 
-  min-width:130px; 
-  padding:9px 13px; 
+  width:170px; 
 }
 .select-field  { 
-  width:auto; 
-  min-width:140px; 
-  padding:9px 13px; 
+  width:190px; 
 }
 .input-date    { 
-  width:auto; 
+  width:170px; 
 }
 
 /* Sidebar keluar link */
@@ -1990,19 +1996,19 @@ select.form-input   {
 
 .jadwal-filter select{
 
-    width:200px;
+    width:190px;
     height:44px;
 
-    padding:0 42px 0 14px;
+    padding:0 16px;
 
-    border:1px solid #E5E7EB;
-    border-radius:12px;
+    border:1px solid #dbe3eb;
+    border-radius:13px;
 
     background:#fff;
 
     font-size:14px;
-    font-weight:500;
-    color:#1F2937;
+    font-weight:400;
+    color:#6b7280;
 
     outline:none;
 
@@ -2132,4 +2138,29 @@ select.form-input   {
 }
 .setting-card .form-group{
     width:100%;
+}
+
+/* ===== EMPTY CHART ===== */
+
+.chart-empty{
+    width:100%;
+    min-height:120px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.chart-empty-icon{
+    font-size:28px;
+    color:#c7cdd8;
+    margin-bottom:8px;
+}
+
+.chart-empty h4{
+    margin:0;
+    font-size:15px;
+    font-weight:600;
+    color:#8b95a7;
 }

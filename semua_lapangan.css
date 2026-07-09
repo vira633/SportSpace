@@ -80,6 +80,30 @@
   color: #334155 !important;
 }
 
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #5C5B56; /* Warna abu-abu --gray-600 */
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-bottom: 16px; /* Jarak pas ke elemen filter di bawahnya */
+    width: fit-content;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* EFEK HOVER SAMA PERSIS */
+.btn-back:hover {
+    color: #164f21; /* Berubah jadi hijau maskot --green */
+    transform: translateX(-4px); /* Efek bergeser interaktif ke kiri */
+}
+
+.btn-back i {
+    font-size: 18px; /* Ukuran ikon panah Tabler */
+}
+
 /* RESPONSIVE KHUSUS LAYAR HP (Otomatis menumpuk ke bawah kalau layar kekecilan) */
 @media (max-width: 768px) {
   .filter-search-wrapper {

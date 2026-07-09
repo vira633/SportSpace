@@ -52,8 +52,7 @@ $result = $conn->query("SELECT * FROM fields ORDER BY field_id ASC");
   <div class="section" id="lapangan" style="min-height: 70vh;">
     <div class="section-header" style="margin-bottom: 20px;">
       <div>
-        <a href="index.php"
-          style="font-size:12px; color:var(--gray-400); font-weight:600; display:inline-flex; align-items:center; gap:4px; margin-bottom:8px;">
+        <a href="index.php" class="btn-back">
           <i class="ti ti-arrow-left"></i>
         </a>
       </div>

@@ -9,7 +9,9 @@ if(isset($_GET['id']) && isset($_GET['status'])){
 
     $query = mysqli_query($conn, "
     UPDATE booking
-    SET status='$status'
+    SET
+        status='$status',
+        created_at=NOW()
     WHERE booking_id='$booking_id'
     ");
 
