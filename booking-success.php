@@ -2,7 +2,11 @@
 
 include 'config.php';
 
-$booking_id = $_GET['id'];
+if (!isset($_GET['id'])) {
+  die("Booking tidak ditemukan");
+}
+
+$booking_id = (int) $_GET['id'];
 
 $query = mysqli_query($conn, "
 SELECT
@@ -38,15 +42,15 @@ if (!$data) {
 
 $durasi = intval(
 
-(
-strtotime($data['jam_selesai'])
--
-strtotime($data['jam_mulai'])
-)
+  (
+    strtotime($data['jam_selesai'])
+    -
+    strtotime($data['jam_mulai'])
+  )
 
-/
+  /
 
-3600
+  3600
 
 );
 
@@ -272,7 +276,7 @@ $kode_booking =
               </button>
 
             </a>
-            <a href="riwayat.php">
+            <a href="riwayat.php?from=booking-success&id=<?= $booking_id ?>">
 
               <button class="btn btn-primary btn-lg">
 
