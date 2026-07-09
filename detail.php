@@ -77,6 +77,64 @@ if (count($jamPenuh) >= $totalSlot) {
   $badgeText = "Tersedia";
 
 }
+
+// CEK HARI LIBUR (sinkron sama format dari dashboard-owner: "2026-07-10 s/d 2026-07-15")
+$isLibur = false;
+
+if (!empty($field['hari_libur'])) {
+
+  $rentangLibur = explode(" s/d ", $field['hari_libur']);
+
+  $liburMulai = $rentangLibur[0] ?? "";
+  $liburSelesai = $rentangLibur[1] ?? "";
+
+  if (
+    !empty($liburMulai) &&
+    !empty($liburSelesai) &&
+    $tanggal >= $liburMulai &&
+    $tanggal <= $liburSelesai
+  ) {
+    $isLibur = true;
+  }
+}
+
+// CEK APAKAH SEMUA SLOT DI TANGGAL YANG DIPILIH SUDAH PENUH
+// (dibooking semua, atau -khusus buat hari ini- udah lewat jam)
+$isPenuhTanggalIni = false;
+
+if (!$isLibur) {
+  $adalahHariIni = ($tanggal === date('Y-m-d'));
+  $jamSekarangInt = (int) date('H');
+
+  $adaSlotKosong = false;
+
+  for ($jam = 6; $jam < 22; $jam++) {
+    $mulai = sprintf('%02d:00', $jam);
+    $sudahDibooking = in_array($mulai, $jamPenuh);
+    $sudahLewat = $adalahHariIni && ($jam <= $jamSekarangInt);
+
+    if (!$sudahDibooking && !$sudahLewat) {
+      $adaSlotKosong = true;
+      break;
+    }
+  }
+
+  if (!$adaSlotKosong) {
+    $isPenuhTanggalIni = true;
+  }
+}
+
+// Tentukan badge status buat hero image: Libur > Penuh > Tersedia
+if ($isLibur) {
+  $badgeClass = 'badge-amber';
+  $badgeText = 'Libur';
+} elseif ($isPenuhTanggalIni) {
+  $badgeClass = 'badge-amber';
+  $badgeText = 'Penuh';
+} else {
+  $badgeClass = 'badge-green';
+  $badgeText = 'Tersedia';
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -250,7 +308,7 @@ if (count($jamPenuh) >= $totalSlot) {
         </button>
       </a>
 
-      <a href="login.html">
+      <a href="profile.php">
         <button class="btn btn-primary btn-sm">
           Akun
         </button>
@@ -489,9 +547,15 @@ if (count($jamPenuh) >= $totalSlot) {
               </label>
 
               <div class="calendar-input">
-                <input type="date" id="booking-date-display" min="<?= date('Y-m-d'); ?>">
+                <input type="date" id="booking-date-display" min="<?= date('Y-m-d'); ?>" value="<?= htmlspecialchars($tanggal) ?>">
               </div>
 
+            </div>
+
+            <!-- NOTICE HARI LIBUR -->
+            <div id="liburNotice" class="libur-notice" style="<?= $isLibur ? 'display:flex;' : 'display:none;' ?>">
+              <i class="ti ti-calendar-off"></i>
+              Lapangan tutup/libur pada tanggal ini. Silakan pilih tanggal lain.
             </div>
 
             <div class="slots-grid">
@@ -510,7 +574,7 @@ if (count($jamPenuh) >= $totalSlot) {
                   in_array(
                     $mulai,
                     $jamPenuh
-                  );
+                  ) || $isLibur;
 
                 ?>
 
@@ -722,10 +786,14 @@ if (count($jamPenuh) >= $totalSlot) {
 
                 .then(data => {
                   console.log(data);
+
+                  const liburNotice = document.getElementById("liburNotice");
+
                   document.querySelectorAll(".slot-btn").forEach(btn => {
 
                     btn.classList.remove("selected");
                     btn.classList.remove("penuh");
+                    btn.classList.remove("booked");
 
                     btn.disabled = false;
 
@@ -735,21 +803,37 @@ if (count($jamPenuh) >= $totalSlot) {
 
                   updateSummary();
 
-                  data.forEach(jam => {
+                  if (data.libur) {
 
-                    const btn =
-                      document.getElementById("slot-" + jam);
+                    // Hari libur: semua slot diblok, tampilin notice
+                    liburNotice.style.display = "flex";
 
-                    if (btn) {
-
+                    document.querySelectorAll(".slot-btn").forEach(btn => {
                       btn.classList.add("penuh");
-                      btn.classList.add("booked");
-
                       btn.disabled = true;
+                    });
 
-                    }
+                  } else {
 
-                  });
+                    liburNotice.style.display = "none";
+
+                    data.penuh.forEach(jam => {
+
+                      const btn =
+                        document.getElementById("slot-" + jam);
+
+                      if (btn) {
+
+                        btn.classList.add("penuh");
+                        btn.classList.add("booked");
+
+                        btn.disabled = true;
+
+                      }
+
+                    });
+
+                  }
 
                   disablePastTime();
 
@@ -815,9 +899,14 @@ if (count($jamPenuh) >= $totalSlot) {
               <?= htmlspecialchars($field['owner_address']); ?>
             </div>
 
-            <a href="chat.php?field_id=<?= $field['field_id']; ?>" class="btn btn-primary btn-full">
+            <a href="chat.php?field_id=<?= $field['field_id']; ?>" class="btn btn-primary btn-full" style="position:relative;">
               <i class="ti ti-message-circle"></i>
               Chat Owner
+              <span
+                id="chatUserBadge"
+                style="display:none;position:absolute;top:-8px;right:-8px;background:#DC2626;color:white;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:999px;align-items:center;justify-content:center;padding:0 6px;">
+                0
+              </span>
             </a>
           </div>
         </div>
@@ -1043,6 +1132,31 @@ if (count($jamPenuh) >= $totalSlot) {
       disablePastTime();
 
     }
+
+    function loadChatUserBadge(){
+
+        fetch("get-unread-chat-user.php?field_id=<?= $field_id ?>")
+        .then(res => res.json())
+        .then(data => {
+
+            const badge = document.getElementById("chatUserBadge");
+
+            if(!badge) return;
+
+            if(data.total > 0){
+                badge.style.display = "flex";
+                badge.textContent = data.total;
+            } else {
+                badge.style.display = "none";
+            }
+
+        })
+        .catch(() => {});
+
+    }
+
+    loadChatUserBadge();
+    setInterval(loadChatUserBadge, 5000);
   </script>
 
 </body>

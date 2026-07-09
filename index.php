@@ -115,38 +115,8 @@ $result = $conn->query("SELECT * FROM fields WHERE aktif='aktif' AND verifikasi=
     <div class="fields-grid">
       <?php while ($lap = $result->fetch_assoc()): ?>
         <?php
-        /* ===========================
+       
    STATUS LAPANGAN HARI INI
-=========================== */
-
-        $hariIni = date("Y-m-d");
-
-        $cekBooking = mysqli_fetch_assoc(mysqli_query($conn, "
-SELECT COUNT(*) total
-FROM booking
-WHERE field_id='" . $lap['field_id'] . "'
-AND tanggal='$hariIni'
-AND status IN(
-'tertunda',
-'menunggu konfirmasi',
-'terkonfirmasi'
-)
-"));
-
-        if ($cekBooking['total'] >= 17) {
-
-          $badge_class = "badge-amber";
-          $badge_text = "Penuh Hari Ini";
-
-        } else {
-
-          $badge_class = "badge-green";
-          $badge_text = "Tersedia";
-
-        }
-        // Tentukan badge berdasarkan status
-        $badge_class = $lap['status'] === 'tersedia' ? 'badge-green' : 'badge-amber';
-        $badge_text = $lap['status'] === 'tersedia' ? 'Tersedia' : 'Penuh hari ini';
 
         // Tentukan ikon jenis olahraga
         $icon = 'ti-ball-football';
@@ -194,7 +164,7 @@ AND status IN(
                 <?php endif; ?>
               <?php else: ?>
                 <a href="detail.php?id=<?= $lap['field_id'] ?>" class="btn-link">
-                  <button class="btn btn-outline btn-sm">Lihat</button>
+                  <button class="btn btn-warning btn-sm">Lihat</button>
                 </a>
               <?php endif; ?>
             </div>

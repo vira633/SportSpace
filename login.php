@@ -52,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Login berhasil — simpan ke session
     $_SESSION['user_id'] = $user['user_id'];
-    $_SESSION['owner_id'] = $user['owner_id'];
     $_SESSION['nama']    = $user['nama'];
     $_SESSION['email']   = $user['email'];
     $_SESSION['role']    = $user['role'];

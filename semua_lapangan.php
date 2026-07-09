@@ -129,8 +129,34 @@ if ($lokasiResult) {
       <?php if ($result && $result->num_rows > 0): ?>
         <?php while ($lap = $result->fetch_assoc()): ?>
           <?php
-          $badge_class = $lap['status'] === 'tersedia' ? 'badge-green' : 'badge-amber';
-          $badge_text = $lap['status'] === 'tersedia' ? 'Tersedia' : 'Penuh hari ini';
+          // Cek apakah lapangan lagi libur HARI INI (rentang tanggal dari dashboard owner)
+          $isLiburHariIni = false;
+
+          if (!empty($lap['hari_libur'])) {
+            $rentangLibur = explode(" s/d ", $lap['hari_libur']);
+            $liburMulai = $rentangLibur[0] ?? '';
+            $liburSelesai = $rentangLibur[1] ?? '';
+            $hariIni = date('Y-m-d');
+
+            if (!empty($liburMulai) && !empty($liburSelesai) && $hariIni >= $liburMulai && $hariIni <= $liburSelesai) {
+              $isLiburHariIni = true;
+            }
+          }
+
+          // Tentukan badge & status tampil berdasarkan prioritas: Libur > Penuh > Tersedia
+          if ($isLiburHariIni) {
+            $badge_class = 'badge-amber';
+            $badge_text = 'Libur hari ini';
+            $statusTampil = 'libur';
+          } elseif ($lap['status'] === 'tersedia') {
+            $badge_class = 'badge-green';
+            $badge_text = 'Tersedia';
+            $statusTampil = 'tersedia';
+          } else {
+            $badge_class = 'badge-amber';
+            $badge_text = 'Penuh hari ini';
+            $statusTampil = 'penuh';
+          }
 
           $icon = 'ti-ball-football';
           if ($lap['jenis'] === 'badminton')
@@ -166,7 +192,7 @@ if ($lokasiResult) {
                   Rp<?= number_format($lap['harga'], 0, ',', '.') ?> <span>/jam</span>
                 </div>
 
-                <?php if ($lap['status'] === 'tersedia'): ?>
+                <?php if ($statusTampil === 'tersedia'): ?>
                   <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="detail.php?id=<?= $lap['field_id'] ?>" class="btn-link">
                       <button class="btn btn-primary btn-sm">Booking <i class="ti ti-arrow-right"></i></button>
@@ -178,7 +204,7 @@ if ($lokasiResult) {
                   <?php endif; ?>
                 <?php else: ?>
                   <a href="detail.php?id=<?= $lap['field_id'] ?>" class="btn-link">
-                    <button class="btn btn-outline btn-sm">Lihat</button>
+                    <button class="btn btn-warning btn-sm">Lihat</button>
                   </a>
                 <?php endif; ?>
               </div>
