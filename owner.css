@@ -1336,9 +1336,12 @@ select.form-input   {
 .field-body  { 
   flex:1; 
 }
-.field-btns  { 
-  display:flex; 
-  gap:6px; 
+.field-btns{
+    width:190px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:8px;
 }
 .toggle-active   { 
   color:var(--green); 
@@ -1348,10 +1351,11 @@ select.form-input   {
 }
 
 .field-status{
+    width:170px;
     display:flex;
     flex-direction:column;
-    gap:10px;
-    min-width:130px;
+    justify-content:center;
+    gap:8px;
 }
 
 .field-status small{
@@ -1381,6 +1385,7 @@ select.form-input   {
     font-size:13px;
     font-weight:600;
 }
+
 
 /* Status Booking */
 .status-booking.tersedia{

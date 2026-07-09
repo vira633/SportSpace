@@ -67,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     '$kapasitas',
     '$jenis_lantai',
     'pending',
-    'aktif'
+    'nonaktif'
     )
     ");
 
