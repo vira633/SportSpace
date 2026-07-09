@@ -108,6 +108,17 @@ unset($_SESSION['toast']);
       Kelola Jadwal
     </div>
 
+    <div class="sidebar-item menu-chat" onclick="window.location.href='chat-admin.php'">
+      <i class="ti ti-message-circle-2"></i>
+      Pesan
+      <span
+        id="chat-badge"
+        class="badge"
+        style="display:none;">
+        0
+      </span>
+    </div>
+
     <div class="sidebar-section">
       Lainnya
     </div>
@@ -2152,6 +2163,35 @@ function loadPendingBadge(){
 }
 
 setInterval(loadPendingBadge,5000);
+
+function loadChatBadge(){
+
+    fetch("get-unread-chat-count.php")
+    .then(res => res.json())
+    .then(data => {
+
+        const badge = document.getElementById("chat-badge");
+
+        if(!badge) return;
+
+        if(data.total > 0){
+
+            badge.style.display = "inline-flex";
+            badge.textContent = data.total;
+
+        }else{
+
+            badge.style.display = "none";
+
+        }
+
+    })
+    .catch(() => {});
+
+}
+
+loadChatBadge();
+setInterval(loadChatBadge,5000);
 
 </script>
 </body>

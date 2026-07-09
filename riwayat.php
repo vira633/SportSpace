@@ -10,6 +10,20 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 /* ===========================
+   TOMBOL KEMBALI (DINAMIS)
+   - Dari halaman pembayaran/invoice -> balik ke invoice tsb
+   - Dari klik menu "Riwayat" di navbar/index -> balik ke index
+=========================== */
+
+$from = $_GET['from'] ?? 'index';
+
+if ($from === 'invoice' && isset($_GET['booking_id'])) {
+  $backLink = "invoice.php?id=" . (int) $_GET['booking_id'];
+} else {
+  $backLink = "index.php";
+}
+
+/* ===========================
    DATA USER
 =========================== */
 
@@ -133,7 +147,7 @@ ORDER BY b.booking_id DESC
 
       <div class="left-header">
 
-        <a href="index.php" class="back-btn">
+        <a href="<?= $backLink ?>" class="back-btn">
 
           <i class="ti ti-arrow-left"></i>
 
@@ -376,7 +390,7 @@ ORDER BY b.booking_id DESC
                   <?php if ($status == "menunggu konfirmasi" || $status == "tertunda") { ?>
 
                     <a href="reschedule.php?id=<?= $row['booking_id']; ?>" class="btn btn-reschedule">
-                      Reschedule
+                      Ubah Jadwal
                     </a>
                     <a href="batalkan-booking.php?id=<?= $row['booking_id']; ?>" class="btn btn-cancel"
                       onclick="return confirm('Yakin ingin membatalkan booking?')">

@@ -98,6 +98,44 @@ if (!empty($field['hari_libur'])) {
     $isLibur = true;
   }
 }
+
+// CEK APAKAH SEMUA SLOT DI TANGGAL YANG DIPILIH SUDAH PENUH
+// (dibooking semua, atau -khusus buat hari ini- udah lewat jam)
+$isPenuhTanggalIni = false;
+
+if (!$isLibur) {
+  $adalahHariIni = ($tanggal === date('Y-m-d'));
+  $jamSekarangInt = (int) date('H');
+
+  $adaSlotKosong = false;
+
+  for ($jam = 6; $jam < 22; $jam++) {
+    $mulai = sprintf('%02d:00', $jam);
+    $sudahDibooking = in_array($mulai, $jamPenuh);
+    $sudahLewat = $adalahHariIni && ($jam <= $jamSekarangInt);
+
+    if (!$sudahDibooking && !$sudahLewat) {
+      $adaSlotKosong = true;
+      break;
+    }
+  }
+
+  if (!$adaSlotKosong) {
+    $isPenuhTanggalIni = true;
+  }
+}
+
+// Tentukan badge status buat hero image: Libur > Penuh > Tersedia
+if ($isLibur) {
+  $badgeClass = 'badge-amber';
+  $badgeText = 'Libur';
+} elseif ($isPenuhTanggalIni) {
+  $badgeClass = 'badge-amber';
+  $badgeText = 'Penuh';
+} else {
+  $badgeClass = 'badge-green';
+  $badgeText = 'Tersedia';
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -271,7 +309,7 @@ if (!empty($field['hari_libur'])) {
         </button>
       </a>
 
-      <a href="login.html">
+      <a href="profile.php">
         <button class="btn btn-primary btn-sm">
           Akun
         </button>
@@ -340,8 +378,8 @@ if (!empty($field['hari_libur'])) {
             <div class="detail-overlay"></div>
 
             <div class="detail-badge">
-              <span class="badge badge-green">
-                <?php echo ucfirst($field['status']); ?>
+              <span class="badge <?= $badgeClass ?>">
+                <?= $badgeText ?>
               </span>
             </div>
 
@@ -862,9 +900,14 @@ if (!empty($field['hari_libur'])) {
               <?= htmlspecialchars($field['owner_address']); ?>
             </div>
 
-            <a href="chat.php?field_id=<?= $field['field_id']; ?>" class="btn btn-primary btn-full">
+            <a href="chat.php?field_id=<?= $field['field_id']; ?>" class="btn btn-primary btn-full" style="position:relative;">
               <i class="ti ti-message-circle"></i>
               Chat Owner
+              <span
+                id="chatUserBadge"
+                style="display:none;position:absolute;top:-8px;right:-8px;background:#DC2626;color:white;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:999px;align-items:center;justify-content:center;padding:0 6px;">
+                0
+              </span>
             </a>
           </div>
         </div>
@@ -1082,6 +1125,31 @@ if (!empty($field['hari_libur'])) {
       disablePastTime();
 
     }
+
+    function loadChatUserBadge(){
+
+        fetch("get-unread-chat-user.php?field_id=<?= $field_id ?>")
+        .then(res => res.json())
+        .then(data => {
+
+            const badge = document.getElementById("chatUserBadge");
+
+            if(!badge) return;
+
+            if(data.total > 0){
+                badge.style.display = "flex";
+                badge.textContent = data.total;
+            } else {
+                badge.style.display = "none";
+            }
+
+        })
+        .catch(() => {});
+
+    }
+
+    loadChatUserBadge();
+    setInterval(loadChatUserBadge, 5000);
   </script>
 
 </body>

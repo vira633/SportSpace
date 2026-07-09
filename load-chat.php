@@ -2,9 +2,23 @@
 session_start();
 include 'config.php';
 
+if (!isset($_SESSION['user_id'])) {
+    exit;
+}
+
 $user_id = $_SESSION['user_id'];
 
 $field_id = (int)$_GET['field_id'];
+
+// tandai semua balasan owner di percakapan ini sebagai sudah dibaca user
+mysqli_query($conn, "
+UPDATE chat
+SET status = 'terbaca'
+WHERE field_id = '$field_id'
+AND user_id = '$user_id'
+AND sender = 'admin'
+AND status = 'belum'
+");
 
 $query = mysqli_query($conn,"
 SELECT *
