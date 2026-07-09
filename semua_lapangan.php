@@ -99,7 +99,7 @@ if ($lokasiResult) {
             <option value="lainnya">Lainnya...</option>
           </select>
           <input type="text" id="filterKategoriLainnya" class="filter-kategori-lainnya-input"
-            placeholder="cth: voli" style="display:none;" onkeyup="jalankanFilterFasilitas()">
+            placeholder="Cari lapangan" style="display:none;" onkeyup="jalankanFilterFasilitas()">
         </div>
 
         <div class="filter-select-box">
