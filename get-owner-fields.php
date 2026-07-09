@@ -20,6 +20,7 @@ $queryInfo = mysqli_query(
     "SELECT *
     FROM fields
     WHERE owner_id='$owner_id'
+    AND verifikasi='diterima'
     ORDER BY field_id ASC
     LIMIT 1"
 );
@@ -28,6 +29,7 @@ $queryTotal = mysqli_query($conn,"
 SELECT COUNT(*) AS total
 FROM fields
 WHERE owner_id='$owner_id'
+AND verifikasi='diterima'
 ");
 
 $dataTotal = mysqli_fetch_assoc($queryTotal);
@@ -36,6 +38,7 @@ $queryAktif = mysqli_query($conn,"
 SELECT COUNT(*) AS total
 FROM fields
 WHERE owner_id='$owner_id'
+AND verifikasi='diterima'
 AND aktif='aktif'
 ");
 
@@ -45,6 +48,7 @@ $queryNonaktif = mysqli_query($conn,"
 SELECT COUNT(*) AS total
 FROM fields
 WHERE owner_id='$owner_id'
+AND verifikasi='diterima'
 AND aktif='nonaktif'
 ");
 
@@ -54,6 +58,7 @@ $queryHarga = mysqli_query($conn,"
 SELECT IFNULL(AVG(harga),0) AS rata
 FROM fields
 WHERE owner_id='$owner_id'
+AND verifikasi='diterima'
 AND aktif='aktif'
 ");
 

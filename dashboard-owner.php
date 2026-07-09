@@ -586,77 +586,112 @@ unset($_SESSION['toast']);
 
           <?php } ?>
         </div>
-          
+
           <div class="field-body">
-            <div class="field-name">
+
+          <div class="field-name">
               <?= $field['nama_lapangan']; ?>
-            </div>
-            
-            <div class="field-meta">
+          </div>
+
+          <div class="field-meta">
               <?= $field['jenis']; ?>
               •
               Rp<?= number_format($field['harga'],0,",","."); ?>/jam
-            </div>
           </div>
-          
-          <div class="field-status">
+        </div>
+
+        <div class="field-status">
+
+        <?php if($field['verifikasi'] == 'pending'){ ?>
+
+            <div class="lapangan-status">
+                <small>Status</small>
+
+                <span class="lapangan-badge badge-amber">
+                    Menunggu Verifikasi
+                </span>
+            </div>
+
+        <?php } elseif($field['verifikasi'] == 'diterima'){ ?>
 
             <div class="booking-status">
-              <small>Status Booking</small>
-              <span class="booking-badge <?= strtolower($field['status']) == 'tersedia' ? 'badge-green' : 'badge-red'; ?>">
-                <?= ucfirst($field['status']); ?>
-              </span>
+                <small>Status Booking</small>
+
+                <span class="booking-badge <?= strtolower($field['status']) == 'tersedia' ? 'badge-green' : 'badge-red'; ?>">
+                    <?= ucfirst($field['status']); ?>
+                </span>
             </div>
-            
+
             <div class="lapangan-status">
-              <small>Status Lapangan</small>
-              <span
-              id="status-text-<?= $field['field_id']; ?>"
-              class="lapangan-badge <?= strtolower($field['aktif']) == 'aktif' ? 'badge-green' : 'badge-red'; ?>">
-              <?= ucfirst($field['aktif']); ?>
-            </span>
-          </div>
-          </div>
-          
-          <div class="field-btns">
-            
-          <label class="switch">
-            <input
-            type="checkbox"
-            <?= $field['aktif'] == 'aktif' ? 'checked' : ''; ?>
-            onchange="toggleFieldStatus(this, <?= $field['field_id']; ?>)">
-            <span class="slider"></span>
-          </label>
-          
-          <button
-          class="btn btn-outline btn-sm"
-          onclick="openEditModal(
-            '<?= $field['field_id']; ?>',
-            '<?= addslashes($field['nama_lapangan']); ?>',
-            '<?= addslashes($field['jenis']); ?>',
-            '<?= addslashes($field['lokasi']); ?>',
-            '<?= $field['harga']; ?>',
-            '<?= $field['kapasitas']; ?>',
-            '<?= addslashes($field['jenis_lantai']); ?>',
-            '<?= addslashes($field['jam_operasional']); ?>',
-            '<?= addslashes($field['deskripsi']); ?>',
-            '<?= $gambarEdit; ?>'
-            )">
-            <i class="ti ti-edit"></i>
-            Edit
-          </button>
-          
-          <button
-          class="btn btn-outline btn-sm btn-red"
-          onclick="hapusLapangan(
-            <?= $field['field_id']; ?>,
-            '<?= addslashes($field['nama_lapangan']); ?>'
-            )">
-            <i class="ti ti-trash"></i>
-          </button>
+                <small>Status Lapangan</small>
+
+                <span
+                    id="status-text-<?= $field['field_id']; ?>"
+                    class="lapangan-badge <?= strtolower($field['aktif']) == 'aktif' ? 'badge-green' : 'badge-red'; ?>">
+                    <?= ucfirst($field['aktif']); ?>
+                </span>
+            </div>
+
+        <?php } else { ?>
+
+            <div class="lapangan-status">
+                <small>Status</small>
+
+                <span class="lapangan-badge badge-red">
+                    Ditolak Admin
+                </span>
+            </div>
+
+        <?php } ?>
 
         </div>
-      </div>
+
+        <div class="field-btns">
+
+        <?php if($field['verifikasi'] == 'diterima'){ ?>
+
+            <label class="switch">
+                <input
+                    type="checkbox"
+                    <?= $field['aktif']=='aktif' ? 'checked' : ''; ?>
+                    onchange="toggleFieldStatus(this, <?= $field['field_id']; ?>)">
+                <span class="slider"></span>
+            </label>
+
+        <?php } ?>
+
+        <?php if($field['verifikasi'] != 'ditolak'){ ?>
+
+            <button
+                class="btn btn-outline btn-sm"
+                onclick="openEditModal(
+                    '<?= $field['field_id']; ?>',
+                    '<?= addslashes($field['nama_lapangan']); ?>',
+                    '<?= addslashes($field['jenis']); ?>',
+                    '<?= addslashes($field['lokasi']); ?>',
+                    '<?= $field['harga']; ?>',
+                    '<?= $field['kapasitas']; ?>',
+                    '<?= addslashes($field['jenis_lantai']); ?>',
+                    '<?= addslashes($field['jam_operasional']); ?>',
+                    '<?= addslashes($field['deskripsi']); ?>',
+                    '<?= $gambarEdit; ?>'
+                )">
+                <i class="ti ti-edit"></i>
+                Edit
+            </button>
+
+        <?php } ?>
+
+            <button
+                class="btn btn-outline btn-sm btn-red"
+                onclick="hapusLapangan(
+                    <?= $field['field_id']; ?>,
+                    '<?= addslashes($field['nama_lapangan']); ?>'
+                )">
+                <i class="ti ti-trash"></i>
+            </button>
+          </div>
+        </div>
         <?php } ?>
       </div>
 
@@ -707,9 +742,9 @@ unset($_SESSION['toast']);
           Rp<?= number_format($dataHarga['rata'],0,",","."); ?>
         </div>
     </div>
-    
-  </div>
-</div>
+      </div>
+      </div>
+
 
     <!-- BOOKING MASUK -->
     <div id="section-booking" style="display:none;">
@@ -745,6 +780,7 @@ unset($_SESSION['toast']);
             SELECT nama_lapangan
             FROM fields
             WHERE owner_id='$owner_id'
+            AND verifikasi='diterima'
             ORDER BY nama_lapangan
           ");
           
@@ -902,10 +938,11 @@ unset($_SESSION['toast']);
 
         <?php
         $qField = mysqli_query($conn,"
-            SELECT field_id,nama_lapangan
-            FROM fields
-            WHERE owner_id='$owner_id'
-            ORDER BY nama_lapangan
+          SELECT field_id,nama_lapangan
+          FROM fields
+          WHERE owner_id='$owner_id'
+          AND verifikasi='diterima'
+          ORDER BY nama_lapangan
         ");
 
         while($f = mysqli_fetch_assoc($qField)){
