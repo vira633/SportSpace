@@ -3,6 +3,12 @@ header('Content-Type: application/json');
 
 include "config.php";
 
+if(session_status() == PHP_SESSION_NONE){
+    session_start();
+}
+
+$owner_id = $_SESSION['owner_id'];
+
 if (!isset($_GET['id'])) {
     echo json_encode([
         "success" => false,
@@ -35,24 +41,30 @@ $update = mysqli_query(
 if ($update) {
 
     $qAktif = mysqli_query($conn,"
-        SELECT COUNT(*) AS total
-        FROM fields
-        WHERE aktif='aktif'
+    SELECT COUNT(*) AS total
+    FROM fields
+    WHERE owner_id='$owner_id'
+    AND verifikasi='diterima'
+    AND aktif='aktif'
     ");
 
     $aktif = mysqli_fetch_assoc($qAktif);
 
     $qNonaktif = mysqli_query($conn,"
-        SELECT COUNT(*) AS total
-        FROM fields
-        WHERE aktif='nonaktif'
+    SELECT COUNT(*) AS total
+    FROM fields
+    WHERE owner_id='$owner_id'
+    AND verifikasi='diterima'
+    AND aktif='nonaktif'
     ");
 
     $nonaktif = mysqli_fetch_assoc($qNonaktif);
 
     $qTotal = mysqli_query($conn,"
-        SELECT COUNT(*) AS total
-        FROM fields
+    SELECT COUNT(*) AS total
+    FROM fields
+    WHERE owner_id='$owner_id'
+    AND verifikasi='diterima'
     ");
 
     $total = mysqli_fetch_assoc($qTotal);
@@ -60,10 +72,12 @@ if ($update) {
     $qRata = mysqli_query($conn,"
     SELECT IFNULL(AVG(harga),0) AS rata
     FROM fields
-    WHERE aktif='aktif'
+    WHERE owner_id='$owner_id'
+    AND verifikasi='diterima'
+    AND aktif='aktif'
     ");
-
-$rata = mysqli_fetch_assoc($qRata);
+    
+    $rata = mysqli_fetch_assoc($qRata);
 
     echo json_encode([
     "success"   => true,
