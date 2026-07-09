@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+if(isset($_GET['section'])){
+    $section = $_GET['section'];
+}else{
+    $section = "dashboard";
+}
+
 include "get-admin-dashboard.php";
 include "get-booking-terbaru.php";
 include "get-users.php";
@@ -59,34 +65,30 @@ date("Y");
       </div>
 
       <div class="detail-content">
-
         <div class="detail-avatar" id="detailAvatar">A</div>
-
         <h3 id="detailNama"></h3>
-
         <p class="detail-role" id="detailRole"></p>
-
         <div class="detail-list">
-
-          <div class="detail-item">
-            <span><i class="ti ti-mail"></i> Email</span>
-            <strong id="detailEmail"></strong>
-          </div>
-
-          <div class="detail-item">
-            <span><i class="ti ti-phone"></i> No HP</span>
-            <strong id="detailTelepon"></strong>
-          </div>
-
-          <div class="detail-item">
-            <span><i class="ti ti-calendar"></i> Bergabung</span>
-            <strong id="detailCreated"></strong>
-          </div>
-
+          
+        <div class="detail-item">
+          <span><i class="ti ti-mail"></i> Email</span>
+          <span id="detailEmail"></span>
         </div>
+        
+        <div class="detail-item">
+          <span><i class="ti ti-phone"></i> No HP</span>
+          <span id="detailTelepon"></span>
+        </div>
+        
+        <div class="detail-item">
+          <span><i class="ti ti-calendar"></i> Bergabung</span>
+          <span id="detailCreated"></span>
+        </div>
+
       </div>
     </div>
   </div>
+</div>
 
   <!-- ================= Detail Lapangan ================= -->
 <div class="modal-overlay" id="fieldDetailModal">
@@ -118,42 +120,45 @@ date("Y");
 
         <div class="detail-item">
           <span><i class="ti ti-user"></i> Pemilik</span>
-          <strong id="fieldOwner"></strong>
+          <span id="fieldOwner"></span>
         </div>
 
         <div class="detail-item">
           <span><i class="ti ti-phone"></i> No HP</span>
-          <strong id="fieldPhone"></strong>
+          <span id="fieldPhone"></span>
         </div>
 
         <div class="detail-item">
           <span><i class="ti ti-map-pin"></i> Lokasi</span>
-          <strong id="fieldLokasi"></strong>
+          <span id="fieldLokasi"></span>
         </div>
 
         <div class="detail-item">
           <span><i class="ti ti-cash"></i> Harga / Jam</span>
-          <strong id="fieldHarga"></strong>
+          <span id="fieldHarga"></span>
         </div>
 
         <div class="detail-item">
           <span><i class="ti ti-users"></i> Kapasitas</span>
-          <strong id="fieldKapasitas"></strong>
+          <span id="fieldKapasitas"></span>
         </div>
 
         <div class="detail-item">
           <span><i class="ti ti-layout-grid"></i> Jenis Lantai</span>
-          <strong id="fieldLantai"></strong>
+          <span id="fieldLantai"></span>
         </div>
 
         <div class="detail-item">
           <span><i class="ti ti-clock"></i> Jam Operasional</span>
-          <strong id="fieldJam"></strong>
+          <span id="fieldJam"></span>
         </div>
 
-        <div class="detail-item">
-          <span><i class="ti ti-file-description"></i> Deskripsi</span>
-          <strong id="fieldDeskripsi"></strong>
+        <div class="detail-item detail-description">
+          <span>
+            <i class="ti ti-file-description"></i>
+            Deskripsi
+          </span>
+          <div id="fieldDeskripsi"></div>
         </div>
 
         <div class="detail-item">
@@ -195,53 +200,57 @@ date("Y");
 
         <div class="notif-dropdown" id="notifDropdown">
 
-        <?php if($notifLapangan > 0): ?>
-        <div 
-          class="notif-item"
-          id="notifLapanganItem">
-          <i class="ti ti-building"></i>
-          <span>
-            <?= $notifLapangan ?>
-            lapangan menunggu verifikasi
-          </span>
-        </div>
-        <?php endif; ?>
+          <?php if($notifLapangan > 0): ?>
+            <div
+              class="notif-item"
+              id="notifLapanganItem"
+              onclick="goToSection('venue')">
+              <i class="ti ti-building"></i>
+              <span>
+                <?= $notifLapangan ?>
+                lapangan menunggu verifikasi
+              </span>
+            </div>
+          <?php endif; ?>
 
         <?php if($notifBooking > 0): ?>
-        <div class="notif-item">
+          <div
+            class="notif-item"
+            onclick="goToSection('booking')">
             <i class="ti ti-calendar-event"></i>
             <span>
-                <?= $notifBooking ?>
-                booking baru hari ini
+              <?= $notifBooking ?>
+              booking baru hari ini
             </span>
-        </div>
+          </div>
         <?php endif; ?>
-
+        
         <?php if($notifUser > 0): ?>
-        <div class="notif-item">
+          <div
+            class="notif-item"
+            onclick="goToSection('user')">
             <i class="ti ti-user-plus"></i>
             <span>
-                <?= $notifUser ?>
-                user baru hari ini
+              <?= $notifUser ?>
+              user baru hari ini
             </span>
-        </div>
+          </div>
         <?php endif; ?>
-
+        
         <?php if(
-            $notifLapangan == 0 &&
-            $notifBooking == 0 &&
-            $notifUser == 0
+          $notifLapangan == 0 &&
+          $notifBooking == 0 &&
+          $notifUser == 0
         ): ?>
 
         <div class="notif-empty">
             Tidak ada notifikasi baru.
         </div>
-
+        
         <?php endif; ?>
-
-        </div>
-
+      </div>
     </div>
+
     <a href="login.html">
       <button class="btn btn-outline btn-sm"> <i class="ti ti-logout"> </i> Keluar </button>
     </a>
@@ -937,7 +946,30 @@ if(isset($_GET['notif'])){
 
       // Simpan menu yang sedang dibuka
       sessionStorage.setItem("activeSection", name);
+
+      if(name === "venue"){
+        window.history.replaceState({}, "", "dashboard-admin.php?filter=pending");
+      }
     }
+
+    function goToSection(section, element){
+
+    let menu = document.querySelector(
+        `.sidebar-item[onclick*="${section}"]`
+    );
+
+    if(menu){
+        showSection(section, menu);
+    }
+
+    if(element){
+        element.remove();
+    }
+
+    document
+        .getElementById("notifDropdown")
+        .classList.remove("active");
+}
 
     function openBookingSection(){
       document
@@ -1053,10 +1085,17 @@ function updateNotificationBadge(){
 }
 
 function refreshNotifications(){
+  const notifRead = sessionStorage.getItem("notifRead");
 
     fetch("get-notification-count.php")
     .then(response => response.json())
     .then(data => {
+      const lastTotal =
+      sessionStorage.getItem("lastNotifTotal") || "0";
+
+      if(data.total > Number(lastTotal)){
+        sessionStorage.removeItem("notifRead");
+      }
 
         // ==========================
         // Badge lonceng
@@ -1065,8 +1104,16 @@ function refreshNotifications(){
 
         if(data.total > 0){
 
-            notifBadge.style.display = "flex";
-            notifBadge.innerText = data.total;
+            if(notifRead === "true"){
+
+                notifBadge.style.display = "none";
+
+            }else{
+
+                notifBadge.style.display = "flex";
+                notifBadge.innerText = data.total;
+
+            }
 
         }else{
 
@@ -1102,7 +1149,9 @@ function refreshNotifications(){
         if(data.lapangan > 0){
 
             html += `
-            <div class="notif-item">
+            <div
+                class="notif-item"
+                onclick="goToSection('venue', this)">
                 <i class="ti ti-building"></i>
                 <span>${data.lapangan} lapangan menunggu verifikasi</span>
             </div>`;
@@ -1111,7 +1160,9 @@ function refreshNotifications(){
         if(data.booking > 0){
 
             html += `
-            <div class="notif-item">
+            <div
+                class="notif-item"
+                onclick="goToSection('booking', this)">
                 <i class="ti ti-calendar-event"></i>
                 <span>${data.booking} booking baru hari ini</span>
             </div>`;
@@ -1120,7 +1171,9 @@ function refreshNotifications(){
         if(data.user > 0){
 
             html += `
-            <div class="notif-item">
+            <div
+                class="notif-item"
+                onclick="goToSection('user', this)">
                 <i class="ti ti-user-plus"></i>
                 <span>${data.user} user baru hari ini</span>
             </div>`;
@@ -1133,11 +1186,9 @@ function refreshNotifications(){
                 Tidak ada notifikasi baru.
             </div>`;
         }
-
         dropdown.innerHTML = html;
-
+        sessionStorage.setItem("lastNotifTotal", data.total);
     });
-
 }
 
     function openDetailModal(id){
@@ -1282,8 +1333,10 @@ document.getElementById("fieldVerifikasi").innerHTML =
       const badge =
       document.getElementById('notifBadge');
       dropdown.classList.toggle('active');
+
       if(dropdown.classList.contains('active')){
          badge.style.display = 'none';
+         sessionStorage.setItem("notifRead", "true");
         }
       }
       window.addEventListener('click', function(e){
@@ -1311,7 +1364,8 @@ document.getElementById("fieldVerifikasi").innerHTML =
 
     <?php endif; ?>
     
-    const lastSection = sessionStorage.getItem("activeSection") || "dashboard";
+    const lastSection =
+    sessionStorage.getItem("activeSection") || "dashboard";
     
     const menuMap = {
       dashboard: 0,

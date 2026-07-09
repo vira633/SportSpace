@@ -946,7 +946,7 @@ input::placeholder{
 
 .modal-header h2{
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size:24px;
+  font-size:22px;
   font-weight:800;
 }
 
@@ -992,9 +992,9 @@ input::placeholder{
 
 .detail-content h3{
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size:24px;
-  margin-top:10px;
-  margin-bottom:8px;
+  font-size:20px;
+  margin-top:8px;
+  margin-bottom:4px;
 }
 
 .detail-role{
@@ -1010,9 +1010,9 @@ input::placeholder{
 }
 
 .detail-item{
-  background:var(--gray-50);
+  background:#f8fafc;
   border-radius:14px;
-  padding:14px 16px;
+  padding:16px 18px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -1023,15 +1023,43 @@ input::placeholder{
 .detail-item span{
   color:var(--gray-500);
 }
-.detail-item strong{
+.detail-item span:last-child{
     text-align:right;
+    color:var(--dark);
+    font-weight:500;
+}
+
+.detail-description{
+    display:block;
+}
+
+.detail-description span{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    margin-bottom:12px;
+}
+
+.detail-description #fieldDeskripsi{
+    color:#4b5563;
+    font-size:15px;
+    line-height:1.8;
 }
 
 #fieldDeskripsi{
-    text-align:left;
     display:block;
-    line-height:1.6;
+    width:100%;
+
+    text-align:left;
+
     white-space:normal;
+    word-break:break-word;
+
+    line-height:1.7;
+
+    font-weight:400;
+    color:#4b5563;
 }
 #fieldVerifikasi{
     display:flex;
