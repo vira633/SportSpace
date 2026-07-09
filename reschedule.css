@@ -1,0 +1,30 @@
+.current-schedule-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+
+  padding: 16px 18px;
+  margin-top: 18px;
+}
+
+.current-schedule-box i {
+  font-size: 24px;
+  color: var(--green);
+  flex-shrink: 0;
+}
+
+.current-schedule-box .label {
+  display: block;
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-bottom: 4px;
+}
+
+.current-schedule-box strong {
+  font-size: 15px;
+  color: var(--gray-800);
+}

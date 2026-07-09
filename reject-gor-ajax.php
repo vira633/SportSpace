@@ -9,7 +9,9 @@ if(isset($_POST['id'])){
 
     $query = mysqli_query($conn,"
         UPDATE fields
-        SET verifikasi='ditolak'
+        SET
+            verifikasi='ditolak',
+            aktif='nonaktif'
         WHERE field_id='$id'
     ");
 

@@ -108,6 +108,17 @@ unset($_SESSION['toast']);
       Kelola Jadwal
     </div>
 
+    <div class="sidebar-item menu-chat" onclick="window.location.href='chat-admin.php'">
+      <i class="ti ti-message-circle-2"></i>
+      Pesan
+      <span
+        id="chat-badge"
+        class="badge"
+        style="display:none;">
+        0
+      </span>
+    </div>
+
     <div class="sidebar-section">
       Lainnya
     </div>
@@ -586,77 +597,113 @@ unset($_SESSION['toast']);
 
           <?php } ?>
         </div>
-          
+
           <div class="field-body">
-            <div class="field-name">
+
+          <div class="field-name">
               <?= $field['nama_lapangan']; ?>
-            </div>
-            
-            <div class="field-meta">
+          </div>
+
+          <div class="field-meta">
               <?= $field['jenis']; ?>
               •
               Rp<?= number_format($field['harga'],0,",","."); ?>/jam
-            </div>
           </div>
-          
-          <div class="field-status">
+        </div>
+
+        <div class="field-status">
+
+        <?php if($field['verifikasi'] == 'pending'){ ?>
+
+            <div class="lapangan-status">
+                <small>Status</small>
+
+                <span class="lapangan-badge badge-amber">
+                    Menunggu Verifikasi
+                </span>
+            </div>
+
+        <?php } elseif($field['verifikasi'] == 'diterima'){ ?>
 
             <div class="booking-status">
-              <small>Status Booking</small>
-              <span class="booking-badge <?= strtolower($field['status']) == 'tersedia' ? 'badge-green' : 'badge-red'; ?>">
-                <?= ucfirst($field['status']); ?>
-              </span>
+                <small>Status Booking</small>
+
+                <span class="booking-badge <?= strtolower($field['status']) == 'tersedia' ? 'badge-green' : 'badge-red'; ?>">
+                    <?= ucfirst($field['status']); ?>
+                </span>
             </div>
-            
+
             <div class="lapangan-status">
-              <small>Status Lapangan</small>
-              <span
-              id="status-text-<?= $field['field_id']; ?>"
-              class="lapangan-badge <?= strtolower($field['aktif']) == 'aktif' ? 'badge-green' : 'badge-red'; ?>">
-              <?= ucfirst($field['aktif']); ?>
-            </span>
-          </div>
-          </div>
-          
-          <div class="field-btns">
-            
-          <label class="switch">
-            <input
-            type="checkbox"
-            <?= $field['aktif'] == 'aktif' ? 'checked' : ''; ?>
-            onchange="toggleFieldStatus(this, <?= $field['field_id']; ?>)">
-            <span class="slider"></span>
-          </label>
-          
-          <button
-          class="btn btn-outline btn-sm"
-          onclick="openEditModal(
-            '<?= $field['field_id']; ?>',
-            '<?= addslashes($field['nama_lapangan']); ?>',
-            '<?= addslashes($field['jenis']); ?>',
-            '<?= addslashes($field['lokasi']); ?>',
-            '<?= $field['harga']; ?>',
-            '<?= $field['kapasitas']; ?>',
-            '<?= addslashes($field['jenis_lantai']); ?>',
-            '<?= addslashes($field['jam_operasional']); ?>',
-            '<?= addslashes($field['deskripsi']); ?>',
-            '<?= $gambarEdit; ?>'
-            )">
-            <i class="ti ti-edit"></i>
-            Edit
-          </button>
-          
-          <button
-          class="btn btn-outline btn-sm btn-red"
-          onclick="hapusLapangan(
-            <?= $field['field_id']; ?>,
-            '<?= addslashes($field['nama_lapangan']); ?>'
-            )">
-            <i class="ti ti-trash"></i>
-          </button>
+                <small>Status Lapangan</small>
+
+                <span
+                    id="status-text-<?= $field['field_id']; ?>"
+                    class="lapangan-badge <?= strtolower($field['aktif']) == 'aktif' ? 'badge-green' : 'badge-red'; ?>">
+                    <?= ucfirst($field['aktif']); ?>
+                </span>
+            </div>
+
+        <?php } else { ?>
+
+            <div class="lapangan-status">
+                <small>Status</small>
+
+                <span class="lapangan-badge badge-red">
+                    Ditolak Admin
+                </span>
+            </div>
+
+        <?php } ?>
 
         </div>
-      </div>
+
+        <div class="field-btns">
+
+        <?php if($field['verifikasi'] == 'diterima'){ ?>
+
+            <label class="switch">
+                <input
+                    type="checkbox"
+                    <?= $field['aktif']=='aktif' ? 'checked' : ''; ?>
+                    onchange="toggleFieldStatus(this, <?= $field['field_id']; ?>)">
+                <span class="slider"></span>
+            </label>
+
+        <?php } ?>
+
+        <?php if($field['verifikasi'] != 'ditolak'){ ?>
+
+            <button
+                class="btn btn-outline btn-sm"
+                onclick="openEditModal(
+                    '<?= $field['field_id']; ?>',
+                    '<?= addslashes($field['nama_lapangan']); ?>',
+                    '<?= addslashes($field['jenis']); ?>',
+                    '<?= addslashes($field['lokasi']); ?>',
+                    '<?= $field['harga']; ?>',
+                    '<?= $field['kapasitas']; ?>',
+                    '<?= addslashes($field['jenis_lantai']); ?>',
+                    '<?= addslashes($field['jam_operasional']); ?>',
+                    '<?= addslashes($field['deskripsi']); ?>',
+                    '<?= $gambarEdit; ?>',
+                    '<?= addslashes($field['fasilitas'] ?? ''); ?>'
+                )">
+                <i class="ti ti-edit"></i>
+                Edit
+            </button>
+
+        <?php } ?>
+
+            <button
+                class="btn btn-outline btn-sm btn-red"
+                onclick="hapusLapangan(
+                    <?= $field['field_id']; ?>,
+                    '<?= addslashes($field['nama_lapangan']); ?>'
+                )">
+                <i class="ti ti-trash"></i>
+            </button>
+          </div>
+        </div>
         <?php } ?>
       </div>
 
@@ -707,9 +754,9 @@ unset($_SESSION['toast']);
           Rp<?= number_format($dataHarga['rata'],0,",","."); ?>
         </div>
     </div>
-    
-  </div>
-</div>
+      </div>
+      </div>
+
 
     <!-- BOOKING MASUK -->
     <div id="section-booking" style="display:none;">
@@ -745,6 +792,7 @@ unset($_SESSION['toast']);
             SELECT nama_lapangan
             FROM fields
             WHERE owner_id='$owner_id'
+            AND verifikasi='diterima'
             ORDER BY nama_lapangan
           ");
           
@@ -902,10 +950,11 @@ unset($_SESSION['toast']);
 
         <?php
         $qField = mysqli_query($conn,"
-            SELECT field_id,nama_lapangan
-            FROM fields
-            WHERE owner_id='$owner_id'
-            ORDER BY nama_lapangan
+          SELECT field_id,nama_lapangan
+          FROM fields
+          WHERE owner_id='$owner_id'
+          AND verifikasi='diterima'
+          ORDER BY nama_lapangan
         ");
 
         while($f = mysqli_fetch_assoc($qField)){
@@ -1346,11 +1395,20 @@ unset($_SESSION['toast']);
             class="form-input"
             id="new-jenis"
             name="jenis"
-            required>
-            <option>Futsal</option>
-            <option>Badminton</option>
-            <option>Basket</option>
+            required
+            onchange="handleJenisChange(this)">
+            <option value="Futsal">Futsal</option>
+            <option value="Badminton">Badminton</option>
+            <option value="Basket">Basket</option>
+            <option value="Renang">Renang</option>
+            <option value="Lainnya">Lainnya...</option>
           </select>
+          <input
+            type="text"
+            class="form-input"
+            id="new-jenis-lainnya"
+            placeholder="Ketik jenis olahraga lain"
+            style="display:none;margin-top:8px;">
         </div>
 
         <div class="form-group">
@@ -1411,6 +1469,16 @@ unset($_SESSION['toast']);
                   rows="3"
                   name="deskripsi">
                 </textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Fasilitas</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  id="new-fasilitas"
+                  name="fasilitas"
+                  placeholder="cth: Parkir, Kantin, Toilet">
               </div>
 
               <div class="form-group">
@@ -1498,11 +1566,20 @@ unset($_SESSION['toast']);
       <label class="form-label">Jenis Olahraga</label>
       <select class="form-input"
         id="edit-jenis"
-        name="jenis">
-        <option>Futsal</option>
-        <option>Badminton</option>
-        <option>Basket</option>
+        name="jenis"
+        onchange="handleJenisChange(this)">
+        <option value="Futsal">Futsal</option>
+        <option value="Badminton">Badminton</option>
+        <option value="Basket">Basket</option>
+        <option value="Renang">Renang</option>
+        <option value="Lainnya">Lainnya...</option>
       </select>
+      <input
+        type="text"
+        class="form-input"
+        id="edit-jenis-lainnya"
+        placeholder="Ketik jenis olahraga lain"
+        style="display:none;margin-top:8px;">
     </div>
 
     <div class="form-group">
@@ -1564,7 +1641,15 @@ unset($_SESSION['toast']);
         rows="3"></textarea>
     </div>
 
-
+    <div class="form-group">
+      <label class="form-label">Fasilitas</label>
+      <input
+        type="text"
+        class="form-input"
+        id="edit-fasilitas"
+        name="fasilitas"
+        placeholder="cth: Parkir, Kantin, Toilet">
+    </div>
 
     <div class="form-group"></div>
 
@@ -1669,7 +1754,8 @@ function openEditModal(
   jenis_lantai,
   jam_operasional,
   deskripsi,
-  gambar
+  gambar,
+  fasilitas
 ){
   document.getElementById("edit-id").value = id;
 
@@ -1681,14 +1767,39 @@ function openEditModal(
   document.getElementById("edit-kapasitas").value = kapasitas;
   document.getElementById("edit-jam").value = jam_operasional;
   document.getElementById("edit-deskripsi").value = deskripsi;
+  document.getElementById("edit-fasilitas").value = fasilitas || "";
   
   const sel = document.getElementById("edit-jenis");
-  
+  const inputLainnya = document.getElementById("edit-jenis-lainnya");
+
+  let ketemu = false;
+
   for(let o of sel.options){
     if(o.value===jenis || o.text===jenis){
       o.selected = true;
+      ketemu = true;
       break;
     }
+  }
+
+  if(ketemu){
+    // Kategori standar, sembunyikan input custom
+    inputLainnya.style.display = "none";
+    inputLainnya.value = "";
+    sel.name = "jenis";
+    inputLainnya.removeAttribute("name");
+  }else{
+    // Kategori custom (bukan Futsal/Badminton/Basket/Renang), pindah ke mode "Lainnya"
+    for(let o of sel.options){
+      if(o.value === "Lainnya"){
+        o.selected = true;
+        break;
+      }
+    }
+    inputLainnya.style.display = "block";
+    inputLainnya.value = jenis;
+    sel.removeAttribute("name");
+    inputLainnya.name = "jenis";
   }
   
   document.getElementById("edit-modal").classList.add("show");
@@ -1701,6 +1812,27 @@ function openEditModal(
   }else{
     preview.style.display = "none";
     noPhoto.style.display = "flex";
+  }
+}
+
+// Toggle input "Lainnya" buat kategori olahraga custom (dipakai form Tambah & Edit)
+function handleJenisChange(select) {
+  const inputId = select.id.replace("jenis", "jenis-lainnya");
+  const inputLainnya = document.getElementById(inputId);
+
+  if (!inputLainnya) return;
+
+  if (select.value === "Lainnya") {
+    inputLainnya.style.display = "block";
+    inputLainnya.setAttribute("required", "required");
+    select.removeAttribute("name");
+    inputLainnya.name = "jenis";
+  } else {
+    inputLainnya.style.display = "none";
+    inputLainnya.value = "";
+    inputLainnya.removeAttribute("required");
+    inputLainnya.removeAttribute("name");
+    select.name = "jenis";
   }
 }
 
@@ -2031,6 +2163,35 @@ function loadPendingBadge(){
 }
 
 setInterval(loadPendingBadge,5000);
+
+function loadChatBadge(){
+
+    fetch("get-unread-chat-count.php")
+    .then(res => res.json())
+    .then(data => {
+
+        const badge = document.getElementById("chat-badge");
+
+        if(!badge) return;
+
+        if(data.total > 0){
+
+            badge.style.display = "inline-flex";
+            badge.textContent = data.total;
+
+        }else{
+
+            badge.style.display = "none";
+
+        }
+
+    })
+    .catch(() => {});
+
+}
+
+loadChatBadge();
+setInterval(loadChatBadge,5000);
 
 </script>
 </body>

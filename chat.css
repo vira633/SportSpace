@@ -2,7 +2,7 @@
 
 body{
     margin:0;
-    background:#f5f7fb;
+    background:#f8fafc;
     font-family:Poppins,sans-serif;
 }
 
@@ -91,7 +91,7 @@ body{
 
     border:none;
 
-    background:#16a34a;
+    background:#164f21;
 
     color:white;
 
@@ -100,6 +100,18 @@ body{
     padding:14px 28px;
 
     cursor:pointer;
+
+    font-weight:700;
+
+    transition:.2s;
+}
+
+.chat-footer button:hover{
+    background:#1f9b32;
+}
+
+.chat-footer input:focus{
+    border-color:#164f21;
 }
 
 .message{
@@ -119,7 +131,7 @@ body{
 
     margin-left:auto;
 
-    background:#16a34a;
+    background:#164f21;
 
     color:white;
 
