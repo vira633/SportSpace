@@ -59,7 +59,7 @@ $result = $conn->query("SELECT * FROM fields WHERE aktif='aktif' AND verifikasi=
 
             </a>
             <div class="user-dropdown-divider"></div>
-            <a href="logout.php" class="user-dropdown-item logout-danger">
+            <a href="logout.php" onclick="return confirm('Yakin ingin keluar dari akun Anda?');" class="user-dropdown-item logout-danger">
               <i class="ti ti-logout"></i> Keluar
             </a>
           </div>
