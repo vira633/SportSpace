@@ -615,8 +615,8 @@ date("Y");
             <?php else: ?>
               <div class="empty-state">
                 <i class="ti ti-building-stadium"></i>
-                <h3>Belum ada GOR yang menunggu verifikasi</h3>
-                <p>Semua pengajuan GOR sudah diproses.</p>
+                <h3>Belum ada Lapangan yang menunggu verifikasi</h3>
+                <p>Semua pengajuan Lapangan sudah diproses.</p>
               </div>
               <?php endif; ?>
           </section>

@@ -521,23 +521,44 @@ include "helper-time.php";
           </button>
         </div>
 
-        <div class="tab-row">
-          <button class="tab-btn active" onclick="filterLapangan('semua',this)">
-            Semua (<?= $totalLapangan['total']; ?>)
-          </button>
+        <div class="filter-row">
 
-          <button class="tab-btn" onclick="filterLapangan('futsal',this)">
-            Futsal (<?= $jumlahJenis['Futsal'] ?? 0; ?>)
-          </button>
+    <div class="filter-sport">
 
-          <button class="tab-btn" onclick="filterLapangan('badminton',this)">
-            Badminton (<?= $jumlahJenis['Badminton'] ?? 0; ?>)
-          </button>
+        <select
+            id="filter-jenis"
+            onchange="filterLapanganDropdown()">
 
-          <button class="tab-btn" onclick="filterLapangan('basket',this)">
-            Basket (<?= $jumlahJenis['Basket'] ?? 0; ?>)
-          </button>
-        </div>
+            <option value="semua">
+                Semua Kategori
+            </option>
+
+            <?php while($jenis = mysqli_fetch_assoc($queryJenis)){ ?>
+
+                <option value="<?= strtolower(trim($jenis['jenis'])); ?>">
+                    <?= $jenis['jenis']; ?>
+                </option>
+
+            <?php } ?>
+
+        </select>
+
+    </div>
+
+    <div class="search-lapangan">
+
+    <div class="search-box">
+        <i class="ti ti-search"></i>
+
+        <input
+            type="text"
+            id="search-lapangan"
+            placeholder="Cari nama lapangan"
+            onkeyup="filterLapanganDropdown()">
+    </div>
+
+</div>
+    </div>
 
         <div class="fields-list">
           <?php while ($field = mysqli_fetch_assoc($queryFields)) { ?>
@@ -550,7 +571,8 @@ include "helper-time.php";
             }
             ?>
 
-            <div class="field-row" data-type="<?= strtolower($field['jenis']); ?>">
+            <div class="field-row"
+            data-type="<?= strtolower(trim($field['jenis'])); ?>">
               <div class="field-image">
 
                 <?php
@@ -1246,7 +1268,7 @@ include "helper-time.php";
           </div>
 
           <button type="button" class="modal-close-btn"
-            onclick="document.getElementById('edit-modal').classList.remove('show')">
+            onclick="document.getElementById('add-modal').classList.remove('show')">
             <i class="ti ti-x"></i>
         </div>
 
@@ -1475,28 +1497,30 @@ include "helper-time.php";
 
     function showSection(name, item) {
 
-      document.querySelectorAll('[id^="section-"]').forEach(s => {
+    document.querySelectorAll('[id^="section-"]').forEach(s => {
         s.style.display = "none";
-      });
+    });
 
-      const t = document.getElementById("section-" + name);
+    const t = document.getElementById("section-" + name);
 
-      if (t) {
+    if (t) {
         t.style.display = "block";
 
-        // pindah ke awal halaman dashboard
         document.querySelector(".dashboard-content").scrollTo({
-          top: 0,
-          behavior: "instant"
+            top: 0,
+            behavior: "instant"
         });
-      }
-
-      document.querySelectorAll(".sidebar-item").forEach(i => {
-        i.classList.remove("active");
-      });
-
-      if (item) item.classList.add("active");
     }
+
+    document.querySelectorAll(".sidebar-item").forEach(i => {
+        i.classList.remove("active");
+    });
+
+    if (item) item.classList.add("active");
+
+    // ← TAMBAHKAN BARIS INI
+    sessionStorage.setItem("activeSection", name);
+}
 
     function openEditModal(
       id,
@@ -1679,13 +1703,38 @@ include "helper-time.php";
 
     }
 
-    function filterLapangan(type, btn) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.field-row').forEach(row => {
-        row.style.display = (type === 'semua' || row.dataset.type === type) ? 'flex' : 'none';
-      });
-    }
+    function filterLapanganDropdown(){
+
+    const jenis = document.getElementById("filter-jenis").value;
+
+    const keyword = document
+        .getElementById("search-lapangan")
+        .value
+        .toLowerCase();
+
+    document.querySelectorAll(".field-row").forEach(function(row){
+
+        const type = row.dataset.type;
+
+        const nama = row
+            .querySelector(".field-name")
+            .innerText
+            .toLowerCase();
+
+        const cocokJenis =
+            jenis === "semua" || type === jenis;
+
+        const cocokNama =
+            nama.includes(keyword);
+
+        row.style.display =
+            (cocokJenis && cocokNama)
+            ? "flex"
+            : "none";
+
+    });
+
+}
 
     function selectJadwalLapangan(el) {
       document.querySelectorAll('.lapangan-pill').forEach(p => p.classList.remove('active'));
@@ -1715,15 +1764,16 @@ include "helper-time.php";
 
     window.onload = function () {
 
-      const activeSection = "<?= $section ?>";
+    const activeSection =
+        sessionStorage.getItem("activeSection") || "dashboard";
 
-      const menu = document.querySelector(
+    const menu = document.querySelector(
         `.sidebar-item[onclick*="${activeSection}"]`
-      );
+    );
 
-      showSection(activeSection, menu);
+    showSection(activeSection, menu);
 
-    }
+}
 
     function closeToast() {
 

@@ -24,6 +24,15 @@ $queryJenis = mysqli_query($conn,"
     ORDER BY jenis
 ");
 
+$queryJenis = mysqli_query($conn,"
+    SELECT DISTINCT jenis
+    FROM fields
+    WHERE owner_id='$owner_id'
+      AND jenis IS NOT NULL
+      AND jenis <> ''
+    ORDER BY jenis
+");
+
 $queryInfo = mysqli_query(
     $conn,
     "SELECT *
