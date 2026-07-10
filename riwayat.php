@@ -10,20 +10,6 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 /* ===========================
-   TOMBOL KEMBALI (DINAMIS)
-   - Dari halaman pembayaran/invoice -> balik ke invoice tsb
-   - Dari klik menu "Riwayat" di navbar/index -> balik ke index
-=========================== */
-
-$from = $_GET['from'] ?? 'index';
-
-if ($from === 'invoice' && isset($_GET['booking_id'])) {
-  $backLink = "invoice.php?id=" . (int) $_GET['booking_id'];
-} else {
-  $backLink = "index.php";
-}
-
-/* ===========================
    DATA USER
 =========================== */
 
@@ -258,9 +244,10 @@ ORDER BY b.booking_id DESC
 
           ?>
 
-          <div class="booking-card" data-id="<?= $row['booking_id']; ?>" data-status="<?= $status ?>"
-            data-name="<?= strtolower($row['nama_lapangan']); ?>" data-date="<?= $row['tanggal']; ?>"
-            data-start="<?= $row['jam_mulai']; ?>" data-end="<?= $row['jam_selesai']; ?>">
+          <div id="booking<?= $row['booking_id']; ?>" class="booking-card" data-id="<?= $row['booking_id']; ?>"
+            data-status="<?= $status ?>" data-name="<?= strtolower($row['nama_lapangan']); ?>"
+            data-date="<?= $row['tanggal']; ?>" data-start="<?= $row['jam_mulai']; ?>"
+            data-end="<?= $row['jam_selesai']; ?>">
 
             <!-- FOTO -->
 
@@ -399,7 +386,7 @@ ORDER BY b.booking_id DESC
                   <?php if ($status == "menunggu konfirmasi" || $status == "tertunda") { ?>
 
                     <a href="reschedule.php?id=<?= $row['booking_id']; ?>" class="btn btn-reschedule">
-                      Ubah Jadwal
+                      Reschedule
                     </a>
                     <a href="batalkan-booking.php?id=<?= $row['booking_id']; ?>" class="btn btn-cancel"
                       onclick="return confirm('Yakin ingin membatalkan booking?')">
@@ -568,6 +555,42 @@ ORDER BY b.booking_id DESC
 
     });
     document.querySelector('.filter button.active').click();
+
+    const bookingTarget = "<?= $_GET['booking'] ?? '' ?>";
+
+if (bookingTarget !== "") {
+
+    setTimeout(function () {
+
+        const card = document.getElementById("booking" + bookingTarget);
+
+        if (card) {
+
+            // tampilkan dulu semua card
+            document.querySelector('[data-filter="semua"]').click();
+
+            setTimeout(function () {
+
+                card.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+                // kasih efek nyala sebentar
+                card.classList.add("highlight-booking");
+
+                setTimeout(function () {
+                    card.classList.remove("highlight-booking");
+                }, 3000);
+
+            }, 200);
+
+        }
+
+    }, 100);
+
+}
+
   </script>
 </body>
 

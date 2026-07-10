@@ -139,9 +139,7 @@ unset($_SESSION['toast']);
   <main class="dashboard-content">
 
     <!-- DASHBOARD -->
-    <div
-      id="section-dashboard"
-      style="<?= $section == 'dashboard' ? 'display:block;' : 'display:none;'; ?>">
+    <div id="section-dashboard" style="display:none;">
       <h1 class="page-title">Dashboard Owner</h1>
       <div class="stats-grid">
       <div class="stat-card">
@@ -536,9 +534,7 @@ unset($_SESSION['toast']);
 </div>
 
     <!-- LAPANGAN SAYA -->
-    <div
-      id="section-lapangan"
-      style="<?= $section == 'lapangan' ? 'display:block;' : 'display:none;'; ?>">
+    <div id="section-lapangan" style="display:none;">
       <div class="flex-between">
         <h1 class="page-title page-title-inline">Lapangan Saya</h1>
         <button class="btn btn-primary" onclick="document.getElementById('add-modal').classList.add('show')">
@@ -547,37 +543,27 @@ unset($_SESSION['toast']);
         </button>
       </div>
 
-      <div class="filter-row">
-        <div class="filter-sport">
-          <select
-            id="filter-jenis"
-            onchange="filterLapanganDropdown()">
-            
-          <option value="semua">
-            Semua Kategori
-          </option>
-
-          <?php while($jenis = mysqli_fetch_assoc($queryJenis)){ ?>
-
-          <option value="<?= strtolower(trim($jenis['jenis'])); ?>">
-            <?= $jenis['jenis']; ?>
-          </option>
-
-          <?php } ?>
-        </select>
+      <div class="tab-row">
+        <button class="tab-btn active"
+          onclick="filterLapangan('semua',this)">
+          Semua (<?= $totalLapangan['total']; ?>)
+        </button>
+        
+        <button class="tab-btn"
+          onclick="filterLapangan('futsal',this)">
+          Futsal (<?= $jumlahJenis['Futsal'] ?? 0; ?>)
+        </button>
+        
+        <button class="tab-btn"
+          onclick="filterLapangan('badminton',this)">
+          Badminton (<?= $jumlahJenis['Badminton'] ?? 0; ?>)
+        </button>
+        
+        <button class="tab-btn"
+          onclick="filterLapangan('basket',this)">
+          Basket (<?= $jumlahJenis['Basket'] ?? 0; ?>)
+        </button>
       </div>
-
-      <div class="search-lapangan">
-        <div class="search-box">
-          <i class="ti ti-search"></i>
-          <input
-          type="text"
-          id="search-lapangan"
-          placeholder="Cari nama lapangan..."
-          onkeyup="filterLapanganDropdown()">
-        </div>
-      </div>
-    </div>
 
       <div class="fields-list">
         <?php while($field = mysqli_fetch_assoc($queryFields)){ ?>
@@ -590,8 +576,7 @@ unset($_SESSION['toast']);
           }
         ?>
           
-          <div class="field-row"
-            data-type="<?= strtolower(trim($field['jenis'])); ?>">
+          <div class="field-row" data-type="<?= strtolower($field['jenis']); ?>">
             <div class="field-image">
 
               <?php
@@ -774,9 +759,7 @@ unset($_SESSION['toast']);
 
 
     <!-- BOOKING MASUK -->
-    <div
-      id="section-booking"
-      style="<?= $section == 'booking' ? 'display:block;' : 'display:none;'; ?>">
+    <div id="section-booking" style="display:none;">
       <h1 class="page-title">Booking Masuk</h1>
 
       <div class="filter-bar">
@@ -953,9 +936,7 @@ unset($_SESSION['toast']);
       </div>
 
     <!-- KELOLA JADWAL -->
-     <div
-      id="section-jadwal"
-      style="<?= $section == 'jadwal' ? 'display:block;' : 'display:none;'; ?>">
+     <div id="section-jadwal" style="display:none;">
       <h1 class="page-title">Kelola Jadwal</h1>
       <div class="flex-between">
 
@@ -1260,9 +1241,7 @@ unset($_SESSION['toast']);
       </div>
 
     <!-- PROFIL OWNER -->
-    <div
-      id="section-profil"
-      style="<?= $section == 'profil' ? 'display:block;' : 'display:none;'; ?>">
+    <div id="section-profil" style="<?= $section=='profil' ? 'display:block;' : 'display:none;' ?>">
 
     <h1 class="page-title">Pengaturan</h1>
 
@@ -1391,7 +1370,7 @@ unset($_SESSION['toast']);
         <button
           type="button"
           class="modal-close-btn"
-          onclick="document.getElementById('add-modal').classList.remove('show')">
+          onclick="document.getElementById('edit-modal').classList.remove('show')">
           <i class="ti ti-x"></i>
       </div>
       
@@ -1751,14 +1730,11 @@ function showSection(name, item) {
   if (t) {
     t.style.display = "block";
 
+    // pindah ke awal halaman dashboard
     document.querySelector(".dashboard-content").scrollTo({
       top: 0,
       behavior: "instant"
     });
-
-    const url = new URL(window.location);
-    url.searchParams.set("section", name);
-    window.history.replaceState({}, "", url);
   }
 
   document.querySelectorAll(".sidebar-item").forEach(i => {
@@ -1902,324 +1878,291 @@ async function toggleFieldStatus(element, fieldId) {
         }
 
         const aktifCount = document.getElementById("aktif-count");
-        const nonaktifCount = document.getElementById("nonaktif-count");
+const nonaktifCount = document.getElementById("nonaktif-count");
 
-        const dashboardAktif = document.getElementById("dashboard-aktif");
-        const dashboardAktifText = document.getElementById("dashboard-aktif-text");
-        const totalLapangan = document.getElementById("dashboard-total-lapangan");
+const dashboardAktif = document.getElementById("dashboard-aktif");
+const dashboardAktifText = document.getElementById("dashboard-aktif-text");
+const totalLapangan = document.getElementById("dashboard-total-lapangan");
 
-        if(result.success){
+if(result.success){
 
-            // Ambil angka langsung dari database
-            if(aktifCount){
-                aktifCount.textContent = result.aktif;
-            }
+    // Ambil angka langsung dari database
+    if(aktifCount){
+        aktifCount.textContent = result.aktif;
+    }
 
-            if(nonaktifCount){
-                nonaktifCount.textContent = result.nonaktif;
-            }
+    if(nonaktifCount){
+        nonaktifCount.textContent = result.nonaktif;
+    }
 
-            if(dashboardAktif){
-                dashboardAktif.textContent = result.aktif;
-            }
+    if(dashboardAktif){
+        dashboardAktif.textContent = result.aktif;
+    }
 
-            if(dashboardAktifText && totalLapangan){
-                dashboardAktifText.textContent =
-                    result.aktif + " dari " + result.total + " lapangan aktif";
-            }
+    if(dashboardAktifText && totalLapangan){
+        dashboardAktifText.textContent =
+            result.aktif + " dari " + result.total + " lapangan aktif";
+    }
 
-            const rataHarga = document.getElementById("rata-harga");
-            
-            if(rataHarga){
-              rataHarga.textContent =
-              "Rp" + Number(result.rata).toLocaleString("id-ID");
-            }
+    const rataHarga = document.getElementById("rata-harga");
+    
+    if(rataHarga){
+      rataHarga.textContent =
+      "Rp" + Number(result.rata).toLocaleString("id-ID");
+    }
 
-        }
+}
 
-            } catch (error) {
+    } catch (error) {
 
-                element.checked = !statusSebelumnya;
+        element.checked = !statusSebelumnya;
 
-                alert("Terjadi kesalahan koneksi.");
+        alert("Terjadi kesalahan koneksi.");
 
-                console.error(error);
+        console.error(error);
 
-            }
+    }
 
-        }
+}
 
-        function filterLapanganDropdown(){
+function filterLapangan(type, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.field-row').forEach(row => {
+    row.style.display = (type==='semua' || row.dataset.type===type) ? 'flex' : 'none';
+  });
+}
 
-            const jenis = document.getElementById("filter-jenis").value;
+function selectJadwalLapangan(el) {
+  document.querySelectorAll('.lapangan-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
 
-            const keyword = document
-                .getElementById("search-lapangan")
-                .value
-                .toLowerCase();
+document.addEventListener('change', e => {
+  if (e.target.type==='checkbox' && e.target.closest('.toggle')) {
+    const span = e.target.nextElementSibling;
+    if (span) { span.textContent = e.target.checked ? 'Aktif' : 'Nonaktif'; span.style.color = e.target.checked ? 'var(--green)' : 'var(--gray-400)'; }
+  }
+});
 
-            document.querySelectorAll(".field-row").forEach(function(row){
+document.addEventListener('click', e => {
+  const slot = e.target.classList.contains('schedule-slot') ? e.target : e.target.closest('.schedule-slot');
+  if (!slot || slot.classList.contains('booked')) return;
+  slot.classList.toggle('blocked'); slot.classList.toggle('available');
+});
 
-                const type = row.dataset.type;
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target===o) o.classList.remove('show'); });
+});
 
-                const nama = row
-                    .querySelector(".field-name")
-                    .innerText
-                    .toLowerCase();
+document.querySelector('.menu-booking').addEventListener('click', () => {
+  document.querySelector('.notif-badge').style.display = 'none';
+});
 
-                const cocokJenis =
-                    jenis === "semua" || type === jenis;
+window.onload = function(){
 
-                const cocokNama =
-                    nama.includes(keyword);
+    const activeSection = "<?= $section ?>";
 
-                row.style.display =
-                    (cocokJenis && cocokNama)
-                    ? "flex"
-                    : "none";
+    const menu = document.querySelector(
+        `.sidebar-item[onclick*="${activeSection}"]`
+    );
 
-            });
+    showSection(activeSection, menu);
 
-        }
+}
 
-        function selectJadwalLapangan(el) {
-          document.querySelectorAll('.lapangan-pill').forEach(p => p.classList.remove('active'));
-          el.classList.add('active');
-        }
+function closeToast(){
 
-        document.addEventListener('change', e => {
-          if (e.target.type==='checkbox' && e.target.closest('.toggle')) {
-            const span = e.target.nextElementSibling;
-            if (span) { span.textContent = e.target.checked ? 'Aktif' : 'Nonaktif'; span.style.color = e.target.checked ? 'var(--green)' : 'var(--gray-400)'; }
-          }
-        });
+    const toast = document.getElementById("toast-success");
 
-        document.addEventListener('click', e => {
-          const slot = e.target.classList.contains('schedule-slot') ? e.target : e.target.closest('.schedule-slot');
-          if (!slot || slot.classList.contains('booked')) return;
-          slot.classList.toggle('blocked'); slot.classList.toggle('available');
-        });
+    if(!toast) return;
 
-        document.querySelectorAll('.modal-overlay').forEach(o => {
-          o.addEventListener('click', e => { if (e.target===o) o.classList.remove('show'); });
-        });
+    toast.style.animation = "toastHide .35s ease forwards";
 
-        document.querySelector('.menu-booking').addEventListener('click', () => {
-          document.querySelector('.notif-badge').style.display = 'none';
-        });
+    setTimeout(function(){
 
-        window.onload = function(){
+        toast.remove();
 
-            const params = new URLSearchParams(window.location.search);
+    },300);
 
-            const section = params.get("section") || "dashboard";
+}
 
-            document.querySelectorAll(".sidebar-item").forEach(i=>{
-                i.classList.remove("active");
-            });
+window.addEventListener("load", function(){
 
-            const menu = document.querySelector(
-                `.sidebar-item[onclick*="${section}"]`
-            );
+    const toast = document.getElementById("toast-success");
 
-            if(menu){
-                menu.classList.add("active");
-            }
+    if(!toast) return;
 
-        }
+    setTimeout(function(){
 
-        function closeToast(){
+        closeToast();
 
-            const toast = document.getElementById("toast-success");
+        // hapus parameter section dari URL
+        history.replaceState({}, "", "dashboard-owner.php");
 
-            if(!toast) return;
+    },3000);
 
-            toast.style.animation = "toastHide .35s ease forwards";
+});
 
-            setTimeout(function(){
+document
+.getElementById("new-gambar")
+.addEventListener("change", function(e){
 
-                toast.remove();
+    const file = e.target.files[0];
 
-            },300);
+    if(!file) return;
 
-        }
+    const reader = new FileReader();
 
-        window.addEventListener("load", function(){
-
-            const toast = document.getElementById("toast-success");
-
-            if(!toast) return;
-
-            setTimeout(function(){
-
-                closeToast();
-
-                // hapus parameter section dari URL
-                history.replaceState({}, "", "dashboard-owner.php");
-
-            },3000);
-
-        });
+    reader.onload = function(event){
 
         document
-        .getElementById("new-gambar")
-        .addEventListener("change", function(e){
-
-            const file = e.target.files[0];
-
-            if(!file) return;
-
-            const reader = new FileReader();
-
-            reader.onload = function(event){
-
-                document
-                .getElementById("preview-image")
-                .src = event.target.result;
-
-                document
-                .getElementById("preview-container")
-                .style.display = "block";
-
-            }
-
-            reader.readAsDataURL(file);
-
-        });
+        .getElementById("preview-image")
+        .src = event.target.result;
 
         document
-        .getElementById("edit-gambar")
-        .addEventListener("change", function(e){
+        .getElementById("preview-container")
+        .style.display = "block";
 
-            const file = e.target.files[0];
+    }
 
-            if(!file) return;
+    reader.readAsDataURL(file);
 
-            const reader = new FileReader();
+});
 
-            reader.onload = function(event){
+document
+.getElementById("edit-gambar")
+.addEventListener("change", function(e){
 
-                document
-                .getElementById("edit-preview-image")
-                .src = event.target.result;
+    const file = e.target.files[0];
 
-                document
-                .getElementById("edit-preview-image")
-                .style.display = "block";
+    if(!file) return;
 
-                document
-                .getElementById("no-photo")
-                .style.display = "none";
+    const reader = new FileReader();
 
-            }
+    reader.onload = function(event){
 
-            reader.readAsDataURL(file);
+        document
+        .getElementById("edit-preview-image")
+        .src = event.target.result;
 
-        });
+        document
+        .getElementById("edit-preview-image")
+        .style.display = "block";
 
-        const searchBooking = document.getElementById("search-booking");
+        document
+        .getElementById("no-photo")
+        .style.display = "none";
 
-        const filterStatus = document.getElementById("filter-status");
+    }
 
-        const filterLapanganBooking = document.getElementById("filter-lapangan");
+    reader.readAsDataURL(file);
 
-        const filterTanggal = document.getElementById("filter-tanggal");
+});
 
-        function filterBooking(){
+const searchBooking = document.getElementById("search-booking");
 
-            const keyword = searchBooking.value.toLowerCase().trim();
+const filterStatus = document.getElementById("filter-status");
 
-            const status = filterStatus.value.toLowerCase().trim();
+const filterLapanganBooking = document.getElementById("filter-lapangan");
 
-            const lapangan = filterLapanganBooking.value.toLowerCase().trim();
+const filterTanggal = document.getElementById("filter-tanggal");
 
-            const tanggal = filterTanggal.value;
+function filterBooking(){
 
-            const rows = document.querySelectorAll("#section-booking tbody tr");
+    const keyword = searchBooking.value.toLowerCase().trim();
 
-            rows.forEach(function(row){
-              const text = row.innerText.toLowerCase();
-              const statusCell = row.cells[6].innerText.toLowerCase().trim();
-              const lapanganCell = row.cells[2].innerText.toLowerCase().trim();
-              const tanggalCell = row.cells[3].innerText.trim();
+    const status = filterStatus.value.toLowerCase().trim();
 
-              const cocokKeyword =
-              keyword === "" || text.includes(keyword);
-              
-              const cocokStatus =
-              status === "" || statusCell === status;
-              
-              const cocokLapangan =
-              lapangan === "" || lapanganCell === lapangan;
-              
-              const cocokTanggal =
-              tanggal === "" || tanggalCell === tanggal;
+    const lapangan = filterLapanganBooking.value.toLowerCase().trim();
 
-              if(
-                cocokKeyword &&
-                cocokStatus &&
-                cocokLapangan &&
-                cocokTanggal
-              ){
-                row.style.display = "";
-              }
-              else{
-                row.style.display = "none";
-              }
-            });
-          }
+    const tanggal = filterTanggal.value;
 
-          if(searchBooking){
-            searchBooking.addEventListener("keyup", filterBooking);
+    const rows = document.querySelectorAll("#section-booking tbody tr");
+
+    rows.forEach(function(row){
+      const text = row.innerText.toLowerCase();
+      const statusCell = row.cells[6].innerText.toLowerCase().trim();
+      const lapanganCell = row.cells[2].innerText.toLowerCase().trim();
+      const tanggalCell = row.cells[3].innerText.trim();
+
+      const cocokKeyword =
+      keyword === "" || text.includes(keyword);
+      
+      const cocokStatus =
+      status === "" || statusCell === status;
+      
+      const cocokLapangan =
+      lapangan === "" || lapanganCell === lapangan;
+      
+      const cocokTanggal =
+      tanggal === "" || tanggalCell === tanggal;
+
+      if(
+        cocokKeyword &&
+        cocokStatus &&
+        cocokLapangan &&
+        cocokTanggal
+      ){
+        row.style.display = "";
+      }
+      else{
+        row.style.display = "none";
+      }
+    });
+  }
+
+  if(searchBooking){
+    searchBooking.addEventListener("keyup", filterBooking);
+}
+
+if(filterStatus){
+    filterStatus.addEventListener("change", filterBooking);
+}
+
+if(filterLapanganBooking){
+    filterLapanganBooking.addEventListener("change", filterBooking);
+}
+
+if(filterTanggal){
+    filterTanggal.addEventListener("change", filterBooking);
+}
+
+function gantiLapangan(id){
+
+    const url =
+    "dashboard-owner.php?section=jadwal&field=" + id;
+
+    window.location.href = url;
+
+}
+
+function loadPendingBadge(){
+
+    fetch("get-pending-count.php")
+    .then(res => res.json())
+    .then(data => {
+
+        const badge = document.getElementById("pending-badge");
+
+        if(!badge) return;
+
+        if(data.total > 0){
+
+            badge.style.display = "inline-flex";
+            badge.textContent = data.total;
+
+        }else{
+
+            badge.style.display = "none";
+
         }
 
-        if(filterStatus){
-            filterStatus.addEventListener("change", filterBooking);
-        }
+    });
 
-        if(filterLapanganBooking){
-            filterLapanganBooking.addEventListener("change", filterBooking);
-        }
+}
 
-        if(filterTanggal){
-            filterTanggal.addEventListener("change", filterBooking);
-        }
-
-        function gantiLapangan(id){
-
-            const url =
-            "dashboard-owner.php?section=jadwal&field=" + id;
-
-            window.location.href = url;
-
-        }
-
-        function loadPendingBadge(){
-
-            fetch("get-pending-count.php")
-            .then(res => res.json())
-            .then(data => {
-
-                const badge = document.getElementById("pending-badge");
-
-                if(!badge) return;
-
-                if(data.total > 0){
-
-                    badge.style.display = "inline-flex";
-                    badge.textContent = data.total;
-
-                }else{
-
-                    badge.style.display = "none";
-
-                }
-
-            });
-
-        }
-
-        setInterval(loadPendingBadge,5000);
+setInterval(loadPendingBadge,5000);
 
 function loadChatBadge(){
 
