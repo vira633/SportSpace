@@ -894,10 +894,10 @@ if ($isLibur) {
               <?= htmlspecialchars($field['owner_phone']); ?>
             </div>
 
-            <div class="owner-info">
+            <!-- <div class="owner-info">
               <i class="ti ti-map-pin"></i>
               <?= htmlspecialchars($field['owner_address']); ?>
-            </div>
+            </div> -->
 
             <a href="chat.php?field_id=<?= $field['field_id']; ?>" class="btn btn-primary btn-full" style="position:relative;">
               <i class="ti ti-message-circle"></i>

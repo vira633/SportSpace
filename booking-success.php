@@ -453,11 +453,6 @@ $kode_booking =
           <?= $data['owner_phone']; ?>
         </div>
 
-        <div class="owner-info">
-          <i class="ti ti-map-pin"></i>
-          <?= $data['owner_address']; ?>
-        </div>
-
       </div>
 
     </div>
