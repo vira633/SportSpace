@@ -64,19 +64,18 @@ if ($booking_id) {
 
 $jamPenuh = [];
 
-while ($b = mysqli_fetch_assoc($bookings)) {
+$totalSlot = 16; // 06.00 - 22.00
 
-  $awal =
-    (int) substr($b['jam_mulai'], 0, 2);
+if (count($jamPenuh) >= $totalSlot) {
 
-  $akhir =
-    (int) substr($b['jam_selesai'], 0, 2);
+  $badgeClass = "badge-amber";
+  $badgeText = "Penuh Hari Ini";
 
-  for ($i = $awal; $i < $akhir; $i++) {
+} else {
 
-    $jamPenuh[] =
-      sprintf("%02d:00", $i);
-  }
+  $badgeClass = "badge-green";
+  $badgeText = "Tersedia";
+
 }
 
 // CEK HARI LIBUR (sinkron sama format dari dashboard-owner: "2026-07-10 s/d 2026-07-15")
@@ -373,7 +372,7 @@ if ($isLibur) {
           <div class="detail-image">
 
 
-           <img src="uploads/fields/<?= $field['gambar']; ?>" alt="<?= $field['nama_lapangan']; ?>">
+            <img src="uploads/fields/<?= $field['gambar']; ?>" alt="<?= $field['nama_lapangan']; ?>">
 
             <div class="detail-overlay"></div>
 
@@ -968,11 +967,19 @@ if ($isLibur) {
 
             <input type="hidden" id="booking-date" name="tanggal">
 
-            <button type="submit" class="btn btn-primary btn-lg btn-full">
+            <?php if ($badgeText == "Penuh Hari Ini") { ?>
 
-              Lanjut Pembayaran
+              <a href="index.php" class="btn btn-outline btn-lg btn-full">
+                Lihat Lapangan Lain
+              </a>
 
-            </button>
+            <?php } else { ?>
+
+              <button type="submit" class="btn btn-primary btn-lg btn-full">
+                Lanjut Pembayaran
+              </button>
+
+            <?php } ?>
 
           </form>
 

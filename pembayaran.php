@@ -326,22 +326,6 @@ $total =
 
             </div>
 
-            <!-- CASH -->
-            <div class="method-card" onclick="selectPayment('cash', this)">
-
-              <div class="method-left">
-
-                <i class="ti ti-cash"></i>
-
-                <div>
-                  <strong>Bayar di Tempat</strong>
-                  <p>Pembayaran langsung ke pemilik</p>
-                </div>
-
-              </div>
-
-            </div>
-
           </div>
 
         </div>
@@ -563,7 +547,7 @@ $total =
 
           <!-- BUTTON -->
           <form action="proses-pembayaran.php" method="POST">
-      
+
             <input type="hidden" name="field_id" value="<?= $field_id ?>">
 
             <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
@@ -586,7 +570,7 @@ $total =
               Konfirmasi Pembayaran
 
             </button>
-  
+
           </form>
 
         </div>
@@ -821,7 +805,7 @@ $total =
       document.getElementById("bankAtasNama").innerHTML =
         bankData[bank].pemilik;
 
-        document.getElementById("bank").value = bank;
+      document.getElementById("bank").value = bank;
 
     }
 
