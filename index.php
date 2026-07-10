@@ -124,7 +124,6 @@ $result = $conn->query("SELECT * FROM fields WHERE aktif='aktif' AND verifikasi=
     <div class="fields-grid">
       <?php while ($lap = $result->fetch_assoc()): ?>
         <?php
-<<<<<<< HEAD
 
 
         $hariIni = date("Y-m-d");
@@ -158,26 +157,17 @@ AND status IN(
         // Cek apakah lapangan lagi libur HARI INI (rentang tanggal dari dashboard owner)
         $isLiburHariIni = false;
         $hariIni = date('Y-m-d');
-=======
-        // Cek apakah lapangan lagi libur HARI INI (rentang tanggal dari dashboard owner)
-        $isLiburHariIni = false;
->>>>>>> 66fdf2a43d02aa5b0a48f07289f5bf3f573bfd61
 
         if (!empty($lap['hari_libur'])) {
           $rentangLibur = explode(" s/d ", $lap['hari_libur']);
           $liburMulai = $rentangLibur[0] ?? '';
           $liburSelesai = $rentangLibur[1] ?? '';
-<<<<<<< HEAD
-=======
-          $hariIni = date('Y-m-d');
->>>>>>> 66fdf2a43d02aa5b0a48f07289f5bf3f573bfd61
 
           if (!empty($liburMulai) && !empty($liburSelesai) && $hariIni >= $liburMulai && $hariIni <= $liburSelesai) {
             $isLiburHariIni = true;
           }
         }
 
-<<<<<<< HEAD
         // Cek apakah semua slot jadwal hari ini sudah penuh (dibooking) atau sudah lewat jam
         // Logikanya disamain persis sama detail.php: slot jam 06:00 - 22:00 per 1 jam,
         // dan booking yang ngeblok slot adalah semua yang statusnya BUKAN 'dibatalkan'
@@ -220,18 +210,12 @@ AND status IN(
           }
         }
 
-=======
->>>>>>> 66fdf2a43d02aa5b0a48f07289f5bf3f573bfd61
         // Tentukan badge & status tampil berdasarkan prioritas: Libur > Penuh > Tersedia
         if ($isLiburHariIni) {
           $badge_class = 'badge-amber';
           $badge_text = 'Libur hari ini';
           $statusTampil = 'libur';
-<<<<<<< HEAD
         } elseif ($lap['status'] === 'tersedia' && !$isPenuhHariIni) {
-=======
-        } elseif ($lap['status'] === 'tersedia') {
->>>>>>> 66fdf2a43d02aa5b0a48f07289f5bf3f573bfd61
           $badge_class = 'badge-green';
           $badge_text = 'Tersedia';
           $statusTampil = 'tersedia';
@@ -275,11 +259,7 @@ AND status IN(
                 Rp<?= number_format($lap['harga'], 0, ',', '.') ?> <span>/jam</span>
               </div>
 
-<<<<<<< HEAD
               <?php if ($badge_text == "Tersedia"): ?>
-=======
-              <?php if ($statusTampil === 'tersedia'): ?>
->>>>>>> 66fdf2a43d02aa5b0a48f07289f5bf3f573bfd61
                 <?php if (isset($_SESSION['user_id'])): ?>
                   <a href="detail.php?id=<?= $lap['field_id'] ?>" class="btn-link">
                     <button class="btn btn-primary btn-sm">Booking <i class="ti ti-arrow-right"></i></button>
