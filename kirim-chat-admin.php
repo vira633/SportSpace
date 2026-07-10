@@ -31,3 +31,24 @@ INSERT INTO chat
 VALUES
 ('$user_id', '$field_id', 'admin', '$pesan', 'terbaca')
 ");
+
+mysqli_query($conn,"
+INSERT INTO user_notifications
+(
+    user_id,
+    field_id,
+    jenis,
+    judul,
+    isi
+)
+VALUES
+(
+    '$user_id',
+    '$field_id',
+    'chat',
+    'Pesan Baru',
+    'Owner mengirim pesan baru kepada Anda.'
+)
+");
+
+exit;

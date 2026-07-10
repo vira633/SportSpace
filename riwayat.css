@@ -699,3 +699,29 @@ a {
     background:#164f21;
     color:white;
 }
+
+.highlight-booking{
+
+    animation: flashBooking 3s ease;
+
+}
+
+@keyframes flashBooking{
+
+    0%{
+
+        box-shadow:0 0 0 4px rgba(22,79,33,.35);
+
+        transform:scale(1.01);
+
+    }
+
+    100%{
+
+        box-shadow:none;
+
+        transform:scale(1);
+
+    }
+
+}

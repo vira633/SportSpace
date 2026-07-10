@@ -244,9 +244,10 @@ ORDER BY b.booking_id DESC
 
           ?>
 
-          <div class="booking-card" data-id="<?= $row['booking_id']; ?>" data-status="<?= $status ?>"
-            data-name="<?= strtolower($row['nama_lapangan']); ?>" data-date="<?= $row['tanggal']; ?>"
-            data-start="<?= $row['jam_mulai']; ?>" data-end="<?= $row['jam_selesai']; ?>">
+          <div id="booking<?= $row['booking_id']; ?>" class="booking-card" data-id="<?= $row['booking_id']; ?>"
+            data-status="<?= $status ?>" data-name="<?= strtolower($row['nama_lapangan']); ?>"
+            data-date="<?= $row['tanggal']; ?>" data-start="<?= $row['jam_mulai']; ?>"
+            data-end="<?= $row['jam_selesai']; ?>">
 
             <!-- FOTO -->
 
@@ -554,6 +555,42 @@ ORDER BY b.booking_id DESC
 
     });
     document.querySelector('.filter button.active').click();
+
+    const bookingTarget = "<?= $_GET['booking'] ?? '' ?>";
+
+if (bookingTarget !== "") {
+
+    setTimeout(function () {
+
+        const card = document.getElementById("booking" + bookingTarget);
+
+        if (card) {
+
+            // tampilkan dulu semua card
+            document.querySelector('[data-filter="semua"]').click();
+
+            setTimeout(function () {
+
+                card.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+                // kasih efek nyala sebentar
+                card.classList.add("highlight-booking");
+
+                setTimeout(function () {
+                    card.classList.remove("highlight-booking");
+                }, 3000);
+
+            }, 200);
+
+        }
+
+    }, 100);
+
+}
+
   </script>
 </body>
 

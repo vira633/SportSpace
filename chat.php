@@ -33,32 +33,48 @@ if (!$field) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Chat Admin</title>
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <title>Chat Owner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
     <link rel="stylesheet" href="chat.css">
 </head>
 
 <body>
+    <nav class="navbar">
+
+        <div class="navbar-left">
+
+            <div class="navbar-brand">
+
+                <i class="ti ti-bowling"></i>
+
+                <span>SportSpace</span>
+
+                <div class="dot"></div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
 
     <div class="chat-wrapper">
 
         <div class="chat-header">
 
-            <div class="header-left">
+            <a href="detail.php?id=<?= $field_id ?>" class="back-btn">
+                <i class="ti ti-arrow-left"></i>
+            </a>
 
-                <a href="detail.php?id=<?= $field_id ?>" class="back-btn">
+            <div class="conv-avatar">
+                A
+            </div>
 
-                    <i class="ti ti-arrow-left"></i>
+            <div class="chat-title">
 
-                </a>
+                <h3>Owner Lapangan</h3>
 
-                <div>
-
-                    <h2>Chat Admin</h2>
-
-                    <p><?= $field['nama_lapangan']; ?></p>
-
-                </div>
+                <p><?= $field['nama_lapangan']; ?></p>
 
             </div>
 
@@ -72,18 +88,19 @@ if (!$field) {
 
             <input id="pesan" type="text" placeholder="Ketik pesan...">
 
-            <button onclick="kirimPesan()">
+            <button id="btnKirim" onclick="kirimPesan()">
 
-                Kirim
+                <i class="ti ti-send"></i>
 
             </button>
 
         </div>
 
     </div>
-    <script>
 
-        function loadChat() {
+    <script>
+        let lastChat = "";
+        function loadChat(auto = true) {
 
             fetch("load-chat.php?field_id=<?= $field_id ?>")
 
@@ -91,20 +108,39 @@ if (!$field) {
 
                 .then(data => {
 
-                    document.getElementById("chatBox").innerHTML = data;
+                    if (auto && data === lastChat) {
+                        return;
+                    }
 
-                    document.getElementById("chatBox").scrollTop =
-                        document.getElementById("chatBox").scrollHeight;
+                    lastChat = data;
+
+                    const box = document.getElementById("chatBox");
+
+                    const sedangDiBawah =
+                        box.scrollHeight - box.scrollTop - box.clientHeight < 120;
+
+                    box.innerHTML = data;
+
+                    if (!auto || sedangDiBawah) {
+
+                        box.scrollTop = box.scrollHeight;
+
+                    }
 
                 });
 
         }
-
         function kirimPesan() {
 
-            let pesan = document.getElementById("pesan").value;
+            const input = document.getElementById("pesan");
 
-            if (pesan == "") return;
+            const btn = document.getElementById("btnKirim");
+
+            const pesan = input.value.trim();
+
+            if (pesan === "" || btn.disabled) return;
+
+            btn.disabled = true;
 
             fetch("kirim-chat.php", {
 
@@ -115,22 +151,50 @@ if (!$field) {
                 },
 
                 body:
-                    "field_id=<?= $field_id; ?>&pesan=" + encodeURIComponent(pesan)
+                    "field_id=<?= $field_id ?>&pesan=" + encodeURIComponent(pesan)
 
             })
 
                 .then(() => {
 
-                    document.getElementById("pesan").value = "";
+                    input.value = "";
 
-                    loadChat();
+                    input.focus();
+
+                    btn.disabled = false;
+
+                    setTimeout(function () {
+
+                        loadChat(false);
+
+                    }, 150);
+
+                })
+
+                .catch(() => {
+
+                    btn.disabled = false;
 
                 });
 
         }
+        const inputPesan = document.getElementById("pesan");
+
+        inputPesan.addEventListener("keydown", function (e) {
+
+            if (e.key === "Enter" && !e.shiftKey) {
+
+                e.preventDefault();
+
+                kirimPesan();
+
+            }
+
+        });
+
         loadChat();
 
-        setInterval(loadChat, 1000);
+        setInterval(loadChat, 3000);
     </script>
 </body>
 

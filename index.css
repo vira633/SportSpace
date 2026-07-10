@@ -1068,3 +1068,69 @@ a {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+.user-dropdown-item{
+
+position:relative;
+
+}
+
+#notifBadge{
+
+position:absolute;
+
+right:18px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+width:18px;
+
+height:18px;
+
+border-radius:50%;
+
+background:#ff3b30;
+
+color:#fff;
+
+font-size:10px;
+
+font-weight:700;
+
+display:none;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.notif-badge{
+
+    margin-left:auto;
+
+    min-width:20px;
+
+    height:20px;
+
+    padding:0 6px;
+
+    border-radius:999px;
+
+    background:#dc2626;
+
+    color:#fff;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
