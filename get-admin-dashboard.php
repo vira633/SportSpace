@@ -135,6 +135,7 @@ $qNotifBooking = mysqli_query($conn,"
     SELECT COUNT(*) AS total
     FROM booking
     WHERE DATE(created_at)=CURDATE()
+    AND status='terkonfirmasi'
 ");
 $notifBooking = mysqli_fetch_assoc($qNotifBooking)['total'];
 
