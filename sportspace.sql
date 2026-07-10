@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2026 at 01:33 PM
+-- Generation Time: Jul 10, 2026 at 05:33 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -79,13 +79,21 @@ INSERT INTO `booking` (`booking_id`, `user_id`, `field_id`, `tanggal`, `jam_mula
 (30, 13, 1, '2026-07-16', '12:00:00', '13:00:00', 'tertunda', '2026-07-08 12:40:39', 'SS-2026-00030', 'qris', '', 82500.00),
 (31, 13, 2, '2026-07-11', '18:00:00', '19:00:00', 'tertunda', '2026-07-08 12:42:36', 'SS-2026-00031', 'gopay', '', 47500.00),
 (32, 14, 10, '2026-07-23', '06:00:00', '08:00:00', 'terkonfirmasi', '2026-07-09 05:45:23', 'SS-2026-00032', 'gopay', '', 122500.00),
-(33, 5, 10, '2026-07-09', '13:00:00', '22:00:00', 'terkonfirmasi', '2026-07-09 05:52:31', 'SS-2026-00033', 'transfer', '', 542500.00),
+(33, 5, 10, '2026-07-09', '13:00:00', '22:00:00', 'selesai', '2026-07-09 05:52:31', 'SS-2026-00033', 'transfer', '', 542500.00),
 (34, 14, 10, '2026-07-09', '06:00:00', '13:00:00', 'selesai', '2026-07-09 05:54:09', 'SS-2026-00034', 'qris', '', 422500.00),
 (35, 14, 10, '2026-08-06', '12:00:00', '14:00:00', 'terkonfirmasi', '2026-07-09 09:07:49', 'SS-2026-00035', 'dana', '', 122500.00),
 (36, 14, 10, '2026-07-23', '08:00:00', '09:00:00', 'terkonfirmasi', '2026-07-09 10:03:18', 'SS-2026-00036', 'qris', '', 62500.00),
-(37, 14, 10, '2026-07-18', '06:00:00', '08:00:00', 'tertunda', '2026-07-09 10:08:53', 'SS-2026-00037', 'transfer', '', 122500.00),
-(38, 14, 10, '2026-07-18', '06:00:00', '08:00:00', 'tertunda', '2026-07-09 10:09:01', 'SS-2026-00038', 'transfer', '', 122500.00),
-(39, 14, 10, '2026-07-24', '17:00:00', '19:00:00', 'tertunda', '2026-07-09 10:54:03', 'SS-2026-00039', 'dana', '', 122500.00);
+(37, 14, 10, '2026-07-18', '06:00:00', '08:00:00', 'terkonfirmasi', '2026-07-09 10:08:53', 'SS-2026-00037', 'transfer', '', 122500.00),
+(38, 14, 10, '2026-07-18', '06:00:00', '08:00:00', 'terkonfirmasi', '2026-07-09 10:09:01', 'SS-2026-00038', 'transfer', '', 122500.00),
+(39, 14, 10, '2026-07-24', '17:00:00', '19:00:00', 'dibatalkan', '2026-07-09 10:54:03', 'SS-2026-00039', 'dana', '', 122500.00),
+(40, 14, 10, '2026-07-18', '12:00:00', '14:00:00', 'terkonfirmasi', '2026-07-09 17:36:51', 'SS-2026-00040', 'qris', '', 122500.00),
+(41, 14, 10, '2026-07-17', '06:00:00', '07:00:00', 'dibatalkan', '2026-07-09 17:38:08', 'SS-2026-00041', 'qris', '', 62500.00),
+(42, 14, 10, '2026-07-25', '19:00:00', '20:00:00', 'terkonfirmasi', '2026-07-09 17:40:31', 'SS-2026-00042', 'qris', '', 62500.00),
+(43, 14, 10, '2026-08-01', '12:00:00', '13:00:00', 'dibatalkan', '2026-07-09 23:23:29', 'SS-2026-00043', 'qris', '', 62500.00),
+(44, 14, 10, '2026-07-22', '13:00:00', '15:00:00', 'terkonfirmasi', '2026-07-10 02:45:44', 'SS-2026-00044', 'qris', '', 122500.00),
+(45, 14, 10, '2026-07-31', '19:00:00', '20:00:00', 'dibatalkan', '2026-07-10 02:51:40', 'SS-2026-00045', 'qris', '', 62500.00),
+(46, 14, 10, '2026-07-22', '10:00:00', '11:00:00', 'terkonfirmasi', '2026-07-10 02:54:06', 'SS-2026-00046', 'qris', '', 62500.00),
+(47, 14, 10, '2026-07-24', '17:00:00', '18:00:00', 'tertunda', '2026-07-10 03:16:36', 'SS-2026-00047', 'qris', '', 62500.00);
 
 -- --------------------------------------------------------
 
@@ -120,7 +128,36 @@ INSERT INTO `chat` (`chat_id`, `user_id`, `booking_id`, `field_id`, `sender`, `p
 (9, 14, NULL, 10, 'user', 'anjay', '2026-07-09 11:02:58', 'terbaca'),
 (10, 14, NULL, 10, 'admin', 'yayaya', '2026-07-09 11:03:16', 'terbaca'),
 (11, 14, NULL, 10, 'user', 'kiw', '2026-07-09 11:07:34', 'terbaca'),
-(12, 14, NULL, 10, 'user', 'kak', '2026-07-09 11:18:39', 'terbaca');
+(12, 14, NULL, 10, 'user', 'kak', '2026-07-09 11:18:39', 'terbaca'),
+(13, 14, NULL, 10, 'user', 'kak', '2026-07-09 13:08:42', 'terbaca'),
+(14, 14, NULL, 10, 'admin', 'yaa', '2026-07-09 13:40:31', 'terbaca'),
+(15, 14, NULL, 10, 'user', 'kakakkk', '2026-07-09 13:42:17', 'terbaca'),
+(16, 14, NULL, 10, 'user', 'tes', '2026-07-09 13:58:49', 'terbaca'),
+(17, 14, NULL, 10, 'user', 'tes', '2026-07-09 15:57:39', 'terbaca'),
+(18, 14, NULL, 10, 'user', 'tes', '2026-07-09 15:57:46', 'terbaca'),
+(19, 14, NULL, 10, 'user', 'p', '2026-07-09 15:57:53', 'terbaca'),
+(20, 14, NULL, 10, 'user', 'y', '2026-07-09 16:03:34', 'terbaca'),
+(21, 14, NULL, 10, 'admin', 'l', '2026-07-09 16:23:20', 'terbaca'),
+(22, 14, NULL, 10, 'admin', 'knp', '2026-07-09 16:29:58', 'terbaca'),
+(23, 14, NULL, 10, 'admin', 'woi', '2026-07-09 16:30:00', 'terbaca'),
+(24, 14, NULL, 10, 'user', 'is', '2026-07-09 16:31:01', 'terbaca'),
+(25, 14, NULL, 10, 'user', 'apaa', '2026-07-09 16:31:11', 'terbaca'),
+(26, 14, NULL, 10, 'admin', 'gapapa', '2026-07-09 16:31:16', 'terbaca'),
+(27, 14, NULL, 10, 'admin', 'l', '2026-07-09 16:32:06', 'terbaca'),
+(28, 14, NULL, 10, 'admin', 'lo', '2026-07-09 16:32:14', 'terbaca'),
+(29, 14, NULL, 10, 'admin', 'yoi', '2026-07-09 16:34:02', 'terbaca'),
+(30, 14, NULL, 10, 'admin', 'apasii', '2026-07-09 16:34:56', 'terbaca'),
+(31, 14, NULL, 10, 'user', 'gaapapp', '2026-07-09 16:35:10', 'terbaca'),
+(32, 14, NULL, 2, 'user', 'pp apa', '2026-07-09 17:40:57', 'belum'),
+(33, 14, NULL, 10, 'user', 'hai im comback', '2026-07-09 17:41:26', 'terbaca'),
+(34, 14, NULL, 10, 'user', 'gajadi', '2026-07-09 17:43:32', 'terbaca'),
+(35, 14, NULL, 10, 'admin', 'yaaa', '2026-07-09 22:40:19', 'terbaca'),
+(36, 14, NULL, 10, 'admin', 'hmmm', '2026-07-09 22:49:44', 'terbaca'),
+(37, 14, NULL, 10, 'admin', 'woi', '2026-07-10 02:41:33', 'terbaca'),
+(38, 14, NULL, 10, 'admin', 'p', '2026-07-10 02:41:46', 'terbaca'),
+(39, 14, NULL, 10, 'admin', 'i', '2026-07-10 02:43:45', 'terbaca'),
+(40, 14, NULL, 10, 'admin', 'ttutu', '2026-07-10 02:49:33', 'terbaca'),
+(41, 14, NULL, 10, 'user', 'oi', '2026-07-10 03:16:47', 'belum');
 
 -- --------------------------------------------------------
 
@@ -143,7 +180,8 @@ INSERT INTO `favorites` (`favorite_id`, `user_id`, `field_id`, `created_at`) VAL
 (4, 3, 1, '2026-07-01 19:20:55'),
 (6, 3, 2, '2026-07-01 19:31:09'),
 (7, 4, 1, '2026-07-03 07:15:57'),
-(8, 4, 2, '2026-07-03 07:16:20');
+(8, 4, 2, '2026-07-03 07:16:20'),
+(9, 4, 6, '2026-07-09 12:40:25');
 
 -- --------------------------------------------------------
 
@@ -181,8 +219,8 @@ CREATE TABLE `fields` (
 --
 
 INSERT INTO `fields` (`field_id`, `owner_id`, `nama_lapangan`, `jenis`, `harga`, `status`, `lokasi`, `gambar`, `deskripsi`, `owner_name`, `owner_phone`, `owner_address`, `jam_operasional`, `kapasitas`, `jenis_lantai`, `fasilitas`, `maps_link`, `google_maps_url`, `verifikasi`, `durasi_slot`, `hari_libur`, `aktif`) VALUES
-(1, NULL, 'Lapangan Futsal A ', 'Futsal', 80000.00, 'tersedia', 'Jl. Kaliurang Km 7, Sleman', 'lapangan-futsal.jpg', 'Lapangan futsal premium dengan lantai vinyl.              ', 'Bapak Suharto', '081234567890', 'Jl. Kaliurang Km 7, Sleman', '06.00 - 22.00', 10, 'Vinyl', 'Parkir,Kantin,Toilet', 'https://www.google.com/maps?q=Jl.+Kaliurang+Km+7+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Kaliurang+Km+7+Sleman', 'pending', 1, NULL, 'aktif'),
-(2, NULL, 'Arena Badminton 88', 'Badminton', 45000.00, 'tersedia', 'Jl. Magelang Km 5, Yogyakarta', 'badminton.jpg', 'Lapangan badminton indoor dengan pencahayaan terang dan area bermain nyaman.', 'Bapak Andi', '081298765432', 'Jl. Magelang Km 5, Yogyakarta', '07.00 - 22.00', 4, 'Karpet Badminton', 'Toilet, Kantin, Parkir', 'https://www.google.com/maps?q=Jl.+Magelang+Km+5+Yogyakarta&output=embed', 'https://maps.google.com/?q=Jl.+Magelang+Km+5+Yogyakarta', 'pending', 1, NULL, 'aktif'),
+(1, NULL, 'Lapangan Futsal A ', 'Futsal', 80000.00, 'tersedia', 'Jl. Kaliurang Km 7, Sleman', 'lapangan-futsal.jpg', 'Lapangan futsal premium dengan lantai vinyl.              ', 'Bapak Suharto', '081234567890', 'Jl. Kaliurang Km 7, Sleman', '06.00 - 22.00', 10, 'Vinyl', 'Parkir,Kantin,Toilet', 'https://www.google.com/maps?q=Jl.+Kaliurang+Km+7+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Kaliurang+Km+7+Sleman', 'diterima', 1, NULL, 'aktif'),
+(2, NULL, 'Arena Badminton 88', 'Badminton', 45000.00, 'tersedia', 'Jl. Magelang Km 5, Yogyakarta', 'badminton.jpg', 'Lapangan badminton indoor dengan pencahayaan terang dan area bermain nyaman.', 'Bapak Andi', '081298765432', 'Jl. Magelang Km 5, Yogyakarta', '07.00 - 22.00', 4, 'Karpet Badminton', 'Toilet, Kantin, Parkir', 'https://www.google.com/maps?q=Jl.+Magelang+Km+5+Yogyakarta&output=embed', 'https://maps.google.com/?q=Jl.+Magelang+Km+5+Yogyakarta', 'diterima', 1, NULL, 'aktif'),
 (3, NULL, 'Basket Court Pro', 'Basket', 120000.00, 'penuh', 'Kota Yogyakarta', 'lapangan-basket.jpg', 'Lapangan basket indoor premium dengan lantai kayu berkualitas, ring standar pertandingan dan tribun penonton.', 'Basket Court Pro', '081290907788', 'Kota Yogyakarta', '08.00 - 23.00', 14, 'Kayu Indoor', 'Tribun, Toilet, Kantin', 'https://www.google.com/maps?q=Kota+Yogyakarta&output=embed', 'https://maps.google.com/?q=Kota+Yogyakarta', 'ditolak', 1, NULL, 'aktif'),
 (4, NULL, 'GOR Sport Center', 'Futsal', 70000.00, 'tersedia', 'Jl. Ringroad Utara, Sleman', 'lapangan-futsal2.jpg', 'Lapangan futsal indoor dengan rumput sintetis dan fasilitas lengkap.', 'Bapak Budi', '081377778888', 'Jl. Ringroad Utara, Sleman', '06.00 - 23.00', 10, 'Rumput Sintetis', 'Toilet, Mushola, Parkir', 'https://www.google.com/maps?q=Jl.+Ringroad+Utara+Sleman&output=embed', 'https://maps.google.com/?q=Jl.+Ringroad+Utara+Sleman', 'diterima', 1, NULL, 'nonaktif'),
 (6, NULL, 'Lapangan Basket A', 'Basket', 90000.00, 'tersedia', 'Jl. Kaliurang Km 9, Sleman', '1783079207_баскетбол.jpg', '                ', NULL, NULL, NULL, '08:00 - 22:00', 15, 'Vinyl', NULL, NULL, NULL, 'diterima', 1, NULL, 'aktif'),
@@ -237,7 +275,15 @@ INSERT INTO `notifications` (`notification_id`, `user_id`, `booking_id`, `judul`
 (26, 14, 36, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-09 10:03:18'),
 (27, 14, 37, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-09 10:09:00'),
 (28, 14, 38, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-09 10:09:01'),
-(29, 14, 39, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-09 10:54:03');
+(29, 14, 39, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-09 10:54:03'),
+(30, 14, 40, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-09 17:36:52'),
+(31, 14, 41, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-09 17:38:08'),
+(32, 14, 42, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-09 17:40:31'),
+(33, 14, 43, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-09 23:23:29'),
+(34, 14, 44, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-10 02:45:44'),
+(35, 14, 45, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-10 02:51:40'),
+(36, 14, 46, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-10 02:54:06'),
+(37, 14, 47, 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'belum', '2026-07-10 03:16:36');
 
 -- --------------------------------------------------------
 
@@ -320,7 +366,15 @@ INSERT INTO `payment` (`payment_id`, `booking_id`, `metode`, `total`, `status`, 
 (33, 36, '', 62500.00, 'tertunda', '2026-07-09 10:03:18', ''),
 (34, 37, 'transfer', 122500.00, 'tertunda', '2026-07-09 10:08:59', ''),
 (35, 38, 'transfer', 122500.00, 'tertunda', '2026-07-09 10:09:01', ''),
-(36, 39, '', 182500.00, 'tertunda', '2026-07-09 10:54:03', '');
+(36, 39, '', 182500.00, 'tertunda', '2026-07-09 10:54:03', ''),
+(37, 40, '', 122500.00, 'tertunda', '2026-07-09 17:36:52', ''),
+(38, 41, '', 62500.00, 'tertunda', '2026-07-09 17:38:08', ''),
+(39, 42, '', 62500.00, 'tertunda', '2026-07-09 17:40:31', ''),
+(40, 43, '', 62500.00, 'tertunda', '2026-07-09 23:23:29', ''),
+(41, 44, '', 122500.00, 'tertunda', '2026-07-10 02:45:44', ''),
+(42, 45, '', 62500.00, 'tertunda', '2026-07-10 02:51:40', ''),
+(43, 46, '', 62500.00, 'tertunda', '2026-07-10 02:54:06', ''),
+(44, 47, '', 62500.00, 'tertunda', '2026-07-10 03:16:36', '');
 
 -- --------------------------------------------------------
 
@@ -353,6 +407,43 @@ INSERT INTO `users` (`user_id`, `nama`, `email`, `telepon`, `password`, `role`, 
 (12, 'martin', 'martin@sportspace.com', '081234567891', '$2y$10$KzZyPvIDVpqjP5Kk/pmEaOhzWhlL/FlHHsNVMuO6.Guxd3.mgGxz2', 'user', 'aktif', '2026-07-05 20:11:24'),
 (13, 'Lucy', 'lucy@gmail.com', '089786543678', '$2y$10$KuGVd0ai9IX3ca1EQaxks.xXToThcJ7Jb4uZub1uneJkeBeh0RqnK', 'user', 'aktif', '2026-07-07 12:03:04'),
 (14, 'Kui', 'kui@gmail.com', '0812456783999', '$2y$10$LdIsC6DOCT5HYQYgaFQ0tOM.1p1N4VJAamXozfxE.1T.6P0eh17P6', 'owner', 'aktif', '2026-07-08 09:53:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_notifications`
+--
+
+CREATE TABLE `user_notifications` (
+  `notification_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `field_id` int(11) DEFAULT NULL,
+  `booking_id` int(11) DEFAULT NULL,
+  `jenis` enum('chat','booking_dibuat','booking_diterima','booking_dibatalkan','pembayaran_diterima','pembayaran_ditolak') NOT NULL,
+  `judul` varchar(100) NOT NULL,
+  `isi` text NOT NULL,
+  `status` enum('belum','dibaca') DEFAULT 'belum',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_notifications`
+--
+
+INSERT INTO `user_notifications` (`notification_id`, `user_id`, `field_id`, `booking_id`, `jenis`, `judul`, `isi`, `status`, `created_at`) VALUES
+(1, 14, 10, 40, 'booking_dibuat', 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'dibaca', '2026-07-09 17:36:52'),
+(2, 14, 10, 41, 'booking_dibuat', 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'dibaca', '2026-07-09 17:38:08'),
+(3, 14, 10, 40, 'booking_diterima', 'Booking Diterima', 'Booking Anda telah diterima oleh owner.', 'dibaca', '2026-07-09 17:38:24'),
+(4, 14, 10, 42, 'booking_dibuat', 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'dibaca', '2026-07-09 17:40:31'),
+(5, 14, 10, 42, 'booking_diterima', 'Booking Diterima', 'Booking Anda telah diterima oleh owner.', 'dibaca', '2026-07-09 22:39:48'),
+(6, 14, 10, NULL, 'chat', 'Pesan Baru', 'Owner mengirim pesan baru kepada Anda.', 'dibaca', '2026-07-09 22:40:19'),
+(7, 14, 10, 41, '', 'Booking Ditolak', 'Maaf, booking Anda ditolak oleh owner.', 'dibaca', '2026-07-09 22:45:36'),
+(8, 14, 10, NULL, 'chat', 'Pesan Baru', 'Owner mengirim pesan baru kepada Anda.', 'dibaca', '2026-07-09 22:49:44'),
+(9, 14, 10, 43, 'booking_dibuat', 'Konfirmasi Pembayaran Diterima', 'Konfirmasi pembayaran Anda telah diterima dan sedang menunggu verifikasi admin.', 'dibaca', '2026-07-09 23:23:29'),
+(10, 14, 10, 43, 'booking_dibatalkan', 'Booking Dibatalkan', 'Maaf, booking Anda dibatalkan oleh owner.', 'dibaca', '2026-07-09 23:23:50'),
+(11, 14, 10, NULL, 'chat', 'Pesan Baru', 'Owner mengirim pesan baru kepada Anda.', 'dibaca', '2026-07-10 02:49:33'),
+(12, 14, 10, 45, 'booking_dibatalkan', 'Booking Dibatalkan', 'Maaf, booking Anda dibatalkan oleh owner.', 'dibaca', '2026-07-10 02:52:45'),
+(13, 14, 10, 46, 'booking_diterima', 'Booking Diterima', 'Booking Anda telah diterima oleh owner.', 'dibaca', '2026-07-10 02:54:19');
 
 --
 -- Indexes for dumped tables
@@ -414,6 +505,15 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `user_notifications`
+--
+ALTER TABLE `user_notifications`
+  ADD PRIMARY KEY (`notification_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `booking_id` (`booking_id`),
+  ADD KEY `field_id` (`field_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -421,19 +521,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `fields`
@@ -445,7 +545,7 @@ ALTER TABLE `fields`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `owners`
@@ -457,13 +557,19 @@ ALTER TABLE `owners`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `user_notifications`
+--
+ALTER TABLE `user_notifications`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -494,6 +600,14 @@ ALTER TABLE `owners`
 --
 ALTER TABLE `payment`
   ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `booking` (`booking_id`);
+
+--
+-- Constraints for table `user_notifications`
+--
+ALTER TABLE `user_notifications`
+  ADD CONSTRAINT `user_notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_notifications_ibfk_2` FOREIGN KEY (`booking_id`) REFERENCES `booking` (`booking_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_notifications_ibfk_3` FOREIGN KEY (`field_id`) REFERENCES `fields` (`field_id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
