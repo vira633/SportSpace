@@ -49,6 +49,15 @@ $result = $conn->query("SELECT * FROM fields WHERE aktif='aktif' AND verifikasi=
             <a href="favorite.php" class="user-dropdown-item">
               <i class="ti ti-heart"></i> Favorit
             </a>
+            <a href="notifikasi-user.php" class="user-dropdown-item notification-item">
+
+              <i class="ti ti-bell"></i>
+
+              <span>Pemberitahuan</span>
+
+              <span class="notif-badge" id="notifBadge"></span>
+
+            </a>
             <div class="user-dropdown-divider"></div>
             <a href="logout.php" class="user-dropdown-item logout-danger">
               <i class="ti ti-logout"></i> Keluar
@@ -115,7 +124,7 @@ $result = $conn->query("SELECT * FROM fields WHERE aktif='aktif' AND verifikasi=
     <div class="fields-grid">
       <?php while ($lap = $result->fetch_assoc()): ?>
         <?php
-        
+
 
         $hariIni = date("Y-m-d");
 
@@ -250,7 +259,7 @@ AND status IN(
                 Rp<?= number_format($lap['harga'], 0, ',', '.') ?> <span>/jam</span>
               </div>
 
-              <?php if($badge_text=="Tersedia"): ?>
+              <?php if ($badge_text == "Tersedia"): ?>
                 <?php if (isset($_SESSION['user_id'])): ?>
                   <a href="detail.php?id=<?= $lap['field_id'] ?>" class="btn-link">
                     <button class="btn btn-primary btn-sm">Booking <i class="ti ti-arrow-right"></i></button>
@@ -405,7 +414,39 @@ AND status IN(
         }
       });
     });
+
+    function loadNotifBadge() {
+
+      fetch("get-user-notification.php")
+
+        .then(r => r.json())
+
+        .then(data => {
+
+          const badge = document.getElementById("notifBadge");
+
+          if (data.total > 0) {
+
+            badge.style.display = "flex";
+
+            badge.innerHTML = data.total;
+
+          } else {
+
+            badge.style.display = "none";
+
+          }
+
+        });
+
+    }
+
+    loadNotifBadge();
+
+    setInterval(loadNotifBadge, 5000);
+
   </script>
+
 </body>
 
 </html>

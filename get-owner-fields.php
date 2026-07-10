@@ -15,6 +15,15 @@ $queryFields = mysqli_query(
     ORDER BY field_id ASC"
 );
 
+$queryJenis = mysqli_query($conn,"
+    SELECT DISTINCT jenis
+    FROM fields
+    WHERE owner_id='$owner_id'
+      AND jenis IS NOT NULL
+      AND jenis <> ''
+    ORDER BY jenis
+");
+
 $queryInfo = mysqli_query(
     $conn,
     "SELECT *
